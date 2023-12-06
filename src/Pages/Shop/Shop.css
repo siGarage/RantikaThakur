@@ -1,0 +1,60 @@
+.Shop{
+    width:100%;
+    margin:100px 0px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.Card{
+    height:100%;
+    width:80%;
+}
+
+.Card img{
+    height:50%;
+    width:100%;
+}
+.Card-Title{
+    font-family:'Poppins';
+    font-size:18px;
+    font-weight:300;
+    margin:5px 0px;
+}
+
+.Card-Description{
+    font-family:'Poppins';
+    font-size:18px;
+    font-weight:300;
+}
+
+.Card-Body-Color{
+    margin:30px 0px;
+}
+
+.Product-Small-Cards{
+    text-decoration: none;
+    color: #737373;
+}
+
+.Card-Body-Color-Box1{
+    font-family:'poppins';
+    font-weight:300;
+    font-size:16px;
+    color:#737373;
+}
+.Card-Body-Color-Box2{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+.Card-Body-Color-Box2-InnerBox{
+    height:20px;
+    width:20px;
+    border:none;
+    border-radius:50%;
+}
+

@@ -1,0 +1,29 @@
+.Navbar{
+    height: auto;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+}
+
+.Navbar-box1{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 46px 0px 0px 0px;
+}
+.Navbar-box1-box{
+display: flex;
+flex-direction: row;
+}
+
+.Navbar-box3{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color:  #757575;
+}

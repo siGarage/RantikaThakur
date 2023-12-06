@@ -1,0 +1,99 @@
+.Home{
+    width:100%;
+    margin:100px 0px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.Home-Box1{
+    height:600px;
+    width:100%;
+    background-image: url('Rectangle.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.NewArrival-Box1{
+    background-image: url('IMG_9098.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+}
+.NewArrival-Box2{
+    background-image: url('IMG_9108.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+}
+.NewArrival-Box3{
+    background-image: url('SDP05095.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+}
+.clothesTypesBox1{
+    background-image: url('Rectangle\ 49.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width:49%;
+    height:100%;
+}
+.clothesTypesBox2{
+    background-image: url('Rectangle\ 48.png');
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+    width:49%;
+    height:100%;
+}
+.clothesTypesBox3{
+    background-image: url('Rectangle\ 7.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clothesTypes-Button{
+    width: 30%;
+    height: 50px;
+    border-radius: 72px;
+    background-color: #E2BF44;
+    color: white;
+    padding: 19px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    border: none;
+}
+.clothesTypes-Button2{
+    width: 15%;
+    height: 50px;
+    border-radius: 72px;
+    background-color: #E2BF44;
+    color: white;
+    padding: 19px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    border: none;
+}

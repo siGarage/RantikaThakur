@@ -1,0 +1,61 @@
+.ProductDescriptionBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 100px 0px;
+}
+
+.ProductDescriptionBox1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.ProductDescriptionBox1-Box1{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProductDescriptionBox1-Box2{
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 0px 100px 0px 0px;
+}
+
+.ProductDescriptionBox2{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size:20px;
+    color: #737373;
+}
+.Size-Box{
+    height: 58px;
+    width: 58px;
+    border: 1px solid #959595;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px 0px 10px;
+}
+
+.Color-Box{
+    height: 32px;
+    width: 32px;
+    border: none;
+    border-radius: 50%;
+    margin: 0px 0px 0px 10px;
+}
