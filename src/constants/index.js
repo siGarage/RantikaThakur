@@ -10,11 +10,11 @@ function generateConsts(type){
         actions: ["login"],
         name: "AUTH",
       };
-      case "group":
+      case "cart":
       return {
-        reducers: default_reducers,
-        actions: ["group"],
-        name: "GROUP",
+        reducers: ['AddToCart','DeleteFromCart'],
+        actions: ["cart"],
+        name: "CART",
       };
       default:
         

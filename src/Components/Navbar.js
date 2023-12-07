@@ -15,7 +15,7 @@ function Navbar() {
       <div style={{height:'25px',width:'20%',margin:'0px 10px 0px 0px'}}><img src={SearchImage} alt='search' /></div>
       <input type='text' style={{height:'28px',border:'none'}}/>
       </div> 
-      <div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div>
+      <Link to='/cart' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div></Link>
       <div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={HeartImage} alt='heart' /></div>
       <div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile'/></div>
       </div>

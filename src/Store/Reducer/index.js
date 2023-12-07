@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import auth from "./auth";
-import group from "./groupSlice";
+import cart from "./cart";
 
 const rootReducer = combineReducers({
   auth: auth,
-  group:group,
+  cart:cart,
 });
 
 export default rootReducer;

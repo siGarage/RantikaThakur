@@ -1,4 +1,6 @@
 import './App.css';
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Components
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -8,13 +10,16 @@ import Contact from './Pages/Contact/Contact'
 import Home from './Pages/Home/Home'
 import Shop from './Pages/Shop/Shop'
 import Product from './Pages/Product/Product';
-import {BrowserRouter as Router,Routes,Route, useParams} from "react-router-dom";
+import Cart from './Pages/Cart/Cart'
+
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+
 function App() {
-  console.log(useParams.id)
   return (
     <>
     <Router>
       <Navbar/>
+   <ToastContainer/>
         <Routes>
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/home" element={<Home />}/>
@@ -22,8 +27,10 @@ function App() {
           <Route exact path="/shop" element={<Shop />}/>
           {/* <Route exact path="/product" element={<Product/>}/> */}
           <Route exact path="/product/:id" element={<Product/>}/>
+          <Route exact path="/cart" element={<Cart/>}/>
         </Routes>
         <Footer/>
+        <ToastContainer />
     </Router>
     </>
   );

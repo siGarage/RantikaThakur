@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Shop.css';
+
 function Shop() {
     let [array, setArray] = useState([])
   useEffect(() => {
@@ -10,11 +11,13 @@ function Shop() {
   },[])
 
 
-  
-
+  const trim=(string)=>{
+    return string.slice(0,25)
+   }
   return (
     <>
     <section className='Shop' >
+     
     <div className='container'>
     <div className="row" >
    
@@ -23,7 +26,7 @@ function Shop() {
    <div >
     <div className='Card'><img src={element.image} alt='ProductImage' style={{height:'258px'}}/> 
     <div>
-        <div className='Card-Title'>{element.title}</div>
+        <div className='Card-Title'>{trim(element.title)}...</div>
         <div className='Card-Description'>Rs. {element.price}</div>
     </div>
     {/* {console.log(element.color['1'])} */}
@@ -36,7 +39,9 @@ function Shop() {
     <div  className='Card-Body-Color-Box2-InnerBox' style={{backgroundColor:'green',margin:'0px 5px'}}></div>
     <div  className='Card-Body-Color-Box2-InnerBox' style={{backgroundColor:'yellow',margin:'0px 5px'}}></div>
     </div>
+    
     <div>
+    
     </div>
     </div>
     </div>
