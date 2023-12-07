@@ -1,15 +1,31 @@
 import { useEffect, useState } from 'react';
 import './Product.css';
+import {toast} from 'react-toastify'
 import { useParams } from 'react-router-dom';
+import constants from '../../constants';
+import { useDispatch } from 'react-redux';
+
+
+import YouMayLike from '../YouMayLike/YouMayLike'
 function Product(props) {
+  const dispatch = useDispatch();
   const {id}= useParams()
   let [product,setProduct]=useState({});
+ 
   useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${id}`)
         .then(response => response.json())
         .then(data => setProduct(data))
       },[id])
-    console.log(product)
+  
+
+      const AddToCart=(array)=>{
+        dispatch({
+          type: constants("cart").reducers.cart.AddToCart,
+          payload: { data: array },
+        })
+        toast.success('Product Added To Cart');
+      }
   return (
     <>
   <div className='ProductDescriptionBox' key={product.id}>
@@ -34,7 +50,7 @@ function Product(props) {
 
             <div style={{width:'100%',display:'flex',justifyContent:'space-between',alignItems:'center',margin:'100px 0px 0px 0px'}}>
                 <button style={{backgroundColor:"#E2BF44",width:'230px',height:'77px',border:'none',borderRadius:'72px',fontFamily:'Inter',color:'white',fontSize:'32px'}}>Buy Now</button>
-                <button style={{backgroundColor:'white',width:'267px',height:'77px',border:'1px solid black',borderRadius:'72px',fontFamily:'Inter',color:'black',fontSize:'32px'}}>Add To Cart</button>
+                <button onClick={()=>{AddToCart(product)}} style={{backgroundColor:'white',width:'267px',height:'77px',border:'1px solid black',borderRadius:'72px',fontFamily:'Inter',color:'black',fontSize:'32px',cursor:'pointer'}}>Add To Cart</button>
             </div>
         </div>
         
@@ -50,6 +66,7 @@ function Product(props) {
         </div>
     </div>
   </div>
+  <YouMayLike/>
     </>
   );
 }
