@@ -1,15 +1,30 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Shop.css';
+import { connect, useDispatch } from 'react-redux';
+import constants from '../../constants';
+import PRODUCTDATA from '../../API/Product'
+import { toast } from 'react-toastify';
 
-function Shop() {
-    let [array, setArray] = useState([])
+function Shop(props) {
+  let{products}=props;
+  const dispatch=useDispatch();
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-    .then(response => response.json())
-    .then(data => setArray(data))
-  },[])
+    PRODUCTDATA.fetchProduct().then((res) => {
+      if(res.status===200){
+      dispatch({
+        type: constants("product").reducers.product.AddToProducts,
+        payload: { data: res.data },
+      });
+    }
+    else{
+      toast.error('Server Side Error')
+    }
+  });
+    
+  },[dispatch])
 
+  
 
   const trim=(string)=>{
     return string.slice(0,25)
@@ -22,14 +37,13 @@ function Shop() {
     <div className="row" >
    
 
-   {array.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
+   {products.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
    <div >
     <div className='Card'><img src={element.image} alt='ProductImage' style={{height:'258px'}}/> 
     <div>
         <div className='Card-Title'>{trim(element.title)}...</div>
         <div className='Card-Description'>Rs. {element.price}</div>
     </div>
-    {/* {console.log(element.color['1'])} */}
     <div className='Card-Body-Color'>
     <div className='Card-Body-Color-Box1' >Available Colors</div>
     
@@ -57,4 +71,7 @@ function Shop() {
   );
 }
 
-export default Shop;
+const mapStateToProps = (state) => ({
+  products: state?.product?.Products,
+});
+export default connect(mapStateToProps)(memo(Shop));

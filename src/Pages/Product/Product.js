@@ -19,10 +19,12 @@ function Product(props) {
       },[id])
   
 
-      const AddToCart=(array)=>{
+     
+
+      const AddToCart=(product)=>{
         dispatch({
           type: constants("cart").reducers.cart.AddToCart,
-          payload: { data: array },
+          payload: { data: product },
         })
         toast.success('Product Added To Cart');
       }
