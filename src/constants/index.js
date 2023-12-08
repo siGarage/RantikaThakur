@@ -16,6 +16,12 @@ function generateConsts(type){
         actions: ["cart"],
         name: "CART",
       };
+      case "product":
+      return {
+        reducers: ['AddToProducts'],
+        actions: ["product"],
+        name: "PRODUCT",
+      };
       default:
         
   }

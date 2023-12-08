@@ -17,7 +17,7 @@ function Navbar() {
       </div> 
       <Link to='/cart' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div></Link>
       <div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={HeartImage} alt='heart' /></div>
-      <div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile'/></div>
+      <Link to='/profile' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile' /></div></Link>
       </div>
     </div>
     <div className='Navbar-box2' style={{margin:'14px 0px'}}>
