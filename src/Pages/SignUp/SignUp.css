@@ -1,0 +1,14 @@
+.SignUp-Button{
+    width: 60%;
+    height: 50px;
+    border-radius: 72px;
+    background-color: #E2BF44;
+    color: white;
+    padding: 19px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border: none;
+    margin: 20px 0px;
+}

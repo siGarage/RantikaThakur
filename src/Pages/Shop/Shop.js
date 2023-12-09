@@ -32,14 +32,43 @@ function Shop(props) {
   return (
     <>
     <section className='Shop' >
-     
-    <div className='container'>
+     <div className='category'>
+      <div style={{margin:'10px 0px'}}>
+        <div style={{fontWeight:'800'}}>Category</div>
+        <div>Shirts</div>
+        <div>Tops</div>
+        <div>Co-ordinates</div>
+        <div>Dresses</div>
+        <div>Kaaftans</div>
+        <div>Skirts</div>
+        <div>Pants</div>
+        <div>Accessories</div>
+        <div>Indian Wear</div>
+      </div>
+      <div style={{margin:'10px 0px'}}>
+        <div style={{fontWeight:'800'}}>Prices</div>
+        <div>Shirts</div>
+        <div>Tops</div>
+        <div>Co-ordinates</div>
+        <div>Dresses</div>
+      </div>
+      <div style={{margin:'10px 0px'}}>
+        <div style={{fontWeight:'800'}}>Size</div>
+        <div>Shirts</div>
+        <div>Tops</div>
+        <div>Co-ordinates</div>
+        <div>Dresses</div>
+      </div>
+     </div>
+
+
+    <div className='container' style={{width:'80%'}}>
     <div className="row" >
    
 
    {products.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
    <div >
-    <div className='Card'><img src={element.image} alt='ProductImage' style={{height:'258px'}}/> 
+    <div className='Card'><img src={element.image} alt='ProductImage' style={{height:'258px',width:'80%'}}/> 
     <div>
         <div className='Card-Title'>{trim(element.title)}...</div>
         <div className='Card-Description'>Rs. {element.price}</div>
