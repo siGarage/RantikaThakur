@@ -1,63 +1,47 @@
-import { memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Shop.css';
-import { connect, useDispatch } from 'react-redux';
-import constants from '../../constants';
-import PRODUCTDATA from '../../API/Product'
-import { toast } from 'react-toastify';
+
 
 function Shop(props) {
-  let{products}=props;
-  const dispatch=useDispatch();
-  useEffect(() => {
-    PRODUCTDATA.fetchProduct().then((res) => {
-      if(res.status===200){
-      dispatch({
-        type: constants("product").reducers.product.AddToProducts,
-        payload: { data: res.data },
-      });
-    }
-    else{
-      toast.error('Server Side Error')
-    }
-  });
-    
-  },[dispatch])
-
-  
-
   const trim=(string)=>{
     return string.slice(0,25)
-   }
+  }
+  console.log(props.products.length)
   return (
     <>
     <section className='Shop' >
      <div className='category'>
       <div style={{margin:'10px 0px'}}>
         <div style={{fontWeight:'800'}}>Category</div>
-        <div>Shirts</div>
-        <div>Tops</div>
-        <div>Co-ordinates</div>
-        <div>Dresses</div>
-        <div>Kaaftans</div>
-        <div>Skirts</div>
-        <div>Pants</div>
-        <div>Accessories</div>
-        <div>Indian Wear</div>
-      </div>
+        {/* <div><input type='radio' name='category' value='shirts'/>Shirts</div>
+        <div><input type='radio' name='category' value='tops'/>Tops</div>
+        <div><input type='radio' name='category' value='co-ordinates'/>Co-ordinates</div>
+        <div><input type='radio' name='category' value='dresses'/>Dresses</div>
+        <div><input type='radio' name='category' value='kaaftans'/>Kaaftans</div>
+        <div><input type='radio' name='category' value='skirts'/>Skirts</div>
+        <div><input type='radio' name='category' value='pants'/>Pants</div>
+        <div><input type='radio' name='category' value='accessories'/>Accessories</div>
+        <div><input type='radio' name='category' value='indian-wear'/>Indian Wear</div> */}
+        <div><input type='radio' name='category' onChange={props.handleChange}  defaultChecked value=""/>all</div>
+        <div><input type='radio' name='category' onChange={props.handleChange} value="men's clothing"/>men's clothing</div>
+        <div><input type='radio' name='category' onChange={props.handleChange} value='jewelery'/>jewelery</div>
+        <div><input type='radio' name='category' onChange={props.handleChange} value='electronics'/>electronics</div>
+        <div><input type='radio' name='category' onChange={props.handleChange} value="women's clothing"/>women's clothing</div>
+        </div>
       <div style={{margin:'10px 0px'}}>
         <div style={{fontWeight:'800'}}>Prices</div>
-        <div>Shirts</div>
-        <div>Tops</div>
-        <div>Co-ordinates</div>
-        <div>Dresses</div>
+        <div><label><input type='radio' onChange={props.handleChange2} defaultChecked name='price' value={''}/>all</label></div>
+        <div><label><input type='radio' onChange={props.handleChange2} name='price' value={100}/>Over 100</label></div>
+        <div><label><input type='radio' onChange={props.handleChange2} name='price' value={200}/>Over 200</label></div>
+        <div><label><input type='radio' onChange={props.handleChange2} name='price' value={300}/>Over 300</label></div>
+        <div><label><input type='radio' onChange={props.handleChange2} name='price' value={600}/>Over 400</label></div>
       </div>
       <div style={{margin:'10px 0px'}}>
         <div style={{fontWeight:'800'}}>Size</div>
-        <div>Shirts</div>
-        <div>Tops</div>
-        <div>Co-ordinates</div>
-        <div>Dresses</div>
+        <div><label><input type='radio' name='size' onChange={props.handleChange3} defaultChecked  value={''}/>all</label></div>
+        <div><label><input type='radio' name='size' onChange={props.handleChange3}  value={'S'}/>Small</label></div>
+        <div><label><input type='radio' name='size' onChange={props.handleChange3}  value={'M'}/>Medium</label></div>
+        <div><label><input type='radio' name='size' onChange={props.handleChange3}  value={'L'}/>Large</label></div>
       </div>
      </div>
 
@@ -66,7 +50,7 @@ function Shop(props) {
     <div className="row" >
    
 
-   {products.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
+   {props.products.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
    <div >
     <div className='Card'><img src={element.image} alt='ProductImage' style={{height:'258px',width:'80%'}}/> 
     <div>
@@ -100,7 +84,4 @@ function Shop(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  products: state?.product?.Products,
-});
-export default connect(mapStateToProps)(memo(Shop));
+export default Shop;
