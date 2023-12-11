@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding:40px 50px;
+    font-family: Inter;
 }
 .Card{
     height:100%;

@@ -83,6 +83,7 @@
     align-items: center;
     font-size: 32px;
     border: none;
+    position: relative;
 }
 .clothesTypes-Button2{
     width: 15%;
@@ -96,4 +97,6 @@
     align-items: center;
     font-size: 32px;
     border: none;
+    
 }
+
