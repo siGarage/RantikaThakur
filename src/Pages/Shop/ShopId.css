@@ -12,7 +12,9 @@
     display: flex;
     flex-direction: row;
 }
-
+.carousel-root {
+    width: 80%;
+}
 
 .ProductDescriptionBox1-Box1{
     width: 50%;
@@ -58,4 +60,8 @@
     border: none;
     border-radius: 50%;
     margin: 0px 0px 0px 10px;
+}
+
+.carousel-slider{
+    height: 400px !important;
 }

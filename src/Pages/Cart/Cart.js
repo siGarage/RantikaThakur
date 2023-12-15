@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import './Cart.css';
 import { connect, useDispatch } from 'react-redux';
 import constants from '../../constants';
@@ -6,16 +6,29 @@ import { toast } from 'react-toastify';
 import YouMayLike from '../YouMayLike/YouMayLike'
 function Cart(props) {
   const dispatch=useDispatch();
-
+    const [code,setCode]=useState('NOTVALID')
     const {cart}=props;
 
-    const trim=(string)=>{
-     return string.slice(0,30)
-    }
 
-    const findSumUsingReduce=()=>{
-      const s = cart.reduce((s,{price}) => s+price,0)
-      return s;
+    const onChange=(e)=>{
+      setCode(e.target.value)
+     
+     }
+
+    let DiscountCode='ASDFGH'
+    
+    const TotalSum=()=>{
+      const arr = cart.map((element) => element.attributes.price)
+      let sum = 0;
+      arr.forEach((el) => sum += el);
+      if(DiscountCode===code){
+        toast.success('Discount Successful!',{id:1})
+        return sum-(sum*(40/100))
+      }
+      else
+      {
+      return sum;
+      }
     }
 
     const DeleteFromCart=(id)=>{
@@ -34,13 +47,13 @@ function Cart(props) {
       <div className='Cart-Main-Box1'>
     {cart.length!==0 ? cart.map((element)=>{return <div key={element.id} style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'center',alignItems:'center',height:'300px',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px',margin:'0px 0px 50px 0px'}}>
         <div style={{width:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <img src={element.image} alt='ProductImage' style={{height:'299px',width:'254px'}}/>
+            <img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} alt='ProductImage' style={{height:'299px',width:'254px'}}/>
         </div>
       <div style={{width:'50%',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
         <div>
-      <p style={{margin:'0px 0px'}}>{trim(element.title)}...<span className="material-symbols-outlined" style={{cursor:'pointer'}} onClick={()=>{DeleteFromCart(element.id)}}>delete</span></p>
-      <p style={{margin:'0px 0px'}}>Rs. {element.price}</p>
-      <p style={{margin:'0px 0px'}}>Category: {element.category}</p>
+      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}<span className="material-symbols-outlined" style={{cursor:'pointer'}} onClick={()=>{DeleteFromCart(element.id)}}>delete</span></p>
+      <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
+      <p style={{margin:'0px 0px'}}>Category: {element.attributes.category.data.attributes.category}</p>
       <p style={{margin:'0px 0px'}}>Product Id: {element.id}</p>
       </div>
       <div>
@@ -58,15 +71,15 @@ function Cart(props) {
      <div className='Cart-Main-Box2'>
       <div>Add a Discount Code</div>
       <div style={{margin:'12px 0px'}}>
-        <input type='text' style={{height:'40px',margin:'0px 20px 0px 0px'}}/>
-        <button style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}}>Add</button>
+        <input type='text' onChange={onChange} style={{height:'40px',margin:'0px 20px 0px 0px'}}/>
+        {/* <button style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}}>Add</button> */}
       </div>
      
      <div style={{borderBottom:'1px solid black',padding:'20px 0px',width:'80%'}}>
       <div style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between',margin:'20px 0px 0px 0px'}}>
         <div >Order Value</div>
          <div>
-        {cart.map((element)=>{return <p key={element.id} style={{margin:'0px'}}>{element.price}</p>})}
+        {cart.map((element)=>{return <p key={element.id} style={{margin:'0px'}}>{element.attributes.price}</p>})}
         </div>
         </div>
         
@@ -84,7 +97,7 @@ function Cart(props) {
         <div style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
         <div >Total</div>
          <div>
-        {findSumUsingReduce()}
+        {TotalSum()}
         </div>
         </div>
 

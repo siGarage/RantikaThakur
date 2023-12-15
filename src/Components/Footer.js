@@ -1,59 +1,54 @@
 import './Footer.css'
-import TwitterImg from '../Images/Twitter.png'
 import EnImage from '../Images/EN.png'
 import AppStoreImage from '../Images/AppStore.png'
+import InstagramLogo from '../Images/Instagram_logo.jpg'
+import FacebookLogo from '../Images/Facebook_icon.jpg'
+import YoutubeLogo from '../Images/Youtube_logo.jpg'
+import LinkedinLogo from '../Images/LinkedIn.jpg'
+import {Link} from 'react-router-dom';
 function Footer() {
   return (
     <>
    <section className='Footer'>
    <div style={{height:'80%',width:'80%',display:'flex',flexDirection:'column',alignItems:'center'}}>
     <div style={{width:'90%'}}>
-    <div style={{margin:'15px 0px',fontFamily:'Roboto',color:'white',fontSize:'24px'}}>Company Name</div>
+    <div style={{margin:'15px 0px',fontFamily:'Roboto',color:'white',fontSize:'24px'}}>RANTIKA THAKUR</div>
     <div style={{margin:'50px 0px 0px 0px',fontFamily:'Roboto',color:'white',fontSize:'14px'}}>Visit Help Center</div>
     <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',color:'white',margin:'50px 0px'}}>
-        <div style={{width:'23%',height:'80%'}}>
-            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px'}}>Company</div>
-            <div style={{fontSize:'14px',margin:'16px 0px'}}>About Us</div>
-            <div style={{fontSize:'14px',margin:'16px 0px'}}>Newsroom</div>
-            <div style={{fontSize:'14px',margin:'16px 0px'}}>Investors</div>
-            <div style={{fontSize:'14px',margin:'16px 0px'}}>Blog</div>
-            <div style={{fontSize:'14px',margin:'16px 0px'}}>Careers</div>
+        <div style={{width:'32%'}}>
+            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px'}}>QUICK LINKS</div>
+            <Link to='/shop'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Shop</div></Link>
+            <Link to='/about'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>About</div></Link>
+            <Link to='/contact'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Customize Size</div></Link>
+            <Link to='/contact'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Contact Us</div></Link>
+            
         </div>
 
 
-        <div style={{width:'23%'}}>
-            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>Company</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>About Us</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Newsroom</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Investors</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Blog</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Careers</div>
+        <div style={{width:'32%'}}>
+            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>USEFUL LINKS</div>
+            <Link to='/privacypolicy'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Privacy Policy</div></Link>
+            <Link to='/exchangepolicy'  style={{textDecoration:'none'}}> <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Exchange Policy</div></Link>
+            <Link to='/termsandcondition' style={{textDecoration:'none'}}> <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Terms and Conditions</div></Link>
+            
         </div>
-        <div style={{width:'23%'}}>
-            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>Company</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>About Us</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Newsroom</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Investors</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Blog</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Careers</div>
+        <div style={{width:'32%'}}>
+            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>SHOP</div>
+            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Shirts</div>
+            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Skirts</div>
+            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Tops</div>
+            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Dresses</div>
         </div>
-        <div style={{width:'23%'}}>
-            <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>Company</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>About Us</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Newsroom</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Investors</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Blog</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Careers</div>
-        </div>
+       
     </div>
     </div>
     <div style={{width:'100%',height:'20%',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
         <div  style={{display:'flex',flexDirection:'row',alignItem:'center',justifyContent:'space-between',width:'50%'}}>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                <div style={{margin:'0px 20px'}}><img src={TwitterImg}  alt='Twitter'/></div>
-                <div style={{margin:'0px 20px'}}><img src={TwitterImg}  alt='Twitter'/></div>
-                <div style={{margin:'0px 20px'}}><img src={TwitterImg}  alt='Twitter'/></div>
-                <div style={{margin:'0px 20px'}}><img src={TwitterImg}  alt='Twitter'/></div>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={InstagramLogo}  style={{height:'25px',width:'25px'}} alt='Twitter'/></div></a>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={FacebookLogo}  style={{height:'25px',width:'25px'}} alt='Facebook'/></div></a>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={ YoutubeLogo}  style={{height:'25px',width:'25px'}} alt='Youtube'/></div></a>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={LinkedinLogo}  style={{height:'25px',width:'25px'}} alt='LinkedIn'/></div></a>
                 </div>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                 <div style={{margin:'0px 20px'}}><img src={EnImage}  alt='Twitter'/></div>

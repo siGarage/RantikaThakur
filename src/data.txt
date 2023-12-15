@@ -1,0 +1,200 @@
+const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
+   ----------- Input Filter -----------
+  const [query, setQuery] = useState("");
+  
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+  
+  const filteredItems = products.filter(
+      (element) => element.attributes.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 
+    );
+    
+     ----------- Radio Filtering -----------
+    const handleChange = (event) => {
+      setSelectedCategory(event.target.value);
+    };
+    
+    const handleChange2 = (event) => {
+      setSelectedPrice(parseInt(event.target.value));
+    };
+    
+    const handleChange3 = (event) => {
+      setSelectedSize(event.target.value);
+    };
+    
+   ------------ Button Filtering -----------
+  const handleClick = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+ 
+  function filteredData(products, selectedCategory,selectedPrice,selectedSize, query) {
+    let filteredProducts = products;
+
+     Filtering Input Items
+    if (query) {
+      filteredProducts = filteredItems;
+      return filteredProducts;
+    }
+
+    1. Applying selectedCategory filter
+    
+    if (selectedCategory){
+      if (selectedPrice){
+        if (selectedSize){
+          filteredProducts = filteredProducts.filter(
+            (element) =>
+              element.category === selectedCategory &&
+              element.price >= selectedPrice && (
+              element.size[0] === selectedSize ||
+              element.size[1] === selectedSize ||
+              element.size[2] === selectedSize)
+          );
+          }
+      else{
+      filteredProducts = filteredProducts.filter(
+        (element) =>
+          element.category === selectedCategory &&
+          element.price >= selectedPrice
+      );
+      }
+    }
+    if (selectedSize){
+      if (selectedPrice){
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+            element.category === selectedCategory &&
+            element.price >= selectedPrice && (
+            element.size[0] === selectedSize ||
+            element.size[1] === selectedSize ||
+            element.size[2] === selectedSize)
+        );
+        }
+    else{
+    filteredProducts = filteredProducts.filter(
+      (element) =>
+        element.category === selectedCategory &&
+        element.size >= selectedSize
+    );
+    }
+  }
+      else{
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+            element.category === selectedCategory 
+        );
+        }
+    }
+ 
+    //2. Applying selectedPrice filter
+
+    if (selectedPrice){
+      if (selectedCategory){
+        if (selectedSize){
+          filteredProducts = filteredProducts.filter(
+            (element) =>
+              element.price >= selectedPrice &&
+              element.category === selectedCategory && (
+              element.size[0] === selectedSize ||
+              element.size[1] === selectedSize ||
+              element.size[2] === selectedSize)
+          );
+          }
+      else{
+      filteredProducts = filteredProducts.filter(
+        (element) =>
+        element.price >= selectedPrice &&
+          element.category === selectedCategory
+          
+      );
+      }
+    }
+    if (selectedSize){
+      if (selectedCategory){
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+          element.price >= selectedPrice &&
+             (
+            element.size[0] === selectedSize ||
+            element.size[1] === selectedSize ||
+            element.size[2] === selectedSize)
+            && element.category === selectedCategory 
+        );
+        }
+    else{
+    filteredProducts = filteredProducts.filter(
+      (element) =>
+        element.price >= selectedPrice &&
+        element.size >= selectedSize
+    );
+    }
+  }
+      else{
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+            element.price >= selectedPrice
+        );
+        }
+    }
+
+    Applying selectedSize filter
+    if (selectedSize){
+      if (selectedCategory){
+        if (selectedPrice){
+          filteredProducts = filteredProducts.filter(
+            (element) => 
+               (
+              element.size[0] === selectedSize ||
+              element.size[1] === selectedSize ||
+              element.size[2] === selectedSize)
+              &&
+              element.category === selectedCategory &&
+              element.price >= selectedPrice
+          );
+          }
+      else{
+      filteredProducts = filteredProducts.filter(
+        (element) =>
+        element.size >= selectedSize &&
+          element.category === selectedCategory
+          
+      );
+      }
+    }
+    if (selectedPrice){
+      if (selectedCategory){
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+          
+             (
+            element.size[0] === selectedSize ||
+            element.size[1] === selectedSize ||
+            element.size[2] === selectedSize)&& 
+            element.price >= selectedPrice &&
+            element.category === selectedCategory 
+        );
+        }
+    else{
+    filteredProducts = filteredProducts.filter(
+      (element) =>
+        
+        element.size >= selectedSize
+         && element.price >= selectedPrice
+    );
+    }
+  }
+      else{
+        filteredProducts = filteredProducts.filter(
+          (element) =>
+            element.size>= selectedSize
+        );
+        }
+    }
+    
+    return filteredProducts;
+  }
+
+  const result = filteredData(products, selectedCategory,selectedPrice,selectedSize, query);

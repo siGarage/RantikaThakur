@@ -1,0 +1,18 @@
+.Privacy-Heading{
+    font-weight: 600;
+}
+
+.Privacy-Policy-Heading{
+    font-size: 60px;
+    margin: 0px 0px 60px 0px;
+    font-weight: 600;
+}
+
+.Privacy-Main-Box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    margin: 100px 100px;
+    font-family: Inter;
+}

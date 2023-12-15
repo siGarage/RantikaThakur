@@ -10,7 +10,7 @@ const persistConfig = {
   key: "root",
   storage: storage,
   debug: true,
-  whitelist: ["auth","cart"],
+  whitelist: ["auth",'cart'],
 };
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);

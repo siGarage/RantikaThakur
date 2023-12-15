@@ -1,91 +1,161 @@
-import { Link } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import constants from '../../constants';
+import PRODUCTDATA from '../../API/Product';
+import { memo, useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate, useSearchParams} from 'react-router-dom';
 import './Shop.css';
+function Shop(props) { 
+  const [searchParams,setSearchParams]=useSearchParams()
+  const [categoryFilter,setCategoryFilter]=useState('All')
+  const [priceFilter,setPriceFilter]=useState(0)
+  const type=searchParams.get('type')
+
+    const {products}=props
+  
+    const navigate=useNavigate();
+    let category=new Set([...products.map((element)=>element.attributes.category.data.attributes.category)])
+    category=['All',...category]
+    
+    
+    const price=[1000,2000,3000,4000]
+    const dispatch = useDispatch(); 
+    
+   
+
+    
+
+    useEffect(() => {
+      if(products.length===0){
+        PRODUCTDATA.fetchProduct().then((res)=>{
+          if(res.status===200){
+            dispatch({
+              type:constants("product").reducers.product.AddToProducts,
+              payload:{Products:res.data.data},
+            });
+          }
+          else{
+            toast.error('Server Side Error')
+          }
+        })
+      }
+        
+      },[dispatch,products])
 
 
-function Shop(props) {
-  const trim=(string)=>{
-    return string.slice(0,25)
-  }
+      useEffect(() => {
+        if(type){
+          setCategoryFilter(type)
+        }
+      },[type])
+
+
+      const filterData=useMemo(()=>{
+        if(products.length>0)
+        {
+            if(categoryFilter!=='All')
+            {
+            if(priceFilter)
+            {
+                return products.filter((element) => element.attributes.category.data.attributes.category===categoryFilter && element.attributes.price>=priceFilter)
+            }    
+             else
+             {
+              return products.filter((element) => element.attributes.category.data.attributes.category===categoryFilter)
+             }   
+            }
+            else
+            {
+            if(priceFilter)
+            {
+               return products.filter((element) => element.attributes.price>=priceFilter)
+            }    
+             else
+             {
+              return products
+             }   
+            }
+            
+        }
+        else{
+            return []
+        }
+      },[products,categoryFilter,priceFilter])
+
   return (
     <>
     <section className='Shop' >
      <div className='category'>
-      <div style={{margin:'10px 0px'}}>
+    <div style={{margin:'10px 0px'}} >
         <div style={{fontWeight:'800'}}>Category</div>
-        {/* <div><input type='radio' name='category' value='shirts'/>Shirts</div>
-        <div><input type='radio' name='category' value='tops'/>Tops</div>
-        <div><input type='radio' name='category' value='co-ordinates'/>Co-ordinates</div>
-        <div><input type='radio' name='category' value='dresses'/>Dresses</div>
-        <div><input type='radio' name='category' value='kaaftans'/>Kaaftans</div>
-        <div><input type='radio' name='category' value='skirts'/>Skirts</div>
-        <div><input type='radio' name='category' value='pants'/>Pants</div>
-        <div><input type='radio' name='category' value='accessories'/>Accessories</div>
-        <div><input type='radio' name='category' value='indian-wear'/>Indian Wear</div> */}
-        <div><input type='radio' name='category' onChange={props.handleChange} checked={props.selectedCategory === ""}  value=""/> All</div>
-        <div><input type='radio' name='category' onChange={props.handleChange} checked={props.selectedCategory === "men's clothing"} value="men's clothing"/> Men's Clothing</div>
-        <div><input type='radio' name='category' onChange={props.handleChange} checked={props.selectedCategory === 'jewelery'} value='jewelery'/> Jewelery</div>
-        <div><input type='radio' name='category' onChange={props.handleChange} checked={props.selectedCategory === 'electronics'} value='electronics'/> Electronics</div>
-        <div><input type='radio' name='category' onChange={props.handleChange} checked={props.selectedCategory === "women's clothing"} value="women's clothing"/> Women's Clothing</div>
+        {category.map((element)=>{return (
+    <div key={element} ><input type='radio' checked={element===categoryFilter}  onChange={()=>{setCategoryFilter(element)}} value={element} /> {element}</div>
+        )
+        
+        } )}
+       
         </div>
 
 
-      <div style={{margin:'10px 0px'}}>
+        <div style={{margin:'10px 0px'}}>
         <div style={{fontWeight:'800'}}>Prices</div>
-        <div><label><input type='radio' onChange={props.handleChange2}  name='price' checked={props.selectedPrice === 0} value={0}/> All</label></div>
-        <div><label><input type='radio' onChange={props.handleChange2} name='price' checked={props.selectedPrice === 100} value={100}/> Over 100</label></div>
-        <div><label><input type='radio' onChange={props.handleChange2} name='price' checked={props.selectedPrice === 200} value={200}/> Over 200</label></div>
-        <div><label><input type='radio' onChange={props.handleChange2} name='price' checked={props.selectedPrice === 300} value={300}/> Over 300</label></div>
-        <div><label><input type='radio' onChange={props.handleChange2} name='price' checked={props.selectedPrice === 400} value={400}/> Over 400</label></div>
+
+        {price.map((element)=>{return (
+    <div  key={element} ><input type='radio'  checked={element===priceFilter}  onChange={()=>{setPriceFilter(element)}} value={element} key={element}/> Over ₹{element}</div>
+        )
+        
+        } )}
+        
       </div>
 
 
-      <div style={{margin:'10px 0px'}}>
-        <div style={{fontWeight:'800'}}>Size</div>
-        <div><label><input type='radio' name='size' onChange={props.handleChange3} checked={props.selectedSize === ''} value={''}/> All</label></div>
-        <div><label><input type='radio' name='size' onChange={props.handleChange3} checked={props.selectedSize === 'S'} value={'S'}/> Small</label></div>
-        <div><label><input type='radio' name='size' onChange={props.handleChange3} checked={props.selectedSize === 'M'} value={'M'}/> Medium</label></div>
-        <div><label><input type='radio' name='size' onChange={props.handleChange3}  checked={props.selectedSize === 'L'}value={'L'}/> Large</label></div>
       </div>
 
-     </div>
 
 
-    <div className='container' style={{width:'80%'}}>
-    <div className="row" >
+
+   {products?.length===0?<div style={{width:'80%',display:'flex',justifyContent:'center'}}><span className="loader" ></span></div>:
    
-
-   {props.products.map((element)=> {return <Link onClick={()=>{window.scrollTo(0,0)}} to={`/product/${element.id}`} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
-   <div >
-    <div className='Card'><img src={element.image[0]} onMouseOver={e=> (e.currentTarget.src = element.image[1]) }
-       onMouseOut={e=> (e.currentTarget.src = element.image[0])}alt='ProductImage' style={{height:'258px',width:'100%'}}/> 
+   <div className='container' style={{width:'80%'}}>
+    <div className="row" >
+   {products?.length>0?
+   <>
+    {
+   filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`)}} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
+  
+    <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
+       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage'/> 
     <div>
-        <div className='Card-Title'>{trim(element.title)}...</div>
-        <div className='Card-Description'>Rs. {element.price}</div>
-    </div>
+        <div className='Card-Title'>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
+        <div className='Card-Category'>{element.attributes.category.data.attributes.category}</div>
+        <div className='Card-Description'>Rs. {element.attributes.price}</div>
+    </div> 
 
-    {/* For Color */}
-    {/* <div className='Card-Body-Color'>
-    <div className='Card-Body-Color-Box1' >Available Colors</div>
-    
-    <div className='Card-Body-Color-Box2'>
-    {element.color.map((color) => {return <div  className='Card-Body-Color-Box2-InnerBox' style={{backgroundColor:color,margin:'0px 5px 0px 0px'}}></div> })}
     </div>
     
-    <div>
     
-    </div>
-    </div> */}
-    </div>
-    
-    </div>
-    </Link>}
+    </div>}
    )}
+   </>
+   :'No Data Found'}
+
+  
     
     </div>
     </div>
+   } 
+
+    
+
+
+    
     </section>
     </>
   );
 }
 
-export default Shop;
+const mapStateToProps = (state) => ({
+    products: state.product.Products
+  });
+  export default connect(mapStateToProps)(memo(Shop));
