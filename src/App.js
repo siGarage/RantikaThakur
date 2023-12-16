@@ -6,15 +6,18 @@ import { connect} from 'react-redux';
 import ScrollToTop from './ScrollToTop';
 
 
+
 // Components
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+
 
 //Pages
 import Contact from './Pages/Contact/Contact'
 import Home from './Pages/Home/Home'
 import Shop from './Pages/Shop/Shop'
 import About from './Pages/About/About';
+
 
 
 import Wishlist from './Pages/Wishlist/Wishlist'
@@ -24,9 +27,11 @@ import Order from './Pages/Order/Order';
 import ShopId from './Pages/Shop/ShopId'
 
 
+
 import Privacy from './Pages/PrivacyPolicy/Privacy'
 import ExchangePolicy from './Pages/ExchangePolicy/ExchangePolicy';
 import Terms from './Pages/TermsCondition/Terms';
+
 
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/SignUp/SignUp';
@@ -36,7 +41,10 @@ import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 
 function App(props) {
   const {logged_in}=props;
+
   
+
+
   return (
     <div >
     <Router>

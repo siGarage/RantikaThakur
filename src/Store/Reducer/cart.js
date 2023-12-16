@@ -11,15 +11,8 @@ export default function auth(state = initial_state, action) {
     case constants("cart").reducers.cart.AddToCart:
       return {
         ...state,
-        cartItems: [...state.cartItems, action.payload.data]
+        cartItems: action.payload.cartItems
       };
-
-    case constants("cart").reducers.cart.DeleteFromCart:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter(item => item.id !== action.payload.data)
-      };
-
 
     default:
       return state;
