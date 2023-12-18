@@ -10,7 +10,7 @@ export default function auth(state = initial_state, action) {
     case constants("product").reducers.product.AddToProducts:
       return {
         ...state,
-         Products: action.payload.data,
+         Products: action.payload.Products,
       };
 
     default:

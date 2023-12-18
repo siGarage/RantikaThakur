@@ -1,6 +1,6 @@
 .Home{
     width:100%;
-    margin:100px 0px;
+    margin:20px 0px;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -83,6 +83,7 @@
     align-items: center;
     font-size: 32px;
     border: none;
+    position: relative;
 }
 .clothesTypes-Button2{
     width: 15%;
@@ -96,4 +97,5 @@
     align-items: center;
     font-size: 32px;
     border: none;
+    
 }
