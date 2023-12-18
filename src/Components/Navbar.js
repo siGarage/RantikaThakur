@@ -5,13 +5,18 @@ import HeartImage from '../Images/heart.png'
 import ProfileImage from '../Images/profileicon.png'
 import RantikaLogo from '../Images/Rantika.png'
 import SearchImage from '../Images/Search.png'
-import { connect } from 'react-redux'
-import { memo, useMemo, useState } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { memo, useEffect, useMemo, useState } from 'react'
+import PRODUCTDATA from '../API/Product';
+import constants from '../constants';
+import { toast } from 'react-toastify'
 
 function Navbar(props) {
   const {products}=props;
  const navigate=useNavigate()
+ const dispatch = useDispatch(); 
  const[query,setQuery]=useState('');
+
  const onChange=(e)=>{
   setQuery(e.target.value)
  
@@ -32,7 +37,7 @@ function Navbar(props) {
     }
     else
     {
-    return []
+    return [];
     }
   }
 
@@ -49,7 +54,22 @@ const handleClickClose = event => {
   setIsShown(false);
 };
 
-
+useEffect(() => {
+  if(products.length===0){
+    PRODUCTDATA.fetchProduct().then((res)=>{
+      if(res.status===200){
+        dispatch({
+          type:constants("product").reducers.product.AddToProducts,
+          payload:{Products:res.data.data},
+        });
+      }
+      else{
+        toast.error('Server Side Error')
+      }
+    })
+  }
+    
+  },[dispatch,products])
   return (
     <>
    <section className='Navbar'>
@@ -70,8 +90,8 @@ const handleClickClose = event => {
     </div>
     <div className='Navbar-box3' style={{fontFamily:'Abhaya Libre',fontSize:'32px',padding:'21px 21px'}}>
     <Link to='/' style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Home</div></Link>
-    <Link to='/shop'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Shop</div></Link>
-    <Link to='/shop'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Customize Size</div></Link>
+    <Link to='/shop?type=All'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Shop</div></Link>
+    <Link to='/contact'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Customize Size</div></Link>
       <Link to='/contact' style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Contact</div></Link>
     </div>
    
@@ -84,7 +104,7 @@ const handleClickClose = event => {
    filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`);setIsShown(false)}} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
   
     <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
-       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'258px',width:'100%'}}/> 
+       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'258px',width:'100%',filter:(!element.attributes.instock)?'grayscale(1)':'grayscale(0)'}}/> 
     <div>
         <div className='Card-Title'>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
         <div className='Card-Category'>{element.attributes.category.data.attributes.category}</div>
@@ -93,7 +113,7 @@ const handleClickClose = event => {
 
     </div>
     
-    
+    {(!element.attributes.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'black',fontWeight:'800'}}>Out Of Stock</div>}
     
     </div>}
    )
@@ -113,5 +133,5 @@ const handleClickClose = event => {
 const mapStateToProps = (state) => ({
   products: state.product.Products
 });
-export default connect(mapStateToProps)(memo(Navbar));
 
+export default connect(mapStateToProps)(memo(Navbar));

@@ -1,14 +1,16 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import './Cart.css';
 import { connect, useDispatch } from 'react-redux';
 import constants from '../../constants';
 import { toast } from 'react-toastify';
 import YouMayLike from '../YouMayLike/YouMayLike'
+import CARTDATA from '../../API/Cart'
+import { useNavigate } from 'react-router-dom';
 function Cart(props) {
+  const navigate=useNavigate()
   const dispatch=useDispatch();
     const [code,setCode]=useState('NOTVALID')
-    const {cart}=props;
-
+    const {cart,useremail,authtoken}=props;
 
     const onChange=(e)=>{
       setCode(e.target.value)
@@ -18,7 +20,7 @@ function Cart(props) {
     let DiscountCode='ASDFGH'
     
     const TotalSum=()=>{
-      const arr = cart.map((element) => element.attributes.price)
+      const arr = cart.map((element) => parseInt(element.attributes.price))
       let sum = 0;
       arr.forEach((el) => sum += el);
       if(DiscountCode===code){
@@ -31,32 +33,50 @@ function Cart(props) {
       }
     }
 
-    const DeleteFromCart=(id)=>{
 
-      dispatch({
-        type: constants("cart").reducers.cart.DeleteFromCart,
-        payload: { data: id },
-      })
-      toast.success('Product Deleted From Cart');
-    }
 
+    const DeleteFromCart=(id,authtoken)=>{
+      CARTDATA.deleteCartItems(id,authtoken).then((res)=>{
+        if(res.status===200){
+          toast.success('Item Deleted Successfully !')
+           }
+          })
+        }
+    
+
+
+    useEffect(() => {
+        CARTDATA.getCartItems(useremail,authtoken).then((res)=>{
+          if(res.status===200){
+            dispatch({
+              type: constants("cart").reducers.cart.AddToCart,
+              payload: {cartItems:res.data.data},
+            })
+          }
+          else{
+            toast.error('Server Side Error')
+          }
+        })
+        
+      },[useremail,authtoken,dispatch])
 
   return (
     <section className='Cart' style={{width:'100%',margin:'100px 0px'}}>
     <div className='Cart-Main-Box'>
       <div className='Cart-Main-Box1'>
-    {cart.length!==0 ? cart.map((element)=>{return <div key={element.id} style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'center',alignItems:'center',height:'300px',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px',margin:'0px 0px 50px 0px'}}>
+    {cart?.length!==0 ? cart.map((element)=>{return <div  key={element.id} style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'center',alignItems:'center',height:'300px',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px',margin:'0px 0px 50px 0px'}}>
         <div style={{width:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} alt='ProductImage' style={{height:'299px',width:'254px'}}/>
+            <img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.image}`} alt='ProductImage' style={{height:'299px',width:'254px'}}/>
         </div>
       <div style={{width:'50%',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-        <div>
-      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}<span className="material-symbols-outlined" style={{cursor:'pointer'}} onClick={()=>{DeleteFromCart(element.id)}}>delete</span></p>
+        <div onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{cursor:'pointer'}}> 
+      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</p>
       <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
-      <p style={{margin:'0px 0px'}}>Category: {element.attributes.category.data.attributes.category}</p>
-      <p style={{margin:'0px 0px'}}>Product Id: {element.id}</p>
+      <p style={{margin:'0px 0px'}}>Category: {element.attributes.category}</p>
+      <p style={{margin:'0px 0px'}}>Product Id: {element.attributes.id_product}</p>
       </div>
-      <div>
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
+        <div>
       <h6>Quantity</h6>
       <select name="Quantity" id="Quantity" style={{width:'88px',height:'56px'}}>
       <option value="1">1</option>
@@ -64,6 +84,8 @@ function Cart(props) {
       <option value="3">3</option>
       <option value="4">4</option>
       </select>
+      </div>
+      <span  style={{margin:'0px 50px',cursor:'pointer',fontSize:'40px'}} className="material-symbols-outlined"  onClick={()=>{DeleteFromCart(element.id,authtoken)}}>delete</span>
       </div>
   </div>
 </div>}):<div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',height:'100%',fontFamily:'Comfortaa',color:'#737373',fontSize:'20px',fontWeight:'700'}}>No Items in Cart</div>} 
@@ -113,6 +135,12 @@ function Cart(props) {
 }
 const mapStateToProps = (state) => ({
     cart: state.cart.cartItems,
+    useremail:state.auth.user.user.email,
+    authtoken:state.auth.user.jwt,
+
   });
   export default connect(mapStateToProps)(memo(Cart));
 
+
+
+  

@@ -1,14 +1,10 @@
-import { connect, useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-import constants from '../../constants';
-import PRODUCTDATA from '../../API/Product';
-import { memo, useEffect, useMemo, useState } from 'react';
-import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { memo, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams} from 'react-router-dom';
 import './Shop.css';
 function Shop(props) { 
   const [searchParams,setSearchParams]=useSearchParams()
-  const [categoryFilter,setCategoryFilter]=useState('All')
+  // const [categoryFilter,setCategoryFilter]=useState('All')
   const [priceFilter,setPriceFilter]=useState(0)
   const type=searchParams.get('type')
 
@@ -20,49 +16,21 @@ function Shop(props) {
     
     
     const price=[1000,2000,3000,4000]
-    const dispatch = useDispatch(); 
     
-   
-
-    
-
-    useEffect(() => {
-      if(products.length===0){
-        PRODUCTDATA.fetchProduct().then((res)=>{
-          if(res.status===200){
-            dispatch({
-              type:constants("product").reducers.product.AddToProducts,
-              payload:{Products:res.data.data},
-            });
-          }
-          else{
-            toast.error('Server Side Error')
-          }
-        })
-      }
-        
-      },[dispatch,products])
-
-
-      useEffect(() => {
-        if(type){
-          setCategoryFilter(type)
-        }
-      },[type])
 
 
       const filterData=useMemo(()=>{
         if(products.length>0)
         {
-            if(categoryFilter!=='All')
+            if(type!=='All')
             {
             if(priceFilter)
             {
-                return products.filter((element) => element.attributes.category.data.attributes.category===categoryFilter && element.attributes.price>=priceFilter)
+                return products.filter((element) => element.attributes.category.data.attributes.category===type && element.attributes.price>=priceFilter)
             }    
              else
              {
-              return products.filter((element) => element.attributes.category.data.attributes.category===categoryFilter)
+              return products.filter((element) => element.attributes.category.data.attributes.category===type)
              }   
             }
             else
@@ -81,7 +49,7 @@ function Shop(props) {
         else{
             return []
         }
-      },[products,categoryFilter,priceFilter])
+      },[products,priceFilter,type])
 
   return (
     <>
@@ -90,7 +58,7 @@ function Shop(props) {
     <div style={{margin:'10px 0px'}} >
         <div style={{fontWeight:'800'}}>Category</div>
         {category.map((element)=>{return (
-    <div key={element} ><input type='radio' checked={element===categoryFilter}  onChange={()=>{setCategoryFilter(element)}} value={element} /> {element}</div>
+    <div key={element} ><input type='radio' checked={element===type}  onChange={()=>{setSearchParams(`?type=${element}`)}} value={element} /> {element}</div>
         )
         
         } )}
@@ -125,7 +93,7 @@ function Shop(props) {
    filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`)}} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
   
     <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
-       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage'/> 
+       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{filter:(!element.attributes.instock)?'grayscale(1)':'grayscale(0)'}}/> 
     <div>
         <div className='Card-Title'>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
         <div className='Card-Category'>{element.attributes.category.data.attributes.category}</div>
@@ -134,7 +102,7 @@ function Shop(props) {
 
     </div>
     
-    
+    {(!element.attributes.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'black',fontWeight:'800'}}>Out Of Stock</div>}
     </div>}
    )}
    </>

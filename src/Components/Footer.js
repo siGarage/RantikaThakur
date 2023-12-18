@@ -5,8 +5,9 @@ import InstagramLogo from '../Images/Instagram_logo.jpg'
 import FacebookLogo from '../Images/Facebook_icon.jpg'
 import YoutubeLogo from '../Images/Youtube_logo.jpg'
 import LinkedinLogo from '../Images/LinkedIn.jpg'
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 function Footer() {
+    const navigate=useNavigate()
   return (
     <>
    <section className='Footer'>
@@ -29,15 +30,39 @@ function Footer() {
             <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>USEFUL LINKS</div>
             <Link to='/privacypolicy'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Privacy Policy</div></Link>
             <Link to='/exchangepolicy'  style={{textDecoration:'none'}}> <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Exchange Policy</div></Link>
-            <Link to='/termsandcondition' style={{textDecoration:'none'}}> <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Terms and Conditions</div></Link>
-            
+            <Link to='/termsandcondition' style={{textDecoration:'none'}}> <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',color:'white'}}>Terms and Conditions</div></Link>  
         </div>
+
+
         <div style={{width:'32%'}}>
             <div style={{margin:'0px 0px 36px 0px',fontSize:'16px',fontWeight:'500'}}>SHOP</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Shirts</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Skirts</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Tops</div>
-            <div style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500'}}>Dresses</div>
+            <div onClick={()=>{navigate({
+            pathname:'/shop',
+            search:`?type=${'Shirts'}`
+          });
+          window.scrollTo(0, 0)
+          }} style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',cursor:'pointer'}}>Shirts</div>
+            
+            <div onClick={()=>{navigate({
+            pathname:'/shop',
+            search:`?type=${'Skirts'}`
+          });
+          window.scrollTo(0, 0)
+          }}  style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',cursor:'pointer'}}>Skirts</div>
+            <div 
+            onClick={()=>{navigate({
+                pathname:'/shop',
+                search:`?type=${'Tops'}`
+              });
+              window.scrollTo(0, 0)}} 
+              style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',cursor:'pointer'}}>Tops</div>
+            <div onClick={()=>{navigate({
+            pathname:'/shop',
+            search:`?type=${'Dresses'}`
+          });
+          window.scrollTo(0, 0)
+        }} 
+          style={{fontSize:'14px',margin:'16px 0px',fontWeight:'500',cursor:'pointer'}}>Dresses</div>
         </div>
        
     </div>
