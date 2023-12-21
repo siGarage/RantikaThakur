@@ -1,16 +1,17 @@
 import constants from "../../constants";
 
 const initial_state = {
-  cartItems:[]
+  wishItems:[]
 };
 
 export default function auth(state = initial_state, action) {
   switch (action.type) {
-    //all load
-    case constants("cart").reducers.cart.AddToCart:
+   
+    case constants("wishlist").reducers.wishlist.AddToWishlist:
+        console.log(action.payload.wishItems)
       return {
         ...state,
-        cartItems: action.payload.cartItems
+        wishItems: action.payload.wishItems
       };
 
     default:

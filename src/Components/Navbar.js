@@ -91,7 +91,7 @@ useEffect(() => {
     <div className='Navbar-box3' style={{fontFamily:'Abhaya Libre',fontSize:'32px',padding:'21px 21px'}}>
     <Link to='/' style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Home</div></Link>
     <Link to='/shop?type=All'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Shop</div></Link>
-    <Link to='/contact'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Customize Size</div></Link>
+    <Link to='/customsize'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Customize Size</div></Link>
       <Link to='/contact' style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Contact</div></Link>
     </div>
    
@@ -101,7 +101,7 @@ useEffect(() => {
     <div onClick={handleClickClose} className='close'></div>
    <div className="row" style={{width:'100%',height:'100%'}} >
    {filterData?.length>0?
-   filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`);setIsShown(false)}} className="col-md-4 my-3   Product-Small-Cards" key={element.id} >
+   filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`);setIsShown(false)}} className="col-md-3 my-3   Product-Small-Cards" key={element.id} >
   
     <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
        onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'258px',width:'100%',filter:(!element.attributes.instock)?'grayscale(1)':'grayscale(0)'}}/> 

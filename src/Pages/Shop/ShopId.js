@@ -1,37 +1,103 @@
 import { memo, useEffect, useState } from "react";
-import { connect} from "react-redux";
+import { connect, useDispatch} from "react-redux";
 import { Carousel } from "react-responsive-carousel";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CARTDATA from '../../API/Cart'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { toast } from "react-toastify";
 import "./ShopId.css";
 import YouMayLike from "../YouMayLike/YouMayLike";
+import constants from "../../constants";
 
 function ShopId(props) {
-  const { shopId } = useParams();
-  let [product, setProduct] = useState({});
-  const {useremail,authtoken}=props;
+  const dispatch=useDispatch()
   
-  const AddToCart = (product,token) => {
-    CARTDATA.addCartItems(product,token).then((res)=>{
-      console.log(res)
+  // Id Of Product
+  const { shopId } = useParams();
+
+
+  const navigate=useNavigate()
+
+  const {cart}=props;
+
+  let [product, setProduct] = useState({});
+
+  const {logged_in}=props;
+ 
+  // If logged_in is true then set useremail and authtoken
+  if(logged_in){
+    var useremail=props.user.user.email;
+    var authtoken=props.user.jwt
+  }
+
+
+  // Add Data To Cart
+ const AddToCart = (data) => { 
+ const findData=cart.find((element)=>Number(element.attributes.id_product)===Number(data.id_product))
+  if(findData){
+    const findProductPrice=Number(findData.attributes.price)+Number(data.price)
+    const findProductQuantity=Number(findData.attributes.quantity)+1
+    updateProduct(findData.id,findProductPrice,findProductQuantity)
+  }
+  else{
+    CARTDATA.addCartItems(data,authtoken).then((res)=>{
+     
       if(res.status===200){
-        toast.success('Item Added To Cart Successfully !')
-         }
+        dispatch({
+          type: constants("cart").reducers.cart.AddToCart,
+          payload: {cartItems:[...cart,res.data.data]},
         })
+        toast.success('Item Added To Cart !')
+         }
+        
+      })
+  }
   };
 
+ const updateProduct=(cartId,price,quantity)=>{
+  const data={price,quantity}
+  CARTDATA.updateCart(cartId,data,authtoken).then((res)=>{
+      if(res.status===200){
+        const something=cart.filter((ele)=>ele.id!==cartId)
+        dispatch({
+          type: constants("cart").reducers.cart.AddToCart,
+          payload: {cartItems:[...something,res.data.data]},
+        })
+        toast.success('Item Added To Cart !')
+         }
+        })
+ }
+
+// Get Data of Product
   useEffect(() => {
     if (shopId) {
       fetch(
-        `http://localhost:1337/api/products/${shopId}?populate=category,images,sizes`
-      )
+        `http://localhost:1337/api/products/${shopId}?populate=category,images,sizes`)
         .then((response) => response.json())
         .then((data) => setProduct(data.data));
     }
   }, [shopId]);
 
+
+// Get Cart Items
+
+  useEffect(() => {
+    if(logged_in){
+    if(cart.length===0){
+    CARTDATA.getCartItems(useremail,authtoken).then((res)=>{
+      if(res.status===200){
+        dispatch({
+          type: constants("cart").reducers.cart.AddToCart,
+          payload: {cartItems:res.data.data},
+        })
+      }
+      else{
+        toast.error('Server Side Error')
+      }
+    })
+  }
+}
+  },[useremail,authtoken,dispatch,cart.length,logged_in])
 
   return (
     <>
@@ -92,7 +158,7 @@ function ShopId(props) {
                 ))}
               </div>
 
-              <div
+             {logged_in ? <div
                 style={{
                   width: "100%",
                   display: "flex",
@@ -124,7 +190,8 @@ function ShopId(props) {
                      "price":product.attributes.price,
                      "category":product.attributes.category.data.attributes.category,
                      "id_product":product.id,
-                     "image":`${product.attributes.images.data[0].attributes.url}`
+                     "image":`${product.attributes.images.data[0].attributes.url}`,
+                     "quantity":1
                   },authtoken);
                   }}
                   disabled={!product.attributes.instock}
@@ -142,7 +209,48 @@ function ShopId(props) {
                 >
                  {(!product.attributes.instock)?'Out Of Stock':'Add To Cart'}
                 </button>
-              </div>
+              </div>:<div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  margin: "100px 0px 0px 0px",
+                }}
+              >
+                <button
+                  onClick={() => {navigate(`/login`)}}
+                  style={{
+                    backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44",
+                    width: "230px",
+                    height: "77px",
+                    border: "none",
+                    borderRadius: "72px",
+                    fontFamily: "Inter",
+                    color: "white",
+                    fontSize: "32px",
+                  }}
+                  
+                >
+                 Buy Now
+                </button>
+                <button
+                  onClick={() => {navigate(`/login`)}}
+                  style={{
+                    backgroundColor: "white",
+                    width: "267px",
+                    height: "77px",
+                    border: "1px solid black",
+                    borderRadius: "72px",
+                    fontFamily: "Inter",
+                    color: "black",
+                    fontSize: "32px",
+                    cursor: "pointer",
+                  }}
+                >
+                Add To Cart
+                </button>
+              </div>}
             </div>
           </div>
           <div className="ProductDescriptionBox2">
@@ -173,7 +281,8 @@ function ShopId(props) {
 }
 
 const mapStateToProps = (state) => ({
-  useremail:state.auth.user.user.email,
-  authtoken:state.auth.user.jwt,
+  user:state.auth.user,
+  logged_in:state.auth.logged_in,
+  cart: state.cart.cartItems
 });
 export default connect(mapStateToProps)(memo(ShopId));

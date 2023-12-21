@@ -21,30 +21,33 @@ function defaultCatch(error, resolve) {
 
 export default class Auth {
 
- // sign up
-    static signup(values) {
-        let payload = values;
+    static setUserData(data,userid,token) {
+        let authtoken=token
         return new Promise((resolve) => {
           instance
-            .post("/api/auth/local/register", payload.data)
+            .put(`/api/users/${userid}`,data,{headers: {
+                'Authorization': 'Bearer ' + authtoken
+              }})
             .then((response) => {
               resolve(response);
             })
             .catch((error) => defaultCatch(error, resolve));
         });
       }
-  //log in
-  static login(values) {
-    let payload = values;
-    return new Promise((resolve) => {
-      instance
-        .post("/api/auth/local", payload.data)
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((error) => defaultCatch(error, resolve));
-    });
-  }
+
+      static getUserData(userid,token) {
+        let authtoken=token
+        return new Promise((resolve) => {
+          instance
+            .put(`/api/users/${userid}`,{headers: {
+                'Authorization': 'Bearer ' + authtoken
+              }})
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => defaultCatch(error, resolve));
+        });
+      }
 
 
   

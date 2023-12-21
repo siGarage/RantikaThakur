@@ -1,0 +1,54 @@
+.Custom{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'inter';
+    margin: 50px 0px;
+}
+
+.Custom input{
+   height: 46px;
+   border-radius: 5px;
+   border: 1px solid #B0B0B0;
+}
+.Custom-Box1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 0px 10px 0px;
+}
+
+.Custom-Box1-Box1{
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Custom-Box1-Box2{
+    width:40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Custom-Box3
+{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    margin: 0px 0px 10px 0px;
+}
+.Custom-Box2
+{
+    
+    margin: 0px 0px 10px 0px;
+}
+
+
+.Custom-Box3-Box{
+    width: 30%;
+}

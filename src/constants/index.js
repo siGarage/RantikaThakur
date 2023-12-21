@@ -22,6 +22,12 @@ function generateConsts(type){
         actions: ["product"],
         name: "PRODUCT",
       };
+      case "wishlist":
+      return {
+        reducers: ['AddToWishlist'],
+        actions: ["wishlist"],
+        name: "WISHLIST",
+      };
       default:
         
   }

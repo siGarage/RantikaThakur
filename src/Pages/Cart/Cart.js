@@ -7,8 +7,10 @@ import YouMayLike from '../YouMayLike/YouMayLike'
 import CARTDATA from '../../API/Cart'
 import { useNavigate } from 'react-router-dom';
 function Cart(props) {
+
   const navigate=useNavigate()
   const dispatch=useDispatch();
+  
     const [code,setCode]=useState('NOTVALID')
     const {cart,useremail,authtoken}=props;
 
@@ -20,7 +22,7 @@ function Cart(props) {
     let DiscountCode='ASDFGH'
     
     const TotalSum=()=>{
-      const arr = cart.map((element) => parseInt(element.attributes.price))
+      const arr = cart.map((element) => Number(element.attributes.price))
       let sum = 0;
       arr.forEach((el) => sum += el);
       if(DiscountCode===code){
@@ -34,31 +36,97 @@ function Cart(props) {
     }
 
 
-
+  // Delete Items From Cart
     const DeleteFromCart=(id,authtoken)=>{
       CARTDATA.deleteCartItems(id,authtoken).then((res)=>{
         if(res.status===200){
+          const cartdata=cart.filter((ele)=>ele.id!==id)
+          dispatch({
+            type: constants("cart").reducers.cart.AddToCart,
+            payload: {cartItems:cartdata},
+          })
           toast.success('Item Deleted Successfully !')
            }
           })
         }
     
 
-
-    useEffect(() => {
-        CARTDATA.getCartItems(useremail,authtoken).then((res)=>{
+    // Update 
+    const Increment=(cartId,priceold,quantityold)=>{
+      const priceofone=priceold/quantityold
+      const price=Number(priceold)+Number(priceofone)
+      const quantity=Number(quantityold)+1
+      const data={price,quantity}
+      const cartData=cart.map((element)=>{
+        if(cartId===element.id)
+        {
+          return {
+            ...element,
+            attributes:{
+                 ...element.attributes,...data
+            }
+          }
+        }
+        return element
+      })
+       
+      
+      CARTDATA.updateCart(cartId,data,authtoken).then((res)=>{ 
           if(res.status===200){
             dispatch({
               type: constants("cart").reducers.cart.AddToCart,
-              payload: {cartItems:res.data.data},
+              payload: {cartItems:cartData},
             })
+             }
+            })
+     }
+
+     const Decrement=(cartId,priceold,quantityold)=>{
+      const priceofone=priceold/quantityold
+      const price=(quantityold>1?Number(priceold)-Number(priceofone):Number(priceofone))
+      const quantity=(quantityold>1?Number(quantityold)-1:1)
+      const data={price,quantity}
+      const cartData=cart.map((element)=>{
+        if(cartId===element.id)
+        {
+          return {
+            ...element,
+            attributes:{
+                 ...element.attributes,...data
+            }
           }
-          else{
-            toast.error('Server Side Error')
-          }
-        })
-        
-      },[useremail,authtoken,dispatch])
+
+        }
+        return element
+      }) 
+      if(quantity>=1){
+      CARTDATA.updateCart(cartId,data,authtoken).then((res)=>{
+          if(res.status===200){
+            dispatch({
+              type: constants("cart").reducers.cart.AddToCart,
+              payload: {cartItems:cartData},
+            })
+             }
+            })
+        }
+      }
+     // Get Cart Items
+
+        useEffect(() => {
+          if(cart.length===0){
+          CARTDATA.getCartItems(useremail,authtoken).then((res)=>{
+            if(res.status===200){
+              dispatch({
+                type: constants("cart").reducers.cart.AddToCart,
+                payload: {cartItems:res.data.data},
+              })
+            }
+            else{
+              toast.error('Server Side Error')
+            }
+          })
+        }
+        },[useremail,authtoken,dispatch,cart.length])
 
   return (
     <section className='Cart' style={{width:'100%',margin:'100px 0px'}}>
@@ -76,19 +144,15 @@ function Cart(props) {
       <p style={{margin:'0px 0px'}}>Product Id: {element.attributes.id_product}</p>
       </div>
       <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
-        <div>
-      <h6>Quantity</h6>
-      <select name="Quantity" id="Quantity" style={{width:'88px',height:'56px'}}>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      </select>
-      </div>
+      <div className="input-group">
+      <button disable={Number(element.attributes.quantity===1)?'true':'false'} id="decrement"  onClick={()=>{Decrement(element.id,element.attributes.price,element.attributes.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>-</button>
+      <input id="input" value={Number(element.attributes.quantity)} readOnly style={{width:'50px',margin:'0px 10px'}}/>
+       <button id="increment"  onClick={()=>{Increment(element.id,element.attributes.price,element.attributes.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>+</button>
+       </div>
       <span  style={{margin:'0px 50px',cursor:'pointer',fontSize:'40px'}} className="material-symbols-outlined"  onClick={()=>{DeleteFromCart(element.id,authtoken)}}>delete</span>
       </div>
   </div>
-</div>}):<div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',height:'100%',fontFamily:'Comfortaa',color:'#737373',fontSize:'20px',fontWeight:'700'}}>No Items in Cart</div>} 
+</div>}):<div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',height:'100%',fontFamily:'Comfortaa',color:'#737373',fontSize:'20px',fontWeight:'700'}}>No Item In Cart</div>} 
       </div>  
      <div className='Cart-Main-Box2'>
       <div>Add a Discount Code</div>

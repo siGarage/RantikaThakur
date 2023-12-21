@@ -17,14 +17,14 @@ import Contact from './Pages/Contact/Contact'
 import Home from './Pages/Home/Home'
 import Shop from './Pages/Shop/Shop'
 import About from './Pages/About/About';
-
-
+import ShopId from './Pages/Shop/ShopId'
+import Custom from './Pages/CustomSize/Custom'
 
 import Wishlist from './Pages/Wishlist/Wishlist'
 import Profile from './Pages/Profile/Profile'
 import Cart from './Pages/Cart/Cart'
 import Order from './Pages/Order/Order';
-import ShopId from './Pages/Shop/ShopId'
+
 
 
 
@@ -56,6 +56,7 @@ function App(props) {
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/contact" element={<Contact />}/>
+          <Route exact path="/customsize" element={<Custom />}/>
           <Route exact path="/about" element={<About/>}/>
           
           <Route exact path="/shop" element={<Shop/>}/>
