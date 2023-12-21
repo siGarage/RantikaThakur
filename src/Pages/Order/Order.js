@@ -122,7 +122,7 @@ function Order(props) {
    </div>
 
    <div className='Order5'>
-   <Link to='/shop' onClick={()=>{window.scrollTo(0,0)}} className='Order5Button'><button style={{backgroundColor:'transparent',border:'none'}} >Continue Shopping</button></Link>
+   <Link to='/shop?type=All' className='Order5Button'><button style={{backgroundColor:'transparent',border:'none'}} >Continue Shopping</button></Link>
     </div>
 
     </section>

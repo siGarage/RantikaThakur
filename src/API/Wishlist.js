@@ -23,12 +23,12 @@ export default class Auth {
 
 
   //Create
-  static getCartItems(email,token) {
+  static getWishlistItems(email,token) {
     let userid=email
     let authtoken=token
     return new Promise((resolve) => {
       instance
-        .get(`/api/carts?filters[email]=${userid}&populate=*`,{headers: {
+        .get(`/api/wishlists?filters[email]=${userid}&populate=*`,{headers: {
             'Authorization': 'Bearer ' + authtoken
           }})
         .then((response) => {
@@ -38,11 +38,11 @@ export default class Auth {
     });
   }
 
-  static deleteCartItems(id,token) {
+  static deleteWishlistItems(id,token) {
     let authtoken=token
     return new Promise((resolve) => {
       instance
-        .delete(`/api/carts/${id}`,{headers: {
+        .delete(`/api/wishlists/${id}`,{headers: {
             'Authorization': 'Bearer ' + authtoken
           }})
         .then((response) => {
@@ -53,26 +53,12 @@ export default class Auth {
   }
 
   
-  static addCartItems(values,token) {
+  static addWishlistItems(values,token) {
     let payload={"data":values};
     let authtoken=token
     return new Promise((resolve) => {
       instance
-      .post("/api/carts", payload,{headers: {
-            'Authorization': 'Bearer ' + authtoken
-          }})
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((error) => defaultCatch(error, resolve));
-    });
-  }
-
-  static updateCart(id,data,token) {
-    let authtoken=token
-    return new Promise((resolve) => {
-      instance
-        .put(`/api/carts/${id}`,{"data":data},{headers: {
+      .post("/api/wishlists", payload,{headers: {
             'Authorization': 'Bearer ' + authtoken
           }})
         .then((response) => {

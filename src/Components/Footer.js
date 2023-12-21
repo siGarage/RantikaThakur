@@ -18,7 +18,7 @@ function Footer() {
     <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',color:'white',margin:'50px 0px'}}>
         <div style={{width:'32%'}}>
             <div style={{margin:'0px 0px 36px 0px',fontSize:'16px'}}>QUICK LINKS</div>
-            <Link to='/shop'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Shop</div></Link>
+            <Link to='/shop/?type=All' onClick={window.scrollTo(0, 0)}   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Shop</div></Link>
             <Link to='/about'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>About</div></Link>
             <Link to='/contact'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Customize Size</div></Link>
             <Link to='/contact'   style={{textDecoration:'none'}}><div style={{fontSize:'14px',margin:'16px 0px',color:'white'}}>Contact Us</div></Link>
