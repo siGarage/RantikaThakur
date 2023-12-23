@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { memo} from 'react';
 import { connect} from 'react-redux';
 import ScrollToTop from './ScrollToTop';
-
+import 'react-multi-carousel/lib/styles.css';
 
 
 // Components

@@ -23,7 +23,6 @@ function Wishlist(props) {
             type: constants("wishlist").reducers.wishlist.AddToWishlist,
             payload: {wishItems:wishdata},
           })
-          toast.success('Item Removed From Wishlist !')
            }
 
           })
@@ -51,7 +50,6 @@ function Wishlist(props) {
                type: constants("cart").reducers.cart.AddToCart,
                payload: {cartItems:[...cart,res.data.data]},
              })
-             toast.success('Item Added To Cart !')
               }
              
            })
@@ -71,7 +69,6 @@ function Wishlist(props) {
               }
              })
       }
-
 
 
       // Get Wishlist Items

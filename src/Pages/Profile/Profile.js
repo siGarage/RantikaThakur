@@ -35,9 +35,7 @@ function Profile(props) {
    }
 
    let submitForm=(data,userid,token)=> {  
-      console.log(data)
         USERAPI.setUserData(data,userid,token).then((res) => {
-          console.log(res)
           if (res.status === 200) 
          {
           toast.error('Your data is updated successfully !')

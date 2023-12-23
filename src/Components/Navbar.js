@@ -57,13 +57,15 @@ const handleClickClose = event => {
 useEffect(() => {
   if(products.length===0){
     PRODUCTDATA.fetchProduct().then((res)=>{
-      if(res.status===200){
+      if(res.status===200)
+      {
         dispatch({
           type:constants("product").reducers.product.AddToProducts,
           payload:{Products:res.data.data},
         });
       }
-      else{
+      else
+      {
         toast.error('Server Side Error')
       }
     })
@@ -73,6 +75,8 @@ useEffect(() => {
   return (
     <>
    <section className='Navbar'>
+   
+
     <div className='Navbar-box1'>
       <div className='Navbar-box1-box'>
      <div style={{height:'35px',width:'100%',borderRadius:'7px',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',border:'1px solid #B0B0B0',margin:'0px 6px',padding:'2px 5px'}}>
@@ -117,9 +121,9 @@ useEffect(() => {
     
     </div>}
    )
-   :<div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'50px',fontWeight:'600'}}>Search For Products &nbsp; <span style={{fontSize:'50px',fontWeight:'600'}} className="material-symbols-outlined">
+   :(query.length===0?<div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'50px',fontWeight:'600'}}>Search For Products &nbsp; <span style={{fontSize:'50px',fontWeight:'600'}} className="material-symbols-outlined">
    search
-   </span></div>
+   </span></div>:<div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'50px',fontWeight:'600'}}>No Product Found</div>)
    }
     </div>
    </div>

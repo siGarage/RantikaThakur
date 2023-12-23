@@ -8,20 +8,20 @@ import { toast } from "react-toastify";
 import "./ShopId.css";
 import YouMayLike from "../YouMayLike/YouMayLike";
 import constants from "../../constants";
-
+import Rating from '@mui/material/Rating';
+import REVIEW from '../../API/Review'
+import Box from '@mui/material/Box';
 function ShopId(props) {
   const dispatch=useDispatch()
-  
+  const [value, setValue] = useState(0);
+  const [reviewItems, setReviewItems] = useState([]);
+ console.log(reviewItems)
   // Id Of Product
   const { shopId } = useParams();
-
-
+  const [review,setReview] = useState({id_product:Number(shopId),rating:value,review:"",name:"",email:""}); 
   const navigate=useNavigate()
-
   const {cart}=props;
-
   let [product, setProduct] = useState({});
-
   const {logged_in}=props;
  
   // If logged_in is true then set useremail and authtoken
@@ -29,7 +29,7 @@ function ShopId(props) {
     var useremail=props.user.user.email;
     var authtoken=props.user.jwt
   }
-
+ console.log(review)
 
   // Add Data To Cart
  const AddToCart = (data) => { 
@@ -67,6 +67,51 @@ function ShopId(props) {
          }
         })
  }
+ 
+
+ let validateForm=(data)=> {
+  const {rating,review,name,email}=data;
+
+  if(rating===0){
+    toast.error('Please Select Rating');
+    return;
+  }
+  if(review.length<=30){
+    toast.error('Your review must contain at least 10 words');
+    return;
+  }
+  if(name.length===0){
+    toast.error('Please Enter Name');
+    return;
+  }
+  if(email.length===0){
+    toast.error('Please Enter Email');
+    return;
+  }
+  if (!email.match("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")){
+    toast.error('Enter Valid Email')
+    return ;
+  }
+
+ 
+  else{
+     
+      REVIEW.addReview({ data }).then((res) => {
+    if (res.status === 200) 
+    {
+      toast.success('Thankyou for your review !')
+    } 
+        else {
+          toast.error(res.data.error.message)
+        }
+      });
+    };
+  }
+
+
+ const onChange=(e)=>{
+  setReview({...review,[e.target.name]:e.target.value})
+ }
 
 // Get Data of Product
   useEffect(() => {
@@ -78,6 +123,17 @@ function ShopId(props) {
     }
   }, [shopId]);
 
+
+
+
+  useEffect(() => {
+    if (shopId) {
+      fetch(
+        `http://localhost:1337/api/ratings?filters[id_product]=${shopId}`)
+        .then((response) => response.json())
+        .then((data) => setReviewItems(data.data));
+    }
+  }, [shopId]);
 
 // Get Cart Items
 
@@ -98,6 +154,8 @@ function ShopId(props) {
   }
 }
   },[useremail,authtoken,dispatch,cart.length,logged_in])
+
+
 
   return (
     <>
@@ -273,8 +331,90 @@ function ShopId(props) {
           </div>
         </div>
       ) : (
-        <>No Products Found</>
+        <>No Product Found</>
       )}
+
+
+{Object.entries(product).length > 1 ? (<div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',margin:'20px 0px 50px 0px'}}>
+        <div style={{width:'80%',fontFamily:'Inter',font:'500'}}>
+        <div style={{color:'black',fontWeight:"800"}}>PLEASE REVIEW "{product.attributes.title}"</div>
+        <div style={{margin:'10px 0px'}}>Your email address will not be published. Required fields are marked *</div>
+        <div>
+
+        <div style={{width:'auto',margin:'0px 0px 10px 0px'}}>
+          <label style={{display:'flex',flexDirection:'column'}}>
+          <p style={{fontWeight:'600'}}>Your Rating <span style={{color:'red'}}>*</span></p>
+          <Box sx={{'& > legend': { mt: 2 }}}>
+      <Rating name="simple-controlled" value={value} onChange={(e, newValue) => {setValue(newValue);setReview({...review,rating:Number(e.target.value)})}}/>
+      </Box>
+
+        </label>
+        </div> 
+
+        <div style={{width:'100%',margin:'0px 0px 10px 0px'}}>
+          <label style={{display:'flex',flexDirection:'column'}}>
+          <p style={{fontWeight:'600'}}>Your Review <span style={{color:'red'}}>*</span></p>
+            <textarea  className='review-Inputs' type='text' name='review' rows="4" onChange={onChange}/>
+          </label>
+        </div>
+
+        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+        <div style={{width:'45%'}}>
+          <label style={{display:'flex',flexDirection:'column'}}>
+          <p style={{fontWeight:'600'}}>Name <span style={{color:'red'}}>*</span></p>
+            <input  className='review-Inputs Input-review' type='text' name='name' rows="4" onChange={onChange}/>
+          </label>
+        </div>
+
+        <div style={{width:'45%'}}>
+          <label style={{display:'flex',flexDirection:'column'}}>
+            <p style={{fontWeight:'600'}}>Email <span style={{color:'red'}}>*</span></p>
+            <input  className='review-Inputs Input-review' type='text' name='email' rows="4" onChange={onChange}/>
+          </label>
+        </div>
+
+        </div>
+        </div>
+        <button className='Review-Button' onClick={()=>{validateForm(review)}}>Add Review</button>
+        </div>
+      </div>):<div style={{fontFamily:'Inter',fontSize:'20px',fontWeight:'600',margin:'30px 0px',display:'flex',justifyContent:'center',alignItems:'center'}}>Please Wait !</div>}
+       
+       
+      <div className="container" style={{ width: "80%"}}>
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center',fontFamily:'Inter',fontWeight:'600',fontSize:'30px',margin:'10px 0px'}}>Customer's Review</div>
+            <div className="row">
+              {reviewItems?.length > 0 ? (
+                <>
+                  {reviewItems.map((element) => {
+                    return (
+                      <div
+                        style={{ position: "relative", cursor: "pointer" }}
+                        className="col-md-4 my-3   Product-Small-Cards"
+                        key={element.id}
+                      >        
+
+                          <div>
+                            <div style={{fontFamily:'inter',fontSize:'20px',fontWeight:'600',color:'black',margin:'0px 0px 5px 0px'}}>
+                              {element.attributes.name}
+                            </div>
+                            <div className="Card-Category">
+                              {
+                                 <Rating name="read-only" value={element.attributes.rating} readOnly />
+                              }
+                            </div>
+                            <div className="Card-Description">
+                              {element.attributes.review}
+                            </div>
+                          </div>
+                        </div>
+                    );
+                  })}
+                </>
+              ) : (
+               <div style={{fontFamily:'Inter',fontSize:'20px',fontWeight:'600',margin:'30px 0px',display:'flex',justifyContent:'center',alignItems:'center'}}>No Reviews</div>
+              )}
+            </div>
+          </div>
       <YouMayLike />
     </>
   );

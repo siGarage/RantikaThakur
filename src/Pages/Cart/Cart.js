@@ -7,31 +7,44 @@ import YouMayLike from '../YouMayLike/YouMayLike'
 import CARTDATA from '../../API/Cart'
 import { useNavigate } from 'react-router-dom';
 function Cart(props) {
-
+ 
   const navigate=useNavigate()
   const dispatch=useDispatch();
   
-    const [code,setCode]=useState('NOTVALID')
+    const [code,setCode]=useState('')
+    const [coupon,setCoupon]=useState('NOT')
     const {cart,useremail,authtoken}=props;
-
+   
     const onChange=(e)=>{
       setCode(e.target.value)
-     
      }
 
-    let DiscountCode='ASDFGH'
-    
+     const onClick=(e)=>{
+      setCoupon(code) 
+     }
+
+    let DiscountCode='ASDFGH';
+
     const TotalSum=()=>{
       const arr = cart.map((element) => Number(element.attributes.price))
       let sum = 0;
       arr.forEach((el) => sum += el);
-      if(DiscountCode===code){
-        toast.success('Discount Successful!',{id:1})
+      if(DiscountCode.length===coupon.length)
+      {
+        if(DiscountCode===coupon)
+        {
+        toast.success('Discount Successful!')
         return sum-(sum*(40/100))
+        }
+          else
+        {
+        toast.success('Please Enter A Valid Code!')
+            return sum;
+        }
       }
       else
       {
-      return sum;
+        return sum
       }
     }
 
@@ -128,6 +141,8 @@ function Cart(props) {
         }
         },[useremail,authtoken,dispatch,cart.length])
 
+
+        
   return (
     <section className='Cart' style={{width:'100%',margin:'100px 0px'}}>
     <div className='Cart-Main-Box'>
@@ -158,7 +173,7 @@ function Cart(props) {
       <div>Add a Discount Code</div>
       <div style={{margin:'12px 0px'}}>
         <input type='text' onChange={onChange} style={{height:'40px',margin:'0px 20px 0px 0px'}}/>
-        {/* <button style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}}>Add</button> */}
+        <button onClick={onClick} style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}} >Add</button>
       </div>
      
      <div style={{borderBottom:'1px solid black',padding:'20px 0px',width:'80%'}}>

@@ -99,3 +99,17 @@
     border: none;
     
 }
+
+.multi-carousel-container {
+    width: 100%;
+    margin: 10px ;
+   }
+
+
+.react-multi-carousel-item{
+    height:auto;
+}
+
+.item-multicarousel{
+    height: 100%;
+}
