@@ -1,0 +1,13 @@
+.Success
+{
+    min-height:400px;
+    display:  flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.Success-Box{
+border: 2px solid black;
+padding: 30px;
+border-radius: 10px;
+}

@@ -18,12 +18,8 @@ function Shop(props) {
   const type = searchParams.get("type");
   const dispatch = useDispatch();
   let wishlist = props.wishlist;
-
-  // set username only when user logged_in
-  if (logged_in) {
-    var useremail = props.useremail.user.email;
-  }
-
+  let {useremail}=props;
+  
   const navigate = useNavigate();
 
   // Set categories
@@ -176,8 +172,8 @@ function Shop(props) {
         </div>
 
         {products?.length === 0 ? (
-          <div
-            style={{ width: "80%", display: "flex", justifyContent: "center" }}
+          <div className="Product-Container"
+            style={{ display: "flex", justifyContent: "center" }}
           >
             <span className="loader"></span>
           </div>
@@ -190,9 +186,10 @@ function Shop(props) {
                     return (
                       <div
                         style={{ position: "relative", cursor: "pointer" }}
-                        className="col-md-4 my-3   Product-Small-Cards"
+                        className="col-md-3 my-3   Product-Small-Cards"
                         key={element.id}
                       >
+                        
                         <div
                           className="Card"
                           onClick={() => {
@@ -217,8 +214,8 @@ function Shop(props) {
 
                           <div>
                             <div className="Card-Title">
-                              {element.attributes.title.length > 25
-                                ? `${element.attributes.title.slice(0, 25)}...`
+                              {element.attributes.title.length > 15
+                                ? `${element.attributes.title.slice(0, 15)}...`
                                 : element.attributes.title}
                             </div>
                             <div className="Card-Category">
@@ -232,7 +229,7 @@ function Shop(props) {
                             </div>
                           </div>
                         </div>
-
+                          
                         {!element.attributes.instock && (
                           <div
                             style={{
@@ -251,8 +248,8 @@ function Shop(props) {
                             <FavoriteIcon                              
                               style={{
                                 position: "absolute",
-                                bottom: "18%",
-                                right: "5%",
+                                bottom: "22%",
+                                right: "8%",
                                 color: "red",
                                 fontSize: "40px",
                                 fontWeight: "500",
@@ -275,11 +272,10 @@ function Shop(props) {
                                     email: useremail,
                                     title: element.attributes.title,
                                     price: element.attributes.price,
-                                    category:
-                                      element.attributes.category.data
-                                        .attributes.category,
+                                    category:element.attributes.category.data.attributes.category,
                                     id_product: element.id,
                                     image: `${element.attributes.images.data[0].attributes.url}`,
+                                    size:element.attributes.sizes.data.map((element)=>element.attributes.size),
                                   },
                                   authtoken
                                 );
@@ -287,9 +283,9 @@ function Shop(props) {
                               
                               style={{
                                 position: "absolute",
-                                bottom: "18%",
-                                right: "5%",
-                                color: "#696969",
+                                bottom: "22%",
+                                right: "8%",
+                                color: "white",
                                 fontSize: "40px",
                                 fontWeight: "500",
                                 cursor: "pointer",
@@ -333,10 +329,10 @@ function Shop(props) {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.product.Products,
-  useremail: state.auth.user,
-  authtoken: state.auth.user.jwt,
-  logged_in: state.auth.logged_in,
-  wishlist: state.wishlist.wishItems,
+  products: state?.product?.Products,
+  useremail: state?.auth?.user?.user?.email,
+  authtoken: state?.auth?.user.jwt,
+  logged_in: state?.auth?.logged_in,
+  wishlist: state?.wishlist?.wishItems,
 });
 export default connect(mapStateToProps)(memo(Shop));

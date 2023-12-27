@@ -6,47 +6,23 @@ import { toast } from 'react-toastify';
 import YouMayLike from '../YouMayLike/YouMayLike'
 import CARTDATA from '../../API/Cart'
 import { useNavigate } from 'react-router-dom';
+
+import {loadStripe} from '@stripe/stripe-js'
+import { makePaymentRequest } from '../../API/Payment';
 function Cart(props) {
  
   const navigate=useNavigate()
   const dispatch=useDispatch();
   
     const [code,setCode]=useState('')
-    const [coupon,setCoupon]=useState('NOT')
+    
     const {cart,useremail,authtoken}=props;
    
     const onChange=(e)=>{
       setCode(e.target.value)
      }
 
-     const onClick=(e)=>{
-      setCoupon(code) 
-     }
-
     let DiscountCode='ASDFGH';
-
-    const TotalSum=()=>{
-      const arr = cart.map((element) => Number(element.attributes.price))
-      let sum = 0;
-      arr.forEach((el) => sum += el);
-      if(DiscountCode.length===coupon.length)
-      {
-        if(DiscountCode===coupon)
-        {
-        toast.success('Discount Successful!')
-        return sum-(sum*(40/100))
-        }
-          else
-        {
-        toast.success('Please Enter A Valid Code!')
-            return sum;
-        }
-      }
-      else
-      {
-        return sum
-      }
-    }
 
 
   // Delete Items From Cart
@@ -141,8 +117,22 @@ function Cart(props) {
         }
         },[useremail,authtoken,dispatch,cart.length])
 
-
-        
+    const stripePromise=loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`)
+    const handlePayment=async()=>{
+      try {
+        const stripe = await stripePromise;
+        console.log(stripe)
+        const res = await makePaymentRequest.post("/api/orders", {email:useremail,
+            products: cart,
+        });
+        await stripe.redirectToCheckout({
+            sessionId: res.data.stripeSession.id,
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    }
+    
   return (
     <section className='Cart' style={{width:'100%',margin:'100px 0px'}}>
     <div className='Cart-Main-Box'>
@@ -156,7 +146,7 @@ function Cart(props) {
       <p style={{margin:'0px 0px'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</p>
       <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
       <p style={{margin:'0px 0px'}}>Category: {element.attributes.category}</p>
-      <p style={{margin:'0px 0px'}}>Product Id: {element.attributes.id_product}</p>
+      <p style={{margin:'0px 0px'}}>Selected Size: {element.attributes.size}</p>
       </div>
       <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
       <div className="input-group">
@@ -173,7 +163,7 @@ function Cart(props) {
       <div>Add a Discount Code</div>
       <div style={{margin:'12px 0px'}}>
         <input type='text' onChange={onChange} style={{height:'40px',margin:'0px 20px 0px 0px'}}/>
-        <button onClick={onClick} style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}} >Add</button>
+        <button style={{height:'40px',width:'100px',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44'}} >Add</button>
       </div>
      
      <div style={{borderBottom:'1px solid black',padding:'20px 0px',width:'80%'}}>
@@ -198,14 +188,18 @@ function Cart(props) {
         <div style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
         <div >Total</div>
          <div>
-        {TotalSum()}
+         {(cart.length!==0)? !(code===DiscountCode)?cart.map((element)=> Number(element.attributes.price)).reduce((accumulator, currentValue) => accumulator + currentValue)
+         :(cart.map((element)=> Number(element.attributes.price)).reduce((accumulator, currentValue) => accumulator + currentValue))*80/100
+         :'0'
+        }
+
         </div>
         </div>
 
 
         </div>
 
-        <button style={{padding:'10px 0px',width:'80%',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44',height:'auto',fontSize:'20px',fontWeight:'400',display:'flex',justifyContent:'center',alignItems:'center',color:'white'}}>Continue To Checkout</button>
+        <button style={{padding:'10px 0px',width:'80%',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44',height:'auto',fontSize:'20px',fontWeight:'400',display:'flex',justifyContent:'center',alignItems:'center',color:'white'}} onClick={()=>handlePayment()}>Continue To Checkout</button>
       </div>   
     </div> 
     <YouMayLike/>

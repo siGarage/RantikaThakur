@@ -10,9 +10,9 @@ import { memo, useEffect, useMemo, useState } from 'react'
 import PRODUCTDATA from '../API/Product';
 import constants from '../constants';
 import { toast } from 'react-toastify'
-
+import Hamberger from './Hamberger'
 function Navbar(props) {
-  const {products}=props;
+  const {username,products,logged_in}=props;
  const navigate=useNavigate()
  const dispatch = useDispatch(); 
  const[query,setQuery]=useState('');
@@ -75,24 +75,25 @@ useEffect(() => {
   return (
     <>
    <section className='Navbar'>
-   
 
     <div className='Navbar-box1'>
+      <div><Hamberger/></div>
       <div className='Navbar-box1-box'>
      <div style={{height:'35px',width:'100%',borderRadius:'7px',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',border:'1px solid #B0B0B0',margin:'0px 6px',padding:'2px 5px'}}>
-      <div  style={{height:'25px',width:'20%',margin:'0px 10px 0px 0px'}}><img src={SearchImage}style={{height:'20px'}} alt='search' /></div>
-
-      <input type='text'  placeholder='Search Products' onClick={handleClick} onChange={onChange} style={{height:'28px',border:'none'}}/>
+      <div  style={{height:'25px',width:'20%'}}><img src={SearchImage}style={{height:'20px'}} alt='search' /></div>
+      <input type='text'  placeholder='Search Products' onClick={handleClick} onChange={onChange} style={{height:'28px',border:'none',backgroundColor:'#FFFFF3'}}/>
       </div> 
       <Link to='/cart' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div></Link>
       <Link to='/wishlist' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={HeartImage} alt='wishlist' /></div></Link>
-      <Link to='/profile' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile' /></div></Link>
+      {!logged_in?<Link to='/profile' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile' /></div></Link>:<Link to='/profile' style={{textDecoration:'none'}}><div className='Profile-Box-Text'>{username.slice(0,1).toUpperCase()}</div></Link>}
       </div>
     </div>
+
+
     <div className='Navbar-box2' style={{margin:'14px 0px'}}>
     <img src={RantikaLogo} alt='Logo'/>
     </div>
-    <div className='Navbar-box3' style={{fontFamily:'Abhaya Libre',fontSize:'32px',padding:'21px 21px'}}>
+    <div className='Navbar-box3' style={{fontFamily:'Abhaya Libre',fontSize:'30px'}}>
     <Link to='/' style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Home</div></Link>
     <Link to='/shop?type=All'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Shop</div></Link>
     <Link to='/customsize'  style={{textDecoration:'none',color:'#757575'}}><div style={{margin:'0px 35px'}}>Customize Size</div></Link>
@@ -135,7 +136,9 @@ useEffect(() => {
 
 
 const mapStateToProps = (state) => ({
-  products: state.product.Products
+  products: state.product.Products,
+  logged_in:state?.auth?.logged_in,
+  username:state?.auth?.user?.user?.username,
 });
 
 export default connect(mapStateToProps)(memo(Navbar));

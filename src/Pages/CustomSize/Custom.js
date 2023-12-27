@@ -2,7 +2,7 @@ import './Custom.css';
 function Custom(props) {
   return (
     <section className='Custom' >
-        <div style={{margin:'50px',fontSize:'36px',fontWeight:'600'}}>CUSTOM SIZE</div>
+        <div style={{margin:'10px 0px 10px 0px',fontSize:'36px',fontWeight:'600'}}>CUSTOM SIZE</div>
         <p style={{width:'80%',textAlign:'center',margin:'0px 0px 40px 0px'}}>If you're unable to find your size in our standard chart, fill in the measurements form below with all your details and your order shall be processed accordingly. </p>
         <div style={{width:'80%'}}>
     <div className='Custom-Box1'>
@@ -104,6 +104,13 @@ function Custom(props) {
         </div> 
        <div className='Custom-Box3-Box'>
       </div>
+    </div>
+
+    <div className='Custom-Box3'>
+    <div className='Custom-Box3-Box'>
+    <button  className='Contact-Submit-Button'>Submit</button>
+    </div>
+        
     </div>
     </div>
     </section>

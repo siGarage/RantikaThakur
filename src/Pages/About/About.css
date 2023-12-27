@@ -1,0 +1,29 @@
+.About{
+    width:100%;
+    height:auto;
+    margin:25px 0px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.About-Box1{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    height:100%;
+}
+
+.About-Box2{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:'row';
+    width:90%;
+    height:100%;
+    border-bottom:1px solid #BD9334;
+    padding:52px 0px;
+}

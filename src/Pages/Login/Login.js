@@ -1,13 +1,13 @@
 import './Login.css';
 import SideImage from '../../Images/SDP05271.png'
-import { Link} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import Auth from '../../API/Auth';
 import constants from '../../constants';
 import { useState } from 'react';
 function Login() {
-    
+    const navigate=useNavigate()
     const dispatch=useDispatch();
     const [credentials,setCredentials] = useState({identifier:"",password:""}); 
 
@@ -47,6 +47,7 @@ function Login() {
               payload: { data: res.data },
             });
             toast.success('Login successful!')
+            navigate('/profile')
           } 
               else {
                 toast.error(res.data.error.message)

@@ -19,6 +19,8 @@ import Shop from './Pages/Shop/Shop'
 import About from './Pages/About/About';
 import ShopId from './Pages/Shop/ShopId'
 import Custom from './Pages/CustomSize/Custom'
+import Success from './Pages/Success/Success'
+import Fail from './Pages/Success/Fail'
 
 import Wishlist from './Pages/Wishlist/Wishlist'
 import Profile from './Pages/Profile/Profile'
@@ -62,7 +64,8 @@ function App(props) {
           <Route exact path="/shop" element={<Shop/>}/>
           <Route exact path="/shop/:shopId" element={<ShopId/>}/>
          
-          
+          <Route exact path="/success" element={<Success/>}/>
+          <Route exact path="/fail" element={<Fail/>}/>
           
           {logged_in?<>
           <Route exact path="/wishlist" element={<Wishlist/>}/>

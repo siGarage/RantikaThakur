@@ -1,11 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
-import Img from './IMG_9098.png'
 import Marquee from "react-fast-marquee";
 import { memo } from 'react';
 import { connect} from 'react-redux';
 import Carousel from 'react-multi-carousel';
-// import axios from "axios";
 
 
 function Home(props) {
@@ -52,21 +50,20 @@ function Home(props) {
   
   return (
     <section className='Home'>
-      <Marquee style={{margin:"100px 0px",fontSize:'50px',fontFamily:'Inter',fontWeight:'100'}}>
-        <img style={{height:'50px',width:'50px'}} src={Img} alt='MarqueeImage'/>
+      <Marquee style={{height:'auto',fontSize:'18px',fontFamily:'Inter',fontWeight:'100',backgroundColor:'#E2BF44',color:'white'}}>
       I can be a React component, multiple React components, or just some text.
       </Marquee>
       <div className='Home-Box1'>
-        <div style={{fontFamily:'Poppins',fontWeight:'600',color:'white',fontSize:'64px'}}>Turn your Clutter into Points</div>
-        <div style={{fontFamily:'Poppins',fontWeight:'400',color:'white',fontSize:'40px'}}>Snap, Buy, Repeat</div>
-        <Link to='/shop?type=All'  style={{textDecoration:'none',width:'25%',height:'20%',fontFamily:'Poppins',fontWeight:'400',color:'black',fontSize:'48px',cursor:'pointer',borderRadius:'17px',margin:'10px 0px',border:'none',display:'flex',justifyContent:'center',alignItems:'center',backgroundColor:'white'}}>Buy Now</Link>
+        <div className='Home-Box1-Heading'>Turn your Clutter into Points</div>
+        <div className='Home-Box1-Description'>Snap, Buy, Repeat</div>
+        <Link to='/shop?type=All'  className='Home-Box1-Button'>Buy Now</Link>
       </div>
    
 
 
-      <div style={{width:'90%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',margin:'30px'}}>
-      <div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',fontFamily:'Abhaya Libre',fontSize:'32px',fontWeight:'400',color:'#757575',margin:'20px 0px'}}>BEST SELLERS</div>
-      <Carousel responsive={responsive}  autoPlay={true} autoPlaySpeed={4000} className="multi-carousel-container">
+      <div className='Home-Box2'>
+      <div className='Home-Box2-Box1'>BEST SELLERS</div>
+      <Carousel responsive={responsive}  autoPlay={true} autoPlaySpeed={2000} className="multi-carousel-container">
       {data.map((element) => {
                     return (
                       <div
@@ -81,7 +78,7 @@ function Home(props) {
                             navigate(`/shop/${element.id}`);
                           }}
                         >
-                          <img
+                          <img className='carousel-best-image'
                             src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`}
                             onMouseOver={(e) =>
                               (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`)
@@ -93,8 +90,8 @@ function Home(props) {
                             style={{
                               filter: !element.attributes.instock
                                 ? "grayscale(1)"
-                                : "grayscale(0)",
-                            width:'100%',height:'300px'}}
+                                : "grayscale(0)"
+                        }}
                           />
 
                           <div>
@@ -126,63 +123,69 @@ function Home(props) {
 
 
 
-      <div style={{width:'90%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',margin:'30px'}}>
-      <div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',fontFamily:'Abhaya Libre',fontSize:'32px',fontWeight:'400',color:'#757575',margin:'20px 0px'}}>Shop By Category</div>
-      <div style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
-       <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',height:'550px',margin:'20px 0px'}}>
+      <div className='Home-Box3'>
+      <div className='Home-Box3-Box1'>Shop By Category</div>
+      <div className='Home-Box3-Box1-Box'>
+       <div className='Home-Box3-Box1-Box-InnerBox1'>
           
           {/* clothesTypesBox1 */}
-        <div className='clothesTypesBox1' style={{width:'49%',height:'100%'}}>
-          <div style={{fontFamily:'Abhaya Libre',fontSize:'64px',fontWeight:'700',color:'white'}}>{array[0]}</div>
+        <div className='clothesTypesBox1'>
+          <div className='clothesTypesBox1-Box1'>{array[0]}</div>
           <div></div>
           <div onClick={()=>{navigate({
             pathname:'/shop',
             search:`?type=${array[0]}`
-          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" style={{opacity:'0',height:'100%',width:'100%',position:'absolute',cursor:'pointer'}}/>Button</div>
+          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" />Button</div>
         </div>
 
          {/* clothesTypesBox2 */}
-        <div className='clothesTypesBox2' style={{width:'49%',height:'100%'}}>
-        <div style={{fontFamily:'Abhaya Libre',fontSize:'64px',fontWeight:'700',color:'white'}}>{array[1]}</div>
+        <div className='clothesTypesBox1' style={{width:'49%',height:'100%'}}>
+        <div className='clothesTypesBox1-Box1'>{array[1]}</div>
         <div></div>
         <div onClick={()=>{navigate({
             pathname:'/shop',
             search:`?type=${array[1]}`
-          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" style={{opacity:'0',height:'100%',width:'100%',position:'absolute',cursor:'pointer'}}/>Button</div>
+          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" />Button</div>
         </div>
         </div> 
 
        {/* clothesTypesBox3 */}
-       <div className='clothesTypesBox3' style={{width:'98%',height:'700px',margin:'20px 0px'}}>
-       <div style={{fontFamily:'Abhaya Libre',fontSize:'64px',fontWeight:'700',color:'white'}}>{array[2]}</div>
+       <div className='clothesTypesBox3'>
+       <div className='clothesTypesBox1-Box1'>{array[2]}</div>
        <div></div>
        <div onClick={()=>{navigate({
             pathname:'/shop',
             search:`?type=${array[2]}`
-          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" style={{opacity:'0',height:'100%',width:'100%',position:'absolute',cursor:'pointer'}}/>Button</div>
+          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" />Button</div>
        </div>
-       <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',height:'550px',margin:'20px 0px'}}>
+
+
+
+       <div className='Home-Box3-Box1-Box-InnerBox1'>
 
         {/* clothesTypesBox4 */}
         <div className='clothesTypesBox1'>
-        <div style={{fontFamily:'Abhaya Libre',fontSize:'64px',fontWeight:'700',color:'white'}}>{array[3]}</div>
+        <div className='clothesTypesBox1-Box1'>{array[3]}</div>
         <div></div>
         <div onClick={()=>{navigate({
             pathname:'/shop',
             search:`?type=${array[3]}`
-          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" style={{opacity:'0',height:'100%',width:'100%',position:'absolute',cursor:'pointer'}}/>Button</div>
+          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" />Button</div>
         </div>
 
         {/* clothesTypesBox5 */}
-        <div className='clothesTypesBox2'>
-        <div style={{fontFamily:'Abhaya Libre',fontSize:'64px',fontWeight:'700',color:'white'}}>{array[4]}</div>
+        <div className='clothesTypesBox1'>
+        <div className='clothesTypesBox1-Box1'>{array[4]}</div>
         <div></div>
         <div onClick={()=>{navigate({
             pathname:'/shop',
             search:`?type=${array[4]}`
-          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" style={{opacity:'0',height:'100%',width:'100%',position:'absolute',cursor:'pointer'}}/>Button</div>
+          })}} className='clothesTypes-Button' style={{textDecoration:'none'}}><input  type='radio' name='category'  value="men's clothing" />Button</div>
         </div>
         </div>
+
+
+
       </div>
       </div>
     </section>

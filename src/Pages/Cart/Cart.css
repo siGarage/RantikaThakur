@@ -21,3 +21,18 @@
     font-size:20px;
     padding: 0px 40px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .Cart-Main-Box{
+        flex-direction: column;
+        
+    }
+    .Cart-Main-Box1{
+        width: 100%;
+    }
+    
+    .Cart-Main-Box2{
+        width: 100%; 
+        justify-content: center;  
+    }
+  }

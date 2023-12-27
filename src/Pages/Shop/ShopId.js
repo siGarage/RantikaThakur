@@ -11,48 +11,52 @@ import constants from "../../constants";
 import Rating from '@mui/material/Rating';
 import REVIEW from '../../API/Review'
 import Box from '@mui/material/Box';
+
+import {loadStripe} from '@stripe/stripe-js'
+import { makePaymentRequest } from '../../API/Payment';
+
+
 function ShopId(props) {
   const dispatch=useDispatch()
   const [value, setValue] = useState(0);
   const [reviewItems, setReviewItems] = useState([]);
- console.log(reviewItems)
+  const [size,setSize]=useState('')
+  
   // Id Of Product
   const { shopId } = useParams();
   const [review,setReview] = useState({id_product:Number(shopId),rating:value,review:"",name:"",email:""}); 
   const navigate=useNavigate()
   const {cart}=props;
   let [product, setProduct] = useState({});
-  const {logged_in}=props;
- 
-  // If logged_in is true then set useremail and authtoken
-  if(logged_in){
-    var useremail=props.user.user.email;
-    var authtoken=props.user.jwt
-  }
- console.log(review)
+  const {logged_in,useremail,authtoken}=props;
+
 
   // Add Data To Cart
- const AddToCart = (data) => { 
- const findData=cart.find((element)=>Number(element.attributes.id_product)===Number(data.id_product))
-  if(findData){
-    const findProductPrice=Number(findData.attributes.price)+Number(data.price)
-    const findProductQuantity=Number(findData.attributes.quantity)+1
-    updateProduct(findData.id,findProductPrice,findProductQuantity)
-  }
-  else{
-    CARTDATA.addCartItems(data,authtoken).then((res)=>{
-     
-      if(res.status===200){
-        dispatch({
-          type: constants("cart").reducers.cart.AddToCart,
-          payload: {cartItems:[...cart,res.data.data]},
-        })
-        toast.success('Item Added To Cart !')
-         }
-        
-      })
-  }
-  };
+  const AddToCart = (data) => { 
+    if(data.size!=='' ){
+    const findData=cart.find((element)=>Number(element.attributes.id_product)===Number(data.id_product) && String(element.attributes.size)===String(data.size))
+     if(findData){
+       const findProductPrice=Number(findData.attributes.price)+Number(data.price)
+       const findProductQuantity=Number(findData.attributes.quantity)+1
+       updateProduct(findData.id,findProductPrice,findProductQuantity)
+     }
+     else{
+       CARTDATA.addCartItems(data,authtoken).then((res)=>{ 
+         if(res.status===200){
+           dispatch({
+             type: constants("cart").reducers.cart.AddToCart,
+             payload: {cartItems:[...cart,res.data.data]},
+
+           })
+           toast.success('Item Added To Cart !')
+            }  
+         })
+     }
+     }
+     else{
+      toast.error('Please Select Size !')
+     }
+    }
 
  const updateProduct=(cartId,price,quantity)=>{
   const data={price,quantity}
@@ -67,42 +71,46 @@ function ShopId(props) {
          }
         })
  }
- 
 
+
+
+ // Review Form
+ 
  let validateForm=(data)=> {
   const {rating,review,name,email}=data;
 
   if(rating===0){
-    toast.error('Please Select Rating');
+    toast.error('Please add rating');
     return;
   }
-  if(review.length<=30){
-    toast.error('Your review must contain at least 10 words');
+  if(review.length<=10){
+    toast.error('Your review must contain at least 5 words');
     return;
   }
   if(name.length===0){
-    toast.error('Please Enter Name');
+    toast.error('Please enter name');
     return;
   }
   if(email.length===0){
-    toast.error('Please Enter Email');
+    toast.error('Please enter email');
     return;
   }
   if (!email.match("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")){
     toast.error('Enter Valid Email')
     return ;
   }
-
  
   else{
-     
       REVIEW.addReview({ data }).then((res) => {
+        console.log(res.data.data)
     if (res.status === 200) 
     {
       toast.success('Thankyou for your review !')
+      setReviewItems([...reviewItems,res.data.data])
     } 
         else {
           toast.error(res.data.error.message)
+          
         }
       });
     };
@@ -112,6 +120,35 @@ function ShopId(props) {
  const onChange=(e)=>{
   setReview({...review,[e.target.name]:e.target.value})
  }
+
+
+
+ const stripePromise=loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`)
+
+  const handlePayment=async()=>{
+    if(size!=='' )
+    {
+      try {
+        const stripe = await stripePromise;
+        const data={...product,attributes:{...product.attributes,size:size,quantity:1,image:product.attributes.images.data[0].attributes.url}}
+        const res = await makePaymentRequest.post("/api/orders", {email:useremail,
+            products: [data],
+        });
+        console.log(res)
+        await stripe.redirectToCheckout({
+            sessionId: res.data.stripeSession.id,
+        });
+    } 
+    catch (err) {
+        console.log(err);
+    }
+    }
+  else{
+    toast.error('Please Select Size')
+  }
+}
+
+ 
 
 // Get Data of Product
   useEffect(() => {
@@ -210,9 +247,9 @@ function ShopId(props) {
 
               <div style={{ display: "flex", flexDirection: "row" }}>
                 {product.attributes.sizes.data.map((element) => (
-                  <div className="Size-Box" key={element.id}>
+                  <button  onClick={()=>setSize(element.attributes.size)} className="Size-Box" key={element.id} style={{backgroundColor:(size===element.attributes.size)?'#E2BF44':'white',border:(size===element.attributes.size)?'none':'3px solid #959595'}}>
                     {element.attributes.size}
-                  </div>
+                  </button>
                 ))}
               </div>
 
@@ -237,6 +274,8 @@ function ShopId(props) {
                     color: "white",
                     fontSize: "32px",
                   }}
+
+                  onClick={()=>{handlePayment()}}
                   
                 >
                  {(!product.attributes.instock)?'Out Of Stock':'Buy Now'}
@@ -249,7 +288,8 @@ function ShopId(props) {
                      "category":product.attributes.category.data.attributes.category,
                      "id_product":product.id,
                      "image":`${product.attributes.images.data[0].attributes.url}`,
-                     "quantity":1
+                     "quantity":1,
+                     "size":size
                   },authtoken);
                   }}
                   disabled={!product.attributes.instock}
@@ -388,8 +428,8 @@ function ShopId(props) {
                   {reviewItems.map((element) => {
                     return (
                       <div
-                        style={{ position: "relative", cursor: "pointer" }}
-                        className="col-md-4 my-3   Product-Small-Cards"
+                        style={{ position: "relative", cursor: "pointer"}}
+                        className="col-md-4 my-3"
                         key={element.id}
                       >        
 
@@ -397,14 +437,14 @@ function ShopId(props) {
                             <div style={{fontFamily:'inter',fontSize:'20px',fontWeight:'600',color:'black',margin:'0px 0px 5px 0px'}}>
                               {element.attributes.name}
                             </div>
-                            <div className="Card-Category">
+                            <div>
                               {
                                  <Rating name="read-only" value={element.attributes.rating} readOnly />
                               }
                             </div>
-                            <div className="Card-Description">
+                            <p >
                               {element.attributes.review}
-                            </div>
+                            </p>
                           </div>
                         </div>
                     );
@@ -421,8 +461,9 @@ function ShopId(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user:state.auth.user,
-  logged_in:state.auth.logged_in,
-  cart: state.cart.cartItems
+  useremail:state?.auth?.user?.user?.email,
+  authtoken:state?.auth?.user?.jwt,
+  logged_in:state?.auth?.logged_in,
+  cart: state?.cart?.cartItems
 });
 export default connect(mapStateToProps)(memo(ShopId));

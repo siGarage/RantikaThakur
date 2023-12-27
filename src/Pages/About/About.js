@@ -2,8 +2,8 @@ import './About.css';
 import SideImage from '../../Images/SDP05271.png'
 function About() {
   return (
-    <section className='Login' style={{width:'100%',height:'auto',margin:'50px 0px',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-      <div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',height:'100%'}}>
+    <section className='About' >
+      <div className='About-Box1'>
     <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'row',width:'95%',height:'100%',borderBottom:'1px solid #BD9334',padding:'52px 0px'}}>
         <div style={{width:'50%',height:'567px',margin:'0px 18px'}}><img src={SideImage} alt='SideImage' style={{height:'100%',width:'100%'}}/></div>
         <div style={{width:'50%',display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:'column',height:'100%'}}>
@@ -16,7 +16,7 @@ function About() {
     </div>
 
 
-    <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'row',width:'90%',height:'100%',borderBottom:'1px solid #BD9334',padding:'52px 0px'}}>
+    <div className='About-Box2' >
         <div style={{width:'100%',display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:'column',height:'100%'}}>
           <div style={{fontFamily:'Abhaya Libre',fontWeight:'400',fontSize:'30px',color:'#BD9334',margin:'0px 0px 10px 0px'}}>~About The founder~</div>
           <div style={{width:'100%',height:'500px',margin:'50px 18px'}}><img src={SideImage} alt='SideImage' style={{height:'100%',width:'100%'}}/></div>

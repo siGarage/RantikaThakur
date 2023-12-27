@@ -1,11 +1,12 @@
 import './SignUp.css';
 import SideImage from '../../Images/SDP05271.png'
-
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Auth from '../../API/Auth';
 
 import { useState } from 'react';
 function SignUp() {
+  let navigate=useNavigate()
   const [credentials,setCredentials] = useState({username:"",email:"",password:""});
     let myFunction=()=> {
         var x = document.getElementById("myInput");
@@ -50,6 +51,7 @@ function SignUp() {
               if (res.status=== 200) 
               {
                 toast.success('Account Created Successfully!');
+                navigate('/login')
               } 
               else {
                 toast.error(res.data.error.message)
