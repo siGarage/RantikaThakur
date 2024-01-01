@@ -1,0 +1,116 @@
+.Contact-Detail{
+    margin:40px 20px;
+    font-family:'Abhaya Libre';
+    font-size:32px;
+    color:#757575;
+}
+
+.Contact-Input-Box{
+    display:flex;
+    justify-content:center;
+    align-items:space-between;
+    width:100%;
+    margin:12px 0px;
+}
+.Contact-Box-Label{
+    width:50%;
+    font-family:'Abhaya Libre';
+    font-size:26px;
+    color:#757575;
+}
+.Contact-Input{
+    width:50%;
+    height:30px;
+}
+.Contact-Submit{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.Contact-Submit-Button{
+    border: none;
+    border-radius: 30px;
+    color: white;
+    background-color: #E2BF44;
+    width: 50%;
+    height: 40px;
+    margin: 10px 0px;
+}
+
+.Contact{
+    width:100%;
+    height:auto;
+    margin:50px 0px;
+}
+
+.Contact-Heading{
+    font-family:'Abhaya Libre';
+    font-size:96px;
+    color:#757575;
+}
+
+.Contact-Box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+    width:80%;
+    height:60%;
+}
+
+.Contact-Box-Box1{
+    width:40%;
+    height:100%;
+}
+
+.Contact-Box-Box2{
+    width:60%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:column;
+    height:100%;
+}
+
+@media only screen and (max-width: 1100px){
+    .Contact-Box{
+        width:100%; 
+    }
+
+    .Contact-Box-Box1
+    {
+        display: none;
+    }
+    .Contact-Box-Box2
+    {
+        width:100%;
+        
+    }
+    .Contact-Heading{
+        
+        font-size:80px;
+       
+    }
+    .Contact-Box-Label{
+        font-size:20px;
+        
+    }
+  }
+
+  @media only screen and (max-width: 1100px) and (min-width:600px){
+    
+    .Contact-Heading{
+        
+        font-size:80px;
+       
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .Contact-Heading{
+
+        font-size:40px;
+       
+    }
+  }

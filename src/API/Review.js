@@ -1,4 +1,5 @@
 import axios from "axios";
+// import Environment from "../enviroment";
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_SERVERNAME}`,
   headers: { "Content-Type": "application/json" },
@@ -20,25 +21,13 @@ function defaultCatch(error, resolve) {
 }
 
 export default class Auth {
-
- // sign up
-    static signup(values) {
-        let payload = values;
-        return new Promise((resolve) => {
-          instance
-            .post("/api/auth/local/register", payload.data)
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => defaultCatch(error, resolve));
-        });
-      }
   //log in
-  static login(values) {
-    let payload = values;
+  
+  static addReview(values) {
+    let payload={"data":values.data};
     return new Promise((resolve) => {
       instance
-        .post("/api/auth/local", payload.data)
+      .post("/api/ratings", payload)
         .then((response) => {
           resolve(response);
         })
@@ -46,6 +35,5 @@ export default class Auth {
     });
   }
 
+  
 }
-
-

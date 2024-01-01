@@ -1,7 +1,6 @@
 .Navbar{
     height: auto;
     width: 100%;
-    background-color: white;
     align-items: center;
     justify-content: space-around;
     display: flex;
@@ -12,13 +11,34 @@
 .Navbar-box1{
     width: 90%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: flex-end;
-    margin: 46px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
 }
 .Navbar-box1-box{
 display: flex;
 flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+.Profile-Box-Text{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  height:30px;
+  width:30px;
+  margin:0px 6px;
+  font-family:Inter;
+  font-weight:700;
+  color:white;
+  border: none;
+  background-color:#E2BF44;
+}
+
+.search-text{
+  font-size:50px;
 }
 
 .Navbar-box3{
@@ -74,4 +94,26 @@ flex-direction: row;
   }
   .close:after {
     transform: rotate(-45deg);
+  }
+
+  @media only screen and (max-width: 700px) {
+    .Navbar-box3{
+    display: none;
+  }
+  .Navbar-link{
+    display: none;
+  }
+  .Navbar-box2 img{
+    width: 300px;
+  }
+  .search-text{
+    font-size:20px;
+  }
+  
+  .SearchBox
+  {
+      margin:0px 0px;
+
+      
+  }
   }

@@ -1,12 +1,14 @@
 .Order{
     width: 100%;
-    margin: 100px 0px;
+    margin: 20px 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
+.Order-Main-Box1-Box{
+    width:60%;
+}
 .OrderBox1{
    height:auto;
    width: 90%;
@@ -79,15 +81,17 @@
 
 .Order-Main-Box{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-   /* align-items: center; */
+   align-items: center;
    width: 100%;
 }
 .Order-Main-Box1{
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -159,7 +163,7 @@ font-weight: 400;
 
 .Order5Button{
     width:40%;
-    height:90px;
+    height:auto;
     margin:0px 100px;
     border:2px solid black;
     border-radius:10px;
@@ -174,3 +178,20 @@ font-weight: 400;
     padding: 0px 20px;
     text-decoration: none;
 }
+.Datail-product-order{
+    font-style: italic;
+}
+
+@media only screen and (max-width: 800px)  {
+    .Order-Main-Box1-Box{
+        width:90%;
+    }
+    .Order5Button{
+        width:80%;
+        font-size:16px;
+       
+    }
+    .Order5{
+        margin:20px 0px;
+    }
+  }

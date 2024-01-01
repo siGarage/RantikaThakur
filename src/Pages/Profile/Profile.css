@@ -31,6 +31,27 @@
     align-items: center;
     flex-direction: column;
     position: relative;
+    
+}
+.Profile-Username{
+    margin:5px 0px;
+    font-family:'Poppins';
+    font-weight:300;
+    font-size:20px;
+}
+.Avatar{
+    margin:5px 0px;
+    font-family:'Poppins';
+    font-weight:300;
+    font-size:40px;
+    background-color:#E2BF44;
+    height:100px;
+    width:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    color:white;
 }
 
 .ProfileDetailsHeading{
