@@ -37,6 +37,10 @@ align-items: center;
   background-color:#E2BF44;
 }
 
+.search-text{
+  font-size:50px;
+}
+
 .Navbar-box3{
     display: flex;
     flex-direction: row;
@@ -95,5 +99,21 @@ align-items: center;
   @media only screen and (max-width: 700px) {
     .Navbar-box3{
     display: none;
+  }
+  .Navbar-link{
+    display: none;
+  }
+  .Navbar-box2 img{
+    width: 300px;
+  }
+  .search-text{
+    font-size:20px;
+  }
+  
+  .SearchBox
+  {
+      margin:0px 0px;
+
+      
   }
   }

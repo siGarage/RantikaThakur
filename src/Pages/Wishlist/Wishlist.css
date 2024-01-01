@@ -13,10 +13,88 @@
 
 .Wishlist{
         width: 100%;
-        margin: 100px 0px;
+        margin: 0px 0px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 }
 
+.WishlistCard{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    margin:0px 0px 50px 0px;
+}
+.WishlistCard-Detail{
+    display:flex;
+    flex-direction:row;
+    width:60%;
+    justify-content:center;
+    align-items:center;
+    height:300px;
+    font-family:'Comfortaa';
+    font-weight:500;
+    font-size:20px;
+}
+.Wishlist-AddToCart{
+    width:40%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px 50px;
+    font-family:poppins;
+    font-weight:400;
+    font-size:24px;
+    color:#E2BF44;
+}
+.Wishlist-AddToCart-Button{
+    background-color:#E2BF44;
+    padding:10px 20px;
+    color:white;
+    font-family:'Inter';
+    font-weight:400;
+    font-size:32px;
+    border-radius:72px;
+    border:none;
+}
+
+.Wishlist-Inside-Card{
+    display: none;
+}
+.product-Wishlist-Image{
+    height:299px;
+    width:254px;
+}
+@media only screen and (max-width: 800px)  {
+    .WishlistCard{
+        flex-direction:column;  
+        padding: 0px 10px;
+    }
+    .WishlistCard-Detail{
+        width:100%;
+        
+    }
+    .Wishlist-AddToCart{
+        display:none;
+    }
+    .Wishlist-Inside-Card{
+        display: flex;
+
+    }
+
+    .Wishlist-AddToCart-Button{
+        font-size:12px;
+        background-color: transparent;
+        padding:0px 5px;
+    }
+
+    .WishlistCard-Detail
+    {
+        height:250px;
+        font-size: 14px;
+    }
+    .product-Wishlist-Image{
+        height:249px;
+    }
+  }

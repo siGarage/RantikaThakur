@@ -7,8 +7,33 @@
     font-family: Inter;
 }
 
-.Exchange-Policy-Heading{
+.Exchange-Policy-Heading
+{
     font-size: 60px;
     margin: 0px 0px 60px 0px;
     font-weight: 600;
 }
+
+@media only screen and (max-width: 1000px) and (min-width: 600px){
+    .Exchange-Policy-Heading
+    {
+        font-size: 40px;
+    
+    }
+    
+    }
+
+
+    @media only screen and (max-width: 600px){
+        .Exchange-Policy-Heading
+        {
+            font-size: 25px;
+        
+        }
+        .Exchange-Main-Box{
+            
+            margin: 50px 10px ;
+           
+        }
+        
+        }

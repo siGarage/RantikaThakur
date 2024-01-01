@@ -302,9 +302,9 @@ function Shop(props) {
                             className="material-symbols-outlined"
                             style={{
                               position: "absolute",
-                              bottom: "18%",
-                              right: "5%",
-                              color: "#696969",
+                              bottom: "22%",
+                              right: "8%",
+                              color: "white",
                               fontSize: "40px",
                               fontWeight: "500",
                               cursor: "pointer",

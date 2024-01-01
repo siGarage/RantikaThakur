@@ -19,7 +19,7 @@ const closeNav=(e)=> {
   <Link  className="closebtn" onClick={closeNav}>&times;</Link>
   <div onClick={closeNav}><Link to="/" style={{color:'white',fontSize:'18px'}}>Home</Link></div>
   <div onClick={closeNav}><Link  to="/shop?type=All" style={{color:'white',fontSize:'18px'}}>Shop</Link></div>
-  <div onClick={closeNav}><Link  to="/customize" style={{color:'white',fontSize:'18px',width:'250px'}}>Customize Size</Link></div>
+  <div onClick={closeNav}><Link  to="/customsize" style={{color:'white',fontSize:'18px',width:'250px'}}>Customize Size</Link></div>
   <div onClick={closeNav}><Link  to="/contact" style={{color:'white',fontSize:'18px'}}>Contact</Link></div>
 </div>
 

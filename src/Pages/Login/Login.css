@@ -12,3 +12,31 @@
     border: none;
     margin: 20px 0px;
 }
+
+.LoginImage{
+    width:50%;
+    height:100%;
+}
+
+.LoginDetails{
+    width:50%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:column;
+    height:100%;
+}
+@media only screen and (max-width: 800px)  {
+    
+    .LoginImage{
+        display: none;
+    }
+    .LoginDetails{
+        width:100%;
+        
+    }
+
+    .Login-Button{
+        width: 100%;
+    }
+  }

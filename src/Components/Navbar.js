@@ -83,9 +83,9 @@ useEffect(() => {
       <div  style={{height:'25px',width:'20%'}}><img src={SearchImage}style={{height:'20px'}} alt='search' /></div>
       <input type='text'  placeholder='Search Products' onClick={handleClick} onChange={onChange} style={{height:'28px',border:'none',backgroundColor:'#FFFFF3'}}/>
       </div> 
-      <Link to='/cart' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div></Link>
-      <Link to='/wishlist' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={HeartImage} alt='wishlist' /></div></Link>
-      {!logged_in?<Link to='/profile' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile' /></div></Link>:<Link to='/profile' style={{textDecoration:'none'}}><div className='Profile-Box-Text'>{username.slice(0,1).toUpperCase()}</div></Link>}
+      <Link className='Navbar-link'  to='/cart' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={CartImage} alt='cart' /></div></Link>
+      <Link className='Navbar-link' to='/wishlist' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={HeartImage} alt='wishlist' /></div></Link>
+      {!logged_in?<Link className='Navbar-link' to='/profile' style={{textDecoration:'none',color:'#757575'}}><div style={{height:'30px',width:'30px',margin:'0px 6px'}}><img src={ProfileImage} alt='profile' /></div></Link>:<Link className='Navbar-link' to='/profile' style={{textDecoration:'none'}}><div className='Profile-Box-Text'>{username.slice(0,1).toUpperCase()}</div></Link>}
       </div>
     </div>
 
@@ -122,9 +122,9 @@ useEffect(() => {
     
     </div>}
    )
-   :(query.length===0?<div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'50px',fontWeight:'600'}}>Search For Products &nbsp; <span style={{fontSize:'50px',fontWeight:'600'}} className="material-symbols-outlined">
+   :(query.length===0?<div className='search-text' style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:'600'}}>Search For Products &nbsp; <span  style={{fontWeight:'600'}} className="material-symbols-outlined search-text">
    search
-   </span></div>:<div style={{display:'flex',justifyContent:'center',alignItems:'center',fontSize:'50px',fontWeight:'600'}}>No Product Found</div>)
+   </span></div>:<div className='search-text' style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:'600'}}>No Product Found</div>)
    }
     </div>
    </div>
@@ -137,7 +137,7 @@ useEffect(() => {
 
 const mapStateToProps = (state) => ({
   products: state.product.Products,
-  logged_in:state?.auth?.logged_in,
+  logged_in:state.auth.logged_in,
   username:state?.auth?.user?.user?.username,
 });
 

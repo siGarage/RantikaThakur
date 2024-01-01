@@ -10,7 +10,7 @@ import 'react-multi-carousel/lib/styles.css';
 // Components
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
-
+import FooterNavbar from './Components/FooterNavbar'
 
 //Pages
 import Contact from './Pages/Contact/Contact'
@@ -91,6 +91,7 @@ function App(props) {
           <Route exact path="*" element={<Home/>}/>
         </Routes>
         <Footer/>
+        <FooterNavbar/>
     </Router>
     </div>
   );

@@ -48,10 +48,12 @@ function WishlistCard(props) {
                payload: {cartItems:[...cart,res.data.data]},
 
              })
+         
              toast.success('Item Added To Cart !')
               }  
            })
        }
+       DeleteFromWishlist(element.id,authtoken)
        }
        else{
         toast.error('Please Select Size !')
@@ -114,25 +116,41 @@ function WishlistCard(props) {
 
 
   return (
-    <div style={{display:'flex',flexDirection:'row',width:'100%',margin:'0px 0px 50px 0px'}} key={element.id}>
+    <div className='WishlistCard' key={element.id}>
         
-        <div  style={{display:'flex',flexDirection:'row',width:'60%',justifyContent:'center',alignItems:'center',height:'300px',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px'}}>
+        <div  className='WishlistCard-Detail'>
         <div style={{width:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.image}`} alt='ProductImage' style={{height:'299px',width:'254px'}}/>
+            <img className='product-Wishlist-Image' src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.image}`} alt='ProductImage'/>
         </div>
       <div  style={{cursor:'pointer',width:'50%',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-        <div onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{width:'100%'}}>
-      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>30?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</p>
+        <div onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{width:'100%',padding:'0px 10px'}}>
+      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>15?`${element.attributes.title.slice(0,15)}...`:element.attributes.title}</p>
       <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
       <p style={{margin:'0px 0px'}}>Category: {element.attributes.category}</p>
       <p style={{margin:'0px 0px'}}>Product Id: {element.attributes.id_product}</p>
       
       </div>
-      <div>Select Size: {element.attributes.size.map((element)=><button  style={{backgroundColor:(size===element)?'#E2BF44':'white',border:(size===element)?'none':'1px solid #959595',margin:'0px 4px'}} onClick={()=>{setSize(element)}} key={element}>{element}</button>)}</div>
-      <div style={{display:'flex',justifyContent:'flex-end'}}><span style={{margin:'0px 50px',cursor:'pointer',fontSize:'40px'}} className="material-symbols-outlined"  onClick={()=>{DeleteFromWishlist(element.id,authtoken)}}>delete</span></div>
+      <div style={{padding:'0px 10px'}}>Select Size: {element.attributes.size.map((element)=><button  style={{backgroundColor:(size===element)?'#E2BF44':'white',border:(size===element)?'none':'1px solid #959595',margin:'0px 4px'}} onClick={()=>{setSize(element)}} key={element}>{element}</button>)}</div>
+      <div style={{display:'flex',justifyContent:'flex-end',flexDirection:'row',alignContent:'center'}}>
+      <button onClick={()=>{AddToCart({"email":useremail,
+                     "title":element.attributes.title,
+                     "price":element.attributes.price,
+                     "category":element.attributes.category,
+                     "id_product":element.attributes.id_product,
+                     "image":`${element.attributes.image}`,
+                     "quantity":1,
+                     "size":size,
+                  },authtoken);                  
+                 
+                }}
+className='Wishlist-AddToCart-Button Wishlist-Inside-Card '><span className="material-symbols-outlined" style={{fontSize:'30px',color:'black',fontWeight:'400'}}>
+add_shopping_cart
+</span></button>
+        
+        <span style={{margin:'0px 10px',cursor:'pointer',fontWeight:'400',fontSize:'30px',display: 'flex',justifyContent: 'center',alignItems: 'center'}} className="material-symbols-outlined"  onClick={()=>{DeleteFromWishlist(element.id,authtoken)}}>delete</span></div>
   </div>
 </div>
-<div  style={{width:'40%',display:'flex',alignItems:'center',justifyContent:'center',padding:'20px 50px',fontFamily:'poppins',fontWeight:'400',fontSize:'24px',color:'#E2BF44'}}>
+<div  className='Wishlist-AddToCart'>
   <button onClick={()=>{AddToCart({"email":useremail,
                      "title":element.attributes.title,
                      "price":element.attributes.price,
@@ -142,8 +160,9 @@ function WishlistCard(props) {
                      "quantity":1,
                      "size":size,
                   },authtoken);                  
-                  }}
-style={{backgroundColor:'#E2BF44',padding:'10px 20px',color:'white',fontFamily:'Inter',fontWeight:'400',fontSize:'32px',borderRadius:'72px',border:'none'}}>Add To Cart</button></div>
+                 
+                }}
+className='Wishlist-AddToCart-Button'>Add To Cart</button></div>
 </div>
  
       

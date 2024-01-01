@@ -22,10 +22,10 @@ function defaultCatch(error, resolve) {
 export default class Auth {
 
  // sign up
-    static getOrder(authtoken) {
+    static getOrder(userid,authtoken) {
         return new Promise((resolve) => {
           instance
-            .get("/api/orders",{headers: {
+            .get(`/api/confirm-orders?filters[email]=${userid}&populate=order_confirmation`,{headers: {
                 'Authorization': 'Bearer ' + authtoken
               }})
             .then((response) => {
@@ -34,6 +34,17 @@ export default class Auth {
             .catch((error) => defaultCatch(error, resolve));
         });
       }
-  //log in
+      
+      static setOrder(data) {
+        let data2={"data":data}
+        return new Promise((resolve) => {
+          instance
+            .post("/api/confirm-orders",data2)
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => defaultCatch(error, resolve));
+        });
+      }
   
 }

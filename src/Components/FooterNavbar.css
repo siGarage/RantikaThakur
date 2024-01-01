@@ -1,0 +1,35 @@
+.Footer-Navbar {
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    display: none;
+     background-color: white;
+     box-shadow: 1px 1px 2px 2px grey;
+     z-index: 100000;;
+ }
+
+ .Profile--Footer-Navbar-Box-Text{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    height:30px;
+    width:30px;
+    margin:0px 6px;
+    font-family:Inter;
+    font-weight:700;
+    color:white;
+    border: none;
+    background-color:red;
+  }
+
+  .Footer-Navlink-Navbar{
+    border: grey;
+  }
+
+ @media only screen and (max-width: 700px){
+    .Footer-Navbar {
+        display: block;
+     }
+}

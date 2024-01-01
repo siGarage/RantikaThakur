@@ -134,7 +134,7 @@ function ShopId(props) {
         const res = await makePaymentRequest.post("/api/orders", {email:useremail,
             products: [data],
         });
-        console.log(res)
+    
         await stripe.redirectToCheckout({
             sessionId: res.data.stripeSession.id,
         });
@@ -240,9 +240,11 @@ function ShopId(props) {
                   fontSize: "15px",
                   color: "#737373",
                   margin: "53px 0px",
+                  display:'flex',
+                  justifyContent:'flex-end'
                 }}
               >
-                Size Guide
+               Available Size
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
@@ -253,30 +255,12 @@ function ShopId(props) {
                 ))}
               </div>
 
-             {logged_in ? <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  margin: "100px 0px 0px 0px",
-                }}
-              >
+             {logged_in ? <div className="Shop-Button">
                 <button
                   disabled={!product.attributes.instock}
-                  style={{
-                    backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44",
-                    width: "230px",
-                    height: "77px",
-                    border: "none",
-                    borderRadius: "72px",
-                    fontFamily: "Inter",
-                    color: "white",
-                    fontSize: "32px",
-                  }}
-
+                  className="Buy-Button"
+                  style={{backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44"}}
                   onClick={()=>{handlePayment()}}
-                  
                 >
                  {(!product.attributes.instock)?'Out Of Stock':'Buy Now'}
                 </button>
@@ -293,80 +277,41 @@ function ShopId(props) {
                   },authtoken);
                   }}
                   disabled={!product.attributes.instock}
-                  style={{
-                    backgroundColor: "white",
-                    width: "267px",
-                    height: "77px",
-                    border: "1px solid black",
-                    borderRadius: "72px",
-                    fontFamily: "Inter",
-                    color: "black",
-                    fontSize: "32px",
-                    cursor: "pointer",
-                  }}
-                >
+                  className="Shop-AddToCart">
                  {(!product.attributes.instock)?'Out Of Stock':'Add To Cart'}
                 </button>
-              </div>:<div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  margin: "100px 0px 0px 0px",
-                }}
-              >
+              </div>:
+              <div className="Shop-Button">
                 <button
                   onClick={() => {navigate(`/login`)}}
-                  style={{
-                    backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44",
-                    width: "230px",
-                    height: "77px",
-                    border: "none",
-                    borderRadius: "72px",
-                    fontFamily: "Inter",
-                    color: "white",
-                    fontSize: "32px",
-                  }}
-                  
-                >
+                  className="Buy-Button"
+                  style={{backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44"}}
+                  >
                  Buy Now
                 </button>
                 <button
                   onClick={() => {navigate(`/login`)}}
-                  style={{
-                    backgroundColor: "white",
-                    width: "267px",
-                    height: "77px",
-                    border: "1px solid black",
-                    borderRadius: "72px",
-                    fontFamily: "Inter",
-                    color: "black",
-                    fontSize: "32px",
-                    cursor: "pointer",
-                  }}
-                >
+                  className="Shop-AddToCart">
                 Add To Cart
                 </button>
               </div>}
             </div>
           </div>
           <div className="ProductDescriptionBox2">
-            <div style={{ width: "50%", padding: "0px 100px 0px 0px" }}>
-              <h5 style={{ width: "60%", margin: "46px 0px" }}>
+            <div className="ProductDescriptionBox2-ProductBox">
+              <h5 style={{  margin: "46px 0px" }}>
                 Product Description
               </h5>
-              <p style={{ width: "60%", fontSize: "12px", fontWeight: "300" }}>
+              <p style={{  fontSize: "12px", fontWeight: "300" }}>
                 {product.attributes.description}
               </p>
-              <h5 style={{ width: "60%", margin: "59px 0px 30px 0px" }}>
+              <h5 style={{  margin: "59px 0px 30px 0px" }}>
                 Product Details
               </h5>
-              <h5 style={{ width: "60%" }}>Size-</h5>
-              <h5 style={{ width: "60%" }}>
+              <h5 >
                 Material-{product.attributes.material}
               </h5>
-              <h5 style={{ width: "60%" }}>Product Code-{product.id}</h5>
+              <h5 >Product Code-{product.id}</h5>
             </div>
           </div>
         </div>
@@ -398,15 +343,15 @@ function ShopId(props) {
           </label>
         </div>
 
-        <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-        <div style={{width:'45%'}}>
+        <div className='Review-Box'>
+        <div className='Review-Box-InnerBox'>
           <label style={{display:'flex',flexDirection:'column'}}>
           <p style={{fontWeight:'600'}}>Name <span style={{color:'red'}}>*</span></p>
             <input  className='review-Inputs Input-review' type='text' name='name' rows="4" onChange={onChange}/>
           </label>
         </div>
 
-        <div style={{width:'45%'}}>
+        <div  className='Review-Box-InnerBox'>
           <label style={{display:'flex',flexDirection:'column'}}>
             <p style={{fontWeight:'600'}}>Email <span style={{color:'red'}}>*</span></p>
             <input  className='review-Inputs Input-review' type='text' name='email' rows="4" onChange={onChange}/>

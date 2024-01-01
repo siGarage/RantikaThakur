@@ -58,7 +58,7 @@ function Wishlist(props) {
 
   return (
     <section className='Wishlist'>
-     <div className='Wishlist2' style={{width:'100%',margin:'100px 0px'}}>
+     <div className='Wishlist2' style={{width:'100%',margin:'40px 0px'}}>
     <div className='Wishlist-Main-Box'>
       <div className='Wishlist-Main-Box1'>
     {wishlist.length!==0 ? wishlist.map((element)=>{return <Wishlistcard element={element}/>

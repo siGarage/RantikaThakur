@@ -22,10 +22,21 @@
     padding: 0px 40px;
 }
 
+.cartCard{
+    height:300px;
+}
+
+.cartCardImage{
+    height:299px;
+    width:254px;
+}
+.cartDeleteButton{
+    font-size:40px
+}
 @media only screen and (max-width: 1000px) {
     .Cart-Main-Box{
         flex-direction: column;
-        
+        margin: 0px 10px;
     }
     .Cart-Main-Box1{
         width: 100%;
@@ -34,5 +45,17 @@
     .Cart-Main-Box2{
         width: 100%; 
         justify-content: center;  
+    }
+    .Cart-Product-Detail{
+        font-size: 16px;
+    }
+    .cartDeleteButton{
+        font-size:25px
+    }
+    .cartCard{
+        height:250px;
+    }
+    .cartCardImage{
+        height:249px;
     }
   }

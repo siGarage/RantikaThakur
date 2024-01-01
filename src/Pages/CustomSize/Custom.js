@@ -1,21 +1,62 @@
+import { toast } from 'react-toastify';
 import './Custom.css';
+import { useState } from 'react';
+import CUSTOM from '../../API/Custom'
 function Custom(props) {
+
+    const [customdata,setCustomData] = useState({name:"",email:"",phone:"",upperbust:'',bust:'',highwaist:'',waist:'',hip:'',shoulder:'',armhole:'',sleevelength:'',bicep:'',fullLength:'',pantskirtLength:''}); 
+  let validateForm=(data)=> {
+    const {email,name,phone}=data;
+
+
+    if(!name){
+      toast.error('Please Enter Name');
+      return;
+    } 
+    if(!email){
+      toast.error('Please Enter Email');
+      return;
+    }
+
+    if(!phone){
+      toast.error('Please Enter Phone Number');
+      return;
+    }
+   
+    else{
+
+        CUSTOM.message({ data: data }).then((res) => {
+          if (res.status === 200) 
+      {
+        toast.success('Your Message Is Sent SuccessFully ! ')
+      } 
+          else {
+            toast.error(res.data.error.message)
+          }
+        });
+      };
+    }
+
+    const onChange=(e)=>{
+        setCustomData({...customdata,[e.target.name]:e.target.value})
+     }
+
   return (
     <section className='Custom' >
         <div style={{margin:'10px 0px 10px 0px',fontSize:'36px',fontWeight:'600'}}>CUSTOM SIZE</div>
-        <p style={{width:'80%',textAlign:'center',margin:'0px 0px 40px 0px'}}>If you're unable to find your size in our standard chart, fill in the measurements form below with all your details and your order shall be processed accordingly. </p>
-        <div style={{width:'80%'}}>
+        <p className='Custom-Size-Text' style={{width:'80%',textAlign:'center',margin:'0px 0px 40px 0px'}}>If you're unable to find your size in our standard chart, fill in the measurements form below with all your details and your order shall be processed accordingly. </p>
+        <div  className='Custom-Box-InnerBox'>
     <div className='Custom-Box1'>
         <div className='Custom-Box1-Box1'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Name
-                <input type='text' required/>
+                <input name='name'  onChange={onChange} type='text' required/>
             </label>
         </div>
         <div className='Custom-Box1-Box2'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Contact No.
-                <input type='text' required/>
+                <input name='phone' onChange={onChange} type='text' required/>
             </label>
         
         </div>
@@ -25,7 +66,7 @@ function Custom(props) {
     <div className='Custom-Box2'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Email
-                <input type='email' required/>
+                <input name='email' onChange={onChange} type='email' required/>
             </label>
         </div>
     </div>
@@ -33,19 +74,19 @@ function Custom(props) {
     <div className='Custom-Box3-Box'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Upper Bust
-                <input type='number'/>
+                <input name='upperbust' onChange={onChange} type='number'/>
             </label>
         </div>
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Bust
-                <input type='number'/>
+                <input name='bust' onChange={onChange} type='number'/>
             </label>
         </div> 
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 High Waist
-                <input type='number'/>
+                <input name='highwaist' onChange={onChange} type='number'/>
             </label>
         </div> 
     </div>
@@ -53,19 +94,19 @@ function Custom(props) {
     <div className='Custom-Box3-Box'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Waist
-                <input type='number'/>
+                <input name='waist' onChange={onChange} type='number'/>
             </label>
         </div>
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Hip
-                <input type='number'/>
+                <input name='hip' onChange={onChange} type='number'/>
             </label>
         </div> 
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Shoulder
-                <input type='number'/>
+                <input name='shoulder' onChange={onChange} type='number'/>
             </label>
         </div> 
     </div>
@@ -73,19 +114,19 @@ function Custom(props) {
     <div className='Custom-Box3-Box'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Armhole
-                <input type='number'/>
+                <input name='armhole' onChange={onChange} type='number'/>
             </label>
         </div>
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Sleeve Length
-                <input type='number'/>
+                <input name='sleevelength'  onChange={onChange} type='number'/>
             </label>
         </div> 
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Bicep
-                <input type='number'/>
+                <input name='bicep'  onChange={onChange} type='number'/>
             </label>
         </div> 
     </div>
@@ -93,13 +134,13 @@ function Custom(props) {
     <div className='Custom-Box3-Box'>
             <label  style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Full Length
-                <input type='number'/>
+                <input name='fullLength' onChange={onChange}  type='number'/>
             </label>
         </div>
         <div className='Custom-Box3-Box'>
             <label style={{display:'flex',flexDirection:'column',width:'100%'}}>
                 Pant/Skirt Length
-                <input type='number'/>
+                <input name='pantskirtLength' onChange={onChange} type='number'/>
             </label>
         </div> 
        <div className='Custom-Box3-Box'>
@@ -107,8 +148,8 @@ function Custom(props) {
     </div>
 
     <div className='Custom-Box3'>
-    <div className='Custom-Box3-Box'>
-    <button  className='Contact-Submit-Button'>Submit</button>
+    <div className='Custom-Box4-Box'>
+    <button className='Custom-Submit-Button' onClick={()=>validateForm(customdata)}>Submit</button>
     </div>
         
     </div>
