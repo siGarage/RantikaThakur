@@ -236,7 +236,7 @@ function Shop(props) {
                               position: "absolute",
                               fontSize: "22px",
                               fontFamily: "Inter",
-                              color: "black",
+                              color: "white",
                               fontWeight: "800",
                             }}
                           >
