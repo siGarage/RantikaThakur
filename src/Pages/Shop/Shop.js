@@ -240,7 +240,7 @@ function Shop(props) {
                               fontWeight: "800",
                             }}
                           >
-                            Out Of Stock
+                            OUT OF STOCK
                           </div>
                         )}
                         {logged_in ? (

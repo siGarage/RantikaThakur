@@ -217,7 +217,7 @@ function ShopId(props) {
                 style={{
                   fontFamily: "Abhaya",
                   fontWeight: "400",
-                  fontSize: "20px",
+                  fontSize: "32px",
                 }}
               >
                 {product.attributes.title}
@@ -239,7 +239,7 @@ function ShopId(props) {
                   fontWeight: "300",
                   fontSize: "15px",
                   color: "#737373",
-                  margin: "53px 0px",
+                  margin: "24px 0px 8px 0px",
                   display:'flex',
                   justifyContent:'flex-end'
                 }}

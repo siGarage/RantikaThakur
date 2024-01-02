@@ -1,8 +1,6 @@
 import './Footer.css'
-import InstagramLogo from '../Images/Instagram_logo.jpg'
-import FacebookLogo from '../Images/Facebook_icon.jpg'
-import YoutubeLogo from '../Images/Youtube_logo.jpg'
-import LinkedinLogo from '../Images/LinkedIn.jpg'
+import image1 from '../Images/image1.svg'
+import image2 from '../Images/image2.svg'
 import {Link, useNavigate} from 'react-router-dom';
 function Footer() {
     const navigate=useNavigate()
@@ -66,10 +64,8 @@ function Footer() {
     <div style={{width:'100%',height:'20%',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
         <div  style={{display:'flex',flexDirection:'row',alignItem:'center',justifyContent:'space-between',width:'50%'}}>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',margin:'10px 0px 20px 0px'}}>
-                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={InstagramLogo}  style={{height:'25px',width:'25px'}} alt='Twitter'/></div></a>
-                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={FacebookLogo}  style={{height:'25px',width:'25px'}} alt='Facebook'/></div></a>
-                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={ YoutubeLogo}  style={{height:'25px',width:'25px'}} alt='Youtube'/></div></a>
-                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={LinkedinLogo}  style={{height:'25px',width:'25px'}} alt='LinkedIn'/></div></a>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 10px'}}><img src={image1}  style={{height:'25px',width:'25px'}} alt='Twitter'/></div></a>
+                <a href='https://www.facebook.com/Rantikathakurclothing' target='blank'><div style={{margin:'0px 10px'}}><img src={image2}  style={{height:'25px',width:'25px'}} alt='Facebook'/></div></a>
             </div>
         </div>
     </div>
