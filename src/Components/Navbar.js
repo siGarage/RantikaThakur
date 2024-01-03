@@ -5,12 +5,15 @@ import HeartImage from '../Images/heart.png'
 import ProfileImage from '../Images/profileicon.png'
 import RantikaLogo from '../Images/Rantika.png'
 import SearchImage from '../Images/Search.png'
+import Whatsapp from '../Images/whatsapp.png'
 import { connect, useDispatch } from 'react-redux'
 import { memo, useEffect, useMemo, useState } from 'react'
 import PRODUCTDATA from '../API/Product';
 import constants from '../constants';
 import { toast } from 'react-toastify'
 import Hamberger from './Hamberger'
+
+
 function Navbar(props) {
   const {username,products,logged_in}=props;
  const navigate=useNavigate()
@@ -130,6 +133,12 @@ useEffect(() => {
    </div>
 }
    
+
+<div id="whatsapp-button">
+    <a href="https://wa.me/9041999489" target="_blank" rel='noreferrer'>
+       <img src={Whatsapp} alt='whatsapp' style={{height:'50px',width:'50px'}}/>
+    </a>
+</div>
     </>
   );
 }

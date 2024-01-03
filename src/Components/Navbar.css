@@ -70,6 +70,13 @@ align-items: center;
     
 }
 
+#whatsapp-button{
+  position: fixed;
+  bottom: 4%;
+  right: 3%;
+  z-index: 10000;
+}
+
 
 
 .close {
@@ -117,5 +124,11 @@ align-items: center;
       margin:0px 0px;
 
       
+  }
+  #whatsapp-button{
+ 
+    bottom: 9%;
+    right: 3%;
+  
   }
   }

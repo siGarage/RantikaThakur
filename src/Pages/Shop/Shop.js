@@ -134,7 +134,7 @@ function Shop(props) {
             <div style={{ fontWeight: "800" }}>Category</div>
             {category.map((element) => {
               return (
-                <div key={element}>
+                <div key={element} className="Category-Filter">
                   <input
                     type="radio"
                     checked={element === type}
@@ -154,7 +154,7 @@ function Shop(props) {
 
             {price.map((element) => {
               return (
-                <div key={element}>
+                <div key={element} className="Price-Filter">
                   <input
                     type="radio"
                     checked={element === priceFilter}
@@ -231,30 +231,16 @@ function Shop(props) {
                         </div>
                           
                         {!element.attributes.instock && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              fontSize: "22px",
-                              fontFamily: "Inter",
-                              color: "white",
-                              fontWeight: "800",
-                            }}
-                          >
+
+                          <div className="out-of-stock">
                             OUT OF STOCK
                           </div>
                         )}
                         {logged_in ? (
                           wistItemsId.includes(element.id) ? (
-                            <FavoriteIcon                              
-                              style={{
-                                position: "absolute",
-                                bottom: "22%",
-                                right: "8%",
-                                color: "red",
-                                fontSize: "40px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                              }}
+                            <FavoriteIcon     
+                            className="Favorite-Button"                         
+                              style={{color: "red"}}
                               onClick={() => {
                                 DeleteFromWishlist(
                                   WishCartID(element.id),
@@ -262,6 +248,8 @@ function Shop(props) {
                                 );
                               }}
                             >
+                          
+                          
                             
                             </FavoriteIcon>
                           ) : (
@@ -281,37 +269,22 @@ function Shop(props) {
                                 );
                               }}
                               
-                              style={{
-                                position: "absolute",
-                                bottom: "22%",
-                                right: "8%",
-                                color: "white",
-                                fontSize: "40px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                              }}
+
+                              className="Favorite-Button"
+                          
+                              style={{color: "white"}}
                             >
                               
                             </FavoriteBorderIcon>
                           )
                         ) : (
-                          <span
-                            onClick={() => {
-                              navigate(`/login`);
-                            }}
-                            className="material-symbols-outlined"
-                            style={{
-                              position: "absolute",
-                              bottom: "22%",
-                              right: "8%",
-                              color: "white",
-                              fontSize: "40px",
-                              fontWeight: "500",
-                              cursor: "pointer",
-                            }}
-                          >
-                            favorite
-                          </span>
+                          <FavoriteBorderIcon onClick={() => { navigate(`/login`);}}
+                          className="Favorite-Button"
+
+                          style={{ color: "white"}}
+                        >
+                          
+                        </FavoriteBorderIcon>
                         )}
                       </div>
                     );

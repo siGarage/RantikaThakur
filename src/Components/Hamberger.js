@@ -25,9 +25,9 @@ const closeNav=(e)=> {
 
  {/* Use any element to open the sidenav  */}
 <button className='Hamburger-button' onClick={openNav} style={{backgroundColor:'#FFFFF3',border:'0px'}}>
-<div style={{height:'3px',width:'20px',backgroundColor:'black',margin:'3px'}}></div>
-<div style={{height:'3px',width:'20px',backgroundColor:'black',margin:'3px'}}></div>
-<div style={{height:'3px',width:'20px',backgroundColor:'black',margin:'3px'}}></div>
+<div style={{height:'2px',width:'20px',backgroundColor:'#E2BF44',margin:'3px'}}></div>
+<div style={{height:'2px',width:'20px',backgroundColor:'#E2BF44',margin:'3px'}}></div>
+<div style={{height:'2px',width:'20px',backgroundColor:'#E2BF44',margin:'3px'}}></div>
 </button>
 </div>
     </>
