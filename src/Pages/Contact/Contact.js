@@ -4,6 +4,9 @@ import SideImage from '../../Images/SDP05271.png'
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import CONTACT from '../../API/Contact'
+import image3 from '../../Images/image3.svg'
+import image4 from '../../Images/image4.svg'
+
 function Contact() {
   const [contactdata,setContactData] = useState({name:"",email:"",phone:"",message:''}); 
   let validateForm=(data)=> {
@@ -61,8 +64,12 @@ function Contact() {
         </div>
     </div>
     <div style={{width:'80%',height:'40%',margin:'50px 0px',borderTop:'1px solid #868686'}}>
-      <div className='Contact-Detail'>Our Mail</div>
+      <div className='Contact-Detail'><a href='mailto:contactrantikathakurclothing@gmail.com' style={{textDecoration:'none',color:'#868686'}}>Our Mail : <span style={{fontSize:'20px'}}>contactrantikathakurclothing@gmail.com</span></a></div>
       <div className='Contact-Detail'>Social Media</div>
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
+                <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 18px'}}><img src={image4}  style={{height:'35px',width:'35px',color:'#2c2c2c'}} alt='Twitter'/></div></a>
+                <a href='https://www.facebook.com/Rantikathakurclothing/' target='blank'><div style={{margin:'0px 10px'}}><img src={image3}  style={{height:'35px',width:'35px',color:'#2c2c2c'}} alt='Facebook'/></div></a>
+      </div>
     </div>
     </div>
     </section>

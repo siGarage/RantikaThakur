@@ -5,12 +5,15 @@ import HeartImage from '../Images/heart.png'
 import ProfileImage from '../Images/profileicon.png'
 import RantikaLogo from '../Images/Rantika.png'
 import SearchImage from '../Images/Search.png'
+import Whatsapp from '../Images/whatsapp.png'
 import { connect, useDispatch } from 'react-redux'
 import { memo, useEffect, useMemo, useState } from 'react'
 import PRODUCTDATA from '../API/Product';
 import constants from '../constants';
 import { toast } from 'react-toastify'
 import Hamberger from './Hamberger'
+
+
 function Navbar(props) {
   const {username,products,logged_in}=props;
  const navigate=useNavigate()
@@ -111,14 +114,14 @@ useEffect(() => {
     <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
        onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'258px',width:'100%',filter:(!element.attributes.instock)?'grayscale(1)':'grayscale(0)'}}/> 
     <div>
-        <div className='Card-Title'>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
-        <div className='Card-Category'>{element.attributes.category.data.attributes.category}</div>
-        <div className='Card-Description'>Rs. {element.attributes.price}</div>
+        <div className='Card-Title' style={{color:'white'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
+        <div className='Card-Category' style={{color:'white'}}>{element.attributes.category.data.attributes.category}</div>
+        <div className='Card-Description' style={{color:'white'}}>Rs. {element.attributes.price}</div>
     </div> 
 
     </div>
     
-    {(!element.attributes.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'black',fontWeight:'800'}}>Out Of Stock</div>}
+    {(!element.attributes.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'white',fontWeight:'800'}}>OUT OF STOCK</div>}
     
     </div>}
    )
@@ -130,6 +133,12 @@ useEffect(() => {
    </div>
 }
    
+
+<div id="whatsapp-button">
+    <a href="https://wa.me/9041999489" target="_blank" rel='noreferrer'>
+       <img src={Whatsapp} alt='whatsapp' style={{height:'50px',width:'50px'}}/>
+    </a>
+</div>
     </>
   );
 }

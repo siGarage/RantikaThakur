@@ -85,9 +85,8 @@ function Profile(props) {
    </div>
 
     </section>
-    <section className='profile2' style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',margin:'138px 0px'}}>
-   <Link to='/order' onClick={()=>{window.scrollTo(0,0)}} className='profile2Button' ><p>Orders</p><p>&gt;</p></Link>
-   <button className='profile2Button'><p>Customer</p><p>&gt;</p></button>
+    <section className='profile2' style={{width:'40%',display:'flex',justifyContent:'flex-start',alignItems:'flex-start'}}>
+   <Link to='/order' onClick={()=>{window.scrollTo(0,0)}} className='profile2Button' ><p style={{margin:'0'}}>Orders</p><p style={{margin:'0'}}>&gt;</p></Link>
     </section>
 
     

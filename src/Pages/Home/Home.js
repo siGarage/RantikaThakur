@@ -50,7 +50,7 @@ function Home(props) {
   
   return (
     <section className='Home'>
-      <Marquee style={{height:'auto',fontSize:'18px',fontFamily:'Inter',fontWeight:'100',backgroundColor:'#E2BF44',color:'white'}}>
+      <Marquee style={{height:'auto',fontSize:'16px',fontFamily:'Inter',fontWeight:'100',backgroundColor:'black',color:'white'}}>
       I can be a React component, multiple React components, or just some text.
       </Marquee>
       <div className='Home-Box1'>

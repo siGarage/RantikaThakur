@@ -76,7 +76,7 @@ function Login()
             <button className='Login-Button' onClick={()=>{validateForm(credentials)}}>Login</button>
           </div>
           <div style={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:'row',width:'70%'}}>
-           <div style={{fontFamily:'Poppins',fontWeight:'500',fontSize:'20px'}}>Does not have account?</div>
+           <div className='Login-Heading2'>Does not have account?</div>
             <Link to='/signup'  style={{textDecoration:'none',margin:'0px 10px'}}>SignUp</Link>
           </div>
         </div>

@@ -39,6 +39,7 @@ align-items: center;
 
 .search-text{
   font-size:50px;
+  color: white;
 }
 
 .Navbar-box3{
@@ -58,15 +59,22 @@ align-items: center;
     z-index:9999;
     right:0px;
     left:0px;
-    top: 110px;
-    margin:0px 20px;
-    border-radius:20px;
-    border:2px solid black;
+    top: 60px;
+    margin:0px 0px;
+
+    border:none;
     height:auto;
     background-color:rgb(226, 191, 68);
     min-height:600px;
     font-family:'inter';
     
+}
+
+#whatsapp-button{
+  position: fixed;
+  bottom: 4%;
+  right: 3%;
+  z-index: 10000;
 }
 
 
@@ -79,6 +87,7 @@ align-items: center;
     right:20px;
     cursor: pointer;
     opacity: 1;
+
   }
   
   .close:before, .close:after {
@@ -87,7 +96,7 @@ align-items: center;
     content: ' ';
     height: 33px;
     width: 2px;
-    background-color: black;
+    background-color: white;
   }
   .close:before {
     transform: rotate(45deg);
@@ -115,5 +124,11 @@ align-items: center;
       margin:0px 0px;
 
       
+  }
+  #whatsapp-button{
+ 
+    bottom: 9%;
+    right: 3%;
+  
   }
   }
