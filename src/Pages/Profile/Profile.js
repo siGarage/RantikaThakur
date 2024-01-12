@@ -1,6 +1,5 @@
 import './Profile.css'
-import ProfileImage from './profile.jpg'
-import AddImage from './Group (4).png'
+
 import { Link } from 'react-router-dom';
 import { connect, useDispatch} from 'react-redux';
 import { memo, useState } from 'react';
@@ -17,6 +16,7 @@ function Profile(props) {
   }
 
   let user = props.user
+  let username = props.user.user.username
   let userid =user.user.id
   let token=user.jwt
   
@@ -35,9 +35,7 @@ function Profile(props) {
    }
 
    let submitForm=(data,userid,token)=> {  
-      console.log(data)
         USERAPI.setUserData(data,userid,token).then((res) => {
-          console.log(res)
           if (res.status === 200) 
          {
           toast.error('Your data is updated successfully !')
@@ -55,9 +53,10 @@ function Profile(props) {
   return (
     <>
     <section className='profile'>
-   <div className='profileBox1'><img src={ProfileImage} alt='profileImage' style={{height:'108px',width:'108px',border:'none',borderRadius:'50%'}}/>
-   <div style={{position:'absolute',height:'43px',display:'flex',justifyContent:'center',alignItems:'center',width:'42px',top:'70px',left:'45vw',backgroundColor:'white',borderRadius:'50%',border:'none'}}><img src={AddImage}  alt='AddImage' /></div>
-   <div style={{margin:'5px 0px',fontFamily:'Poppins',fontWeight:'300',fontSize:'20px'}}>{user.user.username}</div></div>
+   <div className='profileBox1' >
+   <div className='Avatar'>{username.slice(0,1).toUpperCase()}</div>
+   <div className='Profile-Username'>{user.user.username}</div>
+   </div>
    <div className='profileBox2'>
    <div className='profileBox2-Box' style={{width:'50%'}}>
     <div  className='ProfileDetailsHeading'>User Name</div>
@@ -86,9 +85,8 @@ function Profile(props) {
    </div>
 
     </section>
-    <section className='profile2' style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',margin:'138px 0px'}}>
-   <Link to='/order' onClick={()=>{window.scrollTo(0,0)}} className='profile2Button' ><p>Orders</p><p>&gt;</p></Link>
-   <button className='profile2Button'><p>Customer</p><p>&gt;</p></button>
+    <section className='profile2' style={{width:'40%',display:'flex',justifyContent:'flex-start',alignItems:'flex-start'}}>
+   <Link to='/order' onClick={()=>{window.scrollTo(0,0)}} className='profile2Button' ><p style={{margin:'0'}}>Orders</p><p style={{margin:'0'}}>&gt;</p></Link>
     </section>
 
     

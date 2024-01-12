@@ -25,7 +25,7 @@ export default class Auth {
   static fetchProduct() {
     return new Promise((resolve) => {
       instance
-        .get("/api/products?populate=category,images")
+        .get("/api/products?populate=category,images,sizes")
         .then((response) => {
           resolve(response);
         })

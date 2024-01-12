@@ -31,6 +31,29 @@
     padding: 0px 100px 0px 0px;
 }
 
+.Review-Button{
+    width: 20%;
+    height: 50px;
+    border-radius: 72px;
+    background-color: #E2BF44;
+    color: white;
+    padding: 19px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: none;
+    margin: 30px 0px;
+}
+.Input-review{
+    height: 40px;
+}
+
+.review-Inputs{
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+}
+
 .ProductDescriptionBox2{
     width: 100%;
     display: flex;
@@ -42,6 +65,10 @@
     font-weight: 500;
     font-size:20px;
     color: #737373;
+}
+
+.Review-Box-InnerBox{
+    width:45%
 }
 .Size-Box{
     height: 58px;
@@ -64,4 +91,115 @@
 
 .carousel-slider{
     height: 400px !important;
+}
+
+.Shop-Button{
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    margin:60px 0px 0px 0px;
+    padding: 0px;
+}
+
+.Buy-Button
+{
+    width:200px;
+    height:50px;
+    border:none;
+    border-radius:72px;
+    font-family: "Inter";
+    color:white;
+    font-size:28px;
+    margin: 0px 20px 0px 0px;
+}
+.Shop-AddToCart{
+    background-color: "white";
+    width: 210px;
+    height: 50px;
+    border:none;
+    border-radius: 72px;
+    font-family: "Inter";
+    color: black;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+.ProductDescriptionBox2-ProductBox{
+    width:50%;
+    padding:0px 100px 0px 0px;
+}
+
+
+.ProductDescriptionBox2-ProductBox >h5{
+    width: 60%;
+ }
+
+ .ProductDescriptionBox2-ProductBox >p{
+    width: 60%;
+ }
+
+.Review-Box{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+@media only screen and (max-width: 930px) 
+  {
+    .ProductDescriptionBox1{
+        flex-direction: column;
+    }
+    .ProductDescriptionBox1-Box1{
+        width: 100%;
+    }
+    
+    .ProductDescriptionBox1-Box2{
+        width: 100%;
+    }
+    .ProductDescriptionBox2-ProductBox{
+        width:90%;
+        
+    }
+
+    .ProductDescriptionBox2-ProductBox >h5{
+        width: 100%;
+     }
+
+     .ProductDescriptionBox2-ProductBox >p{
+        width: 100%;
+     }
+
+    .Buy-Button
+    {
+        width:150px;
+        height:40px;
+        font-size:20px;
+    }
+.Shop-AddToCart{
+    width:150px;
+    height:40px;
+    font-size:20px;
+}
+
+.Shop-Button{
+    justify-content:space-around;
+    padding: 20px 20px;
+}
+
+.ProductDescriptionBox1-Box2{
+    padding: 0px 10px 0px 0px;
+}
+
+.Review-Box{
+    flex-direction:column;
+}
+
+.Review-Box-InnerBox{
+    width:100%
+}
+.Review-Button{
+    width: 100%;
+  }
 }

@@ -20,25 +20,14 @@ function defaultCatch(error, resolve) {
 }
 
 export default class Auth {
-
- // sign up
-    static signup(values) {
-        let payload = values;
-        return new Promise((resolve) => {
-          instance
-            .post("/api/auth/local/register", payload.data)
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => defaultCatch(error, resolve));
-        });
-      }
   //log in
-  static login(values) {
+
+  static message(values) {
     let payload = values;
+    console.log(payload)
     return new Promise((resolve) => {
       instance
-        .post("/api/auth/local", payload.data)
+        .post("/api/contacts", {data:payload.data})
         .then((response) => {
           resolve(response);
         })
