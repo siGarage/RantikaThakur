@@ -131,21 +131,21 @@ function Cart(props) {
     <section className='Cart' style={{width:'100%',margin:'30px 0px'}}>
     <div className='Cart-Main-Box'>
       <div className='Cart-Main-Box1'>
-    {cart?.length!==0 ? cart.map((element)=>{return <div  className='cartCard' key={element.id} style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'center',alignItems:'center',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px',margin:'0px 0px 50px 0px'}}>
-        <div onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{width:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-            <img className='cartCardImage' src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.image}`} alt='ProductImage'/>
+    {cart?.length!==0 ? cart?.map((element)=>{return <div  className='cartCard' key={element.id} style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'center',alignItems:'center',fontFamily:'Comfortaa',fontWeight:'500',fontSize:'20px',margin:'0px 0px 50px 0px'}}>
+        <div onClick={()=>{navigate(`/shop/${element?.attributes?.id_product}`)}} style={{width:'50%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+            <img className='cartCardImage' src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.image}`} alt='ProductImage'/>
         </div>
       <div style={{width:'50%',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%',margin:'0px 10px'}}>
-        <div className='Cart-Product-Detail' onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{cursor:'pointer'}}> 
-      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>15?`${element.attributes.title.slice(0,15)}...`:element.attributes.title}</p>
-      <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
-      <p style={{margin:'0px 0px'}}>Category: {element.attributes.category}</p>
-      <p style={{margin:'0px 0px'}}>Selected Size: {element.attributes.size}</p>
+        <div className='Cart-Product-Detail' onClick={()=>{navigate(`/shop/${element?.attributes?.id_product}`)}} style={{cursor:'pointer'}}> 
+      <p style={{margin:'0px 0px'}}>{element?.attributes?.title?.length>15?`${element?.attributes?.title?.slice(0,15)}...`:element?.attributes?.title}</p>
+      <p style={{margin:'0px 0px'}}>Rs. {element?.attributes?.price}</p>
+      <p style={{margin:'0px 0px'}}>Category: {element?.attributes?.category}</p>
+      <p style={{margin:'0px 0px'}}>Selected Size: {element?.attributes?.size}</p>
       </div>
       <div className="input-group">
-      <button disable={Number(element.attributes.quantity===1)?'true':'false'} id="decrement"  onClick={()=>{Decrement(element.id,element.attributes.price,element.attributes.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>-</button>
-      <input id="input" value={Number(element.attributes.quantity)} readOnly style={{width:'50px',margin:'0px 10px'}}/>
-       <button id="increment"  onClick={()=>{Increment(element.id,element.attributes.price,element.attributes.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>+</button>
+      <button disable={Number(element?.attributes?.quantity===1)?'true':'false'} id="decrement"  onClick={()=>{Decrement(element.id,element?.attributes?.price,element?.attributes?.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>-</button>
+      <input id="input" value={Number(element?.attributes?.quantity)} readOnly style={{width:'50px',margin:'0px 10px'}}/>
+       <button id="increment"  onClick={()=>{Increment(element?.id,element?.attributes?.price,element?.attributes?.quantity)}} style={{borderRadius:'50%',width:'30px',border:'none',backgroundColor:'rgb(226, 191, 68)'}}>+</button>
        </div>
       <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end',alignItems:'center',width:'100%'}}>
       
@@ -160,7 +160,7 @@ function Cart(props) {
       <div style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between',margin:'20px 0px 0px 0px'}}>
         <div >Order Value</div>
          <div>
-        {cart.map((element)=>{return <p key={element.id} style={{margin:'0px'}}>{element.attributes.price}</p>})}
+        {cart?.map((element)=>{return <p key={element?.id} style={{margin:'0px'}}>{element?.attributes?.price}</p>})}
         </div>
         </div>
         
@@ -187,7 +187,7 @@ function Cart(props) {
 
         </div>
 
-        <button disabled={cart.length===0} style={{padding:'10px 0px',width:'100%',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44',height:'auto',fontSize:'20px',fontWeight:'400',display:'flex',justifyContent:'center',alignItems:'center',color:'white'}} onClick={()=>handlePayment()}>Continue To Checkout</button>
+        <button disabled={cart?.length===0} style={{padding:'10px 0px',width:'100%',border:'none',borderRadius:'6px',backgroundColor:'#E2BF44',height:'auto',fontSize:'20px',fontWeight:'400',display:'flex',justifyContent:'center',alignItems:'center',color:'white'}} onClick={()=>handlePayment()}>Continue To Checkout</button>
       </div>   
     </div> 
     <YouMayLike/>
@@ -195,9 +195,9 @@ function Cart(props) {
   );
 }
 const mapStateToProps = (state) => ({
-    cart: state.cart.cartItems,
-    useremail:state.auth.user.user.email,
-    authtoken:state.auth.user.jwt,
+    cart: state?.cart?.cartItems,
+    useremail:state?.auth?.user?.user?.email,
+    authtoken:state?.auth?.user?.jwt,
 
   });
   export default connect(mapStateToProps)(memo(Cart));

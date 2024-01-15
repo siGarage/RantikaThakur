@@ -34,10 +34,10 @@ function WishlistCard(props) {
 
     const AddToCart = (data) => { 
       if(data.size!==''){
-      const findData=cart.find((element)=>Number(element.attributes.id_product)===Number(data.id_product) && String(element.attributes.size)===String(data.size))
+      const findData=cart.find((element)=>Number(element?.attributes?.id_product)===Number(data?.id_product) && String(element?.attributes?.size)===String(data?.size))
        if(findData){
-         const findProductPrice=Number(findData.attributes.price)+Number(data.price)
-         const findProductQuantity=Number(findData.attributes.quantity)+1
+         const findProductPrice=Number(findData?.attributes?.price)+Number(data?.price)
+         const findProductQuantity=Number(findData?.attributes?.quantity)+1
          updateProduct(findData.id,findProductPrice,findProductQuantity)
        }
        else{
@@ -123,21 +123,21 @@ function WishlistCard(props) {
             <img className='product-Wishlist-Image' src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.image}`} alt='ProductImage'/>
         </div>
       <div  style={{cursor:'pointer',width:'50%',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
-        <div onClick={()=>{navigate(`/shop/${element.attributes.id_product}`)}} style={{width:'100%',padding:'0px 10px'}}>
-      <p style={{margin:'0px 0px'}}>{element.attributes.title.length>15?`${element.attributes.title.slice(0,15)}...`:element.attributes.title}</p>
-      <p style={{margin:'0px 0px'}}>Rs. {element.attributes.price}</p>
-      <p style={{margin:'0px 0px'}}>Category: {element.attributes.category}</p>
-      <p style={{margin:'0px 0px'}}>Product Id: {element.attributes.id_product}</p>
+        <div onClick={()=>{navigate(`/shop/${element?.attributes?.id_product}`)}} style={{width:'100%',padding:'0px 10px'}}>
+      <p style={{margin:'0px 0px'}}>{element?.attributes?.title?.length>15?`${element?.attributes?.title?.slice(0,15)}...`:element?.attributes?.title}</p>
+      <p style={{margin:'0px 0px'}}>Rs. {element?.attributes?.price}</p>
+      <p style={{margin:'0px 0px'}}>Category: {element?.attributes?.category}</p>
+      <p style={{margin:'0px 0px'}}>Product Id: {element?.attributes?.id_product}</p>
       
       </div>
-      <div style={{padding:'0px 10px'}}>Select Size: {element.attributes.size.map((element)=><button  style={{backgroundColor:(size===element)?'#E2BF44':'white',border:(size===element)?'none':'1px solid #959595',margin:'0px 4px'}} onClick={()=>{setSize(element)}} key={element}>{element}</button>)}</div>
+      <div style={{padding:'0px 10px'}}>Select Size: {element?.attributes?.size?.map((element)=><button  style={{backgroundColor:(size===element)?'#E2BF44':'white',border:(size===element)?'none':'1px solid #959595',margin:'0px 4px'}} onClick={()=>{setSize(element)}} key={element}>{element}</button>)}</div>
       <div style={{display:'flex',justifyContent:'flex-end',flexDirection:'row',alignContent:'center'}}>
       <button onClick={()=>{AddToCart({"email":useremail,
-                     "title":element.attributes.title,
-                     "price":element.attributes.price,
-                     "category":element.attributes.category,
-                     "id_product":element.attributes.id_product,
-                     "image":`${element.attributes.image}`,
+                     "title":element?.attributes?.title,
+                     "price":element?.attributes?.price,
+                     "category":element?.attributes?.category,
+                     "id_product":element?.attributes?.id_product,
+                     "image":`${element?.attributes?.image}`,
                      "quantity":1,
                      "size":size,
                   },authtoken);                  
@@ -152,11 +152,11 @@ add_shopping_cart
 </div>
 <div  className='Wishlist-AddToCart'>
   <button onClick={()=>{AddToCart({"email":useremail,
-                     "title":element.attributes.title,
-                     "price":element.attributes.price,
-                     "category":element.attributes.category,
-                     "id_product":element.attributes.id_product,
-                     "image":`${element.attributes.image}`,
+                     "title":element?.attributes?.title,
+                     "price":element?.attributes?.price,
+                     "category":element?.attributes?.category,
+                     "id_product":element?.attributes?.id_product,
+                     "image":`${element?.attributes?.image}`,
                      "quantity":1,
                      "size":size,
                   },authtoken);                  

@@ -48,21 +48,21 @@ function Order(props) {
          <div key={element.id} style={{margin:'30px 0px',border:'2px solid black',padding:'10px'}} >
           <div  style={{fontFamily:'Inter'}}>
            <div style={{fontWeight:'800',color:'black'}}> Order Status</div>
-          {element.attributes.order_confirmation.data===null  ? <div style={{fontWeight:'500',fontStyle:'italic'}}>Order Yet To Ship</div>:(String(element.attributes.order_confirmation.data.attributes.Order_Status)==='shipped'?<div style={{fontStyle:'italic'}}><div style={{fontWeight:'500'}}>Shipped</div><div>Delivery Service: {element.attributes.DeliveryService}</div><div>Track Id: {element.attributes.TrackId}</div></div>:<div style={{fontWeight:'500',display:'flex',alignItems:'center',fontStyle:'italic'}}>Delivered &nbsp;<span className="material-symbols-outlined" style={{color:'blue'}}>verified</span></div>)}
+          {element?.attributes?.order_confirmation?.data===null  ? <div style={{fontWeight:'500',fontStyle:'italic'}}>Order Yet To Ship</div>:(String(element?.attributes?.order_confirmation?.data?.attributes?.Order_Status)==='shipped'?<div style={{fontStyle:'italic'}}><div style={{fontWeight:'500'}}>Shipped</div><div>Delivery Service: {element?.attributes?.DeliveryService}</div><div>Track Id: {element?.attributes?.TrackId}</div></div>:<div style={{fontWeight:'500',display:'flex',alignItems:'center',fontStyle:'italic'}}>Delivered &nbsp;<span className="material-symbols-outlined" style={{color:'blue'}}>verified</span></div>)}
           </div>
            <div style={{fontFamily:'Inter',fontWeight:'300',margin:'20px 0px'}}>
             <div style={{fontFamily:'Inter',fontWeight:'700',fontSize:'20px',color:'black'}}>Address</div>
-            <div className='Datail-product-order'>{element.attributes.address.name}</div>
-            <div className='Datail-product-order'>{element.attributes.address.address.line1}</div>
-            <div className='Datail-product-order'>{element.attributes.address.address.postal_code}</div>
+            <div className='Datail-product-order'>{element?.attributes?.address?.name}</div>
+            <div className='Datail-product-order'>{element?.attributes?.address?.address.line1}</div>
+            <div className='Datail-product-order'>{element?.attributes?.address?.address.postal_code}</div>
             </div>
              <div>
-        {element.attributes.products?.map(item => (
+        {element?.attributes?.products?.map(item => (
         <div key={item.id} style={{margin:'10px 0px'}}>
-          <div><span style={{fontWeight:'700'}}>Product Name: </span> {fetchName(String(item.description))}</div>
-          <div><span style={{fontWeight:'700'}}>Product Price: </span>{Number(item.price.unit_amount)*Number(item.quantity)/100}</div>
-          <div><span style={{fontWeight:'700'}}>Product Quantity: </span>{item.quantity}</div>
-          <div><span style={{fontWeight:'700'}}>Size: </span>{fetchSize(String(item.description))}</div>
+          <div><span style={{fontWeight:'700'}}>Product Name: </span> {fetchName(String(item?.description))}</div>
+          <div><span style={{fontWeight:'700'}}>Product Price: </span>{Number(item?.price.unit_amount)*Number(item.quantity)/100}</div>
+          <div><span style={{fontWeight:'700'}}>Product Quantity: </span>{item?.quantity}</div>
+          <div><span style={{fontWeight:'700'}}>Size: </span>{fetchSize(String(item?.description))}</div>
         </div>
          ))}
         </div>

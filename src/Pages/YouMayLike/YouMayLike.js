@@ -18,12 +18,12 @@ function Like(props) {
      {
    array.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`)}} className="col-md-3 my-3 " key={element.id} >
   
-    <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
-       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'400px',width:'100%'}}/> 
+    <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[1]?.attributes?.url}`) }
+       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)} alt='ProductImage' style={{height:'400px',width:'100%'}}/> 
     <div>
-        <div className='Card-Title'>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
-        <div className='Card-Category'>{element.attributes.category.data.attributes.category}</div>
-        <div className='Card-Description'>Rs. {element.attributes.price}</div>
+        <div className='Card-Title'>{element?.attributes?.title?.length>25?`${element?.attributes?.title.slice(0,25)}...`:element?.attributes?.title}</div>
+        <div className='Card-Category'>{element?.attributes?.category?.data?.attributes?.category}</div>
+        <div className='Card-Description'>Rs. {element?.attributes?.price}</div>
     </div> 
 
     </div>

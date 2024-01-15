@@ -34,18 +34,18 @@ function ShopId(props) {
   // Add Data To Cart
   const AddToCart = (data) => { 
     if(data.size!=='' ){
-    const findData=cart.find((element)=>Number(element.attributes.id_product)===Number(data.id_product) && String(element.attributes.size)===String(data.size))
+    const findData=cart.find((element)=>Number(element?.attributes?.id_product)===Number(data?.id_product) && String(element?.attributes?.size)===String(data?.size))
      if(findData){
-       const findProductPrice=Number(findData.attributes.price)+Number(data.price)
-       const findProductQuantity=Number(findData.attributes.quantity)+1
+       const findProductPrice=Number(findData?.attributes?.price)+Number(data?.price)
+       const findProductQuantity=Number(findData?.attributes?.quantity)+1
        updateProduct(findData.id,findProductPrice,findProductQuantity)
      }
      else{
        CARTDATA.addCartItems(data,authtoken).then((res)=>{ 
          if(res.status===200){
            dispatch({
-             type: constants("cart").reducers.cart.AddToCart,
-             payload: {cartItems:[...cart,res.data.data]},
+             type: constants("cart").reducers?.cart?.AddToCart,
+             payload: {cartItems:[...cart,res?.data?.data]},
 
            })
            toast.success('Item Added To Cart !')
@@ -62,7 +62,7 @@ function ShopId(props) {
   const data={price,quantity}
   CARTDATA.updateCart(cartId,data,authtoken).then((res)=>{
       if(res.status===200){
-        const something=cart.filter((ele)=>ele.id!==cartId)
+        const something=cart.filter((ele)=>ele?.id!==cartId)
         dispatch({
           type: constants("cart").reducers.cart.AddToCart,
           payload: {cartItems:[...something,res.data.data]},
@@ -130,7 +130,7 @@ function ShopId(props) {
     {
       try {
         const stripe = await stripePromise;
-        const data={...product,attributes:{...product.attributes,size:size,quantity:1,image:product.attributes.images.data[0].attributes.url}}
+        const data={...product,attributes:{...product.attributes,size:size,quantity:1,image:product?.attributes?.images?.data[0]?.attributes?.url}}
         const res = await makePaymentRequest.post("/api/orders", {email:useremail,
             products: [data],
         });
@@ -201,10 +201,10 @@ function ShopId(props) {
           <div className="ProductDescriptionBox1">
             <div className="ProductDescriptionBox1-Box1">
               <Carousel style={{ height: "400px" }} autoFocus={true}>
-                {product.attributes.images.data.map((element) => (
+                {product?.attributes?.images?.data?.map((element) => (
                   <div key={element.id}>
                     <img
-                      src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.url}`}
+                      src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
                       alt="productImages"
                       style={{ height: "100%", width: "100%" }}
                     />
@@ -220,7 +220,7 @@ function ShopId(props) {
                   fontSize: "32px",
                 }}
               >
-                {product.attributes.title}
+                {product?.attributes?.title}
               </h5>
               <h6
                 style={{
@@ -230,7 +230,7 @@ function ShopId(props) {
                   color: "#737373",
                 }}
               >
-                Rs. {product.attributes.price}
+                Rs. {product?.attributes?.price}
               </h6>
 
               <p
@@ -248,44 +248,44 @@ function ShopId(props) {
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
-                {product.attributes.sizes.data.map((element) => (
-                  <button  onClick={()=>setSize(element.attributes.size)} className="Size-Box" key={element.id} style={{backgroundColor:(size===element.attributes.size)?'#E2BF44':'white',border:(size===element.attributes.size)?'none':'3px solid #959595'}}>
-                    {element.attributes.size}
+                {product?.attributes?.sizes?.data?.map((element) => (
+                  <button  onClick={()=>setSize(element?.attributes?.size)} className="Size-Box" key={element.id} style={{backgroundColor:(size===element?.attributes?.size)?'#E2BF44':'white',border:(size===element?.attributes?.size)?'none':'3px solid #959595'}}>
+                    {element?.attributes?.size}
                   </button>
                 ))}
               </div>
 
              {logged_in ? <div className="Shop-Button">
                 <button
-                  disabled={!product.attributes.instock}
+                  disabled={!product?.attributes?.instock}
                   className="Buy-Button"
-                  style={{backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44"}}
+                  style={{backgroundColor:(!product?.attributes?.instock)?'grey':"#E2BF44"}}
                   onClick={()=>{handlePayment()}}
                 >
-                 {(!product.attributes.instock)?'Out Of Stock':'Buy Now'}
+                 {(!product?.attributes?.instock)?'Out Of Stock':'Buy Now'}
                 </button>
                 <button
                   onClick={() => {
                     AddToCart({"email":useremail,
-                     "title":product.attributes.title,
-                     "price":product.attributes.price,
-                     "category":product.attributes.category.data.attributes.category,
-                     "id_product":product.id,
-                     "image":`${product.attributes.images.data[0].attributes.url}`,
+                     "title":product?.attributes?.title,
+                     "price":product?.attributes?.price,
+                     "category":product?.attributes?.category?.data?.attributes?.category,
+                     "id_product":product?.id,
+                     "image":`${product?.attributes?.images?.data[0]?.attributes?.url}`,
                      "quantity":1,
                      "size":size
                   },authtoken);
                   }}
-                  disabled={!product.attributes.instock}
+                  disabled={!product?.attributes?.instock}
                   className="Shop-AddToCart">
-                 {(!product.attributes.instock)?'Out Of Stock':'Add To Cart'}
+                 {(!product.attributes?.instock)?'Out Of Stock':'Add To Cart'}
                 </button>
               </div>:
               <div className="Shop-Button">
                 <button
                   onClick={() => {navigate(`/login`)}}
                   className="Buy-Button"
-                  style={{backgroundColor:(!product.attributes.instock)?'grey':"#E2BF44"}}
+                  style={{backgroundColor:(!product?.attributes?.instock)?'grey':"#E2BF44"}}
                   >
                  Buy Now
                 </button>
@@ -303,13 +303,13 @@ function ShopId(props) {
                 Product Description
               </h5>
               <p style={{  fontSize: "12px", fontWeight: "300" }}>
-                {product.attributes.description}
+                {product?.attributes?.description}
               </p>
               <h5 style={{  margin: "59px 0px 30px 0px" }}>
                 Product Details
               </h5>
               <h5 >
-                Material-{product.attributes.material}
+                Material-{product?.attributes?.material}
               </h5>
               <h5 >Product Code-{product.id}</h5>
             </div>
@@ -322,7 +322,7 @@ function ShopId(props) {
 
 {Object.entries(product).length > 1 ? (<div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',margin:'20px 0px 50px 0px'}}>
         <div style={{width:'80%',fontFamily:'Inter',font:'500'}}>
-        <div style={{color:'black',fontWeight:"800"}}>PLEASE REVIEW "{product.attributes.title}"</div>
+        <div style={{color:'black',fontWeight:"800"}}>PLEASE REVIEW "{product?.attributes?.title}"</div>
         <div style={{margin:'10px 0px'}}>Your email address will not be published. Required fields are marked *</div>
         <div>
 
@@ -380,15 +380,15 @@ function ShopId(props) {
 
                           <div>
                             <div style={{fontFamily:'inter',fontSize:'20px',fontWeight:'600',color:'black',margin:'0px 0px 5px 0px'}}>
-                              {element.attributes.name}
+                              {element?.attributes?.name}
                             </div>
                             <div>
                               {
-                                 <Rating name="read-only" value={element.attributes.rating} readOnly />
+                                 <Rating name="read-only" value={element?.attributes?.rating} readOnly />
                               }
                             </div>
                             <p >
-                              {element.attributes.review}
+                              {element?.attributes?.review}
                             </p>
                           </div>
                         </div>

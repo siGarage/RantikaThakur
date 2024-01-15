@@ -25,7 +25,7 @@ function Shop(props) {
   // Set categories
   let category = new Set([
     ...products.map(
-      (element) => element.attributes.category.data.attributes.category
+      (element) => element?.attributes?.category?.data?.attributes?.category
     ),
   ]);
   category = ["All", ...category];
@@ -37,7 +37,7 @@ function Shop(props) {
   const AddToWishlist = (data) => {
     const findData = wishlist.find(
       (element) =>
-        Number(element.attributes.id_product) === Number(data.id_product)
+        Number(element?.attributes?.id_product) === Number(data?.id_product)
     );
     if (findData) {
       toast.success("Item Already In Wishlist!");
@@ -45,10 +45,9 @@ function Shop(props) {
       WISHLIST.addWishlistItems(data, authtoken).then((res) => {
         if (res.status === 200) {
           dispatch({
-            type: constants("wishlist").reducers.wishlist.AddToWishlist,
-            payload: { wishItems: [...wishlist, res.data.data] },
+            type: constants("wishlist").reducers?.wishlist?.AddToWishlist,
+            payload: { wishItems: [...wishlist, res?.data?.data] },
           });
-          
         }
       });
     }
@@ -61,19 +60,19 @@ function Shop(props) {
         if (priceFilter) {
           return products.filter(
             (element) =>
-              element.attributes.category.data.attributes.category === type &&
-              element.attributes.price >= priceFilter
+              element?.attributes?.category?.data?.attributes?.category === type &&
+              element?.attributes?.price >= priceFilter
           );
         } else {
           return products.filter(
             (element) =>
-              element.attributes.category.data.attributes.category === type
+              element?.attributes?.category?.data?.attributes?.category === type
           );
         }
       } else {
         if (priceFilter) {
           return products.filter(
-            (element) => element.attributes.price >= priceFilter
+            (element) => element?.attributes?.price >= priceFilter
           );
         } else {
           return products;
@@ -103,13 +102,13 @@ function Shop(props) {
   }, [useremail, authtoken, dispatch, logged_in, wishlist.length]);
 
   let wistItemsId = wishlist.map((element) =>
-    Number(element.attributes.id_product)
+    Number(element?.attributes?.id_product)
   );
 
   const WishCartID = (id) => {
     for (let item of wishlist) {
-      if (Number(item.attributes.id_product) === Number(id)) {
-        return Number(item.id);
+      if (Number(item?.attributes?.id_product) === Number(id)) {
+        return Number(item?.id);
       }
     }
   };
@@ -117,9 +116,9 @@ function Shop(props) {
   const DeleteFromWishlist = (id, authtoken) => {
     WISHLIST.deleteWishlistItems(id, authtoken).then((res) => {
       if (res.status === 200) {
-        const wishdata = wishlist.filter((ele) => ele.id !== id);
+        const wishdata = wishlist?.filter((ele) => ele?.id !== id);
         dispatch({
-          type: constants("wishlist").reducers.wishlist.AddToWishlist,
+          type: constants("wishlist").reducers?.wishlist?.AddToWishlist,
           payload: { wishItems: wishdata },
         });
       }
@@ -197,16 +196,16 @@ function Shop(props) {
                           }}
                         >
                           <img
-                            src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`}
+                            src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`}
                             onMouseOver={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`)
+                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[1]?.attributes?.url}`)
                             }
                             onMouseOut={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)
+                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                             }
                             alt="ProductImage"
                             style={{
-                              filter: !element.attributes.instock
+                              filter: !element?.attributes?.instock
                                 ? "grayscale(1)"
                                 : "grayscale(0)",
                             }}
@@ -214,23 +213,22 @@ function Shop(props) {
 
                           <div>
                             <div className="Card-Title">
-                              {element.attributes.title.length > 15
-                                ? `${element.attributes.title.slice(0, 15)}...`
-                                : element.attributes.title}
+                              {element?.attributes?.title?.length > 15
+                                ? `${element?.attributes?.title?.slice(0, 15)}...`
+                                : element?.attributes?.title}
                             </div>
                             <div className="Card-Category">
                               {
-                                element.attributes.category.data.attributes
-                                  .category
+                                element?.attributes?.category?.data?.attributes?.category
                               }
                             </div>
                             <div className="Card-Description">
-                              Rs. {element.attributes.price}
+                              Rs. {element?.attributes?.price}
                             </div>
                           </div>
                         </div>
                           
-                        {!element.attributes.instock && (
+                        {!element?.attributes?.instock && (
 
                           <div className="out-of-stock">
                             OUT OF STOCK
@@ -258,12 +256,12 @@ function Shop(props) {
                                 AddToWishlist(
                                   {
                                     email: useremail,
-                                    title: element.attributes.title,
-                                    price: element.attributes.price,
-                                    category:element.attributes.category.data.attributes.category,
-                                    id_product: element.id,
-                                    image: `${element.attributes.images.data[0].attributes.url}`,
-                                    size:element.attributes.sizes.data.map((element)=>element.attributes.size),
+                                    title: element?.attributes?.title,
+                                    price: element?.attributes?.price,
+                                    category:element?.attributes?.category?.data?.attributes?.category,
+                                    id_product: element?.id,
+                                    image: `${element.attributes?.images?.data[0]?.attributes?.url}`,
+                                    size:element?.attributes?.sizes?.data.map((element)=>element?.attributes?.size),
                                   },
                                   authtoken
                                 );

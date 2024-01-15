@@ -111,21 +111,21 @@ useEffect(() => {
    {filterData?.length>0?
    filterData.map((element)=> {return <div onClick={()=>{navigate(`/shop/${element.id}`);setIsShown(false)}} className="col-md-3 my-3   Product-Small-Cards" key={element.id} >
   
-    <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`) }
-       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)} alt='ProductImage' style={{height:'258px',width:'100%',filter:(!element.attributes.instock)?'grayscale(1)':'grayscale(0)'}}/> 
+    <div className='Card'><img src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`} onMouseOver={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[1]?.attributes?.url}`) }
+       onMouseOut={e=> (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)} alt='ProductImage' style={{height:'258px',width:'100%',filter:(!element?.attributes?.instock)?'grayscale(1)':'grayscale(0)'}}/> 
     <div>
-        <div className='Card-Title' style={{color:'white'}}>{element.attributes.title.length>25?`${element.attributes.title.slice(0,25)}...`:element.attributes.title}</div>
-        <div className='Card-Category' style={{color:'white'}}>{element.attributes.category.data.attributes.category}</div>
-        <div className='Card-Description' style={{color:'white'}}>Rs. {element.attributes.price}</div>
+        <div className='Card-Title' style={{color:'white'}}>{element?.attributes?.title?.length>25?`${element?.attributes?.title?.slice(0,25)}...`:element?.attributes?.title}</div>
+        <div className='Card-Category' style={{color:'white'}}>{element?.attributes?.category?.data?.attributes?.category}</div>
+        <div className='Card-Description' style={{color:'white'}}>Rs. {element?.attributes?.price}</div>
     </div> 
 
     </div>
     
-    {(!element.attributes.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'white',fontWeight:'800'}}>OUT OF STOCK</div>}
+    {(!element?.attributes?.instock) && <div style={{position:'absolute',fontSize:'22px',fontFamily:'Inter',color:'white',fontWeight:'800'}}>OUT OF STOCK</div>}
     
     </div>}
    )
-   :(query.length===0?<div className='search-text' style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:'600'}}>Search For Products &nbsp; <span  style={{fontWeight:'600'}} className="material-symbols-outlined search-text">
+   :(query?.length===0?<div className='search-text' style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:'600'}}>Search For Products &nbsp; <span  style={{fontWeight:'600'}} className="material-symbols-outlined search-text">
    search
    </span></div>:<div className='search-text' style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:'600'}}>No Product Found</div>)
    }
