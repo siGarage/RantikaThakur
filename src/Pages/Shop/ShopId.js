@@ -11,7 +11,6 @@ import constants from "../../constants";
 import Rating from "@mui/material/Rating";
 import REVIEW from "../../API/Review";
 import Box from "@mui/material/Box";
-
 import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
 
@@ -40,13 +39,13 @@ function ShopId(props) {
     if (data.size !== "") {
       const findData = cart.find(
         (element) =>
-          Number(element.attributes.id_product) === Number(data.id_product) &&
-          String(element.attributes.size) === String(data.size)
+          Number(element?.attributes.id_product) === Number(data.id_product) &&
+          String(element?.attributes.size) === String(data.size)
       );
       if (findData) {
         const findProductPrice =
-          Number(findData.attributes.price) + Number(data.price);
-        const findProductQuantity = Number(findData.attributes.quantity) + 1;
+          Number(findData?.attributes.price) + Number(data.price);
+        const findProductQuantity = Number(findData?.attributes.quantity) + 1;
         updateProduct(findData.id, findProductPrice, findProductQuantity);
       } else {
         CARTDATA.addCartItems(data, authtoken).then((res) => {
@@ -130,15 +129,15 @@ function ShopId(props) {
         const data = {
           ...product,
           attributes: {
-            ...product.attributes,
+            ...product?.attributes,
             size: size,
             quantity: 1,
-            image: product.attributes.images.data[0].attributes.url,
+            image: product?.attributes.images.data[0].attributes.url,
           },
         };
         const res = await makePaymentRequest.post("/api/orders", {
           email: useremail,
-          products: [data],
+          stripeId: "testId",
         });
 
         await stripe.redirectToCheckout({
@@ -195,14 +194,14 @@ function ShopId(props) {
   return (
     <>
       {Object.entries(product).length > 1 ? (
-        <div className="ProductDescriptionBox" key={product.id}>
+        <div className="ProductDescriptionBox" key={product?.id}>
           <div className="ProductDescriptionBox1">
             <div className="ProductDescriptionBox1-Box1">
               <Carousel style={{ height: "400px" }} autoFocus={true}>
-                {product.attributes.images.data.map((element) => (
-                  <div key={element.id}>
+                {product?.attributes?.images?.data.map((element) => (
+                  <div key={element?.id}>
                     <img
-                      src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.url}`}
+                      src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
                       alt="productImages"
                       style={{ height: "100%", width: "100%" }}
                     />
@@ -218,7 +217,7 @@ function ShopId(props) {
                   fontSize: "32px",
                 }}
               >
-                {product.attributes.title}
+                {product?.attributes?.title}
               </h5>
               <h6
                 style={{
@@ -228,7 +227,7 @@ function ShopId(props) {
                   color: "#737373",
                 }}
               >
-                Rs. {product.attributes.price}
+                Rs. {product?.attributes?.price}
               </h6>
 
               <p
@@ -246,21 +245,21 @@ function ShopId(props) {
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
-                {product.attributes.sizes.data.map((element) => (
+                {product?.attributes?.sizes?.data?.map((element) => (
                   <button
-                    onClick={() => setSize(element.attributes.size)}
+                    onClick={() => setSize(element?.attributes?.size)}
                     className="Size-Box"
-                    key={element.id}
+                    key={element?.id}
                     style={{
                       backgroundColor:
-                        size === element.attributes.size ? "#E2BF44" : "white",
+                        size === element?.attributes?.size ? "#E2BF44" : "white",
                       border:
-                        size === element.attributes.size
+                        size === element?.attributes?.size
                           ? "none"
                           : "3px solid #959595",
                     }}
                   >
-                    {element.attributes.size}
+                    {element?.attributes?.size}
                   </button>
                 ))}
               </div>
@@ -268,10 +267,10 @@ function ShopId(props) {
               {logged_in ? (
                 <div className="Shop-Button">
                   <button
-                    disabled={!product.attributes.instock}
+                    disabled={!product?.attributes?.instock}
                     className="Buy-Button"
                     style={{
-                      backgroundColor: !product.attributes.instock
+                      backgroundColor: !product?.attributes?.instock
                         ? "grey"
                         : "#E2BF44",
                     }}
@@ -279,30 +278,30 @@ function ShopId(props) {
                       handlePayment();
                     }}
                   >
-                    {!product.attributes.instock ? "Out Of Stock" : "Buy Now"}
+                    {!product?.attributes?.instock ? "Out Of Stock" : "Buy Now"}
                   </button>
                   <button
                     onClick={() => {
                       AddToCart(
                         {
                           email: useremail,
-                          title: product.attributes.title,
-                          price: product.attributes.price,
+                          title: product?.attributes?.title,
+                          price: product?.attributes?.price,
                           category:
-                            product.attributes.category.data.attributes
-                              .category,
-                          id_product: product.id,
-                          image: `${product.attributes.images.data[0].attributes.url}`,
+                            product?.attributes?.category?.data?.attributes
+                              ?.category,
+                          id_product: product?.id,
+                          image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
                           quantity: 1,
                           size: size,
                         },
                         authtoken
                       );
                     }}
-                    disabled={!product.attributes.instock}
+                    disabled={!product?.attributes?.instock}
                     className="Shop-AddToCart"
                   >
-                    {!product.attributes.instock
+                    {!product?.attributes?.instock
                       ? "Out Of Stock"
                       : "Add To Cart"}
                   </button>
@@ -315,7 +314,7 @@ function ShopId(props) {
                     }}
                     className="Buy-Button"
                     style={{
-                      backgroundColor: !product.attributes.instock
+                      backgroundColor: !product?.attributes?.instock
                         ? "grey"
                         : "#E2BF44",
                     }}
@@ -338,11 +337,11 @@ function ShopId(props) {
             <div className="ProductDescriptionBox2-ProductBox">
               <h5 style={{ margin: "46px 0px" }}>Product Description</h5>
               <p style={{ fontSize: "12px", fontWeight: "300" }}>
-                {product.attributes.description}
+                {product?.attributes?.description}
               </p>
               <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
-              <h5>Material-{product.attributes.material}</h5>
-              <h5>Product Code-{product.id}</h5>
+              <h5>Material-{product?.attributes?.material}</h5>
+              <h5>Product Code-{product?.id}</h5>
             </div>
           </div>
         </div>
@@ -350,7 +349,7 @@ function ShopId(props) {
         <>No Product Found</>
       )}
 
-      {Object.entries(product).length > 1 ? (
+      {Object.entries(product)?.length > 1 ? (
         <div
           style={{
             width: "100%",
@@ -363,7 +362,7 @@ function ShopId(props) {
         >
           <div style={{ width: "80%", fontFamily: "Inter", font: "500" }}>
             <div style={{ color: "black", fontWeight: "800" }}>
-              PLEASE REVIEW "{product.attributes.title}"
+              PLEASE REVIEW "{product?.attributes?.title}"
             </div>
             <div style={{ margin: "10px 0px" }}>
               Your email address will not be published. Required fields are
@@ -481,12 +480,12 @@ function ShopId(props) {
         <div className="row">
           {reviewItems?.length > 0 ? (
             <>
-              {reviewItems.map((element) => {
+              {reviewItems?.map((element) => {
                 return (
                   <div
                     style={{ position: "relative", cursor: "pointer" }}
                     className="col-md-4 my-3"
-                    key={element.id}
+                    key={element?.id}
                   >
                     <div>
                       <div
@@ -498,18 +497,18 @@ function ShopId(props) {
                           margin: "0px 0px 5px 0px",
                         }}
                       >
-                        {element.attributes.name}
+                        {element?.attributes?.name}
                       </div>
                       <div>
                         {
                           <Rating
                             name="read-only"
-                            value={element.attributes.rating}
+                            value={element?.attributes?.rating}
                             readOnly
                           />
                         }
                       </div>
-                      <p>{element.attributes.review}</p>
+                      <p>{element?.attributes?.review}</p>
                     </div>
                   </div>
                 );

@@ -9,7 +9,7 @@ import Carousel from 'react-multi-carousel';
 function Home(props) {
   
   const {products}=props;
-  const data=products.filter((element)=>element.attributes.bestseller===true)
+  const data=products.filter((element)=>element?.attributes.bestseller===true)
 
 
   
@@ -39,7 +39,7 @@ function Home(props) {
 
 
 
-  let category=new Set([...products.map((element)=>element.attributes.category.data.attributes.category)])
+  let category=new Set([...products.map((element)=>element?.attributes.category.data?.attributes.category)])
   category=[...category]
   const shuffled = category.sort(() => 0.5 - Math.random());
     let array = shuffled.slice(0, 5);
@@ -79,16 +79,16 @@ function Home(props) {
                           }}
                         >
                           <img className='carousel-best-image'
-                            src={`${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`}
+                            src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes.images.data[0].attributes.url}`}
                             onMouseOver={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`)
+                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes.images.data[1].attributes.url}`)
                             }
                             onMouseOut={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[0].attributes.url}`)
+                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes.images.data[0].attributes.url}`)
                             }
                             alt="ProductImage"
                             style={{
-                              filter: !element.attributes.instock
+                              filter: !element?.attributes.instock
                                 ? "grayscale(1)"
                                 : "grayscale(0)"
                         }}
@@ -96,18 +96,18 @@ function Home(props) {
 
                           <div>
                             <div className="Card-Title">
-                              {element.attributes.title.length > 25
-                                ? `${element.attributes.title.slice(0, 25)}...`
-                                : element.attributes.title}
+                              {element?.attributes.title.length > 25
+                                ? `${element?.attributes.title.slice(0, 25)}...`
+                                : element?.attributes.title}
                             </div>
                             <div className="Card-Category">
                               {
-                                element.attributes.category.data.attributes
+                                element?.attributes.category.data?.attributes
                                   .category
                               }
                             </div>
                             <div className="Card-Description">
-                              Rs. {element.attributes.price}
+                              Rs. {element?.attributes.price}
                             </div>
                           </div>
                         </div>

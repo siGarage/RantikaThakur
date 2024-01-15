@@ -9,7 +9,7 @@ const [selectedCategory, setSelectedCategory] = useState("");
   };
   
   const filteredItems = products.filter(
-      (element) => element.attributes.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 
+      (element) => element?.attributes.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 
     );
     
      ----------- Radio Filtering -----------
