@@ -19,7 +19,7 @@ import Shop from './Pages/Shop/Shop'
 import About from './Pages/About/About';
 import ShopId from './Pages/Shop/ShopId'
 import Custom from './Pages/CustomSize/Custom'
-import Success from './Pages/Success/Success'
+import Success from './Pages/Success/sfile'
 import Fail from './Pages/Success/Fail'
 
 import Wishlist from './Pages/Wishlist/Wishlist'
