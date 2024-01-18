@@ -81,6 +81,18 @@
     margin: 0px 0px 0px 10px;
 }
 
+
+.C-Sizebox{
+    height: 58px;
+    width: 90px;
+    border: 1px solid #959595;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0px 0px 10px;
+}
+
 .Color-Box{
     height: 32px;
     width: 32px;

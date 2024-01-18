@@ -32,6 +32,7 @@ function ShopId(props) {
   const navigate = useNavigate();
   const { cart } = props;
   let [product, setProduct] = useState({});
+  let [csize, setCsize] = useState(false);
   const { logged_in, useremail, authtoken } = props;
 
   // Add Data To Cart
@@ -76,7 +77,12 @@ function ShopId(props) {
       }
     });
   };
-
+  
+  //Navigate button
+  const navigateToCustomePage = () => {
+    setCsize();
+    navigate("/customsize");
+  };
   // Review Form
 
   let validateForm = (data) => {
@@ -245,6 +251,19 @@ function ShopId(props) {
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
+                <button
+                  onClick={() => {
+                    navigateToCustomePage();
+                  }}
+                  className="C-Sizebox"
+                  key="12345678646342"
+                  style={{
+                    backgroundColor: csize == true ? "#E2BF44" : "white",
+                    border: csize == true ? "none" : "3px solid #959595",
+                  }}
+                >
+                  Custome Size
+                </button>
                 {product?.attributes?.sizes?.data?.map((element) => (
                   <button
                     onClick={() => setSize(element?.attributes?.size)}
@@ -252,7 +271,9 @@ function ShopId(props) {
                     key={element?.id}
                     style={{
                       backgroundColor:
-                        size === element?.attributes?.size ? "#E2BF44" : "white",
+                        size === element?.attributes?.size
+                          ? "#E2BF44"
+                          : "white",
                       border:
                         size === element?.attributes?.size
                           ? "none"

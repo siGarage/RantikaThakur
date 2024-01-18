@@ -6,20 +6,20 @@ import WISHLIST from "../../API/Wishlist";
 import { toast } from "react-toastify";
 import constants from "../../constants";
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 function Shop(props) {
   // state variables of shop
   const [searchParams, setSearchParams] = useSearchParams();
   const { authtoken, products, logged_in } = props;
   const [priceFilter, setPriceFilter] = useState(0);
+  const [sort, setSort] = useState("");
   const type = searchParams.get("type");
   const dispatch = useDispatch();
   let wishlist = props.wishlist;
-  let {useremail}=props;
-  
+  let { useremail } = props;
+
   const navigate = useNavigate();
 
   // Set categories
@@ -28,7 +28,14 @@ function Shop(props) {
       (element) => element?.attributes?.category?.data?.attributes?.category
     ),
   ]);
+  //Material
+
+  let material = new Set([
+    ...products.map((element) => element?.attributes?.material),
+  ]);
   category = ["All", ...category];
+
+  let filter = [...category, ...material];
 
   //set price
   const price = [1000, 2000, 3000, 4000];
@@ -48,41 +55,89 @@ function Shop(props) {
             type: constants("wishlist")?.reducers?.wishlist?.AddToWishlist,
             payload: { wishItems: [...wishlist, res?.data?.data] },
           });
-          
         }
       });
     }
+  };
+
+  //filter by the fiter Items
+  const filterItems = (value) => {
+    navigate(`/shop?type=${value}`);
+  };
+
+  //sort by the fiter Items
+  const sortItems = (value) => {
+    setSort(value);
   };
 
   // Filter products data on the basis of category and price
   const filterData = useMemo(() => {
     if (products?.length > 0) {
       if (type !== "All") {
-        if (priceFilter) {
-          return products?.filter(
+        if (sort?.length > 0) {
+          let filtervalues = products?.filter(
             (element) =>
-              element?.attributes?.category?.data?.attributes?.category === type &&
-              element?.attributes?.price >= priceFilter
+              element?.attributes?.category?.data?.attributes?.category ===
+                type || element?.attributes?.material === type
           );
+          if (sort == "Alphabatically,A-Z") {
+            return filtervalues.sort();
+          }
+          if (sort == "Alphabatically,Z-A") {
+            return filtervalues.sort().reverse();
+          }
+          if (sort == "Price,Low-High") {
+            return filtervalues.sort(
+              (firstItem, secondItem) =>
+                firstItem?.attributes?.price - secondItem?.attributes?.price
+            );
+          }
+          if (sort == "Price,High-Low") {
+            return filtervalues
+              .sort(
+                (firstItem, secondItem) =>
+                  firstItem?.attributes?.price - secondItem?.attributes?.price
+              )
+              .reverse();
+          }
         } else {
           return products?.filter(
             (element) =>
-              element?.attributes?.category?.data?.attributes?.category === type
+              element?.attributes?.category?.data?.attributes?.category ===
+                type || element?.attributes?.material === type
           );
         }
       } else {
-        if (priceFilter) {
-          return products.filter(
-            (element) => element?.attributes?.price >= priceFilter
-          );
+        let filtervalues2 = products;
+        if (sort?.length > 0) {
+          if (sort == "Alphabatically,A-Z") {
+            return filtervalues2.sort();
+          }
+          if (sort == "Alphabatically,Z-A") {
+            return filtervalues2.sort().reverse();
+          }
+          if (sort == "Price,Low-High") {
+            return filtervalues2.sort(
+              (firstItem, secondItem) =>
+                firstItem?.attributes?.price - secondItem?.attributes?.price
+            );
+          }
+          if (sort == "Price,High-Low") {
+            return filtervalues2
+              .sort(
+                (firstItem, secondItem) =>
+                  firstItem?.attributes?.price - secondItem?.attributes?.price
+              )
+              .reverse();
+          }
         } else {
-          return products;
+          return filtervalues2;
         }
       }
     } else {
       return [];
     }
-  }, [products, priceFilter, type]);
+  }, [products, priceFilter, type, sortItems]);
 
   // Get Wishlist Data
   useEffect(() => {
@@ -128,8 +183,45 @@ function Shop(props) {
 
   return (
     <>
+      <h1 className="d-flex justify-content-center ">{type}</h1>
+      <div className="filter-menu d-flex justify-content-center">
+        <lable className="filter_class">FILTER BY:</lable>
+        <select
+          className="filterSelect"
+          onChange={(e) => {
+            filterItems(e.target.value);
+          }}
+        >
+          <option>Select Filter</option>
+          {filter.length > 0 ? (
+            filter.map((fil) => {
+              return (
+                <option key={fil} value={fil}>
+                  {fil}
+                </option>
+              );
+            })
+          ) : (
+            <option>No Filter</option>
+          )}
+        </select>
+        <lable className="sort_class">SORT BY:</lable>
+        <select
+          className="filterSelect"
+          onChange={(e) => {
+            sortItems(e.target.value);
+          }}
+        >
+          <option>Sort Values</option>
+          <option value="Alphabatically,A-Z">Alphabatically,A-Z</option>
+          <option value="Alphabatically,Z-A">Alphabatically,Z-A</option>
+          <option value="Price,Low-High">Price,Low-High</option>
+          <option value="Price,High-Low">Price,High-Low</option>
+        </select>
+      </div>
+
       <section className="Shop">
-        <div className="category">
+        {/* <div className="category">
           <div style={{ margin: "10px 0px" }}>
             <div style={{ fontWeight: "800" }}>Category</div>
             {category.map((element) => {
@@ -169,10 +261,11 @@ function Shop(props) {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         {products?.length === 0 ? (
-          <div className="Product-Container"
+          <div
+            className="Product-Container"
             style={{ display: "flex", justifyContent: "center" }}
           >
             <span className="loader"></span>
@@ -186,10 +279,9 @@ function Shop(props) {
                     return (
                       <div
                         style={{ position: "relative", cursor: "pointer" }}
-                        className="col-md-3 my-3   Product-Small-Cards"
+                        className="col-md-4 my-4   Product-Small-Cards"
                         key={element.id}
                       >
-                        
                         <div
                           className="Card"
                           onClick={() => {
@@ -215,12 +307,16 @@ function Shop(props) {
                           <div>
                             <div className="Card-Title">
                               {element?.attributes?.title?.length > 15
-                                ? `${element?.attributes?.title.slice(0, 15)}...`
+                                ? `${element?.attributes?.title.slice(
+                                    0,
+                                    15
+                                  )}...`
                                 : element?.attributes?.title}
                             </div>
                             <div className="Card-Category">
                               {
-                                element?.attributes?.category?.data?.attributes?.category
+                                element?.attributes?.category?.data?.attributes
+                                  ?.category
                               }
                             </div>
                             <div className="Card-Description">
@@ -228,29 +324,22 @@ function Shop(props) {
                             </div>
                           </div>
                         </div>
-                          
-                        {!element?.attributes?.instock && (
 
-                          <div className="out-of-stock">
-                            OUT OF STOCK
-                          </div>
+                        {!element?.attributes?.instock && (
+                          <div className="out-of-stock">OUT OF STOCK</div>
                         )}
                         {logged_in ? (
                           wistItemsId.includes(element?.id) ? (
-                            <FavoriteIcon     
-                            className="Favorite-Button"                         
-                              style={{color: "red"}}
+                            <FavoriteIcon
+                              className="Favorite-Button"
+                              style={{ color: "red" }}
                               onClick={() => {
                                 DeleteFromWishlist(
                                   WishCartID(element?.id),
                                   authtoken
                                 );
                               }}
-                            >
-                          
-                          
-                            
-                            </FavoriteIcon>
+                            ></FavoriteIcon>
                           ) : (
                             <FavoriteBorderIcon
                               onClick={() => {
@@ -259,31 +348,30 @@ function Shop(props) {
                                     email: useremail,
                                     title: element?.attributes?.title,
                                     price: element?.attributes?.price,
-                                    category:element?.attributes?.category?.data?.attributes?.category,
+                                    category:
+                                      element?.attributes?.category?.data
+                                        ?.attributes?.category,
                                     id_product: element.id,
                                     image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
-                                    size:element?.attributes?.sizes?.data.map((element)=>element?.attributes?.size),
+                                    size: element?.attributes?.sizes?.data.map(
+                                      (element) => element?.attributes?.size
+                                    ),
                                   },
                                   authtoken
                                 );
                               }}
-                              
-
                               className="Favorite-Button"
-                          
-                              style={{color: "white"}}
-                            >
-                              
-                            </FavoriteBorderIcon>
+                              style={{ color: "white" }}
+                            ></FavoriteBorderIcon>
                           )
                         ) : (
-                          <FavoriteBorderIcon onClick={() => { navigate(`/login`);}}
-                          className="Favorite-Button"
-
-                          style={{ color: "white"}}
-                        >
-                          
-                        </FavoriteBorderIcon>
+                          <FavoriteBorderIcon
+                            onClick={() => {
+                              navigate(`/login`);
+                            }}
+                            className="Favorite-Button"
+                            style={{ color: "white" }}
+                          ></FavoriteBorderIcon>
                         )}
                       </div>
                     );

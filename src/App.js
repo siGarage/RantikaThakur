@@ -6,7 +6,6 @@ import { connect} from 'react-redux';
 import ScrollToTop from './ScrollToTop';
 import 'react-multi-carousel/lib/styles.css';
 
-
 // Components
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';

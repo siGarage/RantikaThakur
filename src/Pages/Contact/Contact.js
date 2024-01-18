@@ -63,8 +63,8 @@ function Contact() {
           </div>
         </div>
     </div>
-    <div style={{width:'80%',height:'40%',margin:'50px 0px',borderTop:'1px solid #868686'}}>
-      <div className='Contact-Detail'><a href='mailto:contactrantikathakurclothing@gmail.com' style={{textDecoration:'none',color:'#868686'}}>Our Mail : <span style={{fontSize:'20px'}}>contactrantikathakurclothing@gmail.com</span></a></div>
+    <div style={{width:'80%',height:'40%',margin:'50px 0px',borderTop:'1px solid #000000; '}}>
+      <div className='Contact-Detail'><a href='mailto:contactrantikathakurclothing@gmail.com' style={{textDecoration:'none',color:'#000000; '}}>Our Mail : <span style={{fontSize:'20px'}}>contactrantikathakurclothing@gmail.com</span></a></div>
       <div className='Contact-Detail'>Social Media</div>
       <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'center'}}>
                 <a href='https://www.instagram.com/rantikathakur/' target='blank'><div style={{margin:'0px 18px'}}><img src={image4}  style={{height:'35px',width:'35px',color:'#2c2c2c'}} alt='Twitter'/></div></a>

@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import YouMayLike from "../YouMayLike/YouMayLike";
 import CARTDATA from "../../API/Cart";
 import { useNavigate } from "react-router-dom";
-
 import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
 function Cart(props) {

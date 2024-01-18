@@ -2,7 +2,7 @@
     margin:40px 10px 10px 20px;
     font-family:'Abhaya Libre';
     font-size:32px;
-    color:#757575;
+    color:#000000; ;
 }
 
 .Contact-Input-Box{
@@ -16,7 +16,7 @@
     width:50%;
     font-family:'Abhaya Libre';
     font-size:26px;
-    color:#757575;
+    color:#000000; ;
 }
 .Contact-Input{
     width:50%;
@@ -47,7 +47,7 @@
 .Contact-Heading{
     font-family:'Abhaya Libre';
     font-size:96px;
-    color:#757575;
+    color:#000000; ;
 }
 
 .Contact-Box{

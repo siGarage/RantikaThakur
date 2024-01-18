@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
-import Marquee from "react-fast-marquee";
 import { memo } from 'react';
 import { connect} from 'react-redux';
 import Carousel from 'react-multi-carousel';
@@ -50,9 +49,6 @@ function Home(props) {
   
   return (
     <section className='Home'>
-      <Marquee style={{height:'auto',fontSize:'16px',fontFamily:'Inter',fontWeight:'100',backgroundColor:'black',color:'white'}}>
-      I can be a React component, multiple React components, or just some text.
-      </Marquee>
       <div className='Home-Box1'>
         <div className='Home-Box1-Heading'>Turn your Clutter into Points</div>
         <div className='Home-Box1-Description'>Snap, Buy, Repeat</div>
