@@ -25,7 +25,6 @@ function NavScrollExample(props) {
     document.getElementById("mySidenav").style.width = "0";
   };
   const show = (e) => {
-    console.log(showCat);
     e.preventDefault();
     if (showCat == true) {
       setShowCat(false);
