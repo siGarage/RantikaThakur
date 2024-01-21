@@ -34,6 +34,14 @@
     display: block;
     transition: 0.3s;
   }
+
+  .categoryham-{
+    color: "white";
+    font-size: 18px;
+    margin-left: -20px;
+    padding: 0px 32px 5px !important;
+    font-family: "Abhaya Libre !important"
+  }
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {

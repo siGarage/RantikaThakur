@@ -12,8 +12,7 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
-    identifier: Yup.string()
-      .required("*Identifier field is required!"),
+    identifier: Yup.string().email("*Enter a valid mail!").required("*Email field is required!"),
     password: Yup.string().required("*Password field is required!"),
   });
 
@@ -117,12 +116,12 @@ function Login() {
                     color: "#757575",
                   }}
                 >
-                  Email or UserName
+                  Email 
                 </div>
                 <input
                   name="identifier"
                   type="text"
-                  placeholder="Identifier"
+                  placeholder="email"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.identifier}
