@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
-    identifier: Yup.string().email("*Enter a valid mail!").required("*Email field is required!"),
+    identifier: Yup.string().email("*Enter a valid mail!").required("*E-mail field is required!"),
     password: Yup.string().required("*Password field is required!"),
   });
 
@@ -32,7 +32,7 @@ function Login() {
           toast.success("Login successful!");
           navigate("/shop?type=All");
         } else {
-          toast.error(res.data.error.message);
+          toast.error("Enter a valid E-mail & Password.");
         }
       });
     },
@@ -121,7 +121,7 @@ function Login() {
                 <input
                   name="identifier"
                   type="text"
-                  placeholder="email"
+                  placeholder="E-mail"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.identifier}
