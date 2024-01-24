@@ -38,6 +38,7 @@
 }
 
 .Card img {
+  height: 90%;
   width: 100%;
 }
 .Card-Title {
