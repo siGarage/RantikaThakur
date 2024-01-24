@@ -37,7 +37,7 @@
     margin: 0px 10px;
 }
 .clothesTypesBox1{
-    background-image: url('Rectangle\ 49.png');
+    background-image: url('../../Images/dresses.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 0px 10px;
@@ -49,7 +49,7 @@
     height:100%;
 }
 .clothesTypesBox2{
-    background-image: url('Rectangle\ 48.png');
+    background-image: url('../../Images/skirts.png');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -61,7 +61,7 @@
     height:100%;
 }
 .clothesTypesBox3{
-    background-image: url('Rectangle\ 7.png');
+    background-image: url('../../Images/suits.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 0px 10px;
@@ -70,6 +70,34 @@
     flex-direction: column;
     align-items: center;
 }
+
+
+.clothesTypesBox4{
+    background-image: url('../../Images/co-ords.png');
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+    width:49%;
+    height:100%;
+}
+
+.clothesTypesBox5{
+    background-image: url('../../Images/shirts.png');
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background-size: 100% 100%;
+    margin: 0px 10px;
+    width:49%;
+    height:100%;
+}
+
 
 .clothesTypes-Button{
     width: 30%;

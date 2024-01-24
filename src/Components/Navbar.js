@@ -69,6 +69,10 @@ function Navbar(props) {
   ]);
   category = ["All", ...category];
 
+  const goToHome = () => {
+    navigate("/home");
+  };
+
   useEffect(() => {
     window
       .matchMedia("(max-width:700px)")
@@ -109,6 +113,7 @@ function Navbar(props) {
             {matches && (
               <img
                 src={RantikaLogo}
+                onClick={() => goToHome()}
                 alt="Logo"
                 className="rantika-logo"
                 style={{ marginLeft: "0px" }}
@@ -117,6 +122,7 @@ function Navbar(props) {
             {!matches && (
               <img
                 src={RantikaLogo}
+                onClick={() => goToHome()}
                 alt="Logo"
                 className="rantika-logo"
                 style={logoStyle}
@@ -124,54 +130,13 @@ function Navbar(props) {
             )}
           </div>
           <div className="Navbar-box1-box">
-            {showSearchInput ? (
-              <div
-                style={{
-                  height: "35px",
-                  width: "100%",
-                  borderRadius: "7px",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  border: "1px solid #B0B0B0",
-                  margin: "0px 6px",
-                  padding: "2px 5px",
-                }}
-              >
-                <div style={{ height: "25px", width: "20%" }}>
-                  <img
-                    src={SearchImage}
-                    style={{ height: "20px" }}
-                    alt="search"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search Products"
-                  onClick={handleClick}
-                  onChange={onChange}
-                  style={{
-                    height: "28px",
-                    border: "none",
-                    backgroundColor: "#FFFFF3",
-                  }}
-                />
-              </div>
-            ) : (
-              <div
-                style={{ height: "25px", width: "20%" }}
-                onClick={() => {
-                  searchInputButton();
-                }}
-              >
-                <img
-                  src={SearchImage}
-                  style={{ height: "30px", width: "30px" }}
-                  alt="search"
-                />
-              </div>
-            )}
+            <div style={{ height: "25px", width: "20%" }} onClick={handleClick}>
+              <img
+                src={SearchImage}
+                style={{ height: "30px", width: "30px" }}
+                alt="search"
+              />
+            </div>
             <Link
               className="Navbar-link"
               to="/cart"
@@ -264,107 +229,122 @@ function Navbar(props) {
       {isShown && (
         <div className="SearchBox">
           <div onClick={handleClickClose} className="close"></div>
-          <div className="row" style={{ width: "100%", height: "100%" }}>
-            {filterData?.length > 0 ? (
-              filterData.map((element) => {
-                return (
-                  <div
-                    onClick={() => {
-                      navigate(`/shop/${element.id}`);
-                      setIsShown(false);
-                    }}
-                    className="col-md-3 my-3   Product-Small-Cards"
-                    key={element.id}
-                  >
-                    <div className="Card">
-                      <img
-                        src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes.images.data[0]?.attributes.url}`}
-                        onMouseOver={(e) =>
-                          (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes.images.data[1].attributes.url}`)
-                        }
-                        onMouseOut={(e) =>
-                          (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes.images.data[0]?.attributes.url}`)
-                        }
-                        alt="ProductImage"
-                        style={{
-                          height: "258px",
-                          width: "100%",
-                          filter: !element.attributes.instock
-                            ? "grayscale(1)"
-                            : "grayscale(0)",
-                        }}
-                      />
-                      <div>
-                        <div className="Card-Title" style={{ color: "white" }}>
-                          {element?.attributes.title.length > 25
-                            ? `${element?.attributes.title.slice(0, 25)}...`
-                            : element.attributes.title}
-                        </div>
-                        <div
-                          className="Card-Category"
-                          style={{ color: "white" }}
-                        >
-                          {
-                            element?.attributes.category.data?.attributes
-                              .category
+          <div className="d-flex flex-column w-100 align-items-center">
+            <input
+              type="text"
+              placeholder="Search Products"
+              onChange={onChange}
+              style={{
+                height: "28px",
+                border: "none",
+                backgroundColor: "#FFFFF3",
+                width:"30%"
+              }}
+            />
+            <div className="row" style={{ width: "100%", height: "100%" }}>
+              {filterData?.length > 0 ? (
+                filterData.map((element) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        navigate(`/shop/${element.id}`);
+                        setIsShown(false);
+                      }}
+                      className="col-md-3 my-3   Product-Small-Cards"
+                      key={element.id}
+                    >
+                      <div className="Card">
+                        <img
+                          src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`}
+                          onMouseOver={(e) =>
+                            (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element.attributes?.images?.data[1]?.attributes?.url}`)
                           }
-                        </div>
-                        <div
-                          className="Card-Description"
-                          style={{ color: "white" }}
-                        >
-                          Rs. {element?.attributes.price}
+                          onMouseOut={(e) =>
+                            (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
+                          }
+                          alt="ProductImage"
+                          style={{
+                            height: "258px",
+                            width: "100%",
+                            filter: !element?.attributes?.instock
+                              ? "grayscale(1)"
+                              : "grayscale(0)",
+                          }}
+                        />
+                        <div>
+                          <div
+                            className="Card-Title"
+                            style={{ color: "white" }}
+                          >
+                            {element?.attributes?.title?.length > 25
+                              ? `${element?.attributes?.title?.slice(0, 25)}...`
+                              : element?.attributes?.title}
+                          </div>
+                          <div
+                            className="Card-Category"
+                            style={{ color: "white" }}
+                          >
+                            {
+                              element?.attributes?.category?.data?.attributes?.category
+                            }
+                          </div>
+                          <div
+                            className="Card-Description"
+                            style={{ color: "white" }}
+                          >
+                            Rs. {element?.attributes?.price}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {!element?.attributes.instock && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          fontSize: "22px",
-                          fontFamily: "Inter",
-                          color: "white",
-                          fontWeight: "800",
-                        }}
-                      >
-                        OUT OF STOCK
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            ) : query.length === 0 ? (
-              <div
-                className="search-text"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontWeight: "600",
-                }}
-              >
-                Search For Products &nbsp;{" "}
-                <span
-                  style={{ fontWeight: "600" }}
-                  className="material-symbols-outlined search-text"
+                      {!element?.attributes?.instock && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            fontSize: "22px",
+                            fontFamily: "Inter",
+                            color: "white",
+                            fontWeight: "800",
+                          }}
+                        >
+                          OUT OF STOCK
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : query.length === 0 ? (
+                <div
+                  className="search-text"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "600",
+                  }}
                 >
-                  search
-                </span>
-              </div>
-            ) : (
-              <div
-                className="search-text"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontWeight: "600",
-                }}
-              >
-                No Product Found
-              </div>
-            )}
+                  Search For Products &nbsp;{" "}
+                  <span
+                    style={{ fontWeight: "600" }}
+                    className="material-symbols-outlined search-text"
+                  >
+                    search
+                  </span>
+                </div>
+              ) : (
+                <div
+                  className="search-text"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "600",
+                  }}
+                >
+                  No Product Found
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
