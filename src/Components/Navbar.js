@@ -19,11 +19,20 @@ function Navbar(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
+  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [logoStyle, setLogoStyle] = useState({ marginLeft: "150px" });
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
 
   const onChange = (e) => {
     setQuery(e.target.value);
   };
 
+  const searchInputButton = () => {
+    setShowSearchInput(true);
+    setLogoStyle({ marginLeft: "350px" });
+  };
   const filteredItems = products.filter(
     (element) =>
       element?.attributes?.title.toLowerCase().indexOf(query.toLowerCase()) !==
@@ -42,13 +51,14 @@ function Navbar(props) {
   }, [products, filteredItems, query]);
 
   const [isShown, setIsShown] = useState(false);
-
   const handleClick = (event) => {
     setIsShown(true);
   };
 
   const handleClickClose = (event) => {
     setIsShown(false);
+    setShowSearchInput(false);
+    setLogoStyle({ marginLeft: "150px" });
   };
 
   // Set categories
@@ -60,6 +70,9 @@ function Navbar(props) {
   category = ["All", ...category];
 
   useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
     if (products.length === 0) {
       PRODUCTDATA.fetchProduct().then((res) => {
         if (res.status === 200) {
@@ -92,40 +105,73 @@ function Navbar(props) {
           <div>
             <Hamberger />
           </div>
+          <div className="Navbar-box2" style={{ margin: "14px 0px" }}>
+            {matches && (
+              <img
+                src={RantikaLogo}
+                alt="Logo"
+                className="rantika-logo"
+                style={{ marginLeft: "0px" }}
+              />
+            )}
+            {!matches && (
+              <img
+                src={RantikaLogo}
+                alt="Logo"
+                className="rantika-logo"
+                style={logoStyle}
+              />
+            )}
+          </div>
           <div className="Navbar-box1-box">
-            <div
-              style={{
-                height: "35px",
-                width: "100%",
-                borderRadius: "7px",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                border: "1px solid #B0B0B0",
-                margin: "0px 6px",
-                padding: "2px 5px",
-              }}
-            >
-              <div style={{ height: "25px", width: "20%" }}>
+            {showSearchInput ? (
+              <div
+                style={{
+                  height: "35px",
+                  width: "100%",
+                  borderRadius: "7px",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: "1px solid #B0B0B0",
+                  margin: "0px 6px",
+                  padding: "2px 5px",
+                }}
+              >
+                <div style={{ height: "25px", width: "20%" }}>
+                  <img
+                    src={SearchImage}
+                    style={{ height: "20px" }}
+                    alt="search"
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search Products"
+                  onClick={handleClick}
+                  onChange={onChange}
+                  style={{
+                    height: "28px",
+                    border: "none",
+                    backgroundColor: "#FFFFF3",
+                  }}
+                />
+              </div>
+            ) : (
+              <div
+                style={{ height: "25px", width: "20%" }}
+                onClick={() => {
+                  searchInputButton();
+                }}
+              >
                 <img
                   src={SearchImage}
-                  style={{ height: "20px" }}
+                  style={{ height: "30px", width: "30px" }}
                   alt="search"
                 />
               </div>
-              <input
-                type="text"
-                placeholder="Search Products"
-                onClick={handleClick}
-                onChange={onChange}
-                style={{
-                  height: "28px",
-                  border: "none",
-                  backgroundColor: "#FFFFF3",
-                }}
-              />
-            </div>
+            )}
             <Link
               className="Navbar-link"
               to="/cart"
@@ -170,9 +216,6 @@ function Navbar(props) {
           </div>
         </div>
 
-        <div className="Navbar-box2" style={{ margin: "14px 0px" }}>
-          <img src={RantikaLogo} alt="Logo" />
-        </div>
         <div
           className="Navbar-box3"
           style={{ fontFamily: "Abhaya Libre", fontSize: "30px" }}

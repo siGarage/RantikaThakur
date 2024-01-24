@@ -11,7 +11,7 @@
   width: 90%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin: 10px 0px 0px 0px;
 }
 .Navbar-box1-box {
@@ -126,8 +126,9 @@ a:hover {
   z-index: 1;
 }
 
-
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 .dropdown-content a {
   color: black;
