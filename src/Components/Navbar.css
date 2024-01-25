@@ -67,6 +67,8 @@ ul li img{
   background: hsl(0, 0%, 100%);
   width: 100%;
   right: 380px;
+  max-height: 330px;
+  overflow-y: auto;
 }
 
 .resultList li {
