@@ -20,11 +20,15 @@ function Navbar(props) {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const [showWhatsappCloud, setshowWhatsappCloud] = useState(true);
   const [logoStyle, setLogoStyle] = useState({ marginLeft: "150px" });
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
 
+  const closeWCloud = () => {
+    setshowWhatsappCloud(false);
+  };
   const onChange = (e) => {
     setQuery(e.target.value);
   };
@@ -379,21 +383,26 @@ function Navbar(props) {
           
           
         </div> */}
-        <div class="nav_container">
-          <div class="el">
-            <a
-              href="https://api.whatsapp.com/send?phone=9041999489"
-              target="_blank"
-              aria-describedby="a11y-new-window-external-message"
-              rel="null noopener"
-            >
-              Hey Beautiful ! Need Help?
-              <br /> Let's Chat...
-            </a>
+        {showWhatsappCloud ? (
+          <div class="nav_container">
+            <div class="el d-flex">
+              <a
+                href="https://api.whatsapp.com/send?phone=9041999489"
+                target="_blank"
+                aria-describedby="a11y-new-window-external-message"
+                rel="null noopener"
+              >
+                Hey Beautiful ! Need Help?
+                <br /> Let's Chat...
+              </a>
+              <div onClick={closeWCloud} className="wclose"></div>
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
         <a href="https://wa.me/9041999489" target="_blank" rel="noreferrer">
-          <span>
+          <span className="d-flex justify-content-end">
             <img
               src={Whatsapp}
               alt="whatsapp"

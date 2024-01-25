@@ -2,7 +2,16 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import { memo } from "react";
 import { connect } from "react-redux";
+// import Carousel from "react-multi-carousel";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import h1 from "../../Images/h1.png";
+import h2 from "../../Images/h2.png";
+import h3 from "../../Images/h3.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 
 function Home(props) {
   const { products } = props;
@@ -41,14 +50,44 @@ function Home(props) {
   const shuffled = category?.sort(() => 0.5 - Math.random());
   let array = shuffled.slice(0, 5);
 
+  const gotoShop = () => {
+    navigate(`/shop?type=All`);
+  };
   return (
     <section className="Home">
-      <div className="Home-Box1">
-        <div className="Home-Box1-Heading">Turn your Clutter into Points</div>
-        <div className="Home-Box1-Description">Snap, Buy, Repeat</div>
-        <Link to="/shop?type=All" className="Home-Box1-Button">
-          Buy Now
-        </Link>
+      <div className="Home-Box1 w-100">
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h1} className="w-100" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h2} className="w-100" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h3} className="w-100" />
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
 
       <div className="Home-Box2">
@@ -120,7 +159,7 @@ function Home(props) {
             <div className="clothesTypesBox1">
               {/* <div className="clothesTypesBox1-Box1">{array[0]}</div> */}
               <div></div>
-              <div
+              {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -132,7 +171,7 @@ function Home(props) {
               >
                 <input type="radio" name="category" value="men's clothing" />
                 Button
-              </div>
+              </div> */}
             </div>
 
             {/* clothesTypesBox2 */}
@@ -142,7 +181,7 @@ function Home(props) {
             >
               {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
               <div></div>
-              <div
+              {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -154,7 +193,7 @@ function Home(props) {
               >
                 <input type="radio" name="category" value="men's clothing" />
                 Button
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -162,7 +201,7 @@ function Home(props) {
           <div className="clothesTypesBox3">
             {/* <div className="clothesTypesBox1-Box1">{array[2]}</div> */}
             <div></div>
-            <div
+            {/* <div
               onClick={() => {
                 navigate({
                   pathname: "/shop",
@@ -174,7 +213,7 @@ function Home(props) {
             >
               <input type="radio" name="category" value="men's clothing" />
               Button
-            </div>
+            </div> */}
           </div>
 
           <div className="Home-Box3-Box1-Box-InnerBox1">
@@ -182,7 +221,7 @@ function Home(props) {
             <div className="clothesTypesBox4">
               {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}
               <div></div>
-              <div
+              {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -194,14 +233,14 @@ function Home(props) {
               >
                 <input type="radio" name="category" value="men's clothing" />
                 Button
-              </div>
+              </div> */}
             </div>
 
             {/* clothesTypesBox5 */}
             <div className="clothesTypesBox5">
               {/* <div className="clothesTypesBox1-Box1">{array[4]}</div> */}
               <div></div>
-              <div
+              {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -213,7 +252,7 @@ function Home(props) {
               >
                 <input type="radio" name="category" value="men's clothing" />
                 Button
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
