@@ -227,21 +227,18 @@ function Navbar(props) {
       </section>
 
       {isShown && (
-        <div className="SearchBox">
-          <div onClick={handleClickClose} className="close"></div>
-          <div className="d-flex flex-column w-100 align-items-center">
-            <input
-              type="text"
-              placeholder="Search Products"
-              onChange={onChange}
-              style={{
-                height: "28px",
-                border: "none",
-                backgroundColor: "#FFFFF3",
-                width:"30%"
-              }}
-            />
-            <div className="row" style={{ width: "100%", height: "100%" }}>
+        <>
+          <div className="SearchBox">
+            <div onClick={handleClickClose} className="close"></div>
+            <div className="d-flex flex-column w-100 align-items-center">
+              <input
+                type="text"
+                placeholder="Search Products"
+                onChange={onChange}
+                className="searchInput"
+                list="browsers"
+              />
+              {/* <div className="row" style={{ width: "100%", height: "100%" }}>
               {filterData?.length > 0 ? (
                 filterData.map((element) => {
                   return (
@@ -344,9 +341,37 @@ function Navbar(props) {
                   No Product Found
                 </div>
               )}
+            </div> */}
             </div>
           </div>
-        </div>
+
+          <div className="resultList">
+            <ul>
+              {filterData?.length > 0 ? (
+                filterData?.map((item) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        navigate(`/shop/${item.id}`);
+                        setIsShown(false);
+                      }}
+                    >
+                      <li>
+                        <img
+                          src={`${process.env.REACT_APP_SERVERNAME}${item?.attributes?.images?.data[0]?.attributes?.url}`}
+                          className="w-10 h-10"
+                        />
+                        {item?.attributes?.title}
+                      </li>
+                    </div>
+                  );
+                })
+              ) : (
+                <li>No Product!</li>
+              )}
+            </ul>
+          </div>
+        </>
       )}
 
       <div id="whatsapp-button">
