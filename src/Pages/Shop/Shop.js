@@ -28,14 +28,10 @@ function Shop(props) {
       (element) => element?.attributes?.category?.data?.attributes?.category
     ),
   ]);
-  //Material
-
-  let material = new Set([
-    ...products.map((element) => element?.attributes?.material),
-  ]);
+  
   category = ["All", ...category];
 
-  let filter = [...category, ...material];
+  let filter = [...category];
 
   //set price
   const price = [1000, 2000, 3000, 4000];
