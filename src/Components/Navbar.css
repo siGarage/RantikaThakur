@@ -219,7 +219,7 @@ a:hover {
   content: " ";
   height: 15px;
   width: 2px;
-  background-color: rgb(251, 0, 0);
+  background-color: rgb(9, 8, 8);
 }
 .wclose:before {
   transform: rotate(45deg);

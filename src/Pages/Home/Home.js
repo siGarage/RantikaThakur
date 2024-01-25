@@ -11,7 +11,7 @@ import h3 from "../../Images/h3.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Autoplay,Navigation } from "swiper/modules";
 
 function Home(props) {
   const { products } = props;
@@ -56,7 +56,16 @@ function Home(props) {
   return (
     <section className="Home">
       <div className="Home-Box1 w-100">
-        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <Swiper
+          navigation={true}
+          className="mySwiper"
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay, Navigation]}
+
+        >
           <SwiperSlide>
             {" "}
             <div

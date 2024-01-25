@@ -182,7 +182,7 @@
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    margin:30px;
+    margin:0px 30px;
 }
 
 .Home-Box2-Box1{
@@ -203,7 +203,7 @@
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    margin:30px;
+    margin:0px 30px;
 }
 
 .clothesTypesBox1{
@@ -264,7 +264,7 @@
 
 @media only screen and (max-width: 1000px) and (min-width:700px) {
     .Home-Box3-Box1-Box-InnerBox1{
-        height:400px;
+        height:320px;
        
     }
 
@@ -309,7 +309,7 @@
        
     }
     .Home-Box1{
-        height:400px;
+        height:320px;
       
     }
 
