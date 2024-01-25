@@ -68,6 +68,8 @@ ul li img{
   width: 100%;
   right: 380px;
   cursor: pointer;
+  max-height: 306px;
+  overflow-y: auto;
 }
 
 .resultList li {
