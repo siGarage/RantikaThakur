@@ -57,7 +57,7 @@ ul {
   list-style-type: none;
 }
 
-ul li img{
+ul li img {
   width: 50px;
 }
 
@@ -84,7 +84,8 @@ ul li img{
   color: #757575;
 }
 .SearchBox {
-  padding: 90px 0px 0px;
+  margin-top: 70px;
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +94,6 @@ ul li img{
   right: 0px;
   left: 0px;
   top: 60px;
-  margin: 0px 0px;
   border: none;
   height: auto;
   background-color: rgb(226, 191, 68);
