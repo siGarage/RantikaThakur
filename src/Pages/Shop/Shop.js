@@ -28,7 +28,7 @@ function Shop(props) {
       (element) => element?.attributes?.category?.data?.attributes?.category
     ),
   ]);
-  
+
   category = ["All", ...category];
 
   let filter = [...category];
@@ -292,11 +292,16 @@ function Shop(props) {
                             onMouseOut={(e) =>
                               (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                             }
+                            width="380px"
+                            height="480px"
                             alt="ProductImage"
                             style={{
                               filter: !element?.attributes?.instock
                                 ? "grayscale(1)"
                                 : "grayscale(0)",
+                              width: "380px",
+                              height: "480px",
+                              objectFit: "fill",
                             }}
                           />
 
