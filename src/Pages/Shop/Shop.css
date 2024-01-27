@@ -38,7 +38,7 @@
 }
 
 .Card img {
-  object-fit: "cover";
+  object-fit: cover;
   height: 90%;
   width: 100%;
 }
