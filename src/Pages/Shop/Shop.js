@@ -180,7 +180,8 @@ function Shop(props) {
   return (
     <>
       <h1 className="d-flex justify-content-center ">{type}</h1>
-      <div className="filter-menu d-flex justify-content-center">
+      <hr class="new2"></hr>
+      <div className="filter-menu ">
         <lable className="filter_class">FILTER BY:</lable>
         <select
           className="filterSelect"
@@ -193,7 +194,7 @@ function Shop(props) {
             filter.map((fil) => {
               return (
                 <option key={fil} value={fil}>
-                  {fil}
+                  {fil?.toUpperCase()}
                 </option>
               );
             })

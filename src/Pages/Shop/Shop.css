@@ -1,6 +1,6 @@
 .Shop {
   width: 100%;
-  margin: 50px 0px;
+  margin: 0px 0px 20px 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,20 +16,24 @@
 }
 
 .filter_class {
-  margin-top: 3px;
+  margin-top: 10px;
   margin-right: 20px;
+  font-size: 12px;
 }
 
 .filterSelect {
-  border: 1px solid #d1cece;
+  border: 1px solid #e3dfdf;
   padding: 5px;
-  color: #737373;
+  color: #9e9898;
+  font-size: 12px;
 }
 
 .sort_class {
-  margin-top: 3px;
+  margin-top: 10px;
   margin-right: 20px;
   margin-left: 10px;
+  font-size: 12px;
+
 }
 
 .Card {
@@ -136,6 +140,13 @@
 
 .filter-menu {
   font-size: 18px;
+  display: flex;
+  justify-content: start;
+  margin-left: 163px;
+}
+
+hr.new2 {
+  border-top: 1px dashed rgb(126, 124, 124);
 }
 
 @keyframes rotation {
@@ -156,6 +167,8 @@
   }
   .filter-menu {
     font-size: 10px;
+    margin-left: 35px;
+
   }
   .Category-Filter {
     font-size: 16px;
@@ -175,6 +188,8 @@
 
   .filter-menu {
     font-size: 10px;
+  margin-left: 35px;
+
   }
 
   .Category-Filter {
@@ -192,6 +207,8 @@
 
   .filter-menu {
     font-size: 10px;
+  margin-left: 0px;
+
   }
 
   .Product-Container {
@@ -273,6 +290,8 @@
 
   .filter-menu {
     font-size: 10px;
+  margin-left: 35px;
+
   }
 }
 
@@ -284,8 +303,8 @@
   }
 
   .filter-menu {
-    font-size: 10px;
-  }
+    font-size: 10px
+    }
 }
 
 @media only screen and (max-width: 600px) and (min-width: 500px) {
