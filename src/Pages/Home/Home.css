@@ -148,22 +148,29 @@
     font-family:'Poppins';
     font-weight:600;
     color:white;
-    font-size:64px;
+        cursor: pointer;
+        font-size:64px;
 }
 
 .Home-Box1-Description{
     font-family:'Poppins';
     font-weight:400;
     color:white;
-    font-size:40px;
+        cursor: pointer;
+        font-size:40px;
 }
 
+.Home-Box1{
+    cursor: pointer;
+
+}
 .Home-Box1-Button{
     text-decoration:none;
     width:25%;
     height:12%;
     font-family:'Poppins';
-    font-weight:400;
+        cursor: pointer;
+        font-weight:400;
     color:black;
     font-size:40px;
     cursor:pointer;
@@ -281,21 +288,26 @@
 
     .Home-Box1{
         height:500px;
+        cursor: pointer;
     }
 
     .Home-Box1-Heading{
         font-size:40px;
+        cursor: pointer;
+
     }
     
     .Home-Box1-Description{
         font-size:30px;
+        cursor: pointer;
+
     }
     
     .Home-Box1-Button{
         height:18%;
         font-size:40px;
         width: 30%;
-       
+        cursor: pointer;
     }
   }
 
@@ -307,6 +319,7 @@
     }
     .Home-Box1{
         height:250px !important;
+        cursor: pointer;
       
     }
 
