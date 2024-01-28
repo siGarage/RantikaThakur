@@ -236,7 +236,7 @@ function Footer() {
                 }}
               >
                 <a
-                  href="https://www.instagram.com/rantikathakur/"
+                  href="https://www.instagram.com/rantikathakurclothing?igsh=bmNjem5pNzQ5bzJw"
                   target="blank"
                 >
                   <div style={{ margin: "0px 10px" }}>

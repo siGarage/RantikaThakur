@@ -1,116 +1,164 @@
-.Contact-Detail{
-    margin:40px 10px 10px 20px;
-    font-family:'Abhaya Libre';
-    font-size:32px;
-    color:#000000; ;
+.Contact-Detail {
+  margin: 40px 10px 10px 20px;
+  font-family: "Abhaya Libre";
+  font-size: 32px;
+  color: #000000;
+}
+.letsConnect {
+  display: flex;
+  justify-content: center;
+  font-family: "Abhaya Libre";
+  font-size: 30px;
 }
 
-.Contact-Input-Box{
-    display:flex;
-    justify-content:center;
-    align-items:space-between;
-    width:100%;
-    margin:12px 0px;
+.Contact-Input-Box {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  width: 100%;
+  margin: 12px 0px;
 }
-.Contact-Box-Label{
-    width:50%;
-    font-family:'Abhaya Libre';
-    font-size:26px;
-    color:#000000; ;
+.contactUsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: auto;
+  width: 90%;
+  margin: 10px 10px;
 }
-.Contact-Input{
-    width:50%;
-    height:30px;
+.contactImg {
+  height: 100%;
+  width: 87%;
 }
-.Contact-Submit{
-    display: flex;
+.title {
+  display: flex;
+  font-family: "Abhaya Libre";
+  font-size: 26px;
+  color: rgb(117, 117, 117);
+}
+.Contact-Box-Label {
+  width: 50%;
+  font-family: "Abhaya Libre";
+  font-size: 26px;
+  color: rgb(117, 117, 117);
+}
+.mA {
+  border-bottom: 1px solid rgb(117, 117, 117);
+  width: 65%;
+}
+hr.new3 {
+  border-top: 1px solid rgb(70, 68, 68);
+}
+.Contact-Input {
+  width: 50%;
+  height: 30px;
+  border: 1px solid #d9d8d8;
+  padding: 10px;
+  font-size: 11px;
+  border-radius: 4px;
+  box-shadow: 0px 5px 5px rgb(146, 144, 144);
+}
+.Contact-Submit {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.Contact-Submit-Button {
+  border: none;
+  border-radius: 4px;
+  color: white;
+  background-color: #e2bf44;
+  width: 50%;
+  height: 30px;
+  margin: 10px 0px;
+}
+
+.Contact {
+  width: 100%;
+  height: auto;
+}
+
+.Contact-Heading {
+  font-family: "Abhaya Libre";
+  font-size: 96px;
+  color: #000000;
+}
+
+.Contact-Box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 80%;
+  height: 60%;
+}
+
+.Contact-Box-Box1 {
+  width: 45%;
+  height: 100%;
+  padding: 20px;
+}
+.mobt{
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.Contact-Box-Box2 {
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  margin-top: -20px;
+}
+
+.mob{
+    align-items: center;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1100px) {
+  .Contact-Box {
     width: 100%;
-    justify-content: flex-end;
-}
-
-.Contact-Submit-Button{
-    border: none;
-    border-radius: 30px;
-    color: white;
-    background-color: #E2BF44;
-    width: 50%;
-    height: 40px;
-    margin: 10px 0px;
-}
-
-.Contact{
-    width:100%;
-    height:auto;
-    margin:50px 0px;
-}
-
-.Contact-Heading{
-    font-family:'Abhaya Libre';
-    font-size:96px;
-    color:#000000; ;
-}
-
-.Contact-Box{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:row;
-    width:80%;
-    height:60%;
-}
-
-.Contact-Box-Box1{
-    width:40%;
-    height:100%;
-}
-
-.Contact-Box-Box2{
-    width:60%;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    flex-direction:column;
-    height:100%;
-}
-
-@media only screen and (max-width: 1100px){
-    .Contact-Box{
-        width:100%; 
-    }
-
-    .Contact-Box-Box1
-    {
-        display: none;
-    }
-    .Contact-Box-Box2
-    {
-        width:100%;
-        
-    }
-    .Contact-Heading{
-        
-        font-size:80px;
-       
-    }
-    .Contact-Box-Label{
-        font-size:20px;
-        
-    }
+  }
+  .mob {
+    justify-content: center !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
 
-  @media only screen and (max-width: 1100px) and (min-width:600px){
-    
-    .Contact-Heading{
-        
-        font-size:80px;
-       
-    }
+  .Contact-Box-Box1 {
+    display: none;
   }
-
-  @media only screen and (max-width: 600px) {
-    .Contact-Heading{
-
-        font-size:40px;
-       
-    }
+  .Contact-Box-Box2 {
+    width: 100%;
+    align-items: center;
   }
+  .Contact-Heading {
+    font-size: 80px;
+  }
+  .Contact-Box-Label {
+    font-size: 20px;
+  }
+  .contactUsContainer {
+    padding: 0px 10px;
+  }
+}
+
+@media only screen and (max-width: 1100px) and (min-width: 600px) {
+  .Contact-Heading {
+    font-size: 80px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Contact-Heading {
+    font-size: 40px;
+  }
+  .Contact-Box-Box2 {
+    align-items: center;
+  }
+}
