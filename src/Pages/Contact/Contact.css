@@ -9,6 +9,7 @@
   justify-content: center;
   font-family: "Abhaya Libre";
   font-size: 30px;
+  font-weight: 500;
 }
 
 .Contact-Input-Box {
@@ -52,7 +53,7 @@ hr.new3 {
 }
 .Contact-Input {
   width: 50%;
-  height: 30px;
+  height: 35px;
   border: 1px solid #d9d8d8;
   padding: 10px;
   font-size: 11px;

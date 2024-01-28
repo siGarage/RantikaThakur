@@ -13,12 +13,17 @@ import REVIEW from "../../API/Review";
 import Box from "@mui/material/Box";
 import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
+import ImageZoom from "react-image-zooom";
 
 function ShopId(props) {
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
   const [reviewItems, setReviewItems] = useState([]);
+  const [showReviewSection, setShowReviewSection] = useState(false);
   const [size, setSize] = useState("");
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
 
   // Id Of Product
   const { shopId } = useParams();
@@ -77,7 +82,7 @@ function ShopId(props) {
       }
     });
   };
-  
+
   //Navigate button
   const navigateToCustomePage = () => {
     setCsize();
@@ -108,6 +113,7 @@ function ShopId(props) {
       toast.error("Enter Valid Email");
       return;
     } else {
+      setShowReviewSection(false);
       REVIEW.addReview({ data }).then((res) => {
         console.log(res.data.data);
         if (res.status === 200) {
@@ -159,6 +165,9 @@ function ShopId(props) {
 
   // Get Data of Product
   useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
     if (shopId) {
       fetch(
         `${process.env.REACT_APP_SERVERNAME}/api/products/${shopId}?populate=category,images,sizes`
@@ -203,7 +212,14 @@ function ShopId(props) {
         <div className="ProductDescriptionBox" key={product?.id}>
           <div className="ProductDescriptionBox1">
             <div className="ProductDescriptionBox1-Box1">
-              <Carousel style={{ height: "400px" }} autoFocus={true}>
+              <Carousel
+                autoPlay
+                thumbWidth="20%"
+                autoFocus={true}
+                width="80%"
+                dynamicHeight="false"
+                infiniteLoop
+              >
                 {product?.attributes?.images?.data.map((element) => (
                   <div key={element?.id}>
                     <img
@@ -220,7 +236,8 @@ function ShopId(props) {
                 style={{
                   fontFamily: "Abhaya",
                   fontWeight: "400",
-                  fontSize: "32px",
+                  fontSize: "24px",
+                  color: "#737373",
                 }}
               >
                 {product?.attributes?.title}
@@ -231,10 +248,25 @@ function ShopId(props) {
                   fontWeight: "700",
                   fontSize: "30px",
                   color: "#737373",
+                  marginTop: "20px",
                 }}
               >
                 Rs. {product?.attributes?.price}
               </h6>
+
+              <p className="sizeGuide">Size Guide</p>
+              <svg
+                width="32"
+                height="16"
+                viewBox="0 0 32 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 0V16H32V0H0ZM2 2H5V9H7V2H9V6H11V2H13V9H15V2H17V6H19V2H21V9H23V2H25V6H27V2H30V14H2V2Z"
+                  fill="#737373"
+                />
+              </svg>
 
               <p
                 style={{
@@ -245,12 +277,18 @@ function ShopId(props) {
                   margin: "24px 0px 8px 0px",
                   display: "flex",
                   justifyContent: "flex-end",
+                  marginTop: "50px",
                 }}
               >
                 Available Size
               </p>
 
-              <div style={{ display: "flex", flexDirection: "row" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
                 <button
                   onClick={() => {
                     navigateToCustomePage();
@@ -363,6 +401,100 @@ function ShopId(props) {
               <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
               <h5>Material-{product?.attributes?.material}</h5>
               <h5>Product Code-{product?.id}</h5>
+
+              <div
+                className="container d-flex justify-content-between"
+                style={{
+                  width: "100%",
+                  border: "1px solid rgb(222 217 217)",
+                  borderRadius: "4px",
+                  marginTop: "40px",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <div className={`${matches ? "w-100" : "w-50"}`}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      fontFamily: "Inter",
+                      fontWeight: "400",
+                      fontSize: "30px",
+                      margin: "5px 0px",
+                    }}
+                  >
+                    Customer Review
+                  </div>
+                  <div className="row">
+                    {reviewItems?.length > 0 ? (
+                      <>
+                        {reviewItems?.map((element) => {
+                          return (
+                            <div
+                              style={{
+                                position: "relative",
+                                cursor: "pointer",
+                              }}
+                              className="col-md-4 my-3"
+                              key={element?.id}
+                            >
+                              <div>
+                                <div
+                                  style={{
+                                    fontFamily: "inter",
+                                    fontSize: "20px",
+                                    fontWeight: "600",
+                                    color: "black",
+                                    margin: "0px 0px 5px 0px",
+                                  }}
+                                >
+                                  {element?.attributes?.name}
+                                </div>
+                                <div>
+                                  {
+                                    <Rating
+                                      name="read-only"
+                                      value={element?.attributes?.rating}
+                                      readOnly
+                                    />
+                                  }
+                                </div>
+                                <p>{element?.attributes?.review}</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <div
+                        style={{
+                          fontFamily: "Inter",
+                          fontSize: "15px",
+                          fontWeight: "400",
+                          margin: "10px 0px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        No Reviews
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="w-50 d-flex justify-content-end pt-5"
+                  style={{
+                    fontFamily: "Inter",
+                    fontSize: "15px",
+                    fontWeight: "400",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <a onClick={() => showReviewSection==false?setShowReviewSection(true):setShowReviewSection(false)}>Write Review</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -371,103 +503,107 @@ function ShopId(props) {
       )}
 
       {Object.entries(product)?.length > 1 ? (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            margin: "20px 0px 50px 0px",
-          }}
-        >
-          <div style={{ width: "80%", fontFamily: "Inter", font: "500" }}>
-            <div style={{ color: "black", fontWeight: "800" }}>
-              PLEASE REVIEW "{product?.attributes?.title}"
-            </div>
-            <div style={{ margin: "10px 0px" }}>
-              Your email address will not be published. Required fields are
-              marked *
-            </div>
-            <div>
-              <div style={{ width: "auto", margin: "0px 0px 10px 0px" }}>
-                <label style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ fontWeight: "600" }}>
-                    Your Rating <span style={{ color: "red" }}>*</span>
-                  </p>
-                  <Box sx={{ "& > legend": { mt: 2 } }}>
-                    <Rating
-                      name="simple-controlled"
-                      value={value}
-                      onChange={(e, newValue) => {
-                        setValue(newValue);
-                        setReview({
-                          ...review,
-                          rating: Number(e.target.value),
-                        });
-                      }}
-                    />
-                  </Box>
-                </label>
+        showReviewSection ? (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              margin: "20px 0px 50px 0px",
+            }}
+          >
+            <div style={{ width: "80%", fontFamily: "Inter", font: "500" }}>
+              <div style={{ color: "black", fontWeight: "800" }}>
+                PLEASE REVIEW "{product?.attributes?.title}"
               </div>
-
-              <div style={{ width: "100%", margin: "0px 0px 10px 0px" }}>
-                <label style={{ display: "flex", flexDirection: "column" }}>
-                  <p style={{ fontWeight: "600" }}>
-                    Your Review <span style={{ color: "red" }}>*</span>
-                  </p>
-                  <textarea
-                    className="review-Inputs"
-                    type="text"
-                    name="review"
-                    rows="4"
-                    onChange={onChange}
-                  />
-                </label>
+              <div style={{ margin: "10px 0px" }}>
+                Your email address will not be published. Required fields are
+                marked *
               </div>
-
-              <div className="Review-Box">
-                <div className="Review-Box-InnerBox">
+              <div>
+                <div style={{ width: "auto", margin: "0px 0px 10px 0px" }}>
                   <label style={{ display: "flex", flexDirection: "column" }}>
                     <p style={{ fontWeight: "600" }}>
-                      Name <span style={{ color: "red" }}>*</span>
+                      Your Rating <span style={{ color: "red" }}>*</span>
                     </p>
-                    <input
-                      className="review-Inputs Input-review"
+                    <Box sx={{ "& > legend": { mt: 2 } }}>
+                      <Rating
+                        name="simple-controlled"
+                        value={value}
+                        onChange={(e, newValue) => {
+                          setValue(newValue);
+                          setReview({
+                            ...review,
+                            rating: Number(e.target.value),
+                          });
+                        }}
+                      />
+                    </Box>
+                  </label>
+                </div>
+
+                <div style={{ width: "100%", margin: "0px 0px 10px 0px" }}>
+                  <label style={{ display: "flex", flexDirection: "column" }}>
+                    <p style={{ fontWeight: "600" }}>
+                      Your Review <span style={{ color: "red" }}>*</span>
+                    </p>
+                    <textarea
+                      className="review-Inputs"
                       type="text"
-                      name="name"
+                      name="review"
                       rows="4"
                       onChange={onChange}
                     />
                   </label>
                 </div>
 
-                <div className="Review-Box-InnerBox">
-                  <label style={{ display: "flex", flexDirection: "column" }}>
-                    <p style={{ fontWeight: "600" }}>
-                      Email <span style={{ color: "red" }}>*</span>
-                    </p>
-                    <input
-                      className="review-Inputs Input-review"
-                      type="text"
-                      name="email"
-                      rows="4"
-                      onChange={onChange}
-                    />
-                  </label>
+                <div className="Review-Box">
+                  <div className="Review-Box-InnerBox">
+                    <label style={{ display: "flex", flexDirection: "column" }}>
+                      <p style={{ fontWeight: "600" }}>
+                        Name <span style={{ color: "red" }}>*</span>
+                      </p>
+                      <input
+                        className="review-Inputs Input-review"
+                        type="text"
+                        name="name"
+                        rows="4"
+                        onChange={onChange}
+                      />
+                    </label>
+                  </div>
+
+                  <div className="Review-Box-InnerBox">
+                    <label style={{ display: "flex", flexDirection: "column" }}>
+                      <p style={{ fontWeight: "600" }}>
+                        Email <span style={{ color: "red" }}>*</span>
+                      </p>
+                      <input
+                        className="review-Inputs Input-review"
+                        type="text"
+                        name="email"
+                        rows="4"
+                        onChange={onChange}
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
+              <button
+                className="Review-Button"
+                onClick={() => {
+                  validateForm(review);
+                }}
+              >
+                Add Review
+              </button>
             </div>
-            <button
-              className="Review-Button"
-              onClick={() => {
-                validateForm(review);
-              }}
-            >
-              Add Review
-            </button>
           </div>
-        </div>
+        ) : (
+          ""
+        )
       ) : (
         <div
           style={{
@@ -484,74 +620,6 @@ function ShopId(props) {
         </div>
       )}
 
-      <div className="container" style={{ width: "80%" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontFamily: "Inter",
-            fontWeight: "600",
-            fontSize: "30px",
-            margin: "10px 0px",
-          }}
-        >
-          Customer's Review
-        </div>
-        <div className="row">
-          {reviewItems?.length > 0 ? (
-            <>
-              {reviewItems?.map((element) => {
-                return (
-                  <div
-                    style={{ position: "relative", cursor: "pointer" }}
-                    className="col-md-4 my-3"
-                    key={element?.id}
-                  >
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: "inter",
-                          fontSize: "20px",
-                          fontWeight: "600",
-                          color: "black",
-                          margin: "0px 0px 5px 0px",
-                        }}
-                      >
-                        {element?.attributes?.name}
-                      </div>
-                      <div>
-                        {
-                          <Rating
-                            name="read-only"
-                            value={element?.attributes?.rating}
-                            readOnly
-                          />
-                        }
-                      </div>
-                      <p>{element?.attributes?.review}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <div
-              style={{
-                fontFamily: "Inter",
-                fontSize: "20px",
-                fontWeight: "600",
-                margin: "30px 0px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              No Reviews
-            </div>
-          )}
-        </div>
-      </div>
       <YouMayLike />
     </>
   );
