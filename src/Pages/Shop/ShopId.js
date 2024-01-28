@@ -563,6 +563,7 @@ function ShopId(props) {
                       name="review"
                       rows="4"
                       onChange={onChange}
+                      placeholder="Enter your review ..." 
                     />
                   </label>
                 </div>
@@ -579,6 +580,7 @@ function ShopId(props) {
                         name="name"
                         rows="4"
                         onChange={onChange}
+                        placeholder="Enter your name"
                       />
                     </label>
                   </div>
@@ -594,6 +596,7 @@ function ShopId(props) {
                         name="email"
                         rows="4"
                         onChange={onChange}
+                        placeholder="Enter valid E-mail"
                       />
                     </label>
                   </div>
