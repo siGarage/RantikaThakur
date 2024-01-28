@@ -109,6 +109,9 @@
   border-radius: 50%;
   margin: 0px 0px 0px 10px;
 }
+.cR {
+  font-size: 30px;
+}
 
 .carousel-slider {
   height: 400px !important;
@@ -233,6 +236,10 @@
     display: run-in;
     width: 100%;
     height: auto !important;
+  }
+  
+.cR {
+    font-size: 20px;
   }
 
   .carousel-inner > .item > img,

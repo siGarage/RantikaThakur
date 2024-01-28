@@ -415,12 +415,12 @@ function ShopId(props) {
               >
                 <div className={`${matches ? "w-100" : "w-50"}`}>
                   <div
+                    className="cR"
                     style={{
                       display: "flex",
                       alignItems: "center",
                       fontFamily: "Inter",
                       fontWeight: "400",
-                      fontSize: "30px",
                       margin: "5px 0px",
                     }}
                   >
@@ -492,7 +492,15 @@ function ShopId(props) {
                     alignItems: "center",
                   }}
                 >
-                  <a onClick={() => showReviewSection==false?setShowReviewSection(true):setShowReviewSection(false)}>Write Review</a>
+                  <a
+                    onClick={() =>
+                      showReviewSection == false
+                        ? setShowReviewSection(true)
+                        : setShowReviewSection(false)
+                    }
+                  >
+                    Write Review
+                  </a>
                 </div>
               </div>
             </div>

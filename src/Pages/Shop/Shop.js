@@ -14,6 +14,9 @@ function Shop(props) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { authtoken, products, logged_in } = props;
   const [priceFilter, setPriceFilter] = useState(0);
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
   const [sort, setSort] = useState("");
   const type = searchParams.get("type");
   const dispatch = useDispatch();
@@ -137,6 +140,9 @@ function Shop(props) {
 
   // Get Wishlist Data
   useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
     if (logged_in) {
       if (wishlist.length === 0) {
         WISHLIST.getWishlistItems(useremail, authtoken).then((res) => {
@@ -293,15 +299,13 @@ function Shop(props) {
                             onMouseOut={(e) =>
                               (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                             }
-                            width="380px"
+                            width={matches ? "300px" : "380px"}
                             height="480px"
                             alt="ProductImage"
                             style={{
                               filter: !element?.attributes?.instock
                                 ? "grayscale(1)"
                                 : "grayscale(0)",
-                              width: "380px",
-                              height: "480px",
                               objectFit: "fill",
                             }}
                           />
