@@ -334,50 +334,57 @@ function Shop(props) {
                         {!element?.attributes?.instock && (
                           <div className="out-of-stock">OUT OF STOCK</div>
                         )}
+
                         {logged_in ? (
                           wistItemsId.includes(element?.id) ? (
-                            <FavoriteIcon
-                              className="Favorite-Button"
-                              style={{ color: "red" }}
-                              onClick={() => {
-                                DeleteFromWishlist(
-                                  WishCartID(element?.id),
-                                  authtoken
-                                );
-                              }}
-                            ></FavoriteIcon>
+                            <div>
+                              <FavoriteIcon
+                                className="Favorite-Button"
+                                style={{ color: "red" }}
+                                onClick={() => {
+                                  DeleteFromWishlist(
+                                    WishCartID(element?.id),
+                                    authtoken
+                                  );
+                                }}
+                              ></FavoriteIcon>
+                            </div>
                           ) : (
+                            <div>
+                              <FavoriteBorderIcon
+                                onClick={() => {
+                                  AddToWishlist(
+                                    {
+                                      email: useremail,
+                                      title: element?.attributes?.title,
+                                      price: element?.attributes?.price,
+                                      category:
+                                        element?.attributes?.category?.data
+                                          ?.attributes?.category,
+                                      id_product: element.id,
+                                      image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
+                                      size: element?.attributes?.sizes?.data.map(
+                                        (element) => element?.attributes?.size
+                                      ),
+                                    },
+                                    authtoken
+                                  );
+                                }}
+                                className="Favorite-Button"
+                                style={{ color: "white" }}
+                              ></FavoriteBorderIcon>
+                            </div>
+                          )
+                        ) : (
+                          <div >
                             <FavoriteBorderIcon
                               onClick={() => {
-                                AddToWishlist(
-                                  {
-                                    email: useremail,
-                                    title: element?.attributes?.title,
-                                    price: element?.attributes?.price,
-                                    category:
-                                      element?.attributes?.category?.data
-                                        ?.attributes?.category,
-                                    id_product: element.id,
-                                    image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
-                                    size: element?.attributes?.sizes?.data.map(
-                                      (element) => element?.attributes?.size
-                                    ),
-                                  },
-                                  authtoken
-                                );
+                                navigate(`/login`);
                               }}
                               className="Favorite-Button"
                               style={{ color: "white" }}
                             ></FavoriteBorderIcon>
-                          )
-                        ) : (
-                          <FavoriteBorderIcon
-                            onClick={() => {
-                              navigate(`/login`);
-                            }}
-                            className="Favorite-Button"
-                            style={{ color: "white" }}
-                          ></FavoriteBorderIcon>
+                          </div>
                         )}
                       </div>
                     );

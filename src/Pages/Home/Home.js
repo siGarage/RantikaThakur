@@ -8,6 +8,8 @@ import "react-multi-carousel/lib/styles.css";
 import h1 from "../../Images/h1.png";
 import h2 from "../../Images/h2.png";
 import h3 from "../../Images/h3.png";
+import h5 from "../../Images/h5.jpeg";
+import h6 from "../../Images/h6.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -60,9 +62,10 @@ function Home(props) {
           navigation={true}
           className="mySwiper"
           autoplay={{
-            delay: 3000,
+            delay: 2000,
             disableOnInteraction: false,
           }}
+          loop
           modules={[Autoplay, Navigation]}
 
         >
@@ -94,6 +97,36 @@ function Home(props) {
               }}
             >
               <img src={h3} className="w-100" />
+            </div>
+          </SwiperSlide>
+          {/* <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h4} className="w-100" />
+            </div>
+          </SwiperSlide> */}
+          <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h5} className="w-100" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            {" "}
+            <div
+              onClick={() => {
+                gotoShop();
+              }}
+            >
+              <img src={h6} className="w-100" />
             </div>
           </SwiperSlide>
         </Swiper>

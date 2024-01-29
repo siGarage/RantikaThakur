@@ -36,7 +36,7 @@
     margin: 0px 10px;
 }
 .clothesTypesBox1{
-    background-image: url('../../Images/dresses.png');
+    background-image: url('../../Images/dresses.jpeg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 0px 10px;
@@ -47,8 +47,10 @@
     width:49%;
     height:100%;
 }
+
+
 .clothesTypesBox2{
-    background-image: url('../../Images/skirts.png');
+    background-image: url('../../Images/skirts.jpeg');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -60,7 +62,7 @@
     height:100%;
 }
 .clothesTypesBox3{
-    background-image: url('../../Images/suits.png');
+    background-image: url('../../Images/h4.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 0px 10px;
@@ -72,7 +74,7 @@
 
 
 .clothesTypesBox4{
-    background-image: url('../../Images/co-ords.png');
+    background-image: url('../../Images/co-ords.jpeg');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -85,7 +87,7 @@
 }
 
 .clothesTypesBox5{
-    background-image: url('../../Images/shirts.png');
+    background-image: url('../../Images/shirts.jpeg');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -138,7 +140,7 @@
 }
 .carousel-best-image{
     width:100%;
-    height:400px;
+    height:500px;
 }
 .item-multicarousel{
     height: 100%;

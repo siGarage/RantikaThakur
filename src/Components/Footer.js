@@ -1,6 +1,10 @@
 import "./Footer.css";
 import image1 from "../Images/image1.svg";
 import image2 from "../Images/image2.svg";
+import mii from "../Images/made-in-india.png";
+import si from "../Images/scissors.png";
+import re from "../Images/png_clipart_semicircle_arrow_clockwise_arrows_circle_arrows_circle.png";
+import rm from "../Images/image-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 function Footer() {
   const navigate = useNavigate();
@@ -204,6 +208,30 @@ function Footer() {
                   }}
                 >
                   Dresses
+                </div>
+              </div>
+
+              <div style={{ width: "10%" }}>
+                <div className="v1"></div>
+              </div>
+              <div style={{ width: "32%" }} className="mdi">
+                <div>
+                  <div className="pb-2 d-flex">
+                    <img src={mii} width={40} height={40} />
+                    <div className="ps-5">Made In India</div>
+                  </div>
+                  <div className="pb-2 d-flex ">
+                    <img src={si} width={40} height={40} />
+                    <div className="ps-5">Customise Now</div>
+                  </div>
+                  <div className="pb-2 d-flex ">
+                    <img src={re} width={40} height={40} />
+                    <div className="ps-5">Easy Return</div>
+                  </div>
+                  <div className="pb-2 d-flex ">
+                    <img src={rm} width={40} height={40} />
+                    <div className="ps-5">Affordable Luxury</div>
+                  </div>
                 </div>
               </div>
             </div>

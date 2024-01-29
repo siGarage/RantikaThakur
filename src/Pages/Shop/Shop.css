@@ -149,6 +149,21 @@ hr.new2 {
   border-top: 1px dashed rgb(126, 124, 124);
 }
 
+
+.image-container {
+  position: relative;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: red;
+  backdrop-filter: blur(5px); /* Adjust the blur value as needed */
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
