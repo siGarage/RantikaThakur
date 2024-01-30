@@ -285,106 +285,106 @@ function Shop(props) {
                         className="col-md-4 my-4   Product-Small-Cards"
                         key={element.id}
                       >
-                        <div
-                          className="Card"
-                          onClick={() => {
-                            navigate(`/shop/${element.id}`);
-                          }}
-                        >
-                          <img
-                            src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`}
-                            onMouseOver={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[1]?.attributes?.url}`)
-                            }
-                            onMouseOut={(e) =>
-                              (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
-                            }
-                            width={matches ? "300px" : "380px"}
-                            height="480px"
-                            alt="ProductImage"
-                            style={{
-                              filter: !element?.attributes?.instock
-                                ? "grayscale(1)"
-                                : "grayscale(0)",
-                              objectFit: "fill",
+                        <div className="Card">
+                          <div
+                            onClick={() => {
+                              navigate(`/shop/${element.id}`);
                             }}
-                          />
-
-                          <div>
-                            <div className="Card-Title">
-                              {element?.attributes?.title?.length > 15
-                                ? `${element?.attributes?.title.slice(
-                                    0,
-                                    15
-                                  )}...`
-                                : element?.attributes?.title}
-                            </div>
-                            <div className="Card-Category">
-                              {
-                                element?.attributes?.category?.data?.attributes
-                                  ?.category
+                          >
+                            <img
+                              src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`}
+                              onMouseOver={(e) =>
+                                (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[1]?.attributes?.url}`)
                               }
+                              onMouseOut={(e) =>
+                                (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
+                              }
+                              width={matches ? "300px" : "380px"}
+                              height="480px"
+                              alt="ProductImage"
+                              style={{
+                                filter: !element?.attributes?.instock
+                                  ? "grayscale(1)"
+                                  : "grayscale(0)",
+                                objectFit: "fill",
+                              }}
+                            />
+                          </div>
+
+                          <div className="d-flex ">
+                            <div className="col-8">
+                              <div className="Card-Title">
+                                {element?.attributes?.title?.length > 15
+                                  ? `${element?.attributes?.title.slice(
+                                      0,
+                                      15
+                                    )}...`
+                                  : element?.attributes?.title}
+                              </div>
+                              <div className="Card-Category">
+                                {
+                                  element?.attributes?.category?.data
+                                    ?.attributes?.category
+                                }
+                              </div>
+                              <div className="Card-Description">
+                                Rs. {element?.attributes?.price}
+                              </div>
                             </div>
-                            <div className="Card-Description">
-                              Rs. {element?.attributes?.price}
+                            <div className="d-flex col-3 justify-content-end ">
+                              {logged_in ? (
+                                wistItemsId.includes(element?.id) ? (
+                                  <div>
+                                    <FavoriteIcon
+                                      style={{ color: "red" }}
+                                      onClick={() => {
+                                        DeleteFromWishlist(
+                                          WishCartID(element?.id),
+                                          authtoken
+                                        );
+                                      }}
+                                    ></FavoriteIcon>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <FavoriteBorderIcon
+                                      onClick={() => {
+                                        AddToWishlist(
+                                          {
+                                            email: useremail,
+                                            title: element?.attributes?.title,
+                                            price: element?.attributes?.price,
+                                            category:
+                                              element?.attributes?.category
+                                                ?.data?.attributes?.category,
+                                            id_product: element.id,
+                                            image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
+                                            size: element?.attributes?.sizes?.data.map(
+                                              (element) =>
+                                                element?.attributes?.size
+                                            ),
+                                          },
+                                          authtoken
+                                        );
+                                      }}
+                                    ></FavoriteBorderIcon>
+                                  </div>
+                                )
+                              ) : (
+                                <div>
+                                  <FavoriteBorderIcon
+                                    onClick={() => {
+                                      navigate(`/login`);
+                                    }}
+                                  ></FavoriteBorderIcon>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
 
                         {!element?.attributes?.instock && (
                           <div className="out-of-stock">OUT OF STOCK</div>
-                        )}
-
-                        {logged_in ? (
-                          wistItemsId.includes(element?.id) ? (
-                            <div>
-                              <FavoriteIcon
-                                className="Favorite-Button"
-                                style={{ color: "red" }}
-                                onClick={() => {
-                                  DeleteFromWishlist(
-                                    WishCartID(element?.id),
-                                    authtoken
-                                  );
-                                }}
-                              ></FavoriteIcon>
-                            </div>
-                          ) : (
-                            <div>
-                              <FavoriteBorderIcon
-                                onClick={() => {
-                                  AddToWishlist(
-                                    {
-                                      email: useremail,
-                                      title: element?.attributes?.title,
-                                      price: element?.attributes?.price,
-                                      category:
-                                        element?.attributes?.category?.data
-                                          ?.attributes?.category,
-                                      id_product: element.id,
-                                      image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
-                                      size: element?.attributes?.sizes?.data.map(
-                                        (element) => element?.attributes?.size
-                                      ),
-                                    },
-                                    authtoken
-                                  );
-                                }}
-                                className="Favorite-Button"
-                                style={{ color: "white" }}
-                              ></FavoriteBorderIcon>
-                            </div>
-                          )
-                        ) : (
-                          <div >
-                            <FavoriteBorderIcon
-                              onClick={() => {
-                                navigate(`/login`);
-                              }}
-                              className="Favorite-Button"
-                              style={{ color: "white" }}
-                            ></FavoriteBorderIcon>
-                          </div>
                         )}
                       </div>
                     );

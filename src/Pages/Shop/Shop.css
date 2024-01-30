@@ -130,9 +130,7 @@
 }
 
 .Favorite-Button {
-  position: absolute;
-  bottom: 24%;
-  right: 10%;
+  /* position: absolute; */
   font-size: 32px;
   font-weight: 200;
   cursor: pointer;
