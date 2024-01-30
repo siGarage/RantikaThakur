@@ -218,19 +218,19 @@ function Footer() {
                 <div>
                   <div className="pb-2 d-flex">
                     <img src={mii} width={40} height={40} />
-                    <div className="ps-5">Made In India</div>
+                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">Made In India</div>
                   </div>
                   <div className="pb-2 d-flex ">
                     <img src={si} width={40} height={40} />
-                    <div className="ps-5">Customise Now</div>
+                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">Customise Now</div>
                   </div>
                   <div className="pb-2 d-flex ">
                     <img src={re} width={40} height={40} />
-                    <div className="ps-5">Easy Return</div>
+                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">Easy Return</div>
                   </div>
                   <div className="pb-2 d-flex ">
                     <img src={rm} width={40} height={40} />
-                    <div className="ps-5">Affordable Luxury</div>
+                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">Affordable Luxury</div>
                   </div>
                 </div>
               </div>

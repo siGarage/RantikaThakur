@@ -125,7 +125,7 @@ a:hover {
 }
 
 .el {
-  border: 1px solid rgb(107, 103, 103);
+  border: 1px solid rgb(145, 142, 142);
   white-space: nowrap;
   max-width: 300px;
   padding: 0.2em 0.5em;
@@ -133,6 +133,7 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   border-radius: 6px;
+  box-shadow: -1px 1px 4px 1px rgb(100 91 91 / 75%);
 }
 
 .el a {
@@ -206,7 +207,7 @@ a:hover {
   position: absolute;
   width: 15px;
   height: 15px;
-  top: 10px;
+  top: 12px;
   right: 10px;
   cursor: pointer;
   opacity: 1;
@@ -217,8 +218,8 @@ a:hover {
   position: absolute;
   left: 15px;
   content: " ";
-  height: 15px;
-  width: 2px;
+  height: 12px;
+  width: 1px;
   background-color: rgb(9, 8, 8);
 }
 .wclose:before {
