@@ -20,6 +20,7 @@ function ShopId(props) {
   const [value, setValue] = useState(0);
   const [reviewItems, setReviewItems] = useState([]);
   const [showReviewSection, setShowReviewSection] = useState(false);
+
   const [size, setSize] = useState("");
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
@@ -37,6 +38,7 @@ function ShopId(props) {
   const navigate = useNavigate();
   const { cart } = props;
   let [product, setProduct] = useState({});
+
   let [csize, setCsize] = useState(false);
   const { logged_in, useremail, authtoken } = props;
 
@@ -176,7 +178,8 @@ function ShopId(props) {
         .then((data) => setProduct(data.data));
     }
   }, [shopId]);
-
+  const [imageShow, setImageShow] = useState("");
+  console.log(imageShow, "imageShow");
   useEffect(() => {
     if (shopId) {
       fetch(
@@ -211,25 +214,34 @@ function ShopId(props) {
       {Object.entries(product).length > 1 ? (
         <div className="ProductDescriptionBox" key={product?.id}>
           <div className="ProductDescriptionBox1">
-            <div className="ProductDescriptionBox1-Box1">
-              <Carousel
-                autoPlay
-                thumbWidth="20%"
-                autoFocus={true}
-                width="80%"
-                dynamicHeight="false"
-                infiniteLoop
-              >
+            <div className="ProductDescriptionBox1-Box1 flex-column">
+              <ImageZoom
+                src={
+                  imageShow.length > 0
+                    ? `${process.env.REACT_APP_SERVERNAME}${imageShow}`
+                    : `${process.env.REACT_APP_SERVERNAME}${product.attributes?.images?.data[0]?.attributes?.url}`
+                }
+                zoom="200"
+                width="380px"
+                height="480px"
+              />
+              <div className="d-flex justify-content-center">
                 {product?.attributes?.images?.data.map((element) => (
-                  <div key={element?.id}>
+                  <div key={element?.id} className="d-flex">
                     <img
                       src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
                       alt="productImages"
-                      style={{ height: "100%", width: "100%" }}
+                      style={{
+                        height: "180px",
+                        width: "180px",
+                        cursor: "pointer",
+                      }}
+                      className="ps-2 pt-3"
+                      onClick={() => setImageShow(element?.attributes?.url)}
                     />
                   </div>
                 ))}
-              </Carousel>
+              </div>
             </div>
             <div className="ProductDescriptionBox1-Box2">
               <h5
@@ -393,6 +405,7 @@ function ShopId(props) {
             </div>
           </div>
           <div className="ProductDescriptionBox2">
+            <div className="col-6"></div>
             <div className="ProductDescriptionBox2-ProductBox">
               <h5 style={{ margin: "46px 0px" }}>Product Description</h5>
               <p style={{ fontSize: "12px", fontWeight: "300" }}>
@@ -563,7 +576,7 @@ function ShopId(props) {
                       name="review"
                       rows="4"
                       onChange={onChange}
-                      placeholder="Enter your review ..." 
+                      placeholder="Enter your review ..."
                     />
                   </label>
                 </div>
