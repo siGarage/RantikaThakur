@@ -13,7 +13,7 @@ import h6 from "../../Images/h6.jpeg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay,Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 
 function Home(props) {
   const { products } = props;
@@ -52,6 +52,9 @@ function Home(props) {
   const shuffled = category?.sort(() => 0.5 - Math.random());
   let array = shuffled.slice(0, 5);
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const gotoShop = () => {
     navigate(`/shop?type=All`);
   };
@@ -67,7 +70,6 @@ function Home(props) {
           }}
           loop
           modules={[Autoplay, Navigation]}
-
         >
           <SwiperSlide>
             {" "}
@@ -183,7 +185,7 @@ function Home(props) {
                       }
                     </div>
                     <div className="Card-Description">
-                      Rs. {element?.attributes?.price}
+                      ₹ {numberWithCommas(element?.attributes?.price)}
                     </div>
                   </div>
                 </div>
@@ -219,7 +221,6 @@ function Home(props) {
             {/* clothesTypesBox2 */}
             <div
               className="clothesTypesBox2"
-              style={{ width: "49%", height: "100%" }}
             >
               {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
               <div></div>

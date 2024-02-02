@@ -15,13 +15,18 @@ import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
 import ImageZoom from "react-image-zooom";
 import parse from "html-react-parser";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import "bootstrap/dist/css/bootstrap.min.css";
+import sizeChart from "../../Images/size_chart.jpg";
 
 function ShopId(props) {
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
   const [reviewItems, setReviewItems] = useState([]);
   const [showReviewSection, setShowReviewSection] = useState(false);
-
+  const [smShow, setSmShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
   const [size, setSize] = useState("");
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
@@ -214,6 +219,21 @@ function ShopId(props) {
     <>
       {Object.entries(product).length > 1 ? (
         <div className="ProductDescriptionBox" key={product?.id}>
+          <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              {/* <Modal.Title id="example-modal-sizes-title-lg">
+                SIZE CHART
+              </Modal.Title> */}
+            </Modal.Header>
+            <Modal.Body>
+              <img src={sizeChart} width={`${matches ? 390 : 770}`} height={500}/>
+            </Modal.Body>
+          </Modal>
           <div className="ProductDescriptionBox1">
             <div className="ProductDescriptionBox1-Box1 flex-column">
               <ImageZoom
@@ -234,7 +254,7 @@ function ShopId(props) {
                       alt="productImages"
                       style={{
                         height: "180px",
-                        width: "180px",
+                        width: "120px",
                         cursor: "pointer",
                       }}
                       className="ps-2 pt-3"
@@ -268,18 +288,20 @@ function ShopId(props) {
               </h6>
 
               <p className="sizeGuide">Size Guide</p>
-              <svg
-                width="32"
-                height="16"
-                viewBox="0 0 32 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 0V16H32V0H0ZM2 2H5V9H7V2H9V6H11V2H13V9H15V2H17V6H19V2H21V9H23V2H25V6H27V2H30V14H2V2Z"
-                  fill="#737373"
-                />
-              </svg>
+              <div style={{cursor:"pointer"}} onClick={() => setLgShow(true)}>
+                <svg
+                  width="32"
+                  height="16"
+                  viewBox="0 0 32 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 0V16H32V0H0ZM2 2H5V9H7V2H9V6H11V2H13V9H15V2H17V6H19V2H21V9H23V2H25V6H27V2H30V14H2V2Z"
+                    fill="#737373"
+                  />
+                </svg>
+              </div>
 
               <p
                 style={{

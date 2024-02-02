@@ -44,7 +44,7 @@
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    width:49%;
+    width:47.57%;
     height:100%;
 }
 
@@ -58,7 +58,7 @@
     align-items: center;
     background-size: 100% 100%;
     margin: 0px 10px;
-    width:49%;
+    width:47.57%;
     height:100%;
 }
 .clothesTypesBox3{
@@ -82,7 +82,7 @@
     align-items: center;
     background-size: 100% 100%;
     margin: 0px 10px;
-    width:49%;
+    width:47.57%;
     height:100%;
 }
 
@@ -95,7 +95,7 @@
     align-items: center;
     background-size: 100% 100%;
     margin: 0px 10px;
-    width:49%;
+    width:47.57%;
     height:100%;
 }
 
@@ -215,10 +215,6 @@
     margin:0px 30px;
 }
 
-.clothesTypesBox1{
-    width:49%;
-    height:100%;
-}
 
 .Home-Box3-Box1{
     width:100%;
@@ -245,12 +241,12 @@
     flex-direction:row;
     justify-content:center;
     align-items:center;
-    height:550px;
+    height:650px;
     margin:20px 0px;
 }
 
 .clothesTypesBox3{
-    width:98%;
+    width:79%;
     height:700px;
     margin:20px 0px;
 }

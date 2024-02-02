@@ -60,6 +60,10 @@
   font-weight: 300;
 }
 
+.shop_pl{
+  padding-left: 50px;
+}
+
 .Card-Body-Color {
   margin: 30px 0px;
 }
@@ -140,7 +144,7 @@
   font-size: 18px;
   display: flex;
   justify-content: start;
-  margin-left: 163px;
+  margin-left: 200px;
 }
 
 hr.new2 {
@@ -178,6 +182,9 @@ hr.new2 {
   .Product-Container {
     width: 70%;
   }
+  .shop_pl{
+    padding-left: 0px;
+  }
   .filter-menu {
     font-size: 10px;
     margin-left: 35px;
@@ -198,7 +205,9 @@ hr.new2 {
   .Product-Container {
     width: 60%;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .filter-menu {
     font-size: 10px;
   margin-left: 35px;
@@ -223,7 +232,9 @@ hr.new2 {
   margin-left: 0px;
 
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .Product-Container {
     width: 35%;
   }
@@ -242,7 +253,9 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .out-of-stock {
     font-size: 18px;
     top: 50%;
@@ -265,7 +278,9 @@ hr.new2 {
   .Card-Title {
     font-size: 13px;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .Card-Description {
     font-size: 13px;
   }
@@ -300,7 +315,9 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .filter-menu {
     font-size: 10px;
   margin-left: 35px;
@@ -314,7 +331,9 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .filter-menu {
     font-size: 10px
     }
@@ -330,6 +349,9 @@ hr.new2 {
   .filter-menu {
     font-size: 10px;
   }
+  .shop_pl{
+    padding-left: 0px;
+  }
 }
 
 @media only screen and (max-width: 500px) and (min-width: 450px) {
@@ -341,6 +363,9 @@ hr.new2 {
 
   .filter-menu {
     font-size: 10px;
+  }
+  .shop_pl{
+    padding-left: 0px;
   }
 }
 
@@ -354,6 +379,9 @@ hr.new2 {
   .filter-menu {
     font-size: 10px;
   }
+  .shop_pl{
+    padding-left: 0px;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -362,7 +390,9 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-
+  .shop_pl{
+    padding-left: 0px;
+  }
   .filter-menu {
     font-size: 10px;
   }

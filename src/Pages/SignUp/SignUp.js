@@ -12,7 +12,7 @@ function SignUp() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
-    username: Yup.string().required("*Username is required"),
+    username: Yup.string().required("*Name is required"),
     email: Yup.string()
       .email("*Your email is invalid!")
       .required("*Email field is required!"),
@@ -58,12 +58,12 @@ function SignUp() {
             <div className="SignUp-Box1-innerBox-Box2-innerBox2">
               <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
                 <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
-                  UserName
+                  Name
                 </div>
                 <input
                   className="signup-input"
                   name="username"
-                  placeholder="Username"
+                  placeholder="Name"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.username}
