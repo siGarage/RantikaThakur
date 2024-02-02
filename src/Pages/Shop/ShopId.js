@@ -409,7 +409,7 @@ function ShopId(props) {
             <div className="col-6"></div>
             <div className="ProductDescriptionBox2-ProductBox">
               <h5 style={{ margin: "46px 0px" }}>Product Description</h5>
-              <div style={{ fontSize: "12px", }}>
+              <div style={{ fontSize: "16px", }}>
               {parse(
                 `<ul>
 
