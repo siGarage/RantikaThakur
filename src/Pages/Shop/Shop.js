@@ -315,7 +315,7 @@ function Shop(props) {
                               }}
                             />
 
-                            <div className="d-flex pe-1">
+                            <div className="d-flex pe-2">
                               <div className="col-10">
                                 <div className="Card-Title">
                                   {element?.attributes?.title?.length > 25
@@ -336,7 +336,7 @@ function Shop(props) {
                                   {numberWithCommas(element?.attributes?.price)}
                                 </div>
                               </div>
-                              <div className="d-flex col-2 ps-3">
+                              <div className="d-flex col-2 ps-2">
                                 {logged_in ? (
                                   wistItemsId.includes(element?.id) ? (
                                     <div>
