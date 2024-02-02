@@ -141,6 +141,7 @@ function Home(props) {
           autoPlay={true}
           autoPlaySpeed={2000}
           className="multi-carousel-container"
+          infinite={true}
         >
           {data.map((element) => {
             return (
