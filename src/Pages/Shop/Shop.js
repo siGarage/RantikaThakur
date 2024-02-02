@@ -299,7 +299,7 @@ function Shop(props) {
                               onMouseOut={(e) =>
                                 (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                               }
-                              width={matches ? "300px" : "380px"}
+                              width={matches ? "300px" : "342px"}
                               height="480px"
                               alt="ProductImage"
                               style={{

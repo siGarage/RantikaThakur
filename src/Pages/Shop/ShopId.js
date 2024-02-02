@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
 import ImageZoom from "react-image-zooom";
+import parse from "html-react-parser";
 
 function ShopId(props) {
   const dispatch = useDispatch();
@@ -409,11 +410,12 @@ function ShopId(props) {
             <div className="ProductDescriptionBox2-ProductBox">
               <h5 style={{ margin: "46px 0px" }}>Product Description</h5>
               <p style={{ fontSize: "12px", fontWeight: "300" }}>
-                {product?.attributes?.description}
+                {parse(product?.attributes?.description)}
               </p>
-              <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
+
+              {/* <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
               <h5>Material-{product?.attributes?.material}</h5>
-              <h5>Product Code-{product?.id}</h5>
+              <h5>Product Code-{product?.id}</h5> */}
 
               <div
                 className="container d-flex justify-content-between"
