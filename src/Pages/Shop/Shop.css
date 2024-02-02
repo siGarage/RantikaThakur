@@ -60,9 +60,9 @@
   font-weight: 300;
 }
 
-.shop_pl{
-  padding-left: 50px;
-}
+/* .shop_pl{
+  padding-left: 50px !important;
+} */
 
 .Card-Body-Color {
   margin: 30px 0px;

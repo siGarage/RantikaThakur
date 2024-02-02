@@ -279,7 +279,10 @@ function Shop(props) {
             <span className="loader"></span>
           </div>
         ) : (
-          <div className="container shop_pl" style={{ width: "80%" }}>
+          <div
+            className="container"
+            style={{ width: matches ? "70%" : "80%" , paddingLeft:matches?"0px":"50px"}}
+          >
             <div className="row">
               {products?.length > 0 ? (
                 <>
@@ -315,7 +318,7 @@ function Shop(props) {
                               }}
                             />
 
-                            <div className="d-flex pe-2">
+                            <div className="d-flex pe-1">
                               <div className="col-10">
                                 <div className="Card-Title">
                                   {element?.attributes?.title?.length > 25
@@ -336,7 +339,7 @@ function Shop(props) {
                                   {numberWithCommas(element?.attributes?.price)}
                                 </div>
                               </div>
-                              <div className="d-flex col-2 ps-2">
+                              <div className="d-flex col-2 ps-3">
                                 {logged_in ? (
                                   wistItemsId.includes(element?.id) ? (
                                     <div>
