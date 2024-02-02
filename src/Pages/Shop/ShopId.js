@@ -123,7 +123,6 @@ function ShopId(props) {
     } else {
       setShowReviewSection(false);
       REVIEW.addReview({ data }).then((res) => {
-        console.log(res.data.data);
         if (res.status === 200) {
           toast.success("Thankyou for your review !");
           setReviewItems([...reviewItems, res.data.data]);
@@ -185,7 +184,9 @@ function ShopId(props) {
     }
   }, [shopId]);
   const [imageShow, setImageShow] = useState("");
-  console.log(imageShow, "imageShow");
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   useEffect(() => {
     if (shopId) {
       fetch(
@@ -231,7 +232,11 @@ function ShopId(props) {
               </Modal.Title> */}
             </Modal.Header>
             <Modal.Body>
-              <img src={sizeChart} width={`${matches ? 390 : 770}`} height={500}/>
+              <img
+                src={sizeChart}
+                width={`${matches ? 390 : 770}`}
+                height={500}
+              />
             </Modal.Body>
           </Modal>
           <div className="ProductDescriptionBox1">
@@ -284,11 +289,14 @@ function ShopId(props) {
                   marginTop: "20px",
                 }}
               >
-                Rs. {product?.attributes?.price}
+                ₹ {numberWithCommas(product?.attributes?.price)}
               </h6>
 
               <p className="sizeGuide">Size Guide</p>
-              <div style={{cursor:"pointer"}} onClick={() => setLgShow(true)}>
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => setLgShow(true)}
+              >
                 <svg
                   width="32"
                   height="16"
