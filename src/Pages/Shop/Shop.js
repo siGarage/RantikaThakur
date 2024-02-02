@@ -192,7 +192,7 @@ function Shop(props) {
     <>
       <h1 className="d-flex justify-content-center ">{type}</h1>
       <hr class="new2"></hr>
-      <div className="filter-menu ">
+      <div className={matches?"filter-menu d-flex justify-content-center":"filter-menu"}>
         <lable className="filter_class">FILTER BY:</lable>
         <select
           className="filterSelect"
