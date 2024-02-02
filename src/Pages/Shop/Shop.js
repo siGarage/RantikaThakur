@@ -8,6 +8,7 @@ import constants from "../../constants";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import rupees from "../../Images/rupee-sign.svg"
 
 function Shop(props) {
   // state variables of shop
@@ -312,12 +313,12 @@ function Shop(props) {
                           </div>
 
                           <div className="d-flex ">
-                            <div className="col-8">
+                            <div className="col-10">
                               <div className="Card-Title">
-                                {element?.attributes?.title?.length > 15
+                                {element?.attributes?.title?.length > 25
                                   ? `${element?.attributes?.title.slice(
                                       0,
-                                      15
+                                      25
                                     )}...`
                                   : element?.attributes?.title}
                               </div>
@@ -328,10 +329,10 @@ function Shop(props) {
                                 }
                               </div>
                               <div className="Card-Description">
-                                Rs. {element?.attributes?.price}
+                                <img src={rupees}/> {element?.attributes?.price}
                               </div>
                             </div>
-                            <div className="d-flex col-3 justify-content-end ">
+                            <div className="d-flex col-2">
                               {logged_in ? (
                                 wistItemsId.includes(element?.id) ? (
                                   <div>
