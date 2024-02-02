@@ -409,14 +409,26 @@ function ShopId(props) {
             <div className="col-6"></div>
             <div className="ProductDescriptionBox2-ProductBox">
               <h5 style={{ margin: "46px 0px" }}>Product Description</h5>
-              <p style={{ fontSize: "12px", fontWeight: "300" }}>
-                {parse(product?.attributes?.description)}
-              </p>
+              <div style={{ fontSize: "12px", }}>
+              {parse(
+                `<ul>
 
+                <li> <b> Lining :</b> Yes </li> 
+                <li> <b> Fit type :</b> Tailored Fit </li> 
+                <li> <b> Product Care: </b> DRY CLEAN ONLY </li>
+                <li> <b> Silver applique work </b> </li>
+                
+                
+                </ul>
+                
+                    <p><strong>Size Can be customized.</strong><br>
+                        You can get the desired product customized into the size you want or even share a few changes with us. We want
+                        you to feel your best and confident in Rantika Thakur Clothing.</p>`
+              )}
+              </div>
               {/* <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
               <h5>Material-{product?.attributes?.material}</h5>
               <h5>Product Code-{product?.id}</h5> */}
-
               <div
                 className="container d-flex justify-content-between"
                 style={{
