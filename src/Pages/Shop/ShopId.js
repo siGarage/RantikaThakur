@@ -227,7 +227,7 @@ function ShopId(props) {
                 height="480px"
               />
               <div className="d-flex justify-content-center">
-                {product?.attributes?.images?.data.map((element) => (
+                {product?.attributes?.images?.data?.map((element) => (
                   <div key={element?.id} className="d-flex">
                     <img
                       src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
@@ -408,23 +408,11 @@ function ShopId(props) {
           <div className="ProductDescriptionBox2">
             <div className="col-6"></div>
             <div className="ProductDescriptionBox2-ProductBox">
-              <h5 style={{ margin: "46px 0px 25px 0px" }}>Product Description</h5>
-              <div style={{ fontSize: "15px", fontFamily:'sans-serif'}}>
-              {parse(
-                `<ul>
-
-                <li> <b> Lining :</b> Yes </li> 
-                <li> <b> Fit type :</b> Tailored Fit </li> 
-                <li> <b> Product Care: </b> DRY CLEAN ONLY </li>
-                <li> <b> Silver applique work </b> </li>
-                
-                
-                </ul>
-                
-                    <p><strong>Size Can be customized.</strong><br>
-                        You can get the desired product customized into the size you want or even share a few changes with us. We want
-                        you to feel your best and confident in Rantika Thakur Clothing.</p>`
-              )}
+              <h5 style={{ margin: "46px 0px 25px 0px" }}>
+                Product Description
+              </h5>
+              <div style={{ fontSize: "15px", fontFamily: "sans-serif" }}>
+                {parse(`${product?.attributes?.material}`)}
               </div>
               {/* <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
               <h5>Material-{product?.attributes?.material}</h5>

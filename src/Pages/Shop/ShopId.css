@@ -209,7 +209,7 @@
   .ProductDescriptionBox2-ProductBox {
     width: 90%;
     padding: 0px 50px 0px 0px;
-    margin-top: 0px;
+    margin-top: 0px !important;
   }
   .Size-Box {
     margin: 0px 0px 0px 10px;
@@ -275,3 +275,4 @@
     width: 100%;
   }
 }
+
