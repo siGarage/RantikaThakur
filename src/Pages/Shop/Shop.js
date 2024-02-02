@@ -8,7 +8,7 @@ import constants from "../../constants";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import rupees from "../../Images/rupee-sign.svg"
+import rupees from "../../Images/rupee-sign.svg";
 
 function Shop(props) {
   // state variables of shop
@@ -329,7 +329,7 @@ function Shop(props) {
                                 }
                               </div>
                               <div className="Card-Description">
-                                <img src={rupees}/> {element?.attributes?.price}
+                                ₹ {element?.attributes?.price}
                               </div>
                             </div>
                             <div className="d-flex col-2">
