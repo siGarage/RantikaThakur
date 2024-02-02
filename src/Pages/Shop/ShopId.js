@@ -412,7 +412,7 @@ function ShopId(props) {
                 Product Description
               </h5>
               <div style={{ fontSize: "15px", fontFamily: "sans-serif" }}>
-                {parse(`${product?.attributes?.material}`)}
+                {parse(`${product?.attributes?.description}`)}
               </div>
               {/* <h5 style={{ margin: "59px 0px 30px 0px" }}>Product Details</h5>
               <h5>Material-{product?.attributes?.material}</h5>
