@@ -46,7 +46,7 @@ function Like(props) {
                             (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                           }
                           alt="ProductImage"
-                          style={{ height: "400px", width: "100%" }}
+                          style={{ height: "400px", width: "90%" }}
                         />
                         <div>
                           <div className="Card-Title">

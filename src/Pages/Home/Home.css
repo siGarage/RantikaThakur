@@ -50,7 +50,7 @@
 
 
 .clothesTypesBox2{
-    background-image: url('../../Images/skirts.jpeg');
+    background-image: url('../../Images/co-ords.jpeg');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -74,7 +74,7 @@
 
 
 .clothesTypesBox4{
-    background-image: url('../../Images/co-ords.jpeg');
+    background-image: url('../../Images/skirts.jpeg');
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
@@ -138,10 +138,12 @@
 .react-multi-carousel-item{
     height:auto;
 }
+
 .carousel-best-image{
     width:100%;
-    height:500px;
+    height:550px;
 }
+
 .item-multicarousel{
     height: 100%;
 }

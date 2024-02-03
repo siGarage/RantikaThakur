@@ -70,6 +70,16 @@ function Shop(props) {
     setSort(value);
   };
 
+  function compare(a, b) {
+    if (a.attributes.title < b.attributes.title) {
+      return -1;
+    }
+    if (a.attributes.title > b.attributes.title) {
+      return 1;
+    }
+    return 0;
+  }
+
   // Filter products data on the basis of category and price
   const filterData = useMemo(() => {
     if (products?.length > 0) {
@@ -77,14 +87,34 @@ function Shop(props) {
         if (sort?.length > 0) {
           let filtervalues = products?.filter(
             (element) =>
-              element?.attributes?.category?.data?.attributes?.category ===
-                type || element?.attributes?.material === type
+              element?.attributes?.category?.data?.attributes?.category === type
           );
           if (sort == "Alphabatically,A-Z") {
-            return filtervalues.sort();
+            return filtervalues.sort((a, b) => {
+              let fa = a?.attributes?.title.toLowerCase(),
+                fb = b?.attributes?.title.toLowerCase();
+
+              if (fa < fb) {
+                return -1;
+              }
+              if (fa > fb) {
+                return 1;
+              }
+              return 0;
+            });
           }
           if (sort == "Alphabatically,Z-A") {
-            return filtervalues.sort().reverse();
+            return filtervalues.sort((a, b) => {
+              let fa = a?.attributes?.title.toLowerCase(),
+                fb = b?.attributes?.title.toLowerCase();
+              if (fa > fb) {
+                return -1;
+              }
+              if (fa < fb) {
+                return 1;
+              }
+              return 0;
+            });
           }
           if (sort == "Price,Low-High") {
             return filtervalues.sort(
@@ -103,18 +133,38 @@ function Shop(props) {
         } else {
           return products?.filter(
             (element) =>
-              element?.attributes?.category?.data?.attributes?.category ===
-                type || element?.attributes?.material === type
+              element?.attributes?.category?.data?.attributes?.category == type
           );
         }
       } else {
         let filtervalues2 = products;
         if (sort?.length > 0) {
           if (sort == "Alphabatically,A-Z") {
-            return filtervalues2.sort();
+            return filtervalues2.sort((a, b) => {
+              let fa = a?.attributes?.title.toLowerCase(),
+                fb = b?.attributes?.title.toLowerCase();
+
+              if (fa < fb) {
+                return -1;
+              }
+              if (fa > fb) {
+                return 1;
+              }
+              return 0;
+            });
           }
           if (sort == "Alphabatically,Z-A") {
-            return filtervalues2.sort().reverse();
+            return filtervalues2.sort((a, b) => {
+              let fa = a?.attributes?.title.toLowerCase(),
+                fb = b?.attributes?.title.toLowerCase();
+              if (fa > fb) {
+                return -1;
+              }
+              if (fa < fb) {
+                return 1;
+              }
+              return 0;
+            });
           }
           if (sort == "Price,Low-High") {
             return filtervalues2.sort(
@@ -191,8 +241,12 @@ function Shop(props) {
   return (
     <>
       <h1 className="d-flex justify-content-center ">{type}</h1>
-      <hr class="new2"></hr>
-      <div className={matches?"filter-menu d-flex justify-content-center":"filter-menu"}>
+      <hr className="new2"></hr>
+      <div
+        className={
+          matches ? "filter-menu d-flex justify-content-center" : "filter-menu"
+        }
+      >
         <lable className="filter_class">FILTER BY:</lable>
         <select
           className="filterSelect"
@@ -200,7 +254,7 @@ function Shop(props) {
             filterItems(e.target.value);
           }}
         >
-          <option>Select Filter</option>
+          <option value="All">Select Filter</option>
           {filter.length > 0 ? (
             filter.map((fil) => {
               return (
@@ -220,7 +274,7 @@ function Shop(props) {
             sortItems(e.target.value);
           }}
         >
-          <option>Sort Values</option>
+          <option value="Alphabatically,A-Z">Sort Values</option>
           <option value="Alphabatically,A-Z">Alphabatically,A-Z</option>
           <option value="Alphabatically,Z-A">Alphabatically,Z-A</option>
           <option value="Price,Low-High">Price,Low-High</option>
@@ -281,7 +335,10 @@ function Shop(props) {
         ) : (
           <div
             className="container"
-            style={{ width: matches ? "70%" : "80%" , paddingLeft:matches?"0px":"50px"}}
+            style={{
+              width: matches ? "70%" : "80%",
+              paddingLeft: matches ? "0px" : "50px",
+            }}
           >
             <div className="row">
               {products?.length > 0 ? (

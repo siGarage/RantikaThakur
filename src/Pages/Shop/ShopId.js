@@ -249,7 +249,7 @@ function ShopId(props) {
                 }
                 zoom="200"
                 width="380px"
-                height="480px"
+                height="540px"
               />
               <div className="d-flex justify-content-center">
                 {product?.attributes?.images?.data?.map((element) => (

@@ -201,7 +201,7 @@ function Home(props) {
         <div className="Home-Box3-Box1-Box">
           <div className="Home-Box3-Box1-Box-InnerBox1">
             {/* clothesTypesBox1 */}
-            <div className="clothesTypesBox1">
+            <div className="clothesTypesBox1" onClick={()=>navigate('/shop?type=Dresses')}>
               {/* <div className="clothesTypesBox1-Box1">{array[0]}</div> */}
               <div></div>
               {/* <div
@@ -221,7 +221,7 @@ function Home(props) {
 
             {/* clothesTypesBox2 */}
             <div
-              className="clothesTypesBox2"
+              className="clothesTypesBox2" onClick={()=>navigate('/shop?type=Co-ordinates')}
             >
               {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
               <div></div>
@@ -242,7 +242,7 @@ function Home(props) {
           </div>
 
           {/* clothesTypesBox3 */}
-          <div className="clothesTypesBox3">
+          <div className="clothesTypesBox3"  onClick={()=>navigate('/shop?type=All')}>
             {/* <div className="clothesTypesBox1-Box1">{array[2]}</div> */}
             <div></div>
             {/* <div
@@ -262,7 +262,7 @@ function Home(props) {
 
           <div className="Home-Box3-Box1-Box-InnerBox1">
             {/* clothesTypesBox4 */}
-            <div className="clothesTypesBox4">
+            <div className="clothesTypesBox4" onClick={()=>navigate('/shop?type=Skirts')}>
               {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}
               <div></div>
               {/* <div
@@ -281,7 +281,7 @@ function Home(props) {
             </div>
 
             {/* clothesTypesBox5 */}
-            <div className="clothesTypesBox5">
+            <div className="clothesTypesBox5" onClick={()=>navigate('/shop?type=Shirts')}>
               {/* <div className="clothesTypesBox1-Box1">{array[4]}</div> */}
               <div></div>
               {/* <div
