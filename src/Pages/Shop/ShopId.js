@@ -10,6 +10,7 @@ import YouMayLike from "../YouMayLike/YouMayLike";
 import constants from "../../constants";
 import Rating from "@mui/material/Rating";
 import REVIEW from "../../API/Review";
+import WISHLIST from "../../API/Wishlist";
 import Box from "@mui/material/Box";
 import { loadStripe } from "@stripe/stripe-js";
 import { makePaymentRequest } from "../../API/Payment";
@@ -19,6 +20,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import sizeChart from "../../Images/size_chart.jpg";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
 
 function ShopId(props) {
   const dispatch = useDispatch();
@@ -43,10 +50,30 @@ function ShopId(props) {
   });
   const navigate = useNavigate();
   const { cart } = props;
+  const WishCartID = (id) => {
+    for (let item of wishlist) {
+      if (Number(item?.attributes?.id_product) === Number(id)) {
+        return Number(item?.id);
+      }
+    }
+  };
+
+  const DeleteFromWishlist = (id, authtoken) => {
+    WISHLIST.deleteWishlistItems(id, authtoken).then((res) => {
+      if (res?.status === 200) {
+        const wishdata = wishlist.filter((ele) => ele?.id !== id);
+        dispatch({
+          type: constants("wishlist")?.reducers?.wishlist?.AddToWishlist,
+          payload: { wishItems: wishdata },
+        });
+      }
+    });
+  };
+  let wishlist = props.wishlist;
   let [product, setProduct] = useState({});
 
   let [csize, setCsize] = useState(false);
-  const { logged_in, useremail, authtoken } = props;
+  const { logged_in, useremail, username, authtoken } = props;
 
   // Add Data To Cart
   const AddToCart = (data) => {
@@ -76,7 +103,54 @@ function ShopId(props) {
       toast.error("Please Select Size !");
     }
   };
+  const BuyAddToCart = (data) => {
+    if (data.size !== "") {
+      const findData = cart.find(
+        (element) =>
+          Number(element?.attributes.id_product) === Number(data.id_product) &&
+          String(element?.attributes.size) === String(data.size)
+      );
+      if (findData) {
+        const findProductPrice =
+          Number(findData?.attributes.price) + Number(data.price);
+        const findProductQuantity = Number(findData?.attributes.quantity) + 1;
+        updateProduct(findData.id, findProductPrice, findProductQuantity);
+      } else {
+        CARTDATA.addCartItems(data, authtoken).then((res) => {
+          if (res.status === 200) {
+            dispatch({
+              type: constants("cart").reducers.cart.AddToCart,
+              payload: { cartItems: [...cart, res.data.data] },
+            });
+            navigate("/cart");
+            toast.success("Item Added To Cart !");
+          }
+        });
+      }
+    } else {
+      toast.error("Please Select Size !");
+    }
+  };
 
+  // Add to Wishlist functionality
+  const AddToWishlist = (data) => {
+    const findData = wishlist.find(
+      (element) =>
+        Number(element?.attributes?.id_product) === Number(data?.id_product)
+    );
+    if (findData) {
+      toast.success("Item Already In Wishlist!");
+    } else {
+      WISHLIST.addWishlistItems(data, authtoken).then((res) => {
+        if (res.status === 200) {
+          dispatch({
+            type: constants("wishlist")?.reducers?.wishlist?.AddToWishlist,
+            payload: { wishItems: [...wishlist, res?.data?.data] },
+          });
+        }
+      });
+    }
+  };
   const updateProduct = (cartId, price, quantity) => {
     const data = { price, quantity };
     CARTDATA.updateCart(cartId, data, authtoken).then((res) => {
@@ -100,25 +174,17 @@ function ShopId(props) {
 
   let validateForm = (data) => {
     const { rating, review, name, email } = data;
-
+    data = {
+      ...data,
+      email: useremail,
+      name: username,
+    };
     if (rating === 0) {
       toast.error("Please add rating");
       return;
     }
     if (review.length <= 10) {
       toast.error("Your review must contain at least 5 words");
-      return;
-    }
-    if (name.length === 0) {
-      toast.error("Please enter name");
-      return;
-    }
-    if (email.length === 0) {
-      toast.error("Please enter email");
-      return;
-    }
-    if (!email.match("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")) {
-      toast.error("Enter Valid Email");
       return;
     } else {
       setShowReviewSection(false);
@@ -187,6 +253,9 @@ function ShopId(props) {
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  let wistItemsId = wishlist.map((element) =>
+    Number(element?.attributes?.id_product)
+  );
   useEffect(() => {
     if (shopId) {
       fetch(
@@ -377,7 +446,21 @@ function ShopId(props) {
                         : "#E2BF44",
                     }}
                     onClick={() => {
-                      handlePayment();
+                      BuyAddToCart(
+                        {
+                          email: useremail,
+                          title: product?.attributes?.title,
+                          price: product?.attributes?.price,
+                          category:
+                            product?.attributes?.category?.data?.attributes
+                              ?.category,
+                          id_product: product?.id,
+                          image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                          quantity: 1,
+                          size: size,
+                        },
+                        authtoken
+                      );
                     }}
                   >
                     {!product?.attributes?.instock ? "Out Of Stock" : "Buy Now"}
@@ -407,6 +490,42 @@ function ShopId(props) {
                       ? "Out Of Stock"
                       : "Add To Cart"}
                   </button>
+                  {wistItemsId.includes(product?.id) ? (
+                    <div className="heart">
+                      <FavoriteIcon
+                        style={{ color: "red" }}
+                        onClick={() => {
+                          DeleteFromWishlist(
+                            WishCartID(product?.id),
+                            authtoken
+                          );
+                        }}
+                      ></FavoriteIcon>
+                    </div>
+                  ) : (
+                    <div className="heart">
+                      <FavoriteBorderIcon
+                        onClick={() => {
+                          AddToWishlist(
+                            {
+                              email: useremail,
+                              title: product?.attributes?.title,
+                              price: product?.attributes?.price,
+                              category:
+                                product?.attributes?.category?.data?.attributes
+                                  ?.category,
+                              id_product: product.id,
+                              image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                              size: product?.attributes?.sizes?.data.map(
+                                (element) => element?.attributes?.size
+                              ),
+                            },
+                            authtoken
+                          );
+                        }}
+                      ></FavoriteBorderIcon>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="Shop-Button">
@@ -455,95 +574,138 @@ function ShopId(props) {
                   textAlign: "center",
                 }}
               >
-                <div className={`${matches ? "w-100" : "w-50"}`}>
-                  <div
-                    className="cR"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      fontFamily: "Inter",
-                      fontWeight: "400",
-                      margin: "5px 0px",
-                    }}
-                  >
-                    Customer Review
-                  </div>
-                  <div className="row">
-                    {reviewItems?.length > 0 ? (
-                      <>
-                        {reviewItems?.map((element) => {
-                          return (
-                            <div
-                              style={{
-                                position: "relative",
-                                cursor: "pointer",
-                              }}
-                              className="col-md-4 my-3"
-                              key={element?.id}
-                            >
-                              <div>
-                                <div
-                                  style={{
-                                    fontFamily: "inter",
-                                    fontSize: "20px",
-                                    fontWeight: "600",
-                                    color: "black",
-                                    margin: "0px 0px 5px 0px",
-                                  }}
-                                >
-                                  {element?.attributes?.name}
-                                </div>
-                                <div>
-                                  {
-                                    <Rating
-                                      name="read-only"
-                                      value={element?.attributes?.rating}
-                                      readOnly
-                                    />
-                                  }
-                                </div>
-                                <p>{element?.attributes?.review}</p>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </>
-                    ) : (
+                {reviewItems.length > 0 ? (
+                  <div className="d-flex w-100 flex-column">
+                    <div className="d-flex w-100">
+                      <div className="col-8 d-flex justify-content-start">
+                        <div
+                          className="cR"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontFamily: "Inter",
+                            fontWeight: "400",
+                            margin: "5px 0px",
+                          }}
+                        >
+                          Customer Review
+                        </div>
+                      </div>
                       <div
+                        className="w-50 d-flex justify-content-end pt-1"
                         style={{
                           fontFamily: "Inter",
                           fontSize: "15px",
                           fontWeight: "400",
-                          margin: "10px 0px",
                           display: "flex",
                           alignItems: "center",
                         }}
                       >
-                        No Reviews
+                        <a
+                          onClick={() =>
+                            showReviewSection == false
+                              ? setShowReviewSection(true)
+                              : setShowReviewSection(false)
+                          }
+                        >
+                          Write Review
+                        </a>
                       </div>
-                    )}
+                    </div>
+
+                    {reviewItems?.map((element) => {
+                      return (
+                        <div className="row w-100 text-start">
+                          <div className="w-100 col-12 d-flex flex-column justify-content-start">
+                            <div className="d-flex">
+                              <div className="Profile-Box-Text negativeMargin">
+                                {element?.attributes?.name
+                                  ?.slice(0, 1)
+                                  .toUpperCase()}
+                              </div>
+                              <div
+                                style={{
+                                  fontFamily: "inter",
+                                  fontSize: "12px",
+                                  fontWeight: "600",
+                                  color: "black",
+                                  margin: "0px 0px 5px 0px",
+                                }}
+                              >
+                                {element?.attributes?.name}
+                              </div>
+                            </div>
+                            <div>
+                              {
+                                <Rating
+                                  name="read-only"
+                                  value={element?.attributes?.rating}
+                                  readOnly
+                                />
+                              }
+                            </div>
+                            <p>{element?.attributes?.review}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </div>
-                <div
-                  className="w-50 d-flex justify-content-end pt-5"
-                  style={{
-                    fontFamily: "Inter",
-                    fontSize: "15px",
-                    fontWeight: "400",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <a
-                    onClick={() =>
-                      showReviewSection == false
-                        ? setShowReviewSection(true)
-                        : setShowReviewSection(false)
-                    }
-                  >
-                    Write Review
-                  </a>
-                </div>
+                ) : (
+                  <div className="d-flex w-100 flex-column justufy-content-start text-start">
+                    <div className="w-100">
+                      <div
+                        className="cR"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontFamily: "Inter",
+                          fontWeight: "400",
+                          margin: "5px 0px",
+                        }}
+                      >
+                        Customer Review
+                      </div>
+                    </div>
+                    <div className="w-100 d-flex">
+                      <div className="w-50">
+                        <div
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "400",
+                            margin: "10px 0px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          No Reviews
+                        </div>
+                      </div>
+                      <div className="w-50 text-end">
+                        <div
+                          className="text-end pt-2 d-flex justify-content-end"
+                          style={{
+                            fontFamily: "Inter",
+                            fontSize: "15px",
+                            fontWeight: "400",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <a
+                            onClick={() =>
+                              showReviewSection == false
+                                ? setShowReviewSection(true)
+                                : setShowReviewSection(false)
+                            }
+                          >
+                            Write Review
+                          </a>
+                        </div>{" "}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -609,40 +771,6 @@ function ShopId(props) {
                     />
                   </label>
                 </div>
-
-                <div className="Review-Box">
-                  <div className="Review-Box-InnerBox">
-                    <label style={{ display: "flex", flexDirection: "column" }}>
-                      <p style={{ fontWeight: "600" }}>
-                        Name <span style={{ color: "red" }}>*</span>
-                      </p>
-                      <input
-                        className="review-Inputs Input-review"
-                        type="text"
-                        name="name"
-                        rows="4"
-                        onChange={onChange}
-                        placeholder="Enter your name"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="Review-Box-InnerBox">
-                    <label style={{ display: "flex", flexDirection: "column" }}>
-                      <p style={{ fontWeight: "600" }}>
-                        Email <span style={{ color: "red" }}>*</span>
-                      </p>
-                      <input
-                        className="review-Inputs Input-review"
-                        type="text"
-                        name="email"
-                        rows="4"
-                        onChange={onChange}
-                        placeholder="Enter valid E-mail"
-                      />
-                    </label>
-                  </div>
-                </div>
               </div>
               <button
                 className="Review-Button"
@@ -680,8 +808,10 @@ function ShopId(props) {
 
 const mapStateToProps = (state) => ({
   useremail: state?.auth?.user?.user?.email,
+  username: state?.auth?.user?.user?.username,
   authtoken: state?.auth?.user?.jwt,
   logged_in: state?.auth?.logged_in,
   cart: state?.cart?.cartItems,
+  wishlist: state?.wishlist?.wishItems,
 });
 export default connect(mapStateToProps)(memo(ShopId));

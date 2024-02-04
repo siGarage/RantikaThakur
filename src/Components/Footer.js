@@ -20,7 +20,7 @@ function Footer() {
                 justifyContent: "space-between",
                 width: "100%",
                 color: "white",
-                margin: "20px 0px 20px 0px",
+                margin: "20px 0px 0px 0px",
               }}
             >
               <div style={{ width: "32%" }}>
@@ -237,6 +237,7 @@ function Footer() {
             </div>
           </div>
           <div
+          className="socialMedia"
             style={{
               width: "100%",
               height: "20%",

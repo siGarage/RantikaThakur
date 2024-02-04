@@ -111,6 +111,7 @@ function Contact() {
                   onClick={() => {
                     validateForm(contactdata);
                   }}
+                  style={{height:"40px"}}
                 >
                   Submit
                 </button>

@@ -374,77 +374,80 @@ function Shop(props) {
                                 objectFit: "fill",
                               }}
                             />
-
-                            <div className="d-flex pe-1">
-                              <div className="col-10">
-                                <div className="Card-Title">
-                                  {element?.attributes?.title?.length > 25
-                                    ? `${element?.attributes?.title.slice(
-                                        0,
-                                        25
-                                      )}...`
-                                    : element?.attributes?.title}
-                                </div>
-                                <div className="Card-Category">
-                                  {
-                                    element?.attributes?.category?.data
-                                      ?.attributes?.category
-                                  }
-                                </div>
-                                <div className="Card-Description">
-                                  ₹{" "}
-                                  {numberWithCommas(element?.attributes?.price)}
-                                </div>
+                          </div>
+                          <div className="d-flex pe-1">
+                            <div
+                              className="col-10"
+                              onClick={() => {
+                                navigate(`/shop/${element.id}`);
+                              }}
+                            >
+                              <div className="Card-Title">
+                                {element?.attributes?.title?.length > 25
+                                  ? `${element?.attributes?.title.slice(
+                                      0,
+                                      25
+                                    )}...`
+                                  : element?.attributes?.title}
                               </div>
-                              <div className="d-flex col-2 ps-3">
-                                {logged_in ? (
-                                  wistItemsId.includes(element?.id) ? (
-                                    <div>
-                                      <FavoriteIcon
-                                        style={{ color: "red" }}
-                                        onClick={() => {
-                                          DeleteFromWishlist(
-                                            WishCartID(element?.id),
-                                            authtoken
-                                          );
-                                        }}
-                                      ></FavoriteIcon>
-                                    </div>
-                                  ) : (
-                                    <div>
-                                      <FavoriteBorderIcon
-                                        onClick={() => {
-                                          AddToWishlist(
-                                            {
-                                              email: useremail,
-                                              title: element?.attributes?.title,
-                                              price: element?.attributes?.price,
-                                              category:
-                                                element?.attributes?.category
-                                                  ?.data?.attributes?.category,
-                                              id_product: element.id,
-                                              image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
-                                              size: element?.attributes?.sizes?.data.map(
-                                                (element) =>
-                                                  element?.attributes?.size
-                                              ),
-                                            },
-                                            authtoken
-                                          );
-                                        }}
-                                      ></FavoriteBorderIcon>
-                                    </div>
-                                  )
+                              <div className="Card-Category">
+                                {
+                                  element?.attributes?.category?.data
+                                    ?.attributes?.category
+                                }
+                              </div>
+                              <div className="Card-Description">
+                                ₹ {numberWithCommas(element?.attributes?.price)}
+                              </div>
+                            </div>
+                            <div className="d-flex col-2 ps-3">
+                              {logged_in ? (
+                                wistItemsId.includes(element?.id) ? (
+                                  <div>
+                                    <FavoriteIcon
+                                      style={{ color: "red" }}
+                                      onClick={() => {
+                                        DeleteFromWishlist(
+                                          WishCartID(element?.id),
+                                          authtoken
+                                        );
+                                      }}
+                                    ></FavoriteIcon>
+                                  </div>
                                 ) : (
                                   <div>
                                     <FavoriteBorderIcon
                                       onClick={() => {
-                                        navigate(`/login`);
+                                        AddToWishlist(
+                                          {
+                                            email: useremail,
+                                            title: element?.attributes?.title,
+                                            price: element?.attributes?.price,
+                                            category:
+                                              element?.attributes?.category
+                                                ?.data?.attributes?.category,
+                                            id_product: element.id,
+                                            image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
+                                            size: element?.attributes?.sizes?.data.map(
+                                              (element) =>
+                                                element?.attributes?.size
+                                            ),
+                                          },
+                                          authtoken
+                                        );
                                       }}
                                     ></FavoriteBorderIcon>
                                   </div>
-                                )}
-                              </div>
+                                )
+                              ) : (
+                                <div>
+                                  <FavoriteBorderIcon
+                                    onClick={() => {
+                                      navigate(`/login`);
+                                    }}
+                                  ></FavoriteBorderIcon>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
