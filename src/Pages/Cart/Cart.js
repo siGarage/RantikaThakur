@@ -11,7 +11,9 @@ import { makePaymentRequest } from "../../API/Payment";
 function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const { cart, useremail, authtoken } = props;
 
   // Delete Items From Cart
@@ -181,12 +183,12 @@ function Cart(props) {
                       style={{ cursor: "pointer" }}
                     >
                       <p style={{ margin: "0px 0px" }}>
-                        {element?.attributes.title.length > 15
-                          ? `${element?.attributes.title.slice(0, 15)}...`
+                        {element?.attributes.title.length > 25
+                          ? `${element?.attributes.title.slice(0, 25)}...`
                           : element?.attributes.title}
                       </p>
                       <p style={{ margin: "0px 0px" }}>
-                        Rs. {element?.attributes.price}
+                        ₹ {numberWithCommas(element?.attributes?.price)}
                       </p>
                       <p style={{ margin: "0px 0px" }}>
                         Category: {element?.attributes.category}
@@ -223,7 +225,11 @@ function Cart(props) {
                         id="input"
                         value={Number(element?.attributes.quantity)}
                         readOnly
-                        style={{ width: "50px", margin: "0px 10px" }}
+                        style={{
+                          width: "50px",
+                          margin: "0px 10px",
+                          padding: "0px 0px 0px 15px",
+                        }}
                       />
                       <button
                         id="increment"

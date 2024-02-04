@@ -550,6 +550,13 @@ function ShopId(props) {
                   >
                     Add To Cart
                   </button>
+                  <div className="heart">
+                    <FavoriteBorderIcon
+                      onClick={() => {
+                        navigate(`/login`);
+                      }}
+                    ></FavoriteBorderIcon>
+                  </div>
                 </div>
               )}
             </div>
