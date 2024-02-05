@@ -18,6 +18,13 @@ function Shop(props) {
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
+  const [ipadMatches, setIpadMatches] = useState(
+    window.matchMedia("(max-width:1024px)").matches
+  );
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:820px)").matches
+  );
+
   const [sort, setSort] = useState("");
   const type = searchParams.get("type");
   const dispatch = useDispatch();
@@ -194,6 +201,12 @@ function Shop(props) {
     window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+    window
+      .matchMedia("(max-width:1024px)")
+      .addEventListener("change", (e) => setIpadMatches(e.matches));
+    window
+      .matchMedia("(max-width:820px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
     if (logged_in) {
       if (wishlist.length === 0) {
         WISHLIST.getWishlistItems(useremail, authtoken).then((res) => {
@@ -336,8 +349,8 @@ function Shop(props) {
           <div
             className="container"
             style={{
-              width: matches ? "70%" : "80%",
-              paddingLeft: matches ? "0px" : "50px",
+              width: matches ? "70%" : ipadAirMatches ? "" : "80%",
+              paddingLeft: matches ? "0px" : ipadAirMatches ? "" : "50px",
             }}
           >
             <div className="row">
@@ -347,7 +360,11 @@ function Shop(props) {
                     return (
                       <div
                         style={{ position: "relative", cursor: "pointer" }}
-                        className="col-md-4 my-4   Product-Small-Cards"
+                        className={
+                          ipadMatches
+                            ? "col-md-6 my-4   Product-Small-Cards"
+                            : "col-md-4 my-4   Product-Small-Cards"
+                        }
                         key={element.id}
                       >
                         <div className="Card">
