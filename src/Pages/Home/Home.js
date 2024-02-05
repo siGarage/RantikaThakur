@@ -260,7 +260,7 @@ function Home(props) {
             </div> */}
           </div>
 
-          <div className="Home-Box3-Box1-Box-InnerBox1">
+          <div className="Home-Box3-Box1-Box-InnerBox1 Home-Box3-Box1-Box-InnerBox1-ipad">
             {/* clothesTypesBox4 */}
             <div className="clothesTypesBox4" onClick={()=>navigate('/shop?type=Skirts')}>
               {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}

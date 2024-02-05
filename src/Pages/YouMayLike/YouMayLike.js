@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
 import "./YouMayLike.css";
-import { memo } from "react";
 import { connect } from "react-redux";
 function Like(props) {
   const navigate = useNavigate();
@@ -8,9 +8,23 @@ function Like(props) {
   const { products } = props;
   const shuffled = products?.sort(() => 0.5 - Math.random());
   let array = shuffled?.slice(0, 4);
+  const [ipadMatches, setIpadMatches] = useState(
+    window.matchMedia("(max-width:1024px)").matches
+  );
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  useEffect(() => {
+    window
+      .matchMedia("(max-width:1024px)")
+      .addEventListener("change", (e) => setIpadMatches(e.matches));
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
+  }, []);
   return (
     <>
       {products?.length > 0 && (
@@ -46,7 +60,13 @@ function Like(props) {
                             (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                           }
                           alt="ProductImage"
-                          style={{ height: "400px", width: "90%" }}
+                          style={
+                            matches
+                              ? { height: "90%", width: "100%" }
+                              : ipadMatches
+                              ? { height: "90%", width: "90%" }
+                              : { height: "400px", width: "90%" }
+                          }
                         />
                         <div>
                           <div className="Card-Title">

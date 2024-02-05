@@ -672,6 +672,26 @@ function ShopId(props) {
                 width="380px"
                 height="540px"
               />
+              {matches?
+              <div className="container">
+                <div className="row w-100">
+                {product?.attributes?.images?.data?.map((element) => (
+                  <div key={element?.id} className="col-4">
+                    <img
+                      src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
+                      alt="productImages"
+                      style={{
+                        height: "180px",
+                        width: "120px",
+                        cursor: "pointer",
+                      }}
+                      className="ps-2 pt-3"
+                      onClick={() => setImageShow(element?.attributes?.url)}
+                    />
+                  </div>
+                ))}
+                </div>
+              </div>:
               <div className="d-flex justify-content-center">
                 {product?.attributes?.images?.data?.map((element) => (
                   <div key={element?.id} className="d-flex">
@@ -688,7 +708,7 @@ function ShopId(props) {
                     />
                   </div>
                 ))}
-              </div>
+              </div>}
             </div>
             <div className="ProductDescriptionBox1-Box2">
               <h5
@@ -751,6 +771,7 @@ function ShopId(props) {
                 style={{
                   display: "flex",
                   flexDirection: "row",
+                  justifyContent: "end",
                 }}
               >
                 <button

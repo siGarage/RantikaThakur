@@ -51,6 +51,10 @@
 hr.new3 {
   border-top: 1px solid rgb(70, 68, 68);
 }
+svg{
+  width: 50 !important;
+  height: 50 !important;
+}
 .Contact-Input {
   width: 50%;
   height: 50px;

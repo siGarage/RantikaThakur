@@ -111,7 +111,7 @@ function Contact() {
                   onClick={() => {
                     validateForm(contactdata);
                   }}
-                  style={{height:"40px"}}
+                  style={{ height: "40px" }}
                 >
                   Submit
                 </button>
@@ -146,16 +146,35 @@ function Contact() {
                     y="0px"
                     width="50"
                     height="50"
-                    viewBox="0 0 48 48"
+                    viewBox="0,0,256,256"
                   >
-                    <path
-                      fill="#3F51B5"
-                      d="M42,37c0,2.762-2.238,5-5,5H11c-2.761,0-5-2.238-5-5V11c0-2.762,2.239-5,5-5h26c2.762,0,5,2.238,5,5V37z"
-                    ></path>
-                    <path
-                      fill="#FFF"
-                      d="M34.368,25H31v13h-5V25h-3v-4h3v-2.41c0.002-3.508,1.459-5.59,5.592-5.59H35v4h-2.287C31.104,17,31,17.6,31,18.723V21h4L34.368,25z"
-                    ></path>
+                    <g
+                      fill="none"
+                      fill-rule="nonzero"
+                      stroke="none"
+                      stroke-width="1"
+                      stroke-linecap="butt"
+                      stroke-linejoin="miter"
+                      stroke-miterlimit="10"
+                      stroke-dasharray=""
+                      stroke-dashoffset="0"
+                      font-family="none"
+                      font-weight="none"
+                      font-size="none"
+                      text-anchor="none"
+                      style={{ mixBlendMode: "normal" }}
+                    >
+                      <g transform="scale(5.33333,5.33333)">
+                        <path
+                          d="M24,5c-10.49341,0 -19,8.50659 -19,19c0,10.49341 8.50659,19 19,19c10.49341,0 19,-8.50659 19,-19c0,-10.49341 -8.50659,-19 -19,-19z"
+                          fill="#030de5"
+                        ></path>
+                        <path
+                          d="M26.572,29.036h4.917l0.772,-4.995h-5.69v-2.73c0,-2.075 0.678,-3.915 2.619,-3.915h3.119v-4.359c-0.548,-0.074 -1.707,-0.236 -3.897,-0.236c-4.573,0 -7.254,2.415 -7.254,7.917v3.323h-4.701v4.995h4.701v13.729c0.931,0.14 1.874,0.235 2.842,0.235c0.875,0 1.729,-0.08 2.572,-0.194z"
+                          fill="#ffffff"
+                        ></path>
+                      </g>
+                    </g>
                   </svg>
                 </a>
                 <a

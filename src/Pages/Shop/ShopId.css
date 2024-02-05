@@ -387,7 +387,6 @@
   width: 32%;
 }
 
-
 .custom .Custom-Box4-Box {
   width: 24%;
 }
@@ -404,7 +403,6 @@
   .custom .Custom-Submit-Button {
     width: 100%;
   }
-
   .custom .Custom-Box-InnerBox {
     width: 95%;
   }
@@ -416,5 +414,23 @@
   }
   .custom .Custom-Box-InnerBox label {
     font-size: 12px;
+  }
+  .Shop-Button {
+    padding: 20px 0px 20px 20px;
+  }
+  .ProductDescriptionBox2-ProductBox{
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 464px) {
+  .Size-Box {
+    margin: 0px 0px 0px 10px !important;
+  }
+  .Shop-AddToCart {
+    font-size: 22px;
+  }
+  .Buy-Button {
+    font-size: 22px;
   }
 }
