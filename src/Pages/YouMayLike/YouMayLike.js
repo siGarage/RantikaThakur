@@ -31,6 +31,7 @@ function Like(props) {
         <section className="Like">
           <div className="container">
             <div
+              className={matches ? "Card text-center" : ""}
               style={{
                 fontFamily: "Abhaya Libre",
                 fontSize: "40px",
@@ -50,7 +51,7 @@ function Like(props) {
                       className="col-md-3 my-3 "
                       key={element?.id}
                     >
-                      <div className="Card">
+                      <div className={matches ? "Card text-center" : "Card"}>
                         <img
                           src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`}
                           onMouseOver={(e) =>
@@ -62,7 +63,7 @@ function Like(props) {
                           alt="ProductImage"
                           style={
                             matches
-                              ? { height: "100%", width: "100%" }
+                              ? { height: "95%", width: "80%" }
                               : ipadMatches
                               ? { height: "90%", width: "90%" }
                               : { height: "400px", width: "90%" }
