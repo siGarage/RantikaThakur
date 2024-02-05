@@ -402,4 +402,8 @@
   .carousel-best-image {
     height: 90%;
   }
+  .multi-carousel-container {
+    width: 80%;
+    margin: 10px;
+}
 }
