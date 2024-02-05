@@ -1,10 +1,10 @@
-.Home{
-    width:100%;
-    margin:0px 0px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+.Home {
+  width: 100%;
+  margin: 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 /* .Home-Box1{
     height:600px;
@@ -17,397 +17,386 @@
     flex-direction: column;
 } */
 
-.NewArrival-Box1{
-    background-image: url('IMG_9098.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 0px 10px;
+.NewArrival-Box1 {
+  background-image: url("IMG_9098.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0px 10px;
 }
-.NewArrival-Box2{
-    background-image: url('IMG_9108.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 0px 10px;
+.NewArrival-Box2 {
+  background-image: url("IMG_9108.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0px 10px;
 }
-.NewArrival-Box3{
-    background-image: url('SDP05095.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 0px 10px;
+.NewArrival-Box3 {
+  background-image: url("SDP05095.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0px 10px;
 }
-.clothesTypesBox1{
-    background-image: url('../../Images/dresses.jpeg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 0px 10px;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    width:47.57%;
-    height:100%;
-}
-
-
-.clothesTypesBox2{
-    background-image: url('../../Images/co-ords.jpeg');
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    background-size: 100% 100%;
-    margin: 0px 10px;
-    width:47.57%;
-    height:100%;
-}
-.clothesTypesBox3{
-    background-image: url('../../Images/h4.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 0px 10px;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
+.clothesTypesBox1 {
+  background-image: url("../../Images/dresses.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0px 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  width: 47.57%;
+  height: 100%;
 }
 
-
-.clothesTypesBox4{
-    background-image: url('../../Images/skirts.jpeg');
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    background-size: 100% 100%;
-    margin: 0px 10px;
-    width:47.57%;
-    height:100%;
+.clothesTypesBox2 {
+  background-image: url("../../Images/co-ords.jpeg");
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background-size: 100% 100%;
+  margin: 0px 10px;
+  width: 47.57%;
+  height: 100%;
+}
+.clothesTypesBox3 {
+  background-image: url("../../Images/h4.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0px 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 }
 
-.clothesTypesBox5{
-    background-image: url('../../Images/shirts.jpeg');
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    background-size: 100% 100%;
-    margin: 0px 10px;
-    width:47.57%;
-    height:100%;
+.clothesTypesBox4 {
+  background-image: url("../../Images/skirts.jpeg");
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background-size: 100% 100%;
+  margin: 0px 10px;
+  width: 47.57%;
+  height: 100%;
 }
 
-
-.clothesTypes-Button{
-    width: 30%;
-    height: 50px;
-    border-radius: 72px;
-    background-color: #E2BF44;
-    color: white;
-    padding: 19px 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    border: none;
-    position: relative;
+.clothesTypesBox5 {
+  background-image: url("../../Images/shirts.jpeg");
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background-size: 100% 100%;
+  margin: 0px 10px;
+  width: 47.57%;
+  height: 100%;
 }
-.clothesTypes-Button2{
-    width: 15%;
-    height: 50px;
-    border-radius: 72px;
-    background-color: #E2BF44;
-    color: white;
-    padding: 19px 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    border: none;
-    
+
+.clothesTypes-Button {
+  width: 30%;
+  height: 50px;
+  border-radius: 72px;
+  background-color: #e2bf44;
+  color: white;
+  padding: 19px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  border: none;
+  position: relative;
+}
+.clothesTypes-Button2 {
+  width: 15%;
+  height: 50px;
+  border-radius: 72px;
+  background-color: #e2bf44;
+  color: white;
+  padding: 19px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  border: none;
 }
 
 .multi-carousel-container {
-    width: 100%;
-    margin: 10px ;
-   }
-
-
-.react-multi-carousel-item{
-    height:auto;
+  width: 100%;
+  margin: 10px;
 }
 
-.carousel-best-image{
-    width:100%;
-    height:550px;
+.react-multi-carousel-item {
+  height: auto;
 }
 
-.item-multicarousel{
-    height: 100%;
+.carousel-best-image {
+  width: 100%;
+  height: 550px;
 }
 
-.Home-Box1-Heading{
-    font-family:'Poppins';
-    font-weight:600;
-    color:white;
-        cursor: pointer;
-        font-size:64px;
+.item-multicarousel {
+  height: 100%;
 }
 
-.Home-Box1-Description{
-    font-family:'Poppins';
-    font-weight:400;
-    color:white;
-        cursor: pointer;
-        font-size:40px;
+.Home-Box1-Heading {
+  font-family: "Poppins";
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  font-size: 64px;
 }
 
-.Home-Box1{
+.Home-Box1-Description {
+  font-family: "Poppins";
+  font-weight: 400;
+  color: white;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.Home-Box1 {
+  cursor: pointer;
+}
+.Home-Box1-Button {
+  text-decoration: none;
+  width: 25%;
+  height: 12%;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-weight: 400;
+  color: black;
+  font-size: 40px;
+  cursor: pointer;
+  border-radius: 17px;
+  margin: 10px 0px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.Home-Box2 {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 30px;
+}
+
+.Home-Box2-Box1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Abhaya Libre";
+  font-size: 32px;
+  font-weight: 400;
+  color: #757575;
+  margin: 20px 0px;
+}
+
+.Home-Box3 {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 30px;
+}
+
+.Home-Box3-Box1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Abhaya Libre;
+  font-size: 32px;
+  font-weight: 400;
+  color: #757575;
+  margin: 20px 0px;
+}
+
+.Home-Box3-Box1-Box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.Home-Box3-Box1-Box-InnerBox1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+  margin: 20px 0px;
+}
+
+.clothesTypesBox3 {
+  width: 79%;
+  height: 700px;
+  margin: 20px 0px;
+}
+
+.clothesTypesBox1-Box1 {
+  font-family: "Abhaya Libre";
+  font-size: 64px;
+  font-weight: 700;
+  color: white;
+}
+
+.clothesTypes-Button input {
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 700px) {
+  .Home-Box3-Box1-Box-InnerBox1 {
+    height: 320px;
+  }
+  .clothesTypesBox1-Box1 {
+    font-size: 32px;
+  }
+
+  .clothesTypesBox3 {
+    height: 500px;
+  }
+  .clothesTypes-Button {
+    width: 40%;
+    font-size: 28px;
+  }
+
+  .Home-Box1 {
+    height: 500px;
     cursor: pointer;
-
-}
-.Home-Box1-Button{
-    text-decoration:none;
-    width:25%;
-    height:12%;
-    font-family:'Poppins';
-        cursor: pointer;
-        font-weight:400;
-    color:black;
-    font-size:40px;
-    cursor:pointer;
-    border-radius:17px;
-    margin:10px 0px;
-    border:none;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background-color:white;
-}
-
-.Home-Box2{
-    width:90%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    margin:0px 30px;
-}
-
-.Home-Box2-Box1{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Abhaya Libre';
-    font-size:32px;
-    font-weight:400;
-    color:#757575;
-    margin:20px 0px;
-}
-
-.Home-Box3{
-    width:90%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    margin:0px 30px;
-}
-
-
-.Home-Box3-Box1{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Abhaya Libre;
-    font-size:32px;
-    font-weight:400;
-    color:#757575;
-    margin:20px 0px;
-}
-
-.Home-Box3-Box1-Box{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
-}
-
-.Home-Box3-Box1-Box-InnerBox1{
-    width:100%;
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-    height:650px;
-    margin:20px 0px;
-}
-
-.clothesTypesBox3{
-    width:79%;
-    height:700px;
-    margin:20px 0px;
-}
-
-.clothesTypesBox1-Box1{
-    font-family:'Abhaya Libre';
-    font-size:64px;
-    font-weight:700;
-    color:white
-}
-
-.clothesTypes-Button input{
-    opacity:0;
-    height:100%;
-    width:100%;
-    position:absolute;
-    cursor:pointer;
-}
-
-
-@media only screen and (max-width: 1000px) and (min-width:700px) {
-    .Home-Box3-Box1-Box-InnerBox1{
-        height:320px;
-    }
-    .clothesTypesBox1-Box1{
-        font-size:32px;
-        
-    }
-    
-    .clothesTypesBox3{
-        height:500px;
-    }
-    .clothesTypes-Button{
-        width: 40%;
-        font-size: 28px;
-    }
-
-    .Home-Box1{
-        height:500px;
-        cursor: pointer;
-    }
-
-    .Home-Box1-Heading{
-        font-size:40px;
-        cursor: pointer;
-
-    }
-    
-    .Home-Box1-Description{
-        font-size:30px;
-        cursor: pointer;
-
-    }
-    
-    .Home-Box1-Button{
-        height:18%;
-        font-size:40px;
-        width: 30%;
-        cursor: pointer;
-    }
   }
 
-
-  @media only screen and (max-width: 700px) and (min-width:500px){
-    .Home-Box3-Box1-Box-InnerBox1{
-        height:260px;
-       
-    }
-    .Home-Box1{
-        height:250px !important;
-        cursor: pointer;
-      
-    }
-
-
-    .clothesTypesBox1-Box1{
-        font-size:25px;
-        
-    }
-    
-    .clothesTypesBox3{
-        height:400px;
-    }
-    .clothesTypes-Button
-    {
-        width: 40%;
-        font-size: 25px;
-        height: 40px;
-    }
-    .Home-Box1-Heading{
-        font-size:30px;
-    }
-    
-    .Home-Box1-Description{
-        font-size:25px;
-    }
-    
-    .Home-Box1-Button{
-        height:15%;
-        font-size:35px;
-        width: 30%;
-    }
+  .Home-Box1-Heading {
+    font-size: 40px;
+    cursor: pointer;
   }
 
-  @media only screen and (max-width: 500px) {
-    .Home-Box3-Box1-Box-InnerBox1{
-        height:200px;
-       
-    }
-    .Home-Box1{
-        height:230px;
-      
-    }
-
-
-    .Home-Box1-Heading{
-        font-size:20px;
-    }
-    
-    .Home-Box1-Description{
-        font-size:18px;
-    }
-    
-    .Home-Box1-Button{
-        height:12%;
-        width: 25%;
-        font-size:16px;
-       
-    }
-
-    .clothesTypesBox1-Box1{
-        font-size:20px;
-        
-    }
-    
-    .clothesTypesBox3{
-        height:200px;
-    }
-
-    .clothesTypes-Button{
-        width: 40%;
-        font-size: 15px;
-        height: 30px;
-    }
+  .Home-Box1-Description {
+    font-size: 30px;
+    cursor: pointer;
   }
 
+  .Home-Box1-Button {
+    height: 18%;
+    font-size: 40px;
+    width: 30%;
+    cursor: pointer;
+  }
+}
 
-  @media only screen and (max-width: 1024px) and (min-width:464px) 
-  {
-    .carousel-best-image
-    {
-        height:300px;
-    }
+@media only screen and (max-width: 700px) and (min-width: 500px) {
+  .Home-Box3-Box1-Box-InnerBox1 {
+    height: 260px;
+  }
+  .Home-Box1 {
+    height: 250px !important;
+    cursor: pointer;
   }
 
-  @media only screen and  (max-width:464px) 
-  {
-    .carousel-best-image
-    {
-        height:300px;
-    }
+  .clothesTypesBox1-Box1 {
+    font-size: 25px;
   }
+
+  .clothesTypesBox3 {
+    height: 400px;
+  }
+  .clothesTypes-Button {
+    width: 40%;
+    font-size: 25px;
+    height: 40px;
+  }
+  .Home-Box1-Heading {
+    font-size: 30px;
+  }
+
+  .Home-Box1-Description {
+    font-size: 25px;
+  }
+
+  .Home-Box1-Button {
+    height: 15%;
+    font-size: 35px;
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Home-Box3-Box1-Box-InnerBox1 {
+    height: 200px;
+  }
+  .Home-Box1 {
+    height: 230px;
+  }
+
+  .Home-Box1-Heading {
+    font-size: 20px;
+  }
+
+  .Home-Box1-Description {
+    font-size: 18px;
+  }
+
+  .Home-Box1-Button {
+    height: 12%;
+    width: 25%;
+    font-size: 16px;
+  }
+
+  .clothesTypesBox1-Box1 {
+    font-size: 20px;
+  }
+
+  .clothesTypesBox3 {
+    height: 200px;
+  }
+
+  .clothesTypes-Button {
+    width: 40%;
+    font-size: 15px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 464px) {
+  .carousel-best-image {
+    height: 80%;
+  }
+
+  .clothesTypesBox1 {
+    height: 110%;
+  }
+  .clothesTypesBox2 {
+    height: 110%;
+  }
+  .clothesTypesBox3 {
+    width: 98%;
+  }
+  .clothesTypesBox5 {
+    height: 110%;
+  }
+  .clothesTypesBox4 {
+    height: 110%;
+  }
+}
+
+@media only screen and (max-width: 464px) {
+  .carousel-best-image {
+    height: 300px;
+  }
+}

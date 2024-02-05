@@ -178,7 +178,7 @@
   height: 85px !important;
 }
 
-.negativeMargin{
+.negativeMargin {
   margin-bottom: -5px;
 }
 
@@ -207,13 +207,13 @@
 .carousel-container {
   margin-left: 0;
 } */
-.heart{
+.heart {
   width: 80px;
   height: 77px;
   padding-left: 20px;
 }
 
-.heart svg{
+.heart svg {
   width: 100%;
   height: 100%;
 }
@@ -312,3 +312,109 @@
   }
 }
 
+.Custom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "inter";
+  margin: 20px 0px;
+}
+
+.custom input {
+  height: 46px;
+  border-radius: 5px;
+  border: 1px solid #b0b0b0;
+}
+
+.custom .Custom-Submit-Button {
+  border: none;
+  border-radius: 30px;
+  color: white;
+  background-color: #e2bf44;
+  width: 50%;
+  height: 40px;
+  margin: 10px 0px;
+}
+.custom .Custom-Box1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 0px 10px 0px;
+}
+
+.custom .Custom-Box1-Box1 {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom .Custom-Box1-Box2 {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom .Custom-Box3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 0px 10px 0px;
+}
+.custom .Custom-Box5 {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 0px 0px 10px 0px;
+}
+.custom .Custom-Box2 {
+  margin: 0px 0px 10px 0px;
+}
+
+.custom .Custom-Box-InnerBox {
+  width: 100%;
+}
+
+.custom .Custom-Box3-Box {
+  width: 30%;
+}
+
+.custom .Custom-Box7-Box {
+  width: 32%;
+}
+
+
+.custom .Custom-Box4-Box {
+  width: 24%;
+}
+
+.custom .Custom-Box5-Box {
+  width: 30%;
+}
+
+.custom .Custom-Size-Text {
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  .custom .Custom-Submit-Button {
+    width: 100%;
+  }
+
+  .custom .Custom-Box-InnerBox {
+    width: 95%;
+  }
+  .custom .Custom input {
+    height: 35px;
+  }
+  .custom .Custom-Size-Text {
+    font-size: 12px;
+  }
+  .custom .Custom-Box-InnerBox label {
+    font-size: 12px;
+  }
+}

@@ -7,6 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { toast } from "react-toastify";
 import "./ShopId.css";
 import YouMayLike from "../YouMayLike/YouMayLike";
+import CUSTOM from "../../API/Custom";
 import constants from "../../constants";
 import Rating from "@mui/material/Rating";
 import REVIEW from "../../API/Review";
@@ -23,6 +24,8 @@ import sizeChart from "../../Images/size_chart.jpg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Cookies from "universal-cookie";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
@@ -34,6 +37,24 @@ function ShopId(props) {
   const [showReviewSection, setShowReviewSection] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [lgShow, setLgShow] = useState(false);
+  const [csShow, setCsShow] = useState(false);
+  const cookies = new Cookies(null, { path: "/" });
+  const [customdata, setCustomData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    upperbust: "",
+    bust: "",
+    highwaist: "",
+    waist: "",
+    hip: "",
+    shoulder: "",
+    armhole: "",
+    sleevelength: "",
+    bicep: "",
+    fullLength: "",
+    pantskirtLength: "",
+  });
   const [size, setSize] = useState("");
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
@@ -165,11 +186,6 @@ function ShopId(props) {
     });
   };
 
-  //Navigate button
-  const navigateToCustomePage = () => {
-    setCsize();
-    navigate("/customsize");
-  };
   // Review Form
 
   let validateForm = (data) => {
@@ -235,7 +251,48 @@ function ShopId(props) {
       toast.error("Please Select Size");
     }
   };
+  // Function to serialize an object to a JSON string
+  const serializeObject = (obj) => JSON.stringify(obj);
 
+  // Function to deserialize a JSON string to an object
+  const deserializeObject = (str) => JSON.parse(str);
+
+  const setCookie = (name, value, days) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${encodeURIComponent(
+      value
+    )};expires=${expires.toUTCString()};path=/`;
+  };
+  const getCookie = (name) => {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+      const [cookieName, cookieValue] = cookie.split("=");
+      if (cookieName.trim() === name) {
+        return deserializeObject(decodeURIComponent(cookieValue));
+      }
+    }
+    return null;
+  };
+  let validateCForm = (data) => {
+    const { email, name, phone } = data;
+    if (!name) {
+      toast.error("Please Enter Name");
+      return;
+    }
+    if (!email) {
+      toast.error("Please Enter Email");
+      return;
+    }
+    if (!phone) {
+      toast.error("Please Enter Phone Number");
+      return;
+    } else {
+      setCookie("customSize", serializeObject(customdata), 7);
+      setCsize(true);
+      setCsShow(false);
+    }
+  };
   // Get Data of Product
   useEffect(() => {
     window
@@ -256,6 +313,9 @@ function ShopId(props) {
   let wistItemsId = wishlist.map((element) =>
     Number(element?.attributes?.id_product)
   );
+  const onCSChange = (e) => {
+    setCustomData({ ...customdata, [e.target.name]: e.target.value });
+  };
   useEffect(() => {
     if (shopId) {
       fetch(
@@ -306,6 +366,298 @@ function ShopId(props) {
                 width={`${matches ? 390 : 770}`}
                 height={500}
               />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="xl"
+            show={csShow}
+            onHide={() => setCsShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg">
+                CUSTOM SIZE
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="w-100 custom">
+                <p
+                  className="Custom-Size-Text"
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    margin: "0px 0px 40px 0px",
+                  }}
+                >
+                  If you're unable to find your size in our standard chart, fill
+                  in the measurements form below with all your details and your
+                  order shall be processed accordingly.{" "}
+                </p>
+                <div className="Custom-Box-InnerBox">
+                  <div className="Custom-Box3">
+                    <div className="Custom-Box3-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Name
+                        <input
+                          name="name"
+                          onChange={onCSChange}
+                          type="text"
+                          placeholder="Enter your name"
+                          required
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box3-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Contact No.
+                        <input
+                          placeholder="Enter your phone number"
+                          name="phone"
+                          onChange={onCSChange}
+                          type="text"
+                          required
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box3-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Email
+                        <input
+                          placeholder="Enter your E-mail"
+                          name="email"
+                          onChange={onCSChange}
+                          type="email"
+                          required
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="Custom-Box3">
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Upper Bust
+                        <input
+                          name="upperbust"
+                          onChange={onCSChange}
+                          placeholder="Upper Bust"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Bust
+                        <input
+                          name="bust"
+                          onChange={onCSChange}
+                          placeholder="Bust"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Full Length
+                        <input
+                          name="fullLength"
+                          onChange={onCSChange}
+                          type="number"
+                          placeholder="Full Length"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        High Waist
+                        <input
+                          name="highwaist"
+                          onChange={onCSChange}
+                          placeholder="High Waist"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="Custom-Box3">
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Waist
+                        <input
+                          name="waist"
+                          onChange={onCSChange}
+                          placeholder="Waist"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Hip
+                        <input
+                          name="hip"
+                          onChange={onCSChange}
+                          placeholder="Hip"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Pant/Skirt Length
+                        <input
+                          name="pantskirtLength"
+                          onChange={onCSChange}
+                          type="number"
+                          placeholder="Full Length"
+                        />
+                      </label>
+                    </div>
+                    <div className="Custom-Box4-Box">
+                      <label
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "100%",
+                        }}
+                      >
+                        Shoulder
+                        <input
+                          name="shoulder"
+                          onChange={onCSChange}
+                          placeholder="Shoulder"
+                          type="number"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-9">
+                    <div className="Custom-Box3 pe-1">
+                      <div className="Custom-Box7-Box">
+                        <label
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                          }}
+                        >
+                          Armhole
+                          <input
+                            name="armhole"
+                            onChange={onCSChange}
+                            type="number"
+                            placeholder="Armhole"
+                          />
+                        </label>
+                      </div>
+                      <div className="Custom-Box7-Box ">
+                        <label
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                          }}
+                        >
+                          Sleeve Length
+                          <input
+                            name="sleevelength"
+                            onChange={onCSChange}
+                            type="number"
+                            placeholder="Sleeve Length"
+                          />
+                        </label>
+                      </div>
+                      <div className="Custom-Box7-Box">
+                        <label
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                          }}
+                        >
+                          Bicep
+                          <input
+                            name="bicep"
+                            onChange={onCSChange}
+                            type="number"
+                            placeholder="Bicep"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="Custom-Box">
+                    <div className="Custom-Box5-Box">
+                      <button
+                        className="Custom-Submit-Button"
+                        onClick={() => validateCForm(customdata)}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </Modal.Body>
           </Modal>
           <div className="ProductDescriptionBox1">
@@ -402,14 +754,16 @@ function ShopId(props) {
                 }}
               >
                 <button
-                  onClick={() => {
-                    navigateToCustomePage();
-                  }}
+                  // onClick={() => {
+                  //   navigateToCustomePage();
+                  // }}
+                  onClick={() => setCsShow(true)}
                   className="C-Sizebox"
                   key="12345678646342"
                   style={{
                     backgroundColor: csize == true ? "#E2BF44" : "white",
                     border: csize == true ? "none" : "3px solid #959595",
+                    width: "20%",
                   }}
                 >
                   Custome Size

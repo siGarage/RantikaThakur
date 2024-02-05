@@ -39,7 +39,7 @@ function Custom(props) {
 
     const onChange=(e)=>{
         setCustomData({...customdata,[e.target.name]:e.target.value})
-     }
+    }
 
   return (
     <section className='Custom' >
