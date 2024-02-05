@@ -62,7 +62,7 @@ function Like(props) {
                           alt="ProductImage"
                           style={
                             matches
-                              ? { height: "90%", width: "100%" }
+                              ? { height: "100%", width: "100%" }
                               : ipadMatches
                               ? { height: "90%", width: "90%" }
                               : { height: "400px", width: "90%" }
