@@ -393,6 +393,9 @@
   .clothesTypesBox4 {
     height: 110%;
   }
+  .Home-Box3-Box1-Box-InnerBox1{
+    padding-bottom: 20px;
+  }
 }
 
 @media only screen and (max-width: 464px) {
