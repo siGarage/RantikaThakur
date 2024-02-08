@@ -427,8 +427,9 @@ function Cart(props) {
               return { transactionState: "SUCCESS" };
             }}
             existingPaymentMethodRequired="false"
-            buttonColor=""
+            buttonColor="default"
             buttonType="buy"
+            buttonSizeMode="fill"
           ></GooglePayButton>
         </div>
       </div>
