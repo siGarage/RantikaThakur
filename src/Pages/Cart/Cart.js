@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import "./Cart.css";
 import { connect, useDispatch } from "react-redux";
 import constants from "../../constants";
@@ -7,10 +7,12 @@ import YouMayLike from "../YouMayLike/YouMayLike";
 import CARTDATA from "../../API/Cart";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import GooglePayButton from "@google-pay/button-react";
 import { makePaymentRequest } from "../../API/Payment";
 function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [price, setPrice] = useState(0);
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -105,25 +107,31 @@ function Cart(props) {
         }
       });
     }
+    if (cart.length > 0) {
+      setPrice(
+        cart
+          .map((element) => Number(element?.attributes.price))
+          .reduce((accumulator, currentValue) => accumulator + currentValue)
+      );
+    }
   }, [useremail, authtoken, dispatch, cart.length]);
 
   const stripePromise = loadStripe(
     `${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`
   );
   const handlePayment = async () => {
-    try {
-      const stripe = await stripePromise;
-      const res = await makePaymentRequest.post("/api/orders", {
-        email: useremail,
-        products: cart,
-      });
-
-      await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const stripe = await stripePromise;
+    //   const res = await makePaymentRequest.post("/api/orders", {
+    //     email: useremail,
+    //     products: cart,
+    //   });
+    //   await stripe.redirectToCheckout({
+    //     sessionId: res.data.stripeSession.id,
+    //   });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -356,7 +364,7 @@ function Cart(props) {
             </div>
           </div>
 
-          <button
+          {/* <button
             disabled={cart.length === 0}
             style={{
               padding: "10px 0px",
@@ -375,7 +383,53 @@ function Cart(props) {
             onClick={() => handlePayment()}
           >
             Continue To Checkout
-          </button>
+          </button> */}
+          <GooglePayButton
+            environment="TEST"
+            paymentRequest={{
+              apiVersion: 2,
+              apiVersionMinor: 0,
+              allowedPaymentMethods: [
+                {
+                  type: "CARD",
+                  parameters: {
+                    allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                    allowedCardNetworks: ["MASTERCARD", "VISA"],
+                  },
+                  tokenizationSpecification: {
+                    type: "PAYMENT_GATEWAY",
+                    parameters: {
+                      gateway: "example",
+                      gatewayMerchantId: "exampleGatewayMerchantId",
+                    },
+                  },
+                },
+              ],
+              merchantInfo: {
+                merchantId: "BCR2DN4T5GRNZ2BV",
+                merchantName: "Demo Merchant",
+              },
+              transactionInfo: {
+                totalPriceStatus: "FINAL",
+                totalPriceLabel: "Total",
+                totalPrice: price.toString(),
+                currencyCode: "INR",
+                countryCode: "IN",
+              },
+              shippingAddressRequired: true,
+              callbackIntents: ["PAYMENT_AUTHORIZATION"],
+            }}
+            onLoadPaymentData={(paymentRequest) => {
+              console.log(paymentRequest);
+            }}
+            onPaymentAuthorized={(paymentData) => {
+              console.log("paymentData " + paymentData);
+              return { transactionState: "SUCCESS" };
+            }}
+            existingPaymentMethodRequired="false"
+            buttonColor=""
+            buttonType="buy"
+          ></GooglePayButton>
         </div>
       </div>
       <YouMayLike />

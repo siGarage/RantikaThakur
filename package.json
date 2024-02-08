@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@google-pay/button-element": "^3.0.10",
+    "@google-pay/button-react": "^3.0.10",
     "@mui/icons-material": "^5.15.1",
     "@mui/material": "^5.15.1",
     "@redux-devtools/extension": "^3.3.0",

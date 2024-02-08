@@ -669,46 +669,48 @@ function ShopId(props) {
                     : `${process.env.REACT_APP_SERVERNAME}${product.attributes?.images?.data[0]?.attributes?.url}`
                 }
                 zoom="200"
-                width="380px"
+                width={matches ? "360px" : "380px"}
                 height="540px"
               />
-              {matches?
-              <div className="container">
-                <div className="row w-100">
-                {product?.attributes?.images?.data?.map((element) => (
-                  <div key={element?.id} className="col-4">
-                    <img
-                      src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
-                      alt="productImages"
-                      style={{
-                        height: "180px",
-                        width: "120px",
-                        cursor: "pointer",
-                      }}
-                      className="ps-2 pt-3"
-                      onClick={() => setImageShow(element?.attributes?.url)}
-                    />
+              {matches ? (
+                <div className="container">
+                  <div className="row w-100">
+                    {product?.attributes?.images?.data?.map((element) => (
+                      <div key={element?.id} className="col-4">
+                        <img
+                          src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
+                          alt="productImages"
+                          style={{
+                            height: "180px",
+                            width: "120px",
+                            cursor: "pointer",
+                          }}
+                          className="ps-2 pt-3"
+                          onClick={() => setImageShow(element?.attributes?.url)}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
                 </div>
-              </div>:
-              <div className="d-flex justify-content-center">
-                {product?.attributes?.images?.data?.map((element) => (
-                  <div key={element?.id} className="d-flex">
-                    <img
-                      src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
-                      alt="productImages"
-                      style={{
-                        height: "180px",
-                        width: "120px",
-                        cursor: "pointer",
-                      }}
-                      className="ps-2 pt-3"
-                      onClick={() => setImageShow(element?.attributes?.url)}
-                    />
-                  </div>
-                ))}
-              </div>}
+              ) : (
+                <div className="d-flex justify-content-center">
+                  {product?.attributes?.images?.data?.map((element) => (
+                    <div key={element?.id} className="d-flex">
+                      <img
+                        src={`${process.env.REACT_APP_SERVERNAME}${element?.attributes?.url}`}
+                        alt="productImages"
+                        style={{
+                          height: "180px",
+                          width: "120px",
+                          cursor: "pointer",
+                        }}
+                        className="ps-2 pt-3"
+                        onClick={() => setImageShow(element?.attributes?.url)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="ProductDescriptionBox1-Box2">
               <h5
