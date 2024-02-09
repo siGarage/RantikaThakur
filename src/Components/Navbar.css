@@ -115,12 +115,12 @@ ul li img {
   margin: 10px auto;
 }
 
-a {
+.Navbar-box3 a {
   color: #000000;
   text-decoration: none;
 }
 
-a:hover {
+.Navbar-box3 a:hover {
   color: #000000;
   text-decoration: none;
   cursor: pointer;
@@ -142,12 +142,12 @@ a:hover {
   color: black;
   padding-top: 5px !important;
 }
-a {
+.Navbar-box3 a {
   color: #000000 !important;
   text-decoration: none;
 }
 
-a:hover {
+.Navbar-box3 a:hover {
   color: #000000 !important;
   text-decoration: none;
   cursor: pointer;
@@ -242,6 +242,9 @@ a:hover {
 }
 
 @media only screen and (max-width: 700px) {
+  a {
+    color: #818181 !important;
+  }
   .Navbar-box3 {
     display: none;
   }
