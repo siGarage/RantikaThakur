@@ -43,7 +43,7 @@ function NavScrollExample(props) {
         <div
           id="mySidenav"
           className="sidenav"
-          style={{ color: "#757575", opacity: "0.955", zIndex: "10" }}
+          style={{ color: "rbg(0,0,0)", opacity: "0.955", zIndex: "10" }}
         >
           <Link className="closebtn" onClick={cross}>
             &times;
@@ -61,15 +61,15 @@ function NavScrollExample(props) {
               ? category?.map((cat) => {
                   return (
                     <div onClick={closeNav}>
-                      <ul style={{ marginLeft: "20px", marginBottom:"0px"}}>
+                      <ul style={{ marginLeft: "20px", marginBottom: "0px" }}>
                         <li>
                           <Link
-                          className="categoryham"
+                            className="categoryham"
                             to={`/shop?type=${cat}`}
                             style={{
                               color: "white",
                               fontSize: "18px",
-                              fontFamily: "Abhaya Libre !important"
+                              fontFamily: "Abhaya Libre !important",
                             }}
                           >
                             {cat}

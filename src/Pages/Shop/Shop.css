@@ -22,9 +22,9 @@
 }
 
 .filterSelect {
-  border: 1px solid #e3dfdf;
+  border: 1px solid #c0bdbd;
   padding: 5px;
-  color: #9e9898;
+  color: #050505;
   font-size: 12px;
 }
 
@@ -70,7 +70,7 @@
 
 .Product-Small-Cards {
   text-decoration: none;
-  color: #737373;
+  color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;

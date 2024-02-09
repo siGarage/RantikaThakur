@@ -12,7 +12,9 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
-    identifier: Yup.string().email("*Enter a valid mail!").required("*E-mail field is required!"),
+    identifier: Yup.string()
+      .email("*Enter a valid mail!")
+      .required("*E-mail field is required!"),
     password: Yup.string().required("*Password field is required!"),
   });
 
@@ -113,10 +115,10 @@ function Login() {
                     fontFamily: "Abhaya Libre",
                     fontWeight: "500",
                     fontSize: "20px",
-                    color: "#757575",
+                    color: "rbg(0,0,0)",
                   }}
                 >
-                  Email 
+                  Email
                 </div>
                 <input
                   name="identifier"
@@ -148,7 +150,7 @@ function Login() {
                     fontFamily: "Abhaya Libre",
                     fontWeight: "500",
                     fontSize: "20px",
-                    color: "#757575",
+                    color: "rbg(0,0,0)",
                   }}
                 >
                   Password

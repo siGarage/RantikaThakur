@@ -1,122 +1,117 @@
-.SignUp-Button{
-    width: 60%;
-    height: 50px;
-    border-radius: 72px;
-    background-color: #E2BF44;
-    color: white;
-    padding: 19px 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    border: none;
-    margin: 20px 0px;
+.SignUp-Button {
+  width: 60%;
+  height: 50px;
+  border-radius: 72px;
+  background-color: #e2bf44;
+  color: white;
+  padding: 19px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  border: none;
+  margin: 20px 0px;
 }
 
-.red_color{
-    color: red;
+.red_color {
+  color: red;
 }
 
-.SignUp{
-    width:100%;
-    height:550px;
-    margin:50px 0px;
+.SignUp {
+  width: 100%;
+  height: 550px;
+  margin: 50px 0px;
 }
 
-.SignUp-Box1{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    height:100%;
+.SignUp-Box1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 
-.SignUp-Box1-innerBox{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:row;
-    width:100%;
-    height:100%;
+.SignUp-Box1-innerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
-.SignUp-Box1-innerBox-Box1{
-    width:50%;
-    height:100%;
+.SignUp-Box1-innerBox-Box1 {
+  width: 50%;
+  height: 100%;
 }
 
-.SignUp-Box1-innerBox-Box1 img{
-    height:100%;
-    width:100%;
+.SignUp-Box1-innerBox-Box1 img {
+  height: 100%;
+  width: 100%;
 }
-.SignUp-Box1-innerBox-Box2{
-    width:50%;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    flex-direction:column;
-    height:100%;
-}
-
-.SignUp-Box1-innerBox-Box2-innerBox1{
-    font-family:'Abhaya Libre';
-    font-size:40px;
-    color:#bd9334;
+.SignUp-Box1-innerBox-Box2 {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 
-.SignUp-Box1-innerBox-Box2-innerBox2{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-direction:column;
-    width:70%;
-    margin:50px 0px;
+.SignUp-Box1-innerBox-Box2-innerBox1 {
+  font-family: "Abhaya Libre";
+  font-size: 40px;
+  color: #bd9334;
 }
 
-.SignUp-Box1-innerBox-Box2-innerBox2-innerBox{
-    display:flex;
-    justify-content:center;
-    flex-direction:column;
-    align-items:space-between;
-    width:100%;
-    margin:15px 0px 0px;
+.SignUp-Box1-innerBox-Box2-innerBox2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  margin: 50px 0px;
 }
 
-.SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box{
-    width:100%;
-    font-family:'Abhaya Libre';
-    font-weight:500;
-    font-size:20px;
-    color:#757575;
+.SignUp-Box1-innerBox-Box2-innerBox2-innerBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: space-between;
+  width: 100%;
+  margin: 15px 0px 0px;
 }
 
-.signup-input{
-    height:40px;
-    width:100%;
+.SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box {
+  width: 100%;
+  font-family: "Abhaya Libre";
+  font-weight: 500;
+  font-size: 20px;
+  color: rbg(0, 0, 0);
 }
 
+.signup-input {
+  height: 40px;
+  width: 100%;
+}
 
-
-@media only screen and (max-width: 800px)  {
-    
-.SignUp-Box1-innerBox-Box1{
+@media only screen and (max-width: 800px) {
+  .SignUp-Box1-innerBox-Box1 {
     display: none;
-}
-.SignUp-Box1-innerBox-Box2{
+  }
+  .SignUp-Box1-innerBox-Box2 {
     width: 100%;
-}
-
-.SignUp-Button{
-    width: 100%;
-    font-size: 22px;
-}
-
   }
 
-  @media only screen and (max-width: 954px) and (min-width:800px) {
-    .SignUp-Button{
-        width: 80%;
-        
-    }
-      }
+  .SignUp-Button {
+    width: 100%;
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 954px) and (min-width: 800px) {
+  .SignUp-Button {
+    width: 80%;
+  }
+}

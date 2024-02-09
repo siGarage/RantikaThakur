@@ -406,15 +406,15 @@ function Cart(props) {
                 },
               ],
               merchantInfo: {
-                merchantId: "BCR2DN4T5GRNZ2BV",
+                merchantId: "1234567896533",
                 merchantName: "Demo Merchant",
               },
               transactionInfo: {
                 totalPriceStatus: "FINAL",
                 totalPriceLabel: "Total",
                 totalPrice: price.toString(),
-                currencyCode: "INR",
-                countryCode: "IN",
+                currencyCode: "USD",
+                countryCode: "US",
               },
               shippingAddressRequired: true,
               callbackIntents: ["PAYMENT_AUTHORIZATION"],

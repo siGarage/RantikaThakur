@@ -144,7 +144,7 @@ function Navbar(props) {
             <Link
               className="Navbar-link"
               to="/cart"
-              style={{ textDecoration: "none", color: "#757575" }}
+              style={{ textDecoration: "none", color: "rbg(0,0,0)" }}
             >
               <div style={{ height: "30px", width: "30px", margin: "0px 6px" }}>
                 <img src={CartImage} alt="cart" />
@@ -153,7 +153,7 @@ function Navbar(props) {
             <Link
               className="Navbar-link"
               to="/wishlist"
-              style={{ textDecoration: "none", color: "#757575" }}
+              style={{ textDecoration: "none", color: "rbg(0,0,0)" }}
             >
               <div style={{ height: "30px", width: "30px", margin: "0px 6px" }}>
                 <img src={HeartImage} alt="wishlist" />
@@ -163,7 +163,7 @@ function Navbar(props) {
               <Link
                 className="Navbar-link"
                 to="/profile"
-                style={{ textDecoration: "none", color: "#757575" }}
+                style={{ textDecoration: "none", color: "rbg(0,0,0)" }}
               >
                 <div
                   style={{ height: "30px", width: "30px", margin: "0px 6px" }}
@@ -189,13 +189,13 @@ function Navbar(props) {
           className="Navbar-box3"
           style={{ fontFamily: "Abhaya Libre", fontSize: "30px" }}
         >
-          <Link to="/" style={{ textDecoration: "none", color: "#757575" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "rbg(0,0,0)" }}>
             <div style={{ margin: "0px 35px" }}>Home</div>
           </Link>
           <div class="dropdown">
             <button
               class="dropbtn"
-              style={{ color: "#757575", backgroundColor: "#FFFFF3" }}
+              style={{ color: "rbg(0,0,0)", backgroundColor: "#FFFFF3" }}
             >
               Category
             </button>
@@ -223,9 +223,9 @@ function Navbar(props) {
           </Link> */}
           <Link
             to="/contact"
-            style={{ textDecoration: "none", color: "#757575" }}
+            style={{ textDecoration: "none", color: "rbg(0,0,0)" }}
           >
-            <div style={{ margin: "0px 35px" }}>Contact</div>
+            <div style={{ margin: "0px 35px" ,color: "rbg(0,0,0)"}}>Contact</div>
           </Link>
         </div>
       </section>

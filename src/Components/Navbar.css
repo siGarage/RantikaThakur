@@ -82,7 +82,7 @@ ul li img {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: #757575;
+  color: #000000;
 }
 .SearchBox {
   margin-top: 70px;
@@ -141,6 +141,16 @@ a:hover {
 .el a {
   color: black;
   padding-top: 5px !important;
+}
+a {
+  color: #000000 !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000000 !important;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .dropbtn {

@@ -72,7 +72,7 @@
 }
 
 .clothesTypesBox4 {
-  background-image: url("../../Images/skirts.jpeg");
+  background-image: url("../../Images/shirts.jpeg");
   background-repeat: no-repeat;
   display: flex;
   justify-content: space-around;
@@ -85,7 +85,7 @@
 }
 
 .clothesTypesBox5 {
-  background-image: url("../../Images/shirts.jpeg");
+  background-image: url("../../Images/skirts.jpeg");
   background-repeat: no-repeat;
   display: flex;
   justify-content: space-around;
@@ -198,7 +198,7 @@
   font-family: "Abhaya Libre";
   font-size: 32px;
   font-weight: 400;
-  color: #757575;
+  color: #000000;
   margin: 20px 0px;
 }
 
@@ -219,7 +219,7 @@
   font-family: Abhaya Libre;
   font-size: 32px;
   font-weight: 400;
-  color: #757575;
+  color: #000000;
   margin: 20px 0px;
 }
 

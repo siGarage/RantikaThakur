@@ -718,7 +718,7 @@ function ShopId(props) {
                   fontFamily: "Abhaya",
                   fontWeight: "400",
                   fontSize: "24px",
-                  color: "#737373",
+                  color: "rbg(0,0,0)",
                 }}
               >
                 {product?.attributes?.title}
@@ -728,7 +728,7 @@ function ShopId(props) {
                   fontFamily: "Abhaya",
                   fontWeight: "700",
                   fontSize: "30px",
-                  color: "#737373",
+                  color: "rbg(0,0,0)",
                   marginTop: "20px",
                 }}
               >
@@ -749,7 +749,7 @@ function ShopId(props) {
                 >
                   <path
                     d="M0 0V16H32V0H0ZM2 2H5V9H7V2H9V6H11V2H13V9H15V2H17V6H19V2H21V9H23V2H25V6H27V2H30V14H2V2Z"
-                    fill="#737373"
+                    fill="#000000"
                   />
                 </svg>
               </div>
@@ -759,7 +759,7 @@ function ShopId(props) {
                   fontFamily: "poppins",
                   fontWeight: "300",
                   fontSize: "15px",
-                  color: "#737373",
+                  color: "rbg(0,0,0)",
                   margin: "24px 0px 8px 0px",
                   display: "flex",
                   justifyContent: "flex-end",
@@ -785,7 +785,7 @@ function ShopId(props) {
                   key="12345678646342"
                   style={{
                     backgroundColor: csize == true ? "#E2BF44" : "white",
-                    border: csize == true ? "none" : "3px solid #959595",
+                    border: csize == true ? "none" : "1px solid #0000000",
                     width: "20%",
                   }}
                 >
@@ -804,7 +804,7 @@ function ShopId(props) {
                       border:
                         size === element?.attributes?.size
                           ? "none"
-                          : "3px solid #959595",
+                          : "1px solid #000000",
                     }}
                   >
                     {element?.attributes?.size}
@@ -814,6 +814,31 @@ function ShopId(props) {
 
               {logged_in ? (
                 <div className="Shop-Button">
+                  <button
+                    onClick={() => {
+                      AddToCart(
+                        {
+                          email: useremail,
+                          title: product?.attributes?.title,
+                          price: product?.attributes?.price,
+                          category:
+                            product?.attributes?.category?.data?.attributes
+                              ?.category,
+                          id_product: product?.id,
+                          image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                          quantity: 1,
+                          size: size,
+                        },
+                        authtoken
+                      );
+                    }}
+                    disabled={!product?.attributes?.instock}
+                    className="Shop-AddToCart"
+                  >
+                    {!product?.attributes?.instock
+                      ? "Out Of Stock"
+                      : "Add To Cart"}
+                  </button>
                   <button
                     disabled={!product?.attributes?.instock}
                     className="Buy-Button"
@@ -841,31 +866,6 @@ function ShopId(props) {
                     }}
                   >
                     {!product?.attributes?.instock ? "Out Of Stock" : "Buy Now"}
-                  </button>
-                  <button
-                    onClick={() => {
-                      AddToCart(
-                        {
-                          email: useremail,
-                          title: product?.attributes?.title,
-                          price: product?.attributes?.price,
-                          category:
-                            product?.attributes?.category?.data?.attributes
-                              ?.category,
-                          id_product: product?.id,
-                          image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
-                          quantity: 1,
-                          size: size,
-                        },
-                        authtoken
-                      );
-                    }}
-                    disabled={!product?.attributes?.instock}
-                    className="Shop-AddToCart"
-                  >
-                    {!product?.attributes?.instock
-                      ? "Out Of Stock"
-                      : "Add To Cart"}
                   </button>
                   {wistItemsId.includes(product?.id) ? (
                     <div className="heart">
@@ -910,6 +910,14 @@ function ShopId(props) {
                     onClick={() => {
                       navigate(`/login`);
                     }}
+                    className="Shop-AddToCart"
+                  >
+                    Add To Cart
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigate(`/login`);
+                    }}
                     className="Buy-Button"
                     style={{
                       backgroundColor: !product?.attributes?.instock
@@ -918,14 +926,6 @@ function ShopId(props) {
                     }}
                   >
                     Buy Now
-                  </button>
-                  <button
-                    onClick={() => {
-                      navigate(`/login`);
-                    }}
-                    className="Shop-AddToCart"
-                  >
-                    Add To Cart
                   </button>
                   <div className="heart">
                     <FavoriteBorderIcon

@@ -36,16 +36,16 @@
   display: flex;
   font-family: "Abhaya Libre";
   font-size: 26px;
-  color: rgb(117, 117, 117);
+  color: rgb(0, 0, 0);
 }
 .Contact-Box-Label {
   width: 50%;
   font-family: "Abhaya Libre";
   font-size: 26px;
-  color: rgb(117, 117, 117);
+  color: rgb(0, 0, 0);
 }
 .mA {
-  border-bottom: 1px solid rgb(117, 117, 117);
+  border-bottom: 1px solid rgb(0, 0, 0);
   width: 65%;
 }
 hr.new3 {
