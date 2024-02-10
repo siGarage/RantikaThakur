@@ -1,5 +1,5 @@
 import './About.css';
-import SideImage from '../../Images/SDP05271.png'
+import SideImage from '../../Images/IMG_2973.jpeg'
 function About() {
   return (
     <section className='About' >

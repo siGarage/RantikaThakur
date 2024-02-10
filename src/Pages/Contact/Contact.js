@@ -1,5 +1,5 @@
 import "./Contact.css";
-import SideImage from "../../Images/IMG_2973.jpeg";
+import SideImage from "../../Images/SDP05271.png";
 // import { toast } from 'react-toastify';
 import { useState } from "react";
 import { toast } from "react-toastify";

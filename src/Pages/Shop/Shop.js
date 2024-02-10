@@ -267,7 +267,7 @@ function Shop(props) {
             filterItems(e.target.value);
           }}
         >
-          <option value="All">Select Filter</option>
+          <option value="All">Select Category</option>
           {filter.length > 0 ? (
             filter.map((fil) => {
               return (
@@ -287,7 +287,7 @@ function Shop(props) {
             sortItems(e.target.value);
           }}
         >
-          <option value="Alphabatically,A-Z">Sort Values</option>
+          <option value="Alphabatically,A-Z">Sort Name & Price</option>
           <option value="Alphabatically,A-Z">Alphabatically,A-Z</option>
           <option value="Alphabatically,Z-A">Alphabatically,Z-A</option>
           <option value="Price,Low-High">Price,Low-High</option>

@@ -16,8 +16,8 @@
 }
 
 .filter_class {
-  margin-top: 10px;
-  margin-right: 20px;
+  margin-top: 5px;
+  margin-right: 5px;
   font-size: 12px;
 }
 
@@ -29,11 +29,10 @@
 }
 
 .sort_class {
-  margin-top: 10px;
-  margin-right: 20px;
+  margin-top: 5px;
+  margin-right: 5px;
   margin-left: 10px;
   font-size: 12px;
-
 }
 
 .Card {
@@ -95,9 +94,8 @@
   border: none;
   border-radius: 50%;
 }
-.Home-Box3{
+.Home-Box3 {
   cursor: pointer;
-
 }
 .loader {
   width: 48px;
@@ -151,7 +149,6 @@ hr.new2 {
   border-top: 1px dashed rgb(126, 124, 124);
 }
 
-
 .image-container {
   position: relative;
 }
@@ -182,13 +179,12 @@ hr.new2 {
   .Product-Container {
     width: 70%;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .filter-menu {
     font-size: 10px;
     margin-left: 35px;
-
   }
   .Category-Filter {
     font-size: 16px;
@@ -205,13 +201,12 @@ hr.new2 {
   .Product-Container {
     width: 60%;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .filter-menu {
     font-size: 10px;
-  margin-left: 35px;
-
+    margin-left: 35px;
   }
 
   .Category-Filter {
@@ -229,10 +224,9 @@ hr.new2 {
 
   .filter-menu {
     font-size: 10px;
-  margin-left: 0px;
-
+    margin-left: 0px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .Product-Container {
@@ -253,7 +247,7 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .out-of-stock {
@@ -278,7 +272,7 @@ hr.new2 {
   .Card-Title {
     font-size: 13px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .Card-Description {
@@ -315,13 +309,12 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .filter-menu {
     font-size: 10px;
-  margin-left: 35px;
-
+    margin-left: 35px;
   }
 }
 
@@ -331,12 +324,12 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .filter-menu {
-    font-size: 10px
-    }
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 600px) and (min-width: 500px) {
@@ -349,7 +342,7 @@ hr.new2 {
   .filter-menu {
     font-size: 10px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
 }
@@ -364,7 +357,7 @@ hr.new2 {
   .filter-menu {
     font-size: 10px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
 }
@@ -379,7 +372,7 @@ hr.new2 {
   .filter-menu {
     font-size: 10px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
 }
@@ -390,7 +383,7 @@ hr.new2 {
     right: 10%;
     font-size: 36px;
   }
-  .shop_pl{
+  .shop_pl {
     padding-left: 0px;
   }
   .filter-menu {
