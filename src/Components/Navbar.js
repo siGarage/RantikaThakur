@@ -106,7 +106,7 @@ function Navbar(props) {
           color: "white",
         }}
       >
-        AVAIL 5% OFF ON PREPAID ORDERS.
+        AVAIL 10% OFF ON YOUR FIRST PURCHASE.
       </Marquee>
       <section className="Navbar">
         <div className="Navbar-box1">

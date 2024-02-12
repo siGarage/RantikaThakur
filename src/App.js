@@ -52,7 +52,6 @@ function App(props) {
       <ScrollToTop/>
       <Navbar/>
        <ToastContainer/>
-    
         <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/home" element={<Home/>}/>
