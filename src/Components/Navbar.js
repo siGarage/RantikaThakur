@@ -225,7 +225,9 @@ function Navbar(props) {
             to="/contact"
             style={{ textDecoration: "none", color: "rbg(0,0,0)" }}
           >
-            <div style={{ margin: "0px 35px" ,color: "rbg(0,0,0)"}}>Contact</div>
+            <div style={{ margin: "0px 35px", color: "rbg(0,0,0)" }}>
+              Contact
+            </div>
           </Link>
         </div>
       </section>
