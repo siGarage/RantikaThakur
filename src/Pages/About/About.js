@@ -94,7 +94,7 @@ function About() {
               fontWeight: "400",
               fontSize: "30px",
               color: "#BD9334",
-              margin: "0px 0px 10px 0px",
+              margin: "0px 0px 30px 0px",
             }}
           >
             ~About The founder~
