@@ -210,10 +210,6 @@ function Profile(props) {
       <div className="col-lg-6 col-sm-12 profileSection_col align-center d-flex justify-content-center pb-5 ">
         <div className="profileSection ">
           <div>
-            {/* <div className="text-center align center w-100 pt-5 pe-5 pb-3">
-              <img src={img} className="profileImg"></img>
-              <p>User Name</p>
-            </div> */}
             <div className="text-center align center w-100 pt-5 pe-5 pb-3">
               <div class="image-container">
                 <img src={img} alt="Image" className="profileImg" />
@@ -221,12 +217,14 @@ function Profile(props) {
                   <img src={svgimg} alt="Edit" />
                 </div>
               </div>
-              <p>User Name</p>
+              <p>{username}</p>
             </div>
             <div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">Name</div>
-                <div className="textWeight ps-4">Test Name</div>
+                <div className="textWeight ps-4">
+                  {username}
+                </div>
               </div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">Address</div>
@@ -238,7 +236,7 @@ function Profile(props) {
               </div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">E-Mail Address</div>
-                <div className="textWeight ps-3">qwer@gmail.com</div>
+                <div className="textWeight ps-3">{user.user.email}</div>
               </div>
             </div>
             <div className="editSection d-flex ps-5 pt-5 pb-4 justify-content-between textWeight5">
