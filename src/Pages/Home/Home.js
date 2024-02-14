@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { connect } from "react-redux";
 // import Carousel from "react-multi-carousel";
 import Carousel from "react-multi-carousel";
@@ -20,7 +20,7 @@ function Home(props) {
   const data = products?.filter(
     (element) => element?.attributes?.bestseller === true
   );
-
+  
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -201,7 +201,10 @@ function Home(props) {
         <div className="Home-Box3-Box1-Box">
           <div className="Home-Box3-Box1-Box-InnerBox1">
             {/* clothesTypesBox1 */}
-            <div className="clothesTypesBox1" onClick={()=>navigate('/shop?type=Dresses')}>
+            <div
+              className="clothesTypesBox1"
+              onClick={() => navigate("/shop?type=Dresses")}
+            >
               {/* <div className="clothesTypesBox1-Box1">{array[0]}</div> */}
               <div></div>
               {/* <div
@@ -221,7 +224,8 @@ function Home(props) {
 
             {/* clothesTypesBox2 */}
             <div
-              className="clothesTypesBox2" onClick={()=>navigate('/shop?type=Co-ordinates')}
+              className="clothesTypesBox2"
+              onClick={() => navigate("/shop?type=Co-ordinates")}
             >
               {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
               <div></div>
@@ -242,7 +246,10 @@ function Home(props) {
           </div>
 
           {/* clothesTypesBox3 */}
-          <div className="clothesTypesBox3"  onClick={()=>navigate('/shop?type=All')}>
+          <div
+            className="clothesTypesBox3"
+            onClick={() => navigate("/shop?type=All")}
+          >
             {/* <div className="clothesTypesBox1-Box1">{array[2]}</div> */}
             <div></div>
             {/* <div
@@ -262,7 +269,10 @@ function Home(props) {
 
           <div className="Home-Box3-Box1-Box-InnerBox1 Home-Box3-Box1-Box-InnerBox1-ipad">
             {/* clothesTypesBox4 */}
-            <div className="clothesTypesBox4" onClick={()=>navigate('/shop?type=Shirts')}>
+            <div
+              className="clothesTypesBox4"
+              onClick={() => navigate("/shop?type=Shirts")}
+            >
               {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}
               <div></div>
               {/* <div
@@ -281,7 +291,10 @@ function Home(props) {
             </div>
 
             {/* clothesTypesBox5 */}
-            <div className="clothesTypesBox5" onClick={()=>navigate('/shop?type=Skirts')}>
+            <div
+              className="clothesTypesBox5"
+              onClick={() => navigate("/shop?type=Skirts")}
+            >
               {/* <div className="clothesTypesBox1-Box1">{array[4]}</div> */}
               <div></div>
               {/* <div

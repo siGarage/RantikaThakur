@@ -392,10 +392,9 @@
   .clothesTypesBox4 {
     height: 90%;
   }
-  .Home-Box3-Box1-Box-InnerBox1{
+  .Home-Box3-Box1-Box-InnerBox1 {
     margin: -20px 0px;
   }
-  
 }
 
 @media only screen and (max-width: 464px) {
@@ -405,5 +404,29 @@
   .multi-carousel-container {
     width: 80%;
     margin: 10px;
+  }
 }
+
+@media only screen and (min-width: 2560px) {
+  .carousel-best-image {
+    height: auto;
+  }
+  .clothesTypesBox1 {
+    height: 1000px;
+  }
+  .clothesTypesBox2{
+    height: 1000px;
+  }
+  .clothesTypesBox3 {
+    height: 1000px;
+  }
+  .clothesTypesBox4 {
+    height: 1000px;
+  }
+  .clothesTypesBox5 {
+    height: 1000px;
+  }
+  .Home-Box3-Box1-Box-InnerBox1{
+    height: 1000px;
+  }
 }

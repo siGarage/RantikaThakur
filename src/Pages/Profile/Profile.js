@@ -1,13 +1,16 @@
 import "./Profile.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { memo, useState } from "react";
 import USERAPI from "../../API/User";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
+import Modal from "react-bootstrap/Modal";
 import constants from "../../constants";
-import img from "./profile.jpg";
+import img from "../../Images/userLogo.png";
 import svgimg from "../../Images/fluent_camera-add-48-filled.svg";
+import Button from "react-bootstrap/Button";
 function Profile(props) {
   let dispatch = useDispatch();
   const logOut = () => {
@@ -28,6 +31,7 @@ function Profile(props) {
     phone: user.user.phone,
   });
   const [edit, setEdit] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -57,6 +61,48 @@ function Profile(props) {
       setShowEdit(false);
     },
   });
+
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("files", image);
+
+    try {
+      const response = await axios.post(
+        "https://admin.rantikathakur.com/api/upload/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Image uploaded successfully:", response.data);
+      // USERAPI.setUserData(values, userid, token).then((res) => {
+      //   if (res.status === 200) {
+      //     toast.success("Your data is updated successfully!");
+      //     dispatch({
+      //       type: constants("auth").reducers.login.success,
+      //       payload: { data: { ...user, user: { ...user.user, ...values } } },
+      //     });
+      //   } else { 
+      //     toast.error(res.data.error.message);
+      //   }
+      // });
+      setShowEdit(false);
+      // Handle success: redirect, show a message, etc.
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      // Handle error: show an error message, retry, etc.
+    }
+  };
   let submitForm = (data, userid, token) => {};
   return (
     // <>
@@ -219,6 +265,32 @@ function Profile(props) {
     //   </section>
     // </>
     <div className="row w-100">
+      <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          {/* <Modal.Title id="example-modal-sizes-title-lg">
+                SIZE CHART
+              </Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleSubmit}>
+            <div className="d-flex flex-column">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <button type="submit" className="col-4">
+                Upload Image
+              </button>
+            </div>
+          </form>
+        </Modal.Body>
+      </Modal>
       <div className="col-lg-6 col-sm-12 profileSection_col align-center d-flex justify-content-center pb-5 ">
         <div className="profileSection">
           <div>
@@ -226,7 +298,11 @@ function Profile(props) {
               <div class="image-container">
                 <img src={img} alt="Image" className="profileImg" />
                 <div class="edit-logo">
-                  <img src={svgimg} alt="Edit" />
+                  <img
+                    src={svgimg}
+                    alt="Edit"
+                    onClick={() => setLgShow(true)}
+                  />
                 </div>
               </div>
               <p>{username}</p>

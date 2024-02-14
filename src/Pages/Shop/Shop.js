@@ -24,6 +24,9 @@ function Shop(props) {
   const [ipadAirMatches, setIpadAirMatches] = useState(
     window.matchMedia("(max-width:820px)").matches
   );
+  const [iMacMatches, setIMacMatches] = useState(
+    window.matchMedia("(min-width:2560px)").matches
+  );
 
   const [sort, setSort] = useState("");
   const type = searchParams.get("type");
@@ -207,6 +210,9 @@ function Shop(props) {
     window
       .matchMedia("(max-width:820px)")
       .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    window
+      .matchMedia("(min-width:2560px)")
+      .addEventListener("change", (e) => setIMacMatches(e.matches));
     if (logged_in) {
       if (wishlist.length === 0) {
         WISHLIST.getWishlistItems(useremail, authtoken).then((res) => {
@@ -417,55 +423,107 @@ function Shop(props) {
                                 ₹ {numberWithCommas(element?.attributes?.price)}
                               </div>
                             </div>
-                            <div className="d-flex col-2 ps-3">
-                              {logged_in ? (
-                                wistItemsId.includes(element?.id) ? (
-                                  <div>
-                                    <FavoriteIcon
-                                      style={{ color: "red" }}
-                                      onClick={() => {
-                                        DeleteFromWishlist(
-                                          WishCartID(element?.id),
-                                          authtoken
-                                        );
-                                      }}
-                                    ></FavoriteIcon>
-                                  </div>
+                            {iMacMatches ? (
+                              <div className="d-flex col-2" style={{marginLeft:"-11px"}}>
+                                {logged_in ? (
+                                  wistItemsId.includes(element?.id) ? (
+                                    <div>
+                                      <FavoriteIcon
+                                        style={{ color: "red" }}
+                                        onClick={() => {
+                                          DeleteFromWishlist(
+                                            WishCartID(element?.id),
+                                            authtoken
+                                          );
+                                        }}
+                                      ></FavoriteIcon>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <FavoriteBorderIcon
+                                        onClick={() => {
+                                          AddToWishlist(
+                                            {
+                                              email: useremail,
+                                              title: element?.attributes?.title,
+                                              price: element?.attributes?.price,
+                                              category:
+                                                element?.attributes?.category
+                                                  ?.data?.attributes?.category,
+                                              id_product: element.id,
+                                              image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
+                                              size: element?.attributes?.sizes?.data.map(
+                                                (element) =>
+                                                  element?.attributes?.size
+                                              ),
+                                            },
+                                            authtoken
+                                          );
+                                        }}
+                                      ></FavoriteBorderIcon>
+                                    </div>
+                                  )
                                 ) : (
                                   <div>
                                     <FavoriteBorderIcon
                                       onClick={() => {
-                                        AddToWishlist(
-                                          {
-                                            email: useremail,
-                                            title: element?.attributes?.title,
-                                            price: element?.attributes?.price,
-                                            category:
-                                              element?.attributes?.category
-                                                ?.data?.attributes?.category,
-                                            id_product: element.id,
-                                            image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
-                                            size: element?.attributes?.sizes?.data.map(
-                                              (element) =>
-                                                element?.attributes?.size
-                                            ),
-                                          },
-                                          authtoken
-                                        );
+                                        navigate(`/login`);
                                       }}
                                     ></FavoriteBorderIcon>
                                   </div>
-                                )
-                              ) : (
-                                <div>
-                                  <FavoriteBorderIcon
-                                    onClick={() => {
-                                      navigate(`/login`);
-                                    }}
-                                  ></FavoriteBorderIcon>
-                                </div>
-                              )}
-                            </div>
+                                )}
+                              </div>
+                            ) : (
+                              <div className="d-flex col-2 ps-3">
+                                {logged_in ? (
+                                  wistItemsId.includes(element?.id) ? (
+                                    <div>
+                                      <FavoriteIcon
+                                        style={{ color: "red" }}
+                                        onClick={() => {
+                                          DeleteFromWishlist(
+                                            WishCartID(element?.id),
+                                            authtoken
+                                          );
+                                        }}
+                                      ></FavoriteIcon>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <FavoriteBorderIcon
+                                        onClick={() => {
+                                          AddToWishlist(
+                                            {
+                                              email: useremail,
+                                              title: element?.attributes?.title,
+                                              price: element?.attributes?.price,
+                                              category:
+                                                element?.attributes?.category
+                                                  ?.data?.attributes?.category,
+                                              id_product: element.id,
+                                              image: `${element?.attributes?.images?.data[0]?.attributes?.url}`,
+                                              size: element?.attributes?.sizes?.data.map(
+                                                (element) =>
+                                                  element?.attributes?.size
+                                              ),
+                                            },
+                                            authtoken
+                                          );
+                                        }}
+                                      ></FavoriteBorderIcon>
+                                    </div>
+                                  )
+                                ) : (
+                                  <div>
+                                    <FavoriteBorderIcon
+                                      onClick={() => {
+                                        navigate(`/login`);
+                                      }}
+                                    ></FavoriteBorderIcon>
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
 

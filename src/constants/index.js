@@ -28,9 +28,7 @@ function generateConsts(type){
         actions: ["wishlist"],
         name: "WISHLIST",
       };
-      default:  
-      
-        
+      default:   
   }
 }
 

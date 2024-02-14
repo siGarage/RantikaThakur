@@ -1,15 +1,22 @@
 import "./About.css";
 import SideImage from "../../Images/IMG_2973.jpeg";
 import Video from "../../Images/rantika-thakur.mp4";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 function About() {
+  const [matches, setMatches] = useState(
+    window.matchMedia("(min-width:2560px)").matches
+  );
   useEffect(() => {
+    window
+      .matchMedia("(min-width:2560px")
+      .addEventListener("change", (e) => setMatches(e.matches));
     var video = document.getElementById("myVideo");
     video.oncanplaythrough = function () {
       video.muted = true;
       video.play();
     };
   }, []);
+
   return (
     <section className="About">
       <div className="About-Box1">
@@ -25,11 +32,15 @@ function About() {
             padding: "52px 0px",
           }}
         >
-          <div className="About-Box1-Box1">
+          <div
+            className={
+              matches ? "About-Box1-Box1 text-center" : "About-Box1-Box1"
+            }
+          >
             <img
               src={SideImage}
               alt="SideImage"
-              style={{ height: "100%", width: "84%" }}
+              style={{ height: "100%", width: `${matches ? "58%" : "84%"}` }}
             />
           </div>
           <div className="About-Box1-Box2">
@@ -100,11 +111,13 @@ function About() {
             ~About The founder~
           </div>
           <div className="row w-100">
-            <div className="col-lg-6 col-sm-12 col-xs-12">
-              {/* <video autoplay muted controls>
-                <source type="video/mp4" />
-                Your browser does not support the video tag.
-              </video> */}
+            <div
+              className={
+                matches
+                  ? "col-lg-6 col-sm-12 col-xs-12 text-center"
+                  : "col-lg-6 col-sm-12 col-xs-12"
+              }
+            >
               <video autoplay muted loop controls id="myVideo">
                 <source src={Video} type="video/mp4" />
               </video>
@@ -121,6 +134,7 @@ function About() {
                   flexDirection: "column",
                   width: "100%",
                   textAlign: "left",
+                  marginLeft: `${matches ? "-100px" : ""}`,
                 }}
               >
                 Founded by Rantika Thakur, who's a blogger turned entrepreneur.
