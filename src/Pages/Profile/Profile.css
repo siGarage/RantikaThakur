@@ -27,6 +27,7 @@
   background-color: #e2bf44;
   padding: 1px 15px 1px 15px;
   border-radius: 12px;
+  cursor: pointer;
 }
 .editSection {
   font-size: 12px;
@@ -34,6 +35,7 @@
 .editText {
   text-decoration: underline;
   color: #e2bf44;
+  cursor: pointer;
 }
 .image-container {
   position: relative;
@@ -44,6 +46,7 @@
   position: absolute;
   bottom: 0px;
   right: 5px; /* Adjust as needed */
+  cursor: pointer;
 }
 
 .edit-logo img {
