@@ -4,6 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import { memo, useState } from "react";
 import USERAPI from "../../API/User";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
 import constants from "../../constants";
 import img from "./profile.jpg";
 import svgimg from "../../Images/fluent_camera-add-48-filled.svg";
@@ -16,6 +17,8 @@ function Profile(props) {
 
   let user = props.user;
   let username = props.user.user.username;
+  let address = props.user.user.address;
+  let phone = props.user.user.phone;
   let userid = user.user.id;
   let token = user.jwt;
 
@@ -25,6 +28,7 @@ function Profile(props) {
     phone: user.user.phone,
   });
   const [edit, setEdit] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -32,20 +36,28 @@ function Profile(props) {
   const ToggleEditButton = (edit) => {
     setEdit(!edit);
   };
-
-  let submitForm = (data, userid, token) => {
-    USERAPI.setUserData(data, userid, token).then((res) => {
-      if (res.status === 200) {
-        toast.error("Your data is updated successfully !");
-        dispatch({
-          type: constants("auth").reducers.login.success,
-          payload: { data: { ...user, user: { ...user.user, ...data } } },
-        });
-      } else {
-        toast.error(res.data.error.message);
-      }
-    });
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: username || "",
+      address: address || "",
+      phone: phone || "",
+    },
+    onSubmit: (values) => {
+      USERAPI.setUserData(values, userid, token).then((res) => {
+        if (res.status === 200) {
+          toast.success("Your data is updated successfully!");
+          dispatch({
+            type: constants("auth").reducers.login.success,
+            payload: { data: { ...user, user: { ...user.user, ...values } } },
+          });
+        } else {
+          toast.error(res.data.error.message);
+        }
+      });
+      setShowEdit(false);
+    },
+  });
+  let submitForm = (data, userid, token) => {};
   return (
     // <>
     //   <section className="profile">
@@ -208,7 +220,7 @@ function Profile(props) {
     // </>
     <div className="row w-100">
       <div className="col-lg-6 col-sm-12 profileSection_col align-center d-flex justify-content-center pb-5 ">
-        <div className="profileSection ">
+        <div className="profileSection">
           <div>
             <div className="text-center align center w-100 pt-5 pe-5 pb-3">
               <div class="image-container">
@@ -223,16 +235,54 @@ function Profile(props) {
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">Name</div>
                 <div className="textWeight ps-4">
-                  {username}
+                  {showEdit ? (
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="Enter your name"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.name}
+                    />
+                  ) : (
+                    username
+                  )}
                 </div>
               </div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">Address</div>
-                <div className="textWeight ps-4">Test Address</div>
+                <div className="textWeight ps-4">
+                  {" "}
+                  {showEdit ? (
+                    <input
+                      name="address"
+                      type="text"
+                      placeholder="Enter your address"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.address}
+                    />
+                  ) : (
+                    address
+                  )}
+                </div>
               </div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">Phone No.</div>
-                <div className="textWeight ps-3">0987654321</div>
+                <div className="textWeight ps-3">
+                  {showEdit ? (
+                    <input
+                      name="phone"
+                      type="number"
+                      placeholder="Enter your phone"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.phone}
+                    />
+                  ) : (
+                    phone
+                  )}
+                </div>
               </div>
               <div className="d-flex ps-5 pb-3">
                 <div className="titleWeight">E-Mail Address</div>
@@ -242,14 +292,27 @@ function Profile(props) {
             <div className="editSection d-flex ps-5 pt-5 pb-4 justify-content-between textWeight5">
               <div className="editText">Add Address</div>
               <div className="pe-3">
-                <div className="editButton">Edit</div>
+                {showEdit ? (
+                  <div className="editButton" onClick={formik.handleSubmit}>
+                    update
+                  </div>
+                ) : (
+                  <div
+                    className="editButton"
+                    onClick={() => {
+                      setShowEdit(true);
+                    }}
+                  >
+                    Edit
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="col-lg-6 col-sm-12 ">
-        <div></div>
+        <div onClick={() => logOut()}>LogOut</div>
       </div>
     </div>
   );

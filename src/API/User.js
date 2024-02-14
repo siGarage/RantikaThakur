@@ -48,12 +48,7 @@ export default class Auth {
             .catch((error) => defaultCatch(error, resolve));
         });
       }
-
-
-  
-
-
- 
+    
 }
 
 
