@@ -20,31 +20,47 @@ function defaultCatch(error, resolve) {
 }
 
 export default class Auth {
+  // sign up
+  static getOrder(userid, authtoken) {
+    return new Promise((resolve) => {
+      instance
+        .get(
+          `/api/confirm-orders?filters[email]=${userid}&populate=order_confirmation`,
+          {
+            headers: {
+              Authorization: "Bearer " + authtoken,
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
 
- // sign up
-    static getOrder(userid,authtoken) {
-        return new Promise((resolve) => {
-          instance
-            .get(`/api/confirm-orders?filters[email]=${userid}&populate=order_confirmation`,{headers: {
-                'Authorization': 'Bearer ' + authtoken
-              }})
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => defaultCatch(error, resolve));
-        });
-      }
-      
-      static setOrder(data) {
-        let data2={"data":data}
-        return new Promise((resolve) => {
-          instance
-            .post("/api/confirm-orders",data2)
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => defaultCatch(error, resolve));
-        });
-      }
-  
+  static setOrder(data) {
+    let data2 = { data: data };
+    return new Promise((resolve) => {
+      instance
+        .post("/api/confirm-orders", data2)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
+
+  static order(values) {
+    let payload = values;
+    console.log(payload);
+    return new Promise((resolve) => {
+      instance
+        .post("/api/orders", { data: payload.data })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
 }

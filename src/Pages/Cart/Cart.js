@@ -119,20 +119,21 @@ function Cart(props) {
   const stripePromise = loadStripe(
     `${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`
   );
-  const handlePayment = async () => {
-    // try {
-    //   const stripe = await stripePromise;
-    //   const res = await makePaymentRequest.post("/api/orders", {
-    //     email: useremail,
-    //     products: cart,
-    //   });
-    //   await stripe.redirectToCheckout({
-    //     sessionId: res.data.stripeSession.id,
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
+  // const handlePayment = async () => {
+  //   try {
+  //     const res = await makePaymentRequest.post("/api/orders", {
+  //       name: "kartik",
+  //       amount: 1,
+  //       number: "0987654321",
+  //     });
+  //     console.log(res.data);
+  //     await stripe.redirectToCheckout({
+  //       sessionId: res.data.stripeSession.id,
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
@@ -364,26 +365,6 @@ function Cart(props) {
             </div>
           </div>
 
-          {/* <button
-            disabled={cart.length === 0}
-            style={{
-              padding: "10px 0px",
-              width: "100%",
-              border: "none",
-              borderRadius: "6px",
-              backgroundColor: "#E2BF44",
-              height: "auto",
-              fontSize: "20px",
-              fontWeight: "400",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-            onClick={() => handlePayment()}
-          >
-            Continue To Checkout
-          </button> */}
           <GooglePayButton
             environment="TEST"
             paymentRequest={{
@@ -406,15 +387,15 @@ function Cart(props) {
                 },
               ],
               merchantInfo: {
-                merchantId: "1234567896533",
-                merchantName: "Demo Merchant",
+                merchantId: "BCR2DN4T5G3NF5Y7",
+                merchantName: "Silicon Garage",
               },
               transactionInfo: {
                 totalPriceStatus: "FINAL",
                 totalPriceLabel: "Total",
                 totalPrice: price.toString(),
-                currencyCode: "USD",
-                countryCode: "US",
+                currencyCode: "INR",
+                countryCode: "IN",
               },
               shippingAddressRequired: true,
               callbackIntents: ["PAYMENT_AUTHORIZATION"],
@@ -433,6 +414,25 @@ function Cart(props) {
           ></GooglePayButton>
         </div>
       </div>
+      {/* <button
+        style={{
+          padding: "10px 0px",
+          width: "100%",
+          border: "none",
+          borderRadius: "6px",
+          backgroundColor: "#E2BF44",
+          height: "auto",
+          fontSize: "20px",
+          fontWeight: "400",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+        }}
+        onClick={() => handlePayment()}
+      >
+        Continue To Checkout
+      </button> */}
       <YouMayLike />
     </section>
   );

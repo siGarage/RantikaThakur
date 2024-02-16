@@ -7,10 +7,13 @@ import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import constants from "../../constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [iMacMatches, setIMacMatches] = useState(
+    window.matchMedia("(min-width:2560px)").matches
+  );
   const SignupSchema = Yup.object().shape({
     identifier: Yup.string()
       .email("*Enter a valid mail!")
@@ -18,6 +21,11 @@ function Login() {
     password: Yup.string().required("*Password field is required!"),
   });
 
+  useEffect(() => {
+    window
+      .matchMedia("(min-width:2560px)")
+      .addEventListener("change", (e) => setIMacMatches(e.matches));
+  }, []);
   const formik = useFormik({
     initialValues: {
       identifier: "",
@@ -73,11 +81,21 @@ function Login() {
             height: "100%",
           }}
         >
-          <div className="LoginImage">
+          <div
+            className={
+              iMacMatches
+                ? "LoginImage d-flex justify-content-center"
+                : "LoginImage "
+            }
+          >
             <img
               src={SideImage}
               alt="SideImage"
-              style={{ height: "100%", width: "100%" }}
+              style={{
+                height: "100%",
+                width: `${iMacMatches ? "60%" : "100%"}`,
+                padding: `${iMacMatches ? "0px" : "20px"}`,
+              }}
             />
           </div>
           <div className="LoginDetails">
