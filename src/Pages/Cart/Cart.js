@@ -7,8 +7,9 @@ import YouMayLike from "../YouMayLike/YouMayLike";
 import CARTDATA from "../../API/Cart";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import ORDER from "../../API/Order";
+import PAYMENT from "../../API/Payment";
 import GooglePayButton from "@google-pay/button-react";
-import { makePaymentRequest } from "../../API/Payment";
 function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ function Cart(props) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   const { cart, useremail, authtoken } = props;
-
   // Delete Items From Cart
   const DeleteFromCart = (id, authtoken) => {
     CARTDATA.deleteCartItems(id, authtoken).then((res) => {
@@ -84,7 +84,7 @@ function Cart(props) {
     if (quantity >= 1) {
       CARTDATA.updateCart(cartId, data, authtoken).then((res) => {
         if (res.status === 200) {
-          dispatch({
+          dispatch({ 
             type: constants("cart").reducers.cart.AddToCart,
             payload: { cartItems: cartData },
           });
@@ -115,25 +115,62 @@ function Cart(props) {
       );
     }
   }, [useremail, authtoken, dispatch, cart.length]);
-
-  const stripePromise = loadStripe(
-    `${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`
-  );
-  // const handlePayment = async () => {
-  //   try {
-  //     const res = await makePaymentRequest.post("/api/orders", {
-  //       name: "kartik",
-  //       amount: 1,
-  //       number: "0987654321",
-  //     });
-  //     console.log(res.data);
-  //     await stripe.redirectToCheckout({
-  //       sessionId: res.data.stripeSession.id,
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const handlePayment = async (e) => {
+    // let data = {
+    //   amount: 100.0,
+    //   currency: "INR",
+    // };
+    // const res = ORDER.order(data, authtoken).then((res) => {
+    //   if (res.status === 200) {
+    //     const order = res.data;
+    //     var options = {
+    //       key: "rzp_test_eqZehvX5KFrQ5k", // Enter the Key ID generated from the Dashboard
+    //       amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //       currency: order.currency,
+    //       name: "Acme Corp", //your business name
+    //       description: "Test Transaction",
+    //       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //       handler: async function (response) {
+    //         const body = {
+    //           ...response,
+    //         };
+    //         const validateRes = PAYMENT.payment(body, authtoken).then((res) => {
+    //           console.log(res.data);
+    //         });
+    //       },
+    //       // prefill: {
+    //       //   //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+    //       //   name: "Web Dev Matrix", //your customer's name
+    //       //   email: "webdevmatrix@example.com",
+    //       //   contact: "9000000000", //Provide the customer's phone number for better conversion rates
+    //       // },
+    //       notes: {
+    //         address: "Razorpay Corporate Office",
+    //       },
+    //       theme: {
+    //         color: "#3399cc",
+    //       },
+    //     };
+    //     var rzp1 = new window.Razorpay(options);
+    //     rzp1.on("payment.failed", function (response) {
+    //       alert(response.error.code);
+    //       alert(response.error.description);
+    //       alert(response.error.source);
+    //       alert(response.error.step);
+    //       alert(response.error.reason);
+    //       alert(response.error.metadata.order_id);
+    //       alert(response.error.metadata.payment_id);
+    //     });
+    //     rzp1.open();
+    //   } else {
+    //     toast.error("Server Side Error");
+    //   }
+    // });
+    // try {
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
 
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
@@ -365,7 +402,26 @@ function Cart(props) {
             </div>
           </div>
 
-          <GooglePayButton
+          <button
+            style={{
+              padding: "10px 0px",
+              width: "100%",
+              border: "none",
+              borderRadius: "6px",
+              backgroundColor: "#E2BF44",
+              height: "auto",
+              fontSize: "20px",
+              fontWeight: "400",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+            }}
+            onClick={() => handlePayment()}
+          >
+            Continue To Checkout
+          </button>
+          {/* <GooglePayButton
             environment="TEST"
             paymentRequest={{
               apiVersion: 2,
@@ -411,7 +467,7 @@ function Cart(props) {
             buttonColor="default"
             buttonType="buy"
             buttonSizeMode="fill"
-          ></GooglePayButton>
+          ></GooglePayButton> */}
         </div>
       </div>
       {/* <button

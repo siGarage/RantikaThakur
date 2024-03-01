@@ -12,7 +12,6 @@ export default function auth(state = initial_state, action) {
         ...state,
         cartItems: action.payload.cartItems
       };
-
     default:
       return state;
   }

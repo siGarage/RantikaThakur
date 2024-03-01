@@ -14,7 +14,6 @@ import REVIEW from "../../API/Review";
 import WISHLIST from "../../API/Wishlist";
 import Box from "@mui/material/Box";
 import { loadStripe } from "@stripe/stripe-js";
-import { makePaymentRequest } from "../../API/Payment";
 import ImageZoom from "react-image-zooom";
 import parse from "html-react-parser";
 import Button from "react-bootstrap/Button";
@@ -223,34 +222,34 @@ function ShopId(props) {
     `${process.env.REACT_APP_STRIPE_PUBLISH_KEY}`
   );
 
-  const handlePayment = async () => {
-    if (size !== "") {
-      try {
-        const stripe = await stripePromise;
-        const data = {
-          ...product,
-          attributes: {
-            ...product?.attributes,
-            size: size,
-            quantity: 1,
-            image: product?.attributes.images.data[0].attributes.url,
-          },
-        };
-        const res = await makePaymentRequest.post("/api/orders", {
-          email: useremail,
-          stripeId: "testId",
-        });
+  // const handlePayment = async () => {
+  //   if (size !== "") {
+  //     try {
+  //       const stripe = await stripePromise;
+  //       const data = {
+  //         ...product,
+  //         attributes: {
+  //           ...product?.attributes,
+  //           size: size,
+  //           quantity: 1,
+  //           image: product?.attributes.images.data[0].attributes.url,
+  //         },
+  //       };
+  //       const res = await makePaymentRequest.post("/api/orders", {
+  //         email: useremail,
+  //         stripeId: "testId",
+  //       });
 
-        await stripe.redirectToCheckout({
-          sessionId: res.data.stripeSession.id,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      toast.error("Please Select Size");
-    }
-  };
+  //       await stripe.redirectToCheckout({
+  //         sessionId: res.data.stripeSession.id,
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   } else {
+  //     toast.error("Please Select Size");
+  //   }
+  // };
   // Function to serialize an object to a JSON string
   const serializeObject = (obj) => JSON.stringify(obj);
 

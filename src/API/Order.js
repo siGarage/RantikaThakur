@@ -51,12 +51,16 @@ export default class Auth {
     });
   }
 
-  static order(values) {
+  static order(values,token) {
     let payload = values;
-    console.log(payload);
+    let authtoken=token
     return new Promise((resolve) => {
       instance
-        .post("/api/orders", { data: payload.data })
+        .post("/api/orders", payload, {
+          headers: {
+            Authorization: "Bearer " + authtoken,
+          },
+        })
         .then((response) => {
           resolve(response);
         })

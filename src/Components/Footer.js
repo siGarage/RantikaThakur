@@ -179,23 +179,6 @@ function Footer() {
                   onClick={() => {
                     navigate({
                       pathname: "/shop",
-                      search: `?type=${"Tops"}`,
-                    });
-                    window.scrollTo(0, 0);
-                  }}
-                  style={{
-                    fontSize: "14px",
-                    margin: "8px 0px",
-                    fontWeight: "500",
-                    cursor: "pointer",
-                  }}
-                >
-                  Tops
-                </div>
-                <div
-                  onClick={() => {
-                    navigate({
-                      pathname: "/shop",
                       search: `?type=${"Dresses"}`,
                     });
                     window.scrollTo(0, 0);

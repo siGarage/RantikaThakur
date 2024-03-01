@@ -133,8 +133,10 @@ function Contact() {
           </div>
           <div className="row align-items-baseline">
             <div className="col-sm-12 col-xs-12 col-md-4 title justify-content-start flex-column mob">
-              <p class="d-flex justify-content-center mA ">E-mail Address</p>
-              <p className="mobt">contactrantikathakurclothing@gmail.com</p>
+              <p class="d-flex justify-content-center mA ">Mail Address</p>
+              <p className="mobt">
+                1313 Top Floor,Sector 37 B, Udhyan Path, Chandigarh 160036
+              </p>
             </div>
             <div className="col-sm-12 col-xs-12 col-md-4 title justify-content-center flex-column mob">
               <p className="d-flex justify-content-center mA">Social Media</p>
@@ -281,6 +283,12 @@ function Contact() {
             <div className="col-sm-12 col-xs-12 col-md-4 title justify-content-end flex-column mob">
               <p className="d-flex justify-content-center mA">Contact No.</p>
               <p className="mobt">+91 8146351843</p>
+            </div>
+          </div>
+          <div className="row align-items-baseline">
+            <div className="col-sm-12 col-xs-12 col-md-4 title justify-content-start flex-column mob">
+              <p class="d-flex justify-content-center mA ">E-mail Address</p>
+              <p className="mobt">contactrantikathakurclothing@gmail.com</p>
             </div>
           </div>
           {/* <div className="Contact-Detail">

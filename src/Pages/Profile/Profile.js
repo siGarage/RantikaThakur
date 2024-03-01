@@ -47,6 +47,7 @@ function Profile(props) {
       phone: phone || "",
     },
     onSubmit: (values) => {
+      console.log(values,"values");
       USERAPI.setUserData(values, userid, token).then((res) => {
         if (res.status === 200) {
           toast.success("Your data is updated successfully!");

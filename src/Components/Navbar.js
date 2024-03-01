@@ -403,7 +403,7 @@ function Navbar(props) {
         ) : (
           ""
         )}
-        <a href="https://wa.me/9041999489" target="_blank" rel="noreferrer">
+        <a href="https://wa.me/8146351843" target="_blank" rel="noreferrer">
           <span className="d-flex justify-content-end">
             <img
               src={Whatsapp}
