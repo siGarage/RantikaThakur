@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Order.css";
 import { connect } from "react-redux";
 import { memo, useEffect, useState } from "react";
@@ -8,7 +8,7 @@ function Order(props) {
   const { authtoken, useremail } = props;
 
   let [order, setOrder] = useState([]);
-
+  const navigate = useNavigate();
   const fetchSize = (String) => {
     const regex = /Size:(\w+)/;
     const match = String.match(regex);
@@ -35,7 +35,7 @@ function Order(props) {
       <div className="Order2" style={{ width: "100%", margin: "20px 0px" }}>
         <div className="Order-Main-Box">
           <div className="Order-Main-Box1">
-            <div
+            {/* <div
               style={{
                 width: "100%",
                 display: "flex",
@@ -47,9 +47,41 @@ function Order(props) {
               }}
             >
               Your Orders
+            </div> */}
+            <div className="row w-50">
+              <div className="col-12 order-list-Container">
+                <div class="order-summary">
+                  <h2> Your Orders</h2>
+                  <ol class="order-list">
+                    {order?.map((order) => {
+                      console.log(order)
+                      return (
+                        <li>
+                          <div class="product-info">
+                            <span
+                              class="product-name"
+                              onClick={() => {
+                                navigate(`/order/${order?.id}`);
+                              }}
+                            >
+                              {order?.attributes?.Payment_id}
+                            </span>
+                            <span class="product-name">
+                              {order?.attributes?.Order_status}
+                            </span>
+                            <span class="product-price">
+                              ₹ {order?.attributes?.Order_Amount}
+                            </span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+              </div>
             </div>
-            <div className="Order-Main-Box1-Box">
-              {order.lengt !== 0 ? (
+            {/* <div className="Order-Main-Box1-Box">
+              {order.length !== 0 ? (
                 order?.map((element) => (
                   <div
                     key={element.id}
@@ -174,7 +206,7 @@ function Order(props) {
                   No Orders
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

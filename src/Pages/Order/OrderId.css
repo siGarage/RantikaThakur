@@ -1,0 +1,97 @@
+.Order {
+  width: 100%;
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.total-amount {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 24px;
+}
+.total-amount p {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 24px;
+}
+.order-detail-link {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 24px;
+  color: #e2bf44;
+}
+.order-detail-box {
+  border: 2px solid black;
+  border-radius: 12px;
+  box-shadow: 5px 5px 5px rgb(146, 144, 144);
+}
+.checkmark {
+  margin-right: -50px;
+}
+.delivery-partner {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.delivery-partner-details {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.track-order {
+  border-radius: 8px;
+  background-color: #fffff3;
+}
+
+.order-brief-detail {
+  font-family: "Comfortaa";
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.cancel-button {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 24px;
+  color: #e2bf44;
+}
+
+.deliverTo {
+  font-family: "Poppins";
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 45px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.col .name {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.col .address {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #8b8b8b;
+}
+.col .phone {
+    font-family: "Poppins";
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #8b8b8b;
+  }

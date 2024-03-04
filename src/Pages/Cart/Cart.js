@@ -4,20 +4,113 @@ import { connect, useDispatch } from "react-redux";
 import constants from "../../constants";
 import { toast } from "react-toastify";
 import YouMayLike from "../YouMayLike/YouMayLike";
-import CARTDATA from "../../API/Cart";
-import { useNavigate } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import ORDER from "../../API/Order";
 import PAYMENT from "../../API/Payment";
-import GooglePayButton from "@google-pay/button-react";
+import ORDER from "../../API/Order";
+import CARTDATA from "../../API/Cart";
+import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let address = props.user.user.address;
+  const [lgShow, setLgShow] = useState(false);
   const [price, setPrice] = useState(0);
+  const [ids, setIds] = useState([]);
+  const [addressList, setAddressList] = useState([address || ""]);
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [newAddress, setNewAddress] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const { cart, useremail, authtoken } = props;
+  // Function to handle changes in the radio selection
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleNewAddressChange = () => {
+    if (!addressList.includes(newAddress)) {
+      // Add the element to the array
+      setAddressList([...addressList, newAddress]);
+    } else {
+      toast.error("Address already exist.");
+    }
+  };
+
+  const handleFinalPayment = (e) => {
+    if (selectedOption?.length > 0) {
+      let data = {
+        amount: price * 100.0,
+        currency: "INR",
+      };
+      const res = ORDER.order(data, authtoken).then((res) => {
+        if (res.status === 200) {
+          const order = res.data;
+          var options = {
+            key: "rzp_test_kuwC6yLAG4jMXv", // Enter the Key ID generated from the Dashboard
+            amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            currency: order.currency,
+            name: "Rantika Thakur Clothing", //your business name
+            description: "Test Transaction",
+            order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            handler: async function (response) {
+              const body = {
+                ...response,
+                address: selectedOption,
+                amount: price,
+                ids: ids,
+                email: useremail
+              };
+              const validateRes = PAYMENT.payment(body, authtoken).then(
+                (res) => {
+                  setLgShow(false);
+                  ids.map(async (id) => {
+                    CARTDATA.deleteCartItems(id, authtoken).then((res) => {
+                      if (res.status === 200) {
+                        window.location.href = "/order";
+                      }
+                    });
+                  });
+                  console.log(res.data);
+                }
+              );
+            },
+            // prefill: {
+            //   //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+            //   name: "Web Dev Matrix", //your customer's name
+            //   email: "webdevmatrix@example.com",
+            //   contact: "9000000000", //Provide the customer's phone number for better conversion rates
+            // },
+            notes: {
+              address: "Razorpay Corporate Office",
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+          var rzp1 = new window.Razorpay(options);
+          rzp1.on("payment.failed", function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+          });
+          rzp1.open();
+        } else {
+          toast.error("Server Side Error");
+        }
+      });
+      try {
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
-  const { cart, useremail, authtoken } = props;
   // Delete Items From Cart
   const DeleteFromCart = (id, authtoken) => {
     CARTDATA.deleteCartItems(id, authtoken).then((res) => {
@@ -84,7 +177,7 @@ function Cart(props) {
     if (quantity >= 1) {
       CARTDATA.updateCart(cartId, data, authtoken).then((res) => {
         if (res.status === 200) {
-          dispatch({ 
+          dispatch({
             type: constants("cart").reducers.cart.AddToCart,
             payload: { cartItems: cartData },
           });
@@ -114,67 +207,96 @@ function Cart(props) {
           .reduce((accumulator, currentValue) => accumulator + currentValue)
       );
     }
+    if (cart.length > 0) {
+      const newValues = cart.map((item) => item.id);
+      setIds((prevArray) => [...prevArray, ...newValues]);
+    }
   }, [useremail, authtoken, dispatch, cart.length]);
   const handlePayment = async (e) => {
-    // let data = {
-    //   amount: 100.0,
-    //   currency: "INR",
-    // };
-    // const res = ORDER.order(data, authtoken).then((res) => {
-    //   if (res.status === 200) {
-    //     const order = res.data;
-    //     var options = {
-    //       key: "rzp_test_eqZehvX5KFrQ5k", // Enter the Key ID generated from the Dashboard
-    //       amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    //       currency: order.currency,
-    //       name: "Acme Corp", //your business name
-    //       description: "Test Transaction",
-    //       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    //       handler: async function (response) {
-    //         const body = {
-    //           ...response,
-    //         };
-    //         const validateRes = PAYMENT.payment(body, authtoken).then((res) => {
-    //           console.log(res.data);
-    //         });
-    //       },
-    //       // prefill: {
-    //       //   //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-    //       //   name: "Web Dev Matrix", //your customer's name
-    //       //   email: "webdevmatrix@example.com",
-    //       //   contact: "9000000000", //Provide the customer's phone number for better conversion rates
-    //       // },
-    //       notes: {
-    //         address: "Razorpay Corporate Office",
-    //       },
-    //       theme: {
-    //         color: "#3399cc",
-    //       },
-    //     };
-    //     var rzp1 = new window.Razorpay(options);
-    //     rzp1.on("payment.failed", function (response) {
-    //       alert(response.error.code);
-    //       alert(response.error.description);
-    //       alert(response.error.source);
-    //       alert(response.error.step);
-    //       alert(response.error.reason);
-    //       alert(response.error.metadata.order_id);
-    //       alert(response.error.metadata.payment_id);
-    //     });
-    //     rzp1.open();
-    //   } else {
-    //     toast.error("Server Side Error");
-    //   }
-    // });
-    // try {
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    if (cart.length > 0) {
+      setLgShow(true);
+    } else {
+      toast.error("Add products in the cart.");
+    }
   };
 
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
       <div className="Cart-Main-Box">
+        <Modal
+          size="lg"
+          show={lgShow}
+          onHide={() => setLgShow(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              ADD ADDRESS
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="address-form-container">
+              {addressList.length > 0 ? (
+                <>
+                  <p>Exixting Address:</p>
+                  <div>
+                    {addressList?.map((item) => {
+                      return (
+                        <div className="d-flex  w-100">
+                          <input
+                            type="radio"
+                            className="me-2"
+                            id={item}
+                            name={item}
+                            value={item}
+                            checked={selectedOption === item}
+                            onChange={handleOptionChange}
+                          />
+                          <label htmlFor="item">{item}</label>
+                        </div>
+                      );
+                    })}
+
+                    {/* Display the selected option */}
+                    {/* <p>Selected option: {selectedOption}</p> */}
+                  </div>
+
+                  <div className="divider"></div>
+                </>
+              ) : (
+                ""
+              )}
+
+              <p className="add-new-address-heading">Add a new address:</p>
+
+              <div className="input-group">
+                <label htmlFor="address">Address Address:</label>
+                <div className="d-flex justufy-content-center w-100">
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={newAddress}
+                    onChange={(e) => setNewAddress(e.target.value)}
+                    style={{ height: "50px" }}
+                  />
+                  <button
+                    onClick={handleNewAddressChange}
+                    className="addaddress-button"
+                  >
+                    Add Address
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={() => handleFinalPayment()}
+                className="submit-button"
+              >
+                Use Selected Address
+              </button>
+            </div>
+          </Modal.Body>
+        </Modal>
         <div className="Cart-Main-Box1">
           {cart?.length !== 0 ? (
             cart.map((element) => {
@@ -497,5 +619,6 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cartItems,
   useremail: state.auth.user.user.email,
   authtoken: state.auth.user.jwt,
+  user: state.auth.user,
 });
 export default connect(mapStateToProps)(memo(Cart));

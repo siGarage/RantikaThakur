@@ -1,64 +1,119 @@
-.Cart-Main-Box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-   /* align-items: center; */
-   width: 100%;
+.Cart-Main-Box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
 }
-.Cart-Main-Box1{
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-}
-
-.Cart-Main-Box2{
-    width: 40%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;  
-    font-family:'Comfortaa';
-    font-weight:'500';
-    font-size:20px;
-    padding: 0px 40px;
+.Cart-Main-Box1 {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
 }
 
-.cartCard{
-    height:300px;
+.Cart-Main-Box2 {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: "Comfortaa";
+  font-weight: "500";
+  font-size: 20px;
+  padding: 0px 40px;
 }
 
-.cartCardImage{
-    height:299px;
-    width:230px;
+.cartCard {
+  height: 300px;
 }
-.cartDeleteButton{
-    font-size:40px
+
+.cartCardImage {
+  height: 299px;
+  width: 230px;
+}
+.cartDeleteButton {
+  font-size: 40px;
+}
+.address-form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.address-form-container .input-group {
+  margin-bottom: 20px;
+}
+
+.address-form-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.address-form-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address-form-container .submit-button {
+  background-color: rgb(226, 191, 68);
+  color: white;
+  padding: 14px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addaddress-button {
+  background-color: rgb(226, 191, 68);
+  color: white;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.address-form-container .submit-button:hover {
+  background-color: rgb(226, 191, 68);
+}
+
+.address-form-container .divider {
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+.add-new-address-heading {
+  font-size: 18px;
+  font-weight: bold;
 }
 @media only screen and (max-width: 1000px) {
-    .Cart-Main-Box{
-        flex-direction: column;
-        margin: 0px 10px;
-    }
-    .Cart-Main-Box1{
-        width: 100%;
-    }
-    
-    .Cart-Main-Box2{
-        width: 100%; 
-        justify-content: center;  
-    }
-    .Cart-Product-Detail{
-        font-size: 16px;
-    }
-    .cartDeleteButton{
-        font-size:25px
-    }
-    .cartCard{
-        height:250px;
-    }
-    .cartCardImage{
-        height:249px;
-    }
-    .cartCardImage{
-        width:150px;
-    }
+  .Cart-Main-Box {
+    flex-direction: column;
+    margin: 0px 10px;
   }
+  .Cart-Main-Box1 {
+    width: 100%;
+  }
+
+  .Cart-Main-Box2 {
+    width: 100%;
+    justify-content: center;
+  }
+  .Cart-Product-Detail {
+    font-size: 16px;
+  }
+  .cartDeleteButton {
+    font-size: 25px;
+  }
+  .cartCard {
+    height: 250px;
+  }
+  .cartCardImage {
+    height: 249px;
+  }
+  .cartCardImage {
+    width: 150px;
+  }
+}

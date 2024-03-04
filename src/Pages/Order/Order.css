@@ -182,6 +182,44 @@ font-weight: 400;
     font-style: italic;
 }
 
+/* Reset default list styles */
+.order-list-Container ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Style for the order summary */
+.order-list-Container .order-summary {
+    background-color: #FFFFF3;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* Style for list items */
+.order-list-Container .order-list li {
+    margin-bottom: 10px;
+}
+
+/* Style for product information */
+.order-list-Container .product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Style for product name */
+.order-list-Container .product-name {
+    font-weight: bold;
+}
+
+/* Style for product price */
+.order-list-Container .product-price {
+    color: #007bff; /* Blue color */
+}
+
 @media only screen and (max-width: 800px)  {
     .Order-Main-Box1-Box{
         width:90%;

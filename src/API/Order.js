@@ -25,7 +25,7 @@ export default class Auth {
     return new Promise((resolve) => {
       instance
         .get(
-          `/api/confirm-orders?filters[email]=${userid}&populate=order_confirmation`,
+          `/api/order-confirmations?filters[Order_By]=${userid}`,
           {
             headers: {
               Authorization: "Bearer " + authtoken,
