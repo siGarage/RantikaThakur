@@ -1,6 +1,7 @@
 import "./shipingPolicy.css";
 import SideImage from "../../Images/IMG_2973.jpeg";
-import Video from "../../Images/rantika-thakur.mp4";
+import Video from "../../Images/rantika-thakur.mp4"; 
+
 import { useEffect, useState } from "react";
 function shipingPolicy() {
   return (

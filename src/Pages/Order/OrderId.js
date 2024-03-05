@@ -20,7 +20,8 @@ function Order(props) {
 
   const { orderId } = useParams();
   let [order, setOrder] = useState([]);
-  console.log(order, "order");
+  let [orderDetails, setOrderDetails] = useState();
+  console.log(orderDetails, "orderDetails");
   const fetchSize = (String) => {
     const regex = /Size:(\w+)/;
     const match = String.match(regex);
@@ -39,7 +40,14 @@ function Order(props) {
         `${process.env.REACT_APP_SERVERNAME}/api/order-confirmations/${orderId}`
       )
         .then((response) => response.json())
-        .then((data) => setOrder(data.data));
+        .then((data) => {
+          setOrder(data.data);
+          setOrderDetails(
+            JSON.parse(
+              data?.data?.attributes?.Order_Details?.replaceAll("\\\\", "")
+            )
+          );
+        });
     }
   }, [authtoken, useremail, orderId]);
   return (
@@ -51,7 +59,7 @@ function Order(props) {
               <div className="row">
                 <div className="col total-amount">
                   Total Amount
-                  <br /> Rs.{order?.attributes?.Order_Amount}
+                  <br /> ₹ {order?.attributes?.Order_Amount}
                   <br />
                   <p>
                     Paid By
@@ -60,17 +68,19 @@ function Order(props) {
                 </div>
                 <div className="col total-amount d-flex justify-content-end">
                   <p>
-                    {moment(order?.attributes?.createdAt).format("DD/MM/YYYY")}
+                    {moment(order?.attributes?.createdAt).format(
+                      "DD MMMM, YYYY"
+                    )}
                   </p>
                 </div>
               </div>
               <hr />
               <div className="row">
-                <div className="col order-detail-link">
+                <div className="col order-detail-link" style={{cursor:"pointer"}}>
                   Delivery <br />
                   Address
                 </div>
-                <div className="col d-flex justify-content-end order-detail-link">
+                <div className="col d-flex justify-content-end order-detail-link" style={{cursor:"pointer"}}>
                   View <br />
                   Details
                 </div>
@@ -153,7 +163,7 @@ function Order(props) {
             <div className="row">
               <div className="col">
                 <div className="row">
-                  <div className="col">
+                  <div className="col ">
                     <p className="delivery-partner">
                       Delivery Partner <br /> Tracking ID
                     </p>
@@ -189,23 +199,33 @@ function Order(props) {
         </div>
         <div className="row w-100 pb-5 d-flex justify-content-center">
           <div className="col-8">
-            <div className="row">
-              <div className="col">
-                <div className="row">
-                  <div className="col">
-                    <img src={suits} width="254px" height="257px" />
-                  </div>
-                  <div className="col order-brief-detail">
-                    Stripped top with ruffles
-                    <br />
-                    <p className="pt-3">Rs.5,349</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col d-flex justify-content-end cancel-button">
-                Cancel
-              </div>
-            </div>
+            {orderDetails?.length > 0
+              ? orderDetails?.map((item) => {
+                  return (
+                    <div className="row">
+                      <div className="col">
+                        <div className="row">
+                          <div className="col">
+                            <img
+                              src={`${process.env.REACT_APP_SERVERNAME}${item.image}`}
+                              width="254px"
+                              height="257px"
+                            />
+                          </div>
+                          <div className="col order-brief-detail">
+                            {item?.title}
+                            <br />
+                            <p className="pt-3"> ₹ {item?.price}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col d-flex justify-content-end cancel-button" style={{cursor:"pointer"}}>
+                        Cancel
+                      </div>
+                    </div>
+                  );
+                })
+              : ""}
           </div>
         </div>
         <div className="row w-100 pb-5 d-flex justify-content-center">

@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { memo, useState } from "react";
@@ -12,6 +12,7 @@ import img from "../../Images/userLogo.png";
 import svgimg from "../../Images/fluent_camera-add-48-filled.svg";
 import Button from "react-bootstrap/Button";
 function Profile(props) {
+  const navigate = useNavigate();
   let dispatch = useDispatch();
   const logOut = () => {
     localStorage.clear();
@@ -47,7 +48,7 @@ function Profile(props) {
       phone: phone || "",
     },
     onSubmit: (values) => {
-      console.log(values,"values");
+      console.log(values, "values");
       USERAPI.setUserData(values, userid, token).then((res) => {
         if (res.status === 200) {
           toast.success("Your data is updated successfully!");
@@ -93,7 +94,7 @@ function Profile(props) {
       //       type: constants("auth").reducers.login.success,
       //       payload: { data: { ...user, user: { ...user.user, ...values } } },
       //     });
-      //   } else { 
+      //   } else {
       //     toast.error(res.data.error.message);
       //   }
       // });
@@ -388,8 +389,9 @@ function Profile(props) {
           </div>
         </div>
       </div>
-      <div className="col-lg-6 col-sm-12 ">
+      <div className="col-lg-6 col-sm-12">
         <div onClick={() => logOut()}>LogOut</div>
+        <div onClick={() => navigate("/order")}>Order</div>
       </div>
     </div>
   );

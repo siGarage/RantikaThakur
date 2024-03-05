@@ -405,6 +405,18 @@
     width: 80%;
     margin: 10px;
   }
+  .clothesTypesBox1 {
+    width: 55% !important;
+  }
+  .clothesTypesBox2 {
+    width: 55% !important;
+  }
+  .clothesTypesBox4 {
+    width: 55% !important;
+  }
+  .clothesTypesBox5 {
+    width: 55% !important;
+  }
 }
 
 @media only screen and (min-width: 2560px) {
