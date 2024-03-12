@@ -27,6 +27,12 @@ function Shop(props) {
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
+  const [mobileRMatches, setMobileRMatches] = useState(
+    window.matchMedia("(max-width:896px)").matches
+  );
+  const [airPadRMatches, setAirIpadRRMatches] = useState(
+    window.matchMedia("(max-width:1180px)").matches
+  );
 
   const [sort, setSort] = useState("");
   const type = searchParams.get("type");
@@ -213,6 +219,13 @@ function Shop(props) {
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
+    window
+      .matchMedia("(max-width:896px)")
+      .addEventListener("change", (e) => setMobileRMatches(e.matches));
+    window
+      .matchMedia("(max-width:1180px)")
+      .addEventListener("change", (e) => setAirIpadRRMatches(e.matches));
+
     if (logged_in) {
       if (wishlist.length === 0) {
         WISHLIST.getWishlistItems(useremail, authtoken).then((res) => {
@@ -387,7 +400,17 @@ function Shop(props) {
                               onMouseOut={(e) =>
                                 (e.currentTarget.src = `${process.env.REACT_APP_SERVERNAME}${element?.attributes?.images?.data[0]?.attributes?.url}`)
                               }
-                              width={matches ? "300px" : "342px"}
+                              width={
+                                matches
+                                  ? "300px"
+                                  : mobileRMatches
+                                  ? "300px"
+                                  : ipadMatches
+                                  ? "342px"
+                                  : airPadRMatches
+                                  ? "280px"
+                                  : "342px"
+                              }
                               height="480px"
                               alt="ProductImage"
                               style={{
@@ -424,7 +447,10 @@ function Shop(props) {
                               </div>
                             </div>
                             {iMacMatches ? (
-                              <div className="d-flex col-2" style={{marginLeft:"-11px"}}>
+                              <div
+                                className="d-flex col-2"
+                                style={{ marginLeft: "-11px" }}
+                              >
                                 {logged_in ? (
                                   wistItemsId.includes(element?.id) ? (
                                     <div>
