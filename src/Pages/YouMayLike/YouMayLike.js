@@ -48,7 +48,7 @@ function Like(props) {
                       onClick={() => {
                         navigate(`/shop/${element?.id}`);
                       }}
-                      className="col-md-3 my-3 "
+                      className={ipadMatches?"col-md-4 my-4 ":"col-md-3 my-3 "}
                       key={element?.id}
                     >
                       <div className={matches ? "Card text-center" : "Card"}>
