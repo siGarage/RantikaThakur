@@ -406,44 +406,41 @@
     margin: 10px;
   }
   .clothesTypesBox1 {
-    width: 55% !important;
+    width: 42% !important;
   }
   .clothesTypesBox2 {
-    width: 55% !important;
+    width: 42% !important;
   }
   .clothesTypesBox4 {
     width: 55% !important;
   }
   .clothesTypesBox5 {
-    width: 55% !important;
+    width: 42% !important;
   }
 }
 
-@media only screen and (min-width: 2560px) {
+@media only screen and (width: 2560px) {
   .carousel-best-image {
-    height: auto;
+    height: auto !important;
   }
   .clothesTypesBox1 {
-    height: 1000px;
+    height: 100% !important;
   }
   .clothesTypesBox2 {
-    height: 1000px;
+    height: 100% !important;
   }
   .clothesTypesBox3 {
     height: 1000px;
   }
   .clothesTypesBox4 {
-    height: 1000px;
+    height: 100% !important;
   }
   .clothesTypesBox5 {
     height: 1000px;
   }
-  .Home-Box3-Box1-Box-InnerBox1 {
-    height: 1000px;
-  }
 }
 
-@media only screen and (min-width: 896px) {
+@media only screen and (width: 896px) {
   .carousel-best-image {
     height: auto;
   }
@@ -473,16 +470,16 @@
   }
 }
 
-@media only screen and (min-width: 1180px) {
+@media only screen and (width: 1180px) {
   .carousel-best-image {
     height: auto;
   }
   .clothesTypesBox1 {
-    height: 80% !important;
+    height: 70% !important;
     width: 40% !important;
   }
   .clothesTypesBox2 {
-    height: 80% !important;
+    height: 70% !important;
     width: 40% !important;
   }
   .clothesTypesBox3 {
@@ -490,19 +487,16 @@
     height: 700px !important;
   }
   .clothesTypesBox4 {
-    height: 80% !important;
+    height: 70% !important;
     width: 40% !important;
   }
   .clothesTypesBox5 {
-    height: 80%!important;
+    height: 70% !important;
     width: 40% !important;
-  }
-  .Home-Box3-Box1-Box-InnerBox1{
-    margin:-90px !important
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (width: 1024px) {
   .carousel-best-image {
     height: auto;
   }
@@ -526,14 +520,14 @@
     height: 70% !important;
     width: 40%;
   }
-  
-  .Home-Box3-Box1-Box-InnerBox1{
-    margin:-90px !important
+
+  .Home-Box3-Box1-Box-InnerBox1 {
+    margin: -90px !important;
   }
 }
 
-@media only screen and (min-width: 820px) {
-  .Home-Box3-Box1-Box-InnerBox1{
+@media only screen and (width: 820px) {
+  .Home-Box3-Box1-Box-InnerBox1 {
     margin: 0px;
   }
   .carousel-best-image {
