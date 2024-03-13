@@ -406,12 +406,12 @@ function Shop(props) {
                                   : mobileRMatches
                                   ? "300px"
                                   : ipadMatches
-                                  ? "342px"
+                                  ? "300spx"
                                   : airPadRMatches
                                   ? "280px"
                                   : "342px"
                               }
-                              height="480px"
+                              height={ipadMatches ? "450px" : "480px"}
                               alt="ProductImage"
                               style={{
                                 filter: !element?.attributes?.instock
