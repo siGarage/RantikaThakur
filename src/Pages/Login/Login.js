@@ -85,7 +85,7 @@ function Login() {
             className={
               iMacMatches
                 ? "LoginImage d-flex justify-content-center"
-                : "LoginImage "
+                : "LoginImage d-flex justify-content-center"
             }
           >
             <img
@@ -93,7 +93,7 @@ function Login() {
               alt="SideImage"
               style={{
                 height: "100%",
-                width: `${iMacMatches ? "60%" : "100%"}`,
+                width: `${iMacMatches ? "60%" : "80%"}`,
                 padding: `${iMacMatches ? "0px" : "20px"}`,
               }}
             />
