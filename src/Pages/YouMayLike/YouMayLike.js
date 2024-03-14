@@ -11,9 +11,15 @@ function Like(props) {
   const [ipadMatches, setIpadMatches] = useState(
     window.matchMedia("(max-width:1024px)").matches
   );
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:820px)").matches
+  );
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
+  window
+    .matchMedia("(max-width:820px)")
+    .addEventListener("change", (e) => setIpadAirMatches(e.matches));
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -48,7 +54,13 @@ function Like(props) {
                       onClick={() => {
                         navigate(`/shop/${element?.id}`);
                       }}
-                      className={ipadMatches?"col-md-4 my-4 ":"col-md-3 my-3 "}
+                      className={
+                        ipadMatches
+                          ? "col-md-4 my-4"
+                          : ipadAirMatches
+                          ? "col-md-4 my-4"
+                          : "col-md-3 my-3 "
+                      }
                       key={element?.id}
                     >
                       <div className={matches ? "Card text-center" : "Card"}>
