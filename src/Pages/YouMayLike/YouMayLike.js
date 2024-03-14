@@ -20,8 +20,8 @@ function Like(props) {
   const [airPadRMatches, setAirIpadRRMatches] = useState(
     window.matchMedia("(max-width:1180px)").matches
   );
-  const [iPadProRMatches, setIpadProRRMatches] = useState(
-    window.matchMedia("(max-height:1024px)").matches
+  const [iprMatches, setIprMatches] = useState(
+    window.matchMedia("(min-height:1024px)").matches
   );
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -31,8 +31,8 @@ function Like(props) {
       .matchMedia("(max-width:1024px)")
       .addEventListener("change", (e) => setIpadMatches(e.matches));
     window
-      .matchMedia("(max-height:1024px)")
-      .addEventListener("change", (e) => setIpadProRRMatches(e.matches));
+      .matchMedia("(min-height:1024px)")
+      .addEventListener("change", (e) => setIprMatches(e.matches));
     window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
@@ -61,7 +61,7 @@ function Like(props) {
                   ipadMatches,
                   ipadAirMatches,
                   airPadRMatches,
-                  iPadProRMatches
+                  iprMatches
                 )}
                 {array.map((element) => {
                   return (
@@ -73,7 +73,7 @@ function Like(props) {
                         ipadMatches ||
                         ipadAirMatches ||
                         airPadRMatches ||
-                        iPadProRMatches
+                        iprMatches
                           ? "col-md-4 my-4"
                           : "col-md-3 my-3"
                       }
