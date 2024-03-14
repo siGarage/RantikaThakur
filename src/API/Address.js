@@ -23,11 +23,11 @@ function defaultCatch(error, resolve) {
 export default class Auth {
   //log in
 
-  static addReview(values) {
+  static addAddress(values) {
     let payload = { data: values.data };
     return new Promise((resolve) => {
       instance
-        .post("/api/ratings", payload)
+        .post("/api/users-shipping-details", payload)
         .then((response) => {
           resolve(response);
         })

@@ -1,24 +1,33 @@
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { memo, useState } from "react";
 import USERAPI from "../../API/User";
+import ADDRESSAPI from "../../API/Address";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import Modal from "react-bootstrap/Modal";
 import constants from "../../constants";
 import img from "../../Images/userLogo.png";
 import svgimg from "../../Images/fluent_camera-add-48-filled.svg";
+import * as Yup from "yup";
 import Button from "react-bootstrap/Button";
 function Profile(props) {
   const navigate = useNavigate();
   let dispatch = useDispatch();
+  let [full_address, setAddress] = useState({});
   const logOut = () => {
     localStorage.clear();
     window.location.reload("/login");
   };
-
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:820px)").matches
+  );
+  const [mobileRMatches, setMobileRMatches] = useState(
+    window.matchMedia("(max-width:896px)").matches
+  );
   let user = props.user;
   let username = props.user.user.username;
   let address = props.user.user.address;
@@ -31,8 +40,24 @@ function Profile(props) {
     address: user.user.address,
     phone: user.user.phone,
   });
+  useEffect(() => {
+    window
+      .matchMedia("(max-width:820px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    window
+      .matchMedia("(max-width:896px)")
+      .addEventListener("change", (e) => setMobileRMatches(e.matches));
+    if (userid) {
+      fetch(
+        `${process.env.REACT_APP_SERVERNAME}/api/users-shipping-details?filters[userId]=${userid}`
+      )
+        .then((response) => response.json())
+        .then((data) => setAddress(data.data));
+    }
+  }, [userid]);
   const [edit, setEdit] = useState(false);
   const [lgShow, setLgShow] = useState(false);
+  const [adShow, setAdShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const onChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -41,26 +66,53 @@ function Profile(props) {
   const ToggleEditButton = (edit) => {
     setEdit(!edit);
   };
+  const SignupSchema = Yup.object().shape({
+    phone: Yup.number().required("*Phone is required!"),
+    address: Yup.string().required("*Full Address is required!"),
+    pin: Yup.number().required("*Pin is required!"),
+  });
   const formik = useFormik({
     initialValues: {
       name: username || "",
       address: address || "",
       phone: phone || "",
+      pin: "",
     },
+    validationSchema: SignupSchema,
     onSubmit: (values) => {
-      console.log(values, "values");
-      USERAPI.setUserData(values, userid, token).then((res) => {
-        if (res.status === 200) {
-          toast.success("Your data is updated successfully!");
-          dispatch({
-            type: constants("auth").reducers.login.success,
-            payload: { data: { ...user, user: { ...user.user, ...values } } },
-          });
-        } else {
-          toast.error(res.data.error.message);
-        }
-      });
-      setShowEdit(false);
+      if (adShow) {
+        let data = {
+          ...values,
+          userId: userid,
+        };
+        ADDRESSAPI.addAddress({ data }).then((res) => {
+          if (res.status === 200) {
+            toast.success("Shipping Address added succesfully !");
+            setAddress([...full_address, res.data.data]);
+            setAdShow(false);
+          } else {
+            toast.error(res.data.error.message);
+          }
+        });
+      } else {
+        values = {
+          name: values?.name,
+          address: values?.address,
+          phone: values?.phone,
+        };
+        USERAPI.setUserData(values, userid, token).then((res) => {
+          if (res.status === 200) {
+            toast.success("Your data is updated successfully!");
+            dispatch({
+              type: constants("auth").reducers.login.success,
+              payload: { data: { ...user, user: { ...user.user, ...values } } },
+            });
+          } else {
+            toast.error(res.data.error.message);
+          }
+        });
+        setShowEdit(false);
+      }
     },
   });
 
@@ -269,6 +321,93 @@ function Profile(props) {
     <div className="row w-100">
       <Modal
         size="lg"
+        show={adShow}
+        onHide={() => setAdShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            ADD SHIPING ADDRESS
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div class="container">
+            <form onSubmit={formik.handleSubmit}>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Enter name please"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.name}
+                />
+                {formik.errors.name && formik.touched.name ? (
+                  <div className="red_color">{formik.errors.name}</div>
+                ) : null}
+              </div>
+              <div class="form-group">
+                <label for="adderess">
+                  Full Address(House No., City, State)
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  name="address"
+                  placeholder="Enter full address please"
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.address}
+                />
+                {formik.errors.address && formik.touched.address ? (
+                  <div className="red_color">{formik.errors.address}</div>
+                ) : null}
+              </div>
+              <div class="form-group">
+                <label for="pin">Pin Code</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="pin"
+                  name="pin"
+                  placeholder="Enter pin please."
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.pin}
+                />
+                {formik.errors.pin && formik.touched.pin ? (
+                  <div className="red_color">{formik.errors.pin}</div>
+                ) : null}
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone No.</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter phone please."
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.phone}
+                />
+                {formik.errors.phone && formik.touched.phone ? (
+                  <div className="red_color">{formik.errors.phone}</div>
+                ) : null}
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">
+                Submit
+              </button>
+            </form>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
         show={lgShow}
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
@@ -368,7 +507,7 @@ function Profile(props) {
               </div>
             </div>
             <div className="editSection d-flex ps-5 pt-5 pb-4 justify-content-between textWeight5">
-              <div className="editText">Add Address</div>
+              {/* <div className="editText">Add Address</div> */}
               <div className="pe-3">
                 {showEdit ? (
                   <div className="editButton" onClick={formik.handleSubmit}>
@@ -389,9 +528,44 @@ function Profile(props) {
           </div>
         </div>
       </div>
-      <div className="col-lg-6 col-sm-12">
-        <div onClick={() => logOut()}>LogOut</div>
-        <div onClick={() => navigate("/order")}>Order</div>
+      <div
+        className={
+          ipadAirMatches || mobileRMatches
+            ? "col-md-12 col-lg-12 col-sm-6 d-flex justify-content-center mb-3"
+            : "col col-sm-6 d-flex justify-content-center mb-3 h-100"
+        }
+      >
+        <div className="profileSection">
+          <h3 className="text-center mt-2">Shipping Address</h3>
+          <div className="p-4">
+            {full_address.length > 0
+              ? full_address?.map((item, index) => {
+                  return (
+                    <div className="row d-flex justify-content-center flex-column mb-3">
+                      <div className="col">
+                        {index + 1}.Name:&nbsp;{item.attributes.name}
+                      </div>
+                      <div className="col">
+                        &nbsp;&nbsp;&nbsp;Full Address:&nbsp;
+                        {item.attributes.address}
+                      </div>
+                      <div className="col">
+                        &nbsp;&nbsp;&nbsp;Pin:&nbsp;{item.attributes.pin}
+                      </div>
+                      <div className="col">
+                        &nbsp;&nbsp;&nbsp;Phone:&nbsp;{item.attributes.phone}
+                      </div>
+                    </div>
+                  );
+                })
+              : ""}
+            <button onClick={() => setAdShow(true)} className="editButton aba">
+              Add Shiping Address
+            </button>
+          </div>
+        </div>
+        {/* <div onClick={() => logOut()}>LogOut</div>
+        <div onClick={() => navigate("/order")}>Order</div> */}
       </div>
     </div>
   );
