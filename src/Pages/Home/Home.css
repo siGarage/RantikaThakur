@@ -534,19 +534,22 @@
     height: auto;
   }
   .clothesTypesBox1 {
-    height: 90%;
+    height: 100%;
   }
   .clothesTypesBox2 {
-    height: 90%;
+    height: 100%;
   }
   .clothesTypesBox3 {
     width: 97%;
-    height: 350px;
+    height: 340px;
   }
   .clothesTypesBox4 {
-    height: 90%;
+    height: 100%;
+    margin-bottom: 10px;
   }
   .clothesTypesBox5 {
-    height: 90%;
+    height: 100%;
+    margin-bottom: 10px;
+
   }
 }

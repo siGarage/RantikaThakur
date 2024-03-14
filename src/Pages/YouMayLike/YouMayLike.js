@@ -17,9 +17,12 @@ function Like(props) {
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
-  window
-    .matchMedia("(max-width:820px)")
-    .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+  const [airPadRMatches, setAirIpadRRMatches] = useState(
+    window.matchMedia("(max-width:1180px)").matches
+  );
+  const [iPadProRMatches, setIpadProRRMatches] = useState(
+    window.matchMedia("(max-height:1024px)").matches
+  );
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -28,8 +31,14 @@ function Like(props) {
       .matchMedia("(max-width:1024px)")
       .addEventListener("change", (e) => setIpadMatches(e.matches));
     window
+      .matchMedia("(max-height:1024px)")
+      .addEventListener("change", (e) => setIpadProRRMatches(e.matches));
+    window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+    window
+      .matchMedia("(max-width:1180px)")
+      .addEventListener("change", (e) => setAirIpadRRMatches(e.matches));
   }, []);
   return (
     <>
@@ -48,6 +57,12 @@ function Like(props) {
             </div>
             {array?.length > 0 ? (
               <div className="row">
+                {console.log(
+                  ipadMatches,
+                  ipadAirMatches,
+                  airPadRMatches,
+                  iPadProRMatches
+                )}
                 {array.map((element) => {
                   return (
                     <div
@@ -55,11 +70,12 @@ function Like(props) {
                         navigate(`/shop/${element?.id}`);
                       }}
                       className={
-                        ipadMatches
+                        ipadMatches ||
+                        ipadAirMatches ||
+                        airPadRMatches ||
+                        iPadProRMatches
                           ? "col-md-4 my-4"
-                          : ipadAirMatches
-                          ? "col-md-4 my-4"
-                          : "col-md-3 my-3 "
+                          : "col-md-3 my-3"
                       }
                       key={element?.id}
                     >
