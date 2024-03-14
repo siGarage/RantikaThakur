@@ -240,7 +240,26 @@ ul li img {
 .wclose:after {
   transform: rotate(-45deg);
 }
+.rightMenu .dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+.rightMenu .dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.rightMenu .dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
 @media only screen and (max-width: 700px) {
   a {
     color: #818181 !important;
@@ -249,6 +268,9 @@ ul li img {
     display: none;
   }
   .Navbar-link {
+    display: none;
+  }
+  .rightMenu{
     display: none;
   }
   .Navbar-box1 {
@@ -274,7 +296,7 @@ ul li img {
   }
 }
 @media only screen and (min-width: 2560px) {
-  .dropdown-content{
+  .dropdown-content {
     font-size: 20px;
   }
 }

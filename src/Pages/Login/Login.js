@@ -84,8 +84,8 @@ function Login() {
           <div
             className={
               iMacMatches
-                ? "LoginImage d-flex justify-content-center"
-                : "LoginImage d-flex justify-content-center"
+                ? "LoginImage   text-center"
+                : "LoginImage   text-center"
             }
           >
             <img

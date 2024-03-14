@@ -58,7 +58,10 @@ function Navbar(props) {
   const handleClick = (event) => {
     setIsShown(true);
   };
-
+  const logOut = () => {
+    localStorage.clear();
+    window.location.reload("/login");
+  };
   const handleClickClose = (event) => {
     setIsShown(false);
     setShowSearchInput(false);
@@ -172,15 +175,36 @@ function Navbar(props) {
                 </div>
               </Link>
             ) : (
-              <Link
-                className="Navbar-link"
-                to="/profile"
-                style={{ textDecoration: "none" }}
-              >
-                <div className="Profile-Box-Text">
-                  {username.slice(0, 1).toUpperCase()}
+              <div class="rightMenu">
+                <div class="dropdown" style={{ float: "right" }}>
+                  <div className="Profile-Box-Text">
+                    {username.slice(0, 1).toUpperCase()}
+                  </div>
+                  <div class="dropdown-content">
+                    <Link
+                      className="Navbar-link"
+                      to="/profile"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      className="Navbar-link"
+                      to="/order"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Orders
+                    </Link>
+                    <Link
+                      className="Navbar-link"
+                      onClick={() => logOut()}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Logout
+                    </Link>
+                  </div>
                 </div>
-              </Link>
+              </div>
             )}
           </div>
         </div>

@@ -24,6 +24,10 @@ function NavScrollExample(props) {
     e.preventDefault();
     document.getElementById("mySidenav").style.width = "0";
   };
+  const logOut = () => {
+    localStorage.clear();
+    window.location.reload("/login");
+  };
   const show = (e) => {
     e.preventDefault();
     if (showCat == true) {
@@ -94,6 +98,21 @@ function NavScrollExample(props) {
             <Link to="/contact" style={{ color: "white", fontSize: "18px" }}>
               Contact
             </Link>
+            {!logged_in ? (
+              ""
+            ) : (
+              <>
+                <Link to="/order" style={{ color: "white", fontSize: "18px" }}>
+                  Orders
+                </Link>
+                <Link
+                  onClick={() => logOut()}
+                  style={{ color: "white", fontSize: "18px" }}
+                >
+                  Logout
+                </Link>
+              </>
+            )}
           </div>
         </div>
 

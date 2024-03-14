@@ -1,56 +1,53 @@
-.Login-Button{
-    width: 60%;
-    height: 50px;
-    border-radius: 72px;
-    background-color: #E2BF44;
-    color: white;
-    padding: 19px 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    border: none;
-    margin: 20px 0px;
+.Login-Button {
+  width: 60%;
+  height: 50px;
+  border-radius: 72px;
+  background-color: #e2bf44;
+  color: white;
+  padding: 19px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  border: none;
+  margin: 20px 0px;
 }
 
-.red_color{
-    color:red;
+.red_color {
+  color: red;
 }
 
-.LoginImage{
-    width:50%;
-    height:100%;
+.LoginImage {
+  width: 50%;
+  height: 100%;
 }
 
-.LoginDetails{
-    width:50%;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    flex-direction:column;
-    height:100%;
+.LoginDetails {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
 
-.Login-Heading2{
-    font-family:'Poppins';
-    font-weight:500;
-    font-size:20px;
+.Login-Heading2 {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 20px;
 }
-@media only screen and (max-width: 800px)  {
-    
-    .LoginImage{
-        display: none;
-    }
-    .LoginDetails{
-        width:100%;
-        
-    }
-
-    .Login-Button{
-        width: 100%;
-    }
-    .Login-Heading2
-    {
-        font-size:16px;
-    }
+@media only screen and (max-width: 800px) {
+  .LoginImage {
+    display: none;
   }
+  .LoginDetails {
+    width: 100%;
+  }
+
+  .Login-Button {
+    width: 100%;
+  }
+  .Login-Heading2 {
+    font-size: 16px;
+  }
+}
