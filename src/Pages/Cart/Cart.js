@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useId, useState } from "react";
 import "./Cart.css";
 import { connect, useDispatch } from "react-redux";
 import constants from "../../constants";
@@ -16,24 +16,34 @@ function Cart(props) {
   const [lgShow, setLgShow] = useState(false);
   const [price, setPrice] = useState(0);
   const [ids, setIds] = useState([]);
+  let userid = props.user.user.id;
   const [addressList, setAddressList] = useState([address || ""]);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [newAddress, setNewAddress] = useState("");
+  const [full_Address, setAddress] = useState("");
+  console.log(full_Address);
   const [selectedOption, setSelectedOption] = useState("");
+  const [order_final_address, setOrderFinalAddress] = useState("");
+  const [order_final_phone, setOrderFinalPhone] = useState("");
+  const [order_final_pin, setOrderFinalPin] = useState("");
+  const [order_final_name, setOrderFinalName] = useState("");
 
   const { cart, useremail, authtoken } = props;
   // Function to handle changes in the radio selection
   const handleOptionChange = (event) => {
+    // setSelectedOption(event.target.value);
+    let final_address = full_Address.filter(
+      (item) => item.attributes.address == event.target.value
+    );
     setSelectedOption(event.target.value);
+    setOrderFinalAddress(final_address[0].attributes.address);
+    setOrderFinalPhone(final_address[0].attributes.phone);
+    setOrderFinalPin(final_address[0].attributes.pin);
+    setOrderFinalName(final_address[0].attributes.name);
   };
 
   const handleNewAddressChange = () => {
-    if (!addressList.includes(newAddress)) {
-      // Add the element to the array
-      setAddressList([...addressList, newAddress]);
-    } else {
-      toast.error("Address already exist.");
-    }
+    navigate("/profile");
   };
 
   const handleFinalPayment = (e) => {
@@ -46,7 +56,7 @@ function Cart(props) {
         if (res.status === 200) {
           const order = res.data;
           var options = {
-            key: "rzp_test_kuwC6yLAG4jMXv", // Enter the Key ID generated from the Dashboard
+            key: "rzp_live_91L6FV1TyEcyhT", // Enter the Key ID generated from the Dashboard
             amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             currency: order.currency,
             name: "Rantika Thakur Clothing", //your business name
@@ -55,10 +65,13 @@ function Cart(props) {
             handler: async function (response) {
               const body = {
                 ...response,
-                address: selectedOption,
+                address: order_final_address,
+                phone: order_final_phone,
+                pin: order_final_pin,
+                name: order_final_name,
                 amount: price,
                 ids: ids,
-                email: useremail
+                email: useremail,
               };
               const validateRes = PAYMENT.payment(body, authtoken).then(
                 (res) => {
@@ -105,6 +118,12 @@ function Cart(props) {
       try {
       } catch (err) {
         console.log(err);
+      }
+    } else {
+      if (full_Address?.length > 0) {
+        toast.error("Choose Shipping Address .");
+      } else {
+        navigate("/profile");
       }
     }
   };
@@ -211,7 +230,14 @@ function Cart(props) {
       const newValues = cart.map((item) => item.id);
       setIds((prevArray) => [...prevArray, ...newValues]);
     }
-  }, [useremail, authtoken, dispatch, cart.length]);
+    if (userid) {
+      fetch(
+        `${process.env.REACT_APP_SERVERNAME}/api/users-shipping-details?filters[userId]=${userid}`
+      )
+        .then((response) => response.json())
+        .then((data) => setAddress(data.data));
+    }
+  }, [useremail, authtoken, dispatch, cart.length, userid]);
   const handlePayment = async (e) => {
     if (cart.length > 0) {
       setLgShow(true);
@@ -236,64 +262,60 @@ function Cart(props) {
           </Modal.Header>
           <Modal.Body>
             <div className="address-form-container">
-              {addressList.length > 0 ? (
+              {full_Address?.length > 0 ? (
                 <>
-                  <p>Exixting Address:</p>
+                  <p>Choose Shipping Address:</p>
                   <div>
-                    {addressList?.map((item) => {
+                    {full_Address?.map((item, index) => {
                       return (
-                        <div className="d-flex  w-100">
-                          <input
-                            type="radio"
-                            className="me-2"
-                            id={item}
-                            name={item}
-                            value={item}
-                            checked={selectedOption === item}
-                            onChange={handleOptionChange}
-                          />
-                          <label htmlFor="item">{item}</label>
-                        </div>
+                        <>
+                          <div className="d-flex  w-100">
+                            <input
+                              type="radio"
+                              className="me-2"
+                              id={index}
+                              name={item.attributes.address}
+                              value={item.attributes.address}
+                              checked={
+                                selectedOption === item.attributes.address
+                              }
+                              onChange={handleOptionChange}
+                            />
+                            <div className="row d-flex justify-content-center flex-column mb-3">
+                              <div className="col">{item.attributes.name}</div>
+                              <div className="col">
+                                {item.attributes.address}
+                                {item.attributes.pin}
+                              </div>
+                              <div className="col">{item.attributes.phone}</div>
+                            </div>
+                          </div>
+                          <div className="divider"></div>
+                        </>
                       );
                     })}
 
                     {/* Display the selected option */}
                     {/* <p>Selected option: {selectedOption}</p> */}
                   </div>
-
-                  <div className="divider"></div>
                 </>
               ) : (
                 ""
               )}
-
-              <p className="add-new-address-heading">Add a new address:</p>
-
-              <div className="input-group">
-                <label htmlFor="address">Address Address:</label>
-                <div className="d-flex justufy-content-center w-100">
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={newAddress}
-                    onChange={(e) => setNewAddress(e.target.value)}
-                    style={{ height: "50px" }}
-                  />
-                  <button
-                    onClick={handleNewAddressChange}
-                    className="addaddress-button"
-                  >
-                    Add Address
-                  </button>
-                </div>
+              <div className="d-flex justify-content-between">
+                <button
+                  onClick={() => handleFinalPayment()}
+                  className="submit-button"
+                >
+                  Use Selected Address
+                </button>
+                <button
+                  onClick={handleNewAddressChange}
+                  className="submit-button"
+                >
+                  Add New Address
+                </button>
               </div>
-              <button
-                onClick={() => handleFinalPayment()}
-                className="submit-button"
-              >
-                Use Selected Address
-              </button>
             </div>
           </Modal.Body>
         </Modal>

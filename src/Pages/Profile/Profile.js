@@ -538,7 +538,7 @@ function Profile(props) {
         <div className="profileSection">
           <h3 className="text-center mt-2">Shipping Address</h3>
           <div className="p-4">
-            {full_address.length > 0
+            {full_address?.length > 0
               ? full_address?.map((item, index) => {
                   return (
                     <div className="row d-flex justify-content-center flex-column mb-3">

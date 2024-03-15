@@ -180,7 +180,7 @@ function Navbar(props) {
                   <div className="Profile-Box-Text">
                     {username.slice(0, 1).toUpperCase()}
                   </div>
-                  <div class="dropdown-content">
+                  <div class="dropdown-content mt-3">
                     <Link
                       className="Navbar-link"
                       to="/profile"
