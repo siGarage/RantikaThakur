@@ -23,8 +23,18 @@ function Navbar(props) {
   const [showWhatsappCloud, setshowWhatsappCloud] = useState(true);
   const [logoStyle, setLogoStyle] = useState({ marginLeft: "150px" });
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  // const handleMouseEnter = () => {
+  //   setIsHovered(true);
+  // };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
   };
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
@@ -179,48 +189,15 @@ function Navbar(props) {
                 </div>
               </Link>
             ) : (
-              <div class="rightMenu">
-                <div class="dropdown" style={{ float: "right" }}>
-                  <button
-                    class="p-dropbtn"
-                    style={{ color: "rbg(0,0,0)", backgroundColor: "#FFFFF3" }}
-                    onClick={toggleDropdown}
-                  >
-                    <div className="Profile-Box-Text">
-                      {username.slice(0, 1).toUpperCase()}
-                    </div>
-                  </button>
-                  {isOpen && (
-                    <div class="dropdown-content mt-3">
-                      <Link
-                        className="Navbar-link"
-                        to="/profile"
-                        style={{ textDecoration: "none" }}
-                      >
-                        Profile
-                      </Link>
-                      <Link
-                        className="Navbar-link"
-                        to="/order"
-                        style={{ textDecoration: "none" }}
-                      >
-                        Orders
-                      </Link>
-                      <Link
-                        className="Navbar-link"
-                        onClick={() => logOut()}
-                        style={{ textDecoration: "none" }}
-                      >
-                        Logout
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </div>
-              // <div className="dropdown">
-              //     <div className="Profile-Box-Text" onClick={toggleDropdown}>
+              // <div className="dropdown" onMouseLeave={handleMouseLeave}>
+              //   <button
+              //     className="custom-dropdown-button"
+              //     onClick={toggleDropdown}
+              //   >
+              //     <div className="Profile-Box-Text" >
               //       {username.slice(0, 1).toUpperCase()}
               //     </div>
+              //   </button>
               //   {isOpen && (
               //     <ul className="dropdown-menu">
               //       <li>
@@ -253,6 +230,48 @@ function Navbar(props) {
               //     </ul>
               //   )}
               // </div>
+              <div
+                className="dropdown "
+                onMouseLeave={handleMouseLeave}
+                style={{ float: "right" }}
+              >
+                <div className="Profile-Box-Text" onClick={toggleDropdown}>
+                  {username.slice(0, 1).toUpperCase()}
+                </div>
+                {isOpen && (
+                  <ul
+                    className="dropdown-menu right-drop-menu"
+                  >
+                    <li>
+                      <Link
+                        className="Navbar-link"
+                        to="/profile"
+                        style={{ textDecoration: "none !important" }}
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="Navbar-link"
+                        to="/order"
+                        style={{ textDecoration: "none !important" }}
+                      >
+                        Orders
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="Navbar-link"
+                        onClick={() => logOut()}
+                        style={{ textDecoration: "none !important" }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </div>
             )}
           </div>
         </div>

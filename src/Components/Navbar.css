@@ -152,6 +152,18 @@ ul li img {
   text-decoration: none;
   cursor: pointer;
 }
+.right-drop-menu li a {
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.right-drop-menu {
+  position: absolute;
+  top: 105%;
+  right: 0; /* Set the width to 80% of its parent container */
+}
 
 .dropbtn {
   padding: 16px;
@@ -159,7 +171,7 @@ ul li img {
   border: none;
 }
 
-.p-dropbtn{
+.p-dropbtn {
   border: none;
 }
 
@@ -274,7 +286,7 @@ ul li img {
   .Navbar-link {
     display: none;
   }
-  .rightMenu{
+  .rightMenu {
     display: none;
   }
   .Navbar-box1 {
