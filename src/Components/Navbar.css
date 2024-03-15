@@ -159,6 +159,10 @@ ul li img {
   border: none;
 }
 
+.p-dropbtn{
+  border: none;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
