@@ -231,7 +231,7 @@ function Navbar(props) {
               //   )}
               // </div>
               <div
-                className="dropdown "
+                className="dropdown"
                 onMouseLeave={handleMouseLeave}
                 style={{ float: "right" }}
               >
