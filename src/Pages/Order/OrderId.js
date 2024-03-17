@@ -76,11 +76,17 @@ function Order(props) {
               </div>
               <hr />
               <div className="row">
-                <div className="col order-detail-link" style={{cursor:"pointer"}}>
+                <div
+                  className="col order-detail-link"
+                  style={{ cursor: "pointer" }}
+                >
                   Delivery <br />
                   Address
                 </div>
-                <div className="col d-flex justify-content-end order-detail-link" style={{cursor:"pointer"}}>
+                <div
+                  className="col d-flex justify-content-end order-detail-link"
+                  style={{ cursor: "pointer" }}
+                >
                   View <br />
                   Details
                 </div>
@@ -97,9 +103,9 @@ function Order(props) {
                   ? 10
                   : order?.attributes?.Order_status == "Packed"
                   ? 40
-                  : order?.attributes?.Order_status == "Shiped"
+                  : order?.attributes?.Order_status == "Shipped"
                   ? 70
-                  : order?.attributes?.Order_status == "Arriving"
+                  : order?.attributes?.Order_status == "Delivering"
                   ? 100
                   : 0
               }
@@ -150,7 +156,7 @@ function Order(props) {
                       width="35"
                       src={pin}
                     />
-                    <p className="pt-2">Arriving</p>
+                    <p className="pt-2">Delivering</p>
                   </div>
                 )}
               </Step>
@@ -170,15 +176,26 @@ function Order(props) {
                   </div>
                   <div className="col">
                     <p className="delivery-partner-details">
-                      WRFCYTG
+                      {order?.attributes?.Delivery_Partner.length > 0
+                        ? order?.attributes?.Delivery_Partner
+                        : ""}
                       <br />
                       <p className="d-flex">
-                        354766746776564
+                        {order?.attributes?.Order_Track_Id.length > 0
+                          ? order?.attributes?.Order_Track_Id
+                          : ""}
                         <img
                           className="mt-2"
                           src={copy}
                           width={20}
                           height={20}
+                          onClick={() => {
+                            navigator.clipboard.writeText(
+                              order?.attributes?.Order_Track_Id.length > 0
+                                ? order?.attributes?.Order_Track_Id
+                                : ""
+                            );
+                          }}
                         />
                       </p>
                     </p>
@@ -197,7 +214,7 @@ function Order(props) {
             </div>
           </div>
         </div>
-        <div className="row w-100 pb-5 d-flex justify-content-center">
+        <div className="row w-100 pb-3 d-flex justify-content-center">
           <div className="col-8">
             {orderDetails?.length > 0
               ? orderDetails?.map((item) => {
@@ -205,23 +222,26 @@ function Order(props) {
                     <div className="row">
                       <div className="col">
                         <div className="row">
-                          <div className="col">
+                          <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <img
                               src={`${process.env.REACT_APP_SERVERNAME}${item.image}`}
-                              width="254px"
-                              height="257px"
+                              width="180px"
+                              height="270px"
                             />
                           </div>
-                          <div className="col order-brief-detail">
+                          <div className="col-lg-9 col-md-9 col-sm-12 co-xs-12 order-brief-detail">
                             {item?.title}
                             <br />
                             <p className="pt-3"> ₹ {item?.price}</p>
                           </div>
                         </div>
                       </div>
-                      <div className="col d-flex justify-content-end cancel-button" style={{cursor:"pointer"}}>
+                      {/* <div
+                        className="col d-flex justify-content-end cancel-button"
+                        style={{ cursor: "pointer" }}
+                      >
                         Cancel
-                      </div>
+                      </div> */}
                     </div>
                   );
                 })
@@ -232,13 +252,19 @@ function Order(props) {
           <div className="col-8">
             <div className="row">
               <div className="col">
-                <p className="deliverTo">Deliver to</p>
-                <p className="name mt-3">{username}</p>
-                <p className="col-3 address mt-3">
+                <div className="deliverTo">Deliver to:</div>
+                <div className="name">
+                  {username}
+                  <br />
+                  {/* <p className="col-3 address mt-3"> */}
                   {order?.attributes?.Order_Address}
-                </p>
-                <br />
-                <p className="col-lg-3 col-12 phone mt-1">Phone : {phone}</p>
+                  {/* </p> */}
+                </div>
+                {/* <p className="col-lg-3 col-12 phone mt-1"> */}
+                <div className="col-lg-3 col-12 phone ">
+                  Phone : {order?.attributes?.Order_Phone}
+                </div>
+                {/* </p> */}
               </div>
             </div>
           </div>
