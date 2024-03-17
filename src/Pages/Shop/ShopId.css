@@ -431,3 +431,14 @@
     font-size: 22px;
   }
 }
+
+@media only screen and (width: 1180px) {
+  .Size-Box {
+    margin: 0px 0px 0px 30px !important;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .Size-Box {
+    margin: 0px 0px 0px 30px !important;
+  }
+}
