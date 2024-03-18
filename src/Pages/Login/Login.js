@@ -14,6 +14,9 @@ function Login() {
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:820px)").matches
+  );
   const SignupSchema = Yup.object().shape({
     identifier: Yup.string()
       .email("*Enter a valid mail!")
@@ -25,6 +28,9 @@ function Login() {
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
+    window
+      .matchMedia("(max-width:820px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
   }, []);
   const formik = useFormik({
     initialValues: {
@@ -92,7 +98,7 @@ function Login() {
               src={SideImage}
               alt="SideImage"
               style={{
-                height: "100%",
+                height: `${ipadAirMatches ? "80%" : "100%"}`,
                 width: `${iMacMatches ? "60%" : "80%"}`,
                 padding: `${iMacMatches ? "0px" : "20px"}`,
               }}

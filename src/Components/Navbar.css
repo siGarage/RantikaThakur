@@ -317,3 +317,21 @@ ul li img {
     font-size: 20px;
   }
 }
+@media only screen and (width: 1180px) {
+  .resultList {
+    right: 200px !important;
+  }
+}
+@media only screen and (width: 820px) {
+  .resultList {
+    max-width: 500px !important;
+    right: 150px !important;
+  }
+}
+
+@media only screen and (width: 896px) {
+  .resultList {
+    max-width: 500px !important;
+    right: 200px !important;
+  }
+}
