@@ -151,7 +151,7 @@ function Navbar(props) {
             )}
           </div>
           <div className="Navbar-box1-box">
-            <div style={{ height: "25px", width: "20%" }} onClick={handleClick}>
+            <div style={{ height: "25px" }} onClick={handleClick}>
               <img
                 src={SearchImage}
                 style={{ height: "30px", width: "30px" }}
@@ -239,9 +239,7 @@ function Navbar(props) {
                   {username.slice(0, 1).toUpperCase()}
                 </div>
                 {isOpen && (
-                  <ul
-                    className="dropdown-menu right-drop-menu"
-                  >
+                  <ul className="dropdown-menu right-drop-menu">
                     <li>
                       <Link
                         className="Navbar-link"
