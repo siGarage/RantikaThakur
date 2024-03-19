@@ -25,12 +25,11 @@ export default class Auth {
   static fetchProduct() {
     return new Promise((resolve) => {
       instance
-        .get("/api/products?populate=category,images,sizes")
+        .get("/api/products?populate=category,images,sizes&sort[0]=id:desc")
         .then((response) => {
           resolve(response);
         })
         .catch((error) => defaultCatch(error, resolve));
     });
   }
-  
 }
