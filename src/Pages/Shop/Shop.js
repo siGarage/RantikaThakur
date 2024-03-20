@@ -33,6 +33,9 @@ function Shop(props) {
   const [airPadRMatches, setAirIpadRRMatches] = useState(
     window.matchMedia("(max-width:1180px)").matches
   );
+  const [OSPadRMatches, setOSAirpadRRMatches] = useState(
+    window.matchMedia("(width:1080px)").matches
+  );
 
   const [sort, setSort] = useState("");
   const type = searchParams.get("type");
@@ -225,6 +228,9 @@ function Shop(props) {
     window
       .matchMedia("(max-width:1180px)")
       .addEventListener("change", (e) => setAirIpadRRMatches(e.matches));
+    window
+      .matchMedia("(width:1080px)")
+      .addEventListener("change", (e) => setOSAirpadRRMatches(e.matches));
 
     if (logged_in) {
       if (wishlist.length === 0) {
@@ -403,6 +409,8 @@ function Shop(props) {
                               width={
                                 matches
                                   ? "300px"
+                                  : OSPadRMatches
+                                  ? "250px"
                                   : mobileRMatches
                                   ? "300px"
                                   : ipadMatches
@@ -411,7 +419,13 @@ function Shop(props) {
                                   ? "280px"
                                   : "342px"
                               }
-                              height={ipadMatches ? "450px" : "480px"}
+                              height={
+                                ipadMatches
+                                  ? "450px"
+                                  : OSPadRMatches
+                                  ? "375px"
+                                  : "480px"
+                              }
                               alt="ProductImage"
                               style={{
                                 filter: !element?.attributes?.instock

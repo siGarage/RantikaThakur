@@ -87,11 +87,28 @@
   color: black;
 }
 .col .phone {
-    font-family: "Poppins";
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 36px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: black;
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: black;
+}
+
+@media only screen and (height: 1080px) {
+  .order-detail-box {
+    width: 80%;
   }
+}
+
+@media only screen and (height: 1180px) {
+  .order-detail-box {
+    width: 80%;
+  }
+}
+@media only screen and (height: 844px) {
+  .order-detail-box {
+    width: 90%;
+  }
+}

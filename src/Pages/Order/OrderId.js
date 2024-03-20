@@ -17,6 +17,15 @@ function Order(props) {
   const { authtoken, useremail } = props;
   let username = props.user.user.username;
   let phone = props.user.user.phone;
+  const [OSPadRMatches, setOSAirpadRRMatches] = useState(
+    window.matchMedia("(height:1080px)").matches
+  );
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(width:820px)").matches
+  );
+  const [thirteenMatches, set13Matches] = useState(
+    window.matchMedia("(height: 844px)").matches
+  );
 
   const { orderId } = useParams();
   let [order, setOrder] = useState([]);
@@ -35,6 +44,15 @@ function Order(props) {
   };
 
   useEffect(() => {
+    window
+      .matchMedia("(height:1080px)")
+      .addEventListener("change", (e) => setOSAirpadRRMatches(e.matches));
+    window
+      .matchMedia("(width:820px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    window
+      .matchMedia("(height: 844px)")
+      .addEventListener("change", (e) => set13Matches(e.matches));
     if (orderId) {
       fetch(
         `${process.env.REACT_APP_SERVERNAME}/api/order-confirmations/${orderId}`
@@ -96,7 +114,7 @@ function Order(props) {
         </div>
 
         <div className="row w-100 pt-5 pb-5 d-flex justify-content-center">
-          <div className="col-8">
+          <div className={thirteenMatches ? "col-10" : "col-8"}>
             <ProgressBar
               percent={
                 order?.attributes?.Order_status == "Confirmed"
@@ -222,14 +240,26 @@ function Order(props) {
                     <div className="row">
                       <div className="col">
                         <div className="row">
-                          <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                          <div
+                            className={
+                              OSPadRMatches || ipadAirMatches
+                                ? "col-5"
+                                : "col-lg-3 col-md-3 col-sm-12 col-xs-12"
+                            }
+                          >
                             <img
                               src={`${process.env.REACT_APP_SERVERNAME}${item.image}`}
                               width="180px"
                               height="270px"
                             />
                           </div>
-                          <div className="col-lg-9 col-md-9 col-sm-12 co-xs-12 order-brief-detail">
+                          <div
+                            className={
+                              OSPadRMatches || ipadAirMatches
+                                ? "col-5"
+                                : "col-lg-9 col-md-9 col-sm-12 co-xs-12 order-brief-detail"
+                            }
+                          >
                             {item?.title}
                             <br />
                             <p className="pt-3"> ₹ {item?.price}</p>

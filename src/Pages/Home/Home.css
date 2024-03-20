@@ -550,6 +550,62 @@
   .clothesTypesBox5 {
     height: 100%;
     margin-bottom: 10px;
+  }
+}
 
+@media only screen and (height: 1080px) {
+  .carousel-best-image {
+    width: 100%;
+    height: 100% !important;
+  }
+  .clothesTypesBox1 {
+    height: 320px !important;
+    width: 320px !important;
+  }
+  .clothesTypesBox2 {
+    height: 320px !important;
+    width: 320px !important;
+  }
+  .clothesTypesBox3 {
+    width: 663px !important;
+    height: 320px !important;
+  }
+  .clothesTypesBox4 {
+    height: 320px !important;
+    width: 320px !important;
+  }
+  .clothesTypesBox5 {
+    height: 320px !important;
+    width: 320px !important;
+  }
+}
+
+@media only screen and (width: 1080px) {
+  .carousel-best-image {
+    width: 100%;
+    height: 100% !important;
+  }
+  .Home-Box3-Box1-Box-InnerBox1 {
+    height: 500px;
+  }
+  .clothesTypesBox1 {
+    height: 500px !important;
+    width: 500px !important;
+  }
+  .clothesTypesBox2 {
+    height: 500px !important;
+    width: 500px !important;
+  }
+  .clothesTypesBox3 {
+    width: 950px !important;
+    height: 500px !important;
+  }
+  .clothesTypesBox4 {
+    height: 500px !important;
+    width: 500px !important;
+  }
+  .clothesTypesBox5 {
+    height: 500px !important;
+    width: 500px !important;
   }
 }

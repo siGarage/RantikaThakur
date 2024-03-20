@@ -460,3 +460,13 @@
     justify-content: end !important;
   }
 }
+@media only screen and (height: 1080px) {
+  .Shop-Button{
+    justify-content: end !important;
+  }
+}
+@media only screen and (width: 1080px) {
+  .Size-Box {
+    margin: 0px 0px 0px 10px !important;
+  }
+}
