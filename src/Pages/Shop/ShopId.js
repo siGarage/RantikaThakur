@@ -786,6 +786,7 @@ function ShopId(props) {
                     backgroundColor: csize == true ? "#E2BF44" : "white",
                     border: csize == true ? "none" : "1px solid #0000000",
                     width: "20%",
+                    color: "black",
                   }}
                 >
                   Custome Size
@@ -804,6 +805,7 @@ function ShopId(props) {
                         size === element?.attributes?.size
                           ? "none"
                           : "1px solid #000000",
+                      color: "black"
                     }}
                   >
                     {element?.attributes?.size}

@@ -7,7 +7,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import h1 from "../../Images/h1.png";
 import h2 from "../../Images/h2.png";
-import h3 from "../../Images/h3.png";
+// import h3 from "../../Images/h3.png";
 import h5 from "../../Images/h5.PNG";
 import h6 from "../../Images/h6.PNG";
 import h7 from "../../Images/h7.PNG";
@@ -92,7 +92,7 @@ function Home(props) {
               <img src={h2} className="w-100" />
             </div>
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             {" "}
             <div
               onClick={() => {
@@ -101,7 +101,7 @@ function Home(props) {
             >
               <img src={h3} className="w-100" />
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
           {/* <SwiperSlide>
             {" "}
             <div

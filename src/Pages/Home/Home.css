@@ -609,3 +609,21 @@
     width: 500px !important;
   }
 }
+@media only screen and (height: 852px) {
+  .clothesTypesBox1 {
+    height: 200px !important;
+    width: 200px !important;
+  }
+  .clothesTypesBox2 {
+    height: 200px !important;
+    width: 200px !important;
+  }
+  .clothesTypesBox4 {
+    height: 200px !important;
+    width: 200px !important;
+  }
+  .clothesTypesBox5 {
+    height: 200px !important;
+    width: 200px !important;
+  }
+}
