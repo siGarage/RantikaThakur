@@ -347,3 +347,8 @@ ul li img {
     z-index: 999999;
   }
 } */
+@media only screen and (width: 852px) {
+  .resultList {
+    right: 50px !important;
+  }
+}
