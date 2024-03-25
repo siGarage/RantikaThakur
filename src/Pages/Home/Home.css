@@ -83,6 +83,12 @@
   width: 47.57%;
   height: 100%;
 }
+.widthFixForImage {
+  width: 350px;
+  height: 350px;
+  padding: 5px;
+  cursor: pointer;
+}
 
 .clothesTypesBox5 {
   background-image: url("../../Images/skirts.jpeg");

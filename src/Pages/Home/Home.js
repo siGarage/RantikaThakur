@@ -7,7 +7,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import h1 from "../../Images/h1.png";
 import h2 from "../../Images/h2.png";
-// import h3 from "../../Images/h3.png";
 import h5 from "../../Images/h5.PNG";
 import h6 from "../../Images/h6.PNG";
 import h7 from "../../Images/h7.PNG";
@@ -15,13 +14,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
+import dress from "../../Images/dresses.jpeg";
+import coOrds from "../../Images/co-ords.jpeg";
+import shirts from "../../Images/shirts.jpeg";
+import skirts from "../../Images/skirts.jpeg";
+import h4 from "../../Images/h4.jpg";
 
 function Home(props) {
   const { products } = props;
   const data = products?.filter(
     (element) => element?.attributes?.bestseller === true
   );
-  
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -50,6 +54,9 @@ function Home(props) {
     ),
   ]);
   category = [...category];
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
   const shuffled = category?.sort(() => 0.5 - Math.random());
   let array = shuffled.slice(0, 5);
 
@@ -59,6 +66,11 @@ function Home(props) {
   const gotoShop = () => {
     navigate(`/shop?type=All`);
   };
+  useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
+  }, []);
   return (
     <section className="Home">
       <div className="Home-Box1 w-100">
@@ -209,16 +221,55 @@ function Home(props) {
 
       <div className="Home-Box3">
         <div className="Home-Box3-Box1">Shop By Category</div>
-        <div className="Home-Box3-Box1-Box">
-          <div className="Home-Box3-Box1-Box-InnerBox1">
-            {/* clothesTypesBox1 */}
-            <div
-              className="clothesTypesBox1"
-              onClick={() => navigate("/shop?type=Dresses")}
-            >
-              {/* <div className="clothesTypesBox1-Box1">{array[0]}</div> */}
-              <div></div>
-              {/* <div
+        {matches ? (
+          <div className="row">
+            <div className="col-12 d-flex justify-content-center">
+              <img
+                src={dress}
+                className="widthFixForImage"
+                onClick={() => navigate("/shop?type=Dresses")}
+              />
+            </div>
+            <div className="col-12 d-flex justify-content-center">
+              <img
+                src={coOrds}
+                className="widthFixForImage"
+                onClick={() => navigate("/shop?type=Co-ordinates")}
+              />
+            </div>
+            <div className="col-12 d-flex justify-content-center">
+              <img
+                src={h4}
+                className="widthFixForImage"
+                onClick={() => navigate("/shop?type=All")}
+              />
+            </div>
+            <div className="col-12 d-flex justify-content-center">
+              <img
+                src={shirts}
+                className="widthFixForImage"
+                onClick={() => navigate("/shop?type=Shirts")}
+              />
+            </div>
+            <div className="col-12 d-flex justify-content-center">
+              <img
+                src={skirts}
+                className="widthFixForImage"
+                onClick={() => navigate("/shop?type=Skirts")}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="Home-Box3-Box1-Box">
+            <div className="Home-Box3-Box1-Box-InnerBox1">
+              {/* clothesTypesBox1 */}
+              <div
+                className="clothesTypesBox1"
+                onClick={() => navigate("/shop?type=Dresses")}
+              >
+                {/* <div className="clothesTypesBox1-Box1">{array[0]}</div> */}
+                <div></div>
+                {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -231,16 +282,16 @@ function Home(props) {
                 <input type="radio" name="category" value="men's clothing" />
                 Button
               </div> */}
-            </div>
+              </div>
 
-            {/* clothesTypesBox2 */}
-            <div
-              className="clothesTypesBox2"
-              onClick={() => navigate("/shop?type=Co-ordinates")}
-            >
-              {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
-              <div></div>
-              {/* <div
+              {/* clothesTypesBox2 */}
+              <div
+                className="clothesTypesBox2"
+                onClick={() => navigate("/shop?type=Co-ordinates")}
+              >
+                {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
+                <div></div>
+                {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -253,17 +304,17 @@ function Home(props) {
                 <input type="radio" name="category" value="men's clothing" />
                 Button
               </div> */}
+              </div>
             </div>
-          </div>
 
-          {/* clothesTypesBox3 */}
-          <div
-            className="clothesTypesBox3"
-            onClick={() => navigate("/shop?type=All")}
-          >
-            {/* <div className="clothesTypesBox1-Box1">{array[2]}</div> */}
-            <div></div>
-            {/* <div
+            {/* clothesTypesBox3 */}
+            <div
+              className="clothesTypesBox3"
+              onClick={() => navigate("/shop?type=All")}
+            >
+              {/* <div className="clothesTypesBox1-Box1">{array[2]}</div> */}
+              <div></div>
+              {/* <div
               onClick={() => {
                 navigate({
                   pathname: "/shop",
@@ -276,17 +327,17 @@ function Home(props) {
               <input type="radio" name="category" value="men's clothing" />
               Button
             </div> */}
-          </div>
+            </div>
 
-          <div className="Home-Box3-Box1-Box-InnerBox1 Home-Box3-Box1-Box-InnerBox1-ipad">
-            {/* clothesTypesBox4 */}
-            <div
-              className="clothesTypesBox4"
-              onClick={() => navigate("/shop?type=Shirts")}
-            >
-              {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}
-              <div></div>
-              {/* <div
+            <div className="Home-Box3-Box1-Box-InnerBox1 Home-Box3-Box1-Box-InnerBox1-ipad">
+              {/* clothesTypesBox4 */}
+              <div
+                className="clothesTypesBox4"
+                onClick={() => navigate("/shop?type=Shirts")}
+              >
+                {/* <div className="clothesTypesBox1-Box1">{array[3]}</div> */}
+                <div></div>
+                {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -299,16 +350,16 @@ function Home(props) {
                 <input type="radio" name="category" value="men's clothing" />
                 Button
               </div> */}
-            </div>
+              </div>
 
-            {/* clothesTypesBox5 */}
-            <div
-              className="clothesTypesBox5"
-              onClick={() => navigate("/shop?type=Skirts")}
-            >
-              {/* <div className="clothesTypesBox1-Box1">{array[4]}</div> */}
-              <div></div>
-              {/* <div
+              {/* clothesTypesBox5 */}
+              <div
+                className="clothesTypesBox5"
+                onClick={() => navigate("/shop?type=Skirts")}
+              >
+                {/* <div className="clothesTypesBox1-Box1">{array[4]}</div> */}
+                <div></div>
+                {/* <div
                 onClick={() => {
                   navigate({
                     pathname: "/shop",
@@ -321,9 +372,10 @@ function Home(props) {
                 <input type="radio" name="category" value="men's clothing" />
                 Button
               </div> */}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
