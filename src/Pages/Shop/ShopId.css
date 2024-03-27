@@ -478,5 +478,21 @@
   .Shop-AddToCart {
     padding: 0px !important ;
     font-size: 15px !important;
+    margin: 0px !important;
+  }
+  .heart {
+    width: 40px !important;
+    padding-left: 0px !important;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .Shop-AddToCart {
+    padding: 0px !important ;
+    font-size: 15px !important;
+    margin: 0px !important;
+  }
+  .heart {
+    width: 35px !important;
+    padding-left: 0px !important;
   }
 }
