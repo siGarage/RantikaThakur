@@ -18,7 +18,7 @@ import dress from "../../Images/dresses.jpeg";
 import coOrds from "../../Images/co-ords.jpeg";
 import shirts from "../../Images/shirts.jpeg";
 import skirts from "../../Images/skirts.jpeg";
-import h4 from "../../Images/h4.jpg";
+import h4 from "../../Images/s_mid.PNG";
 
 function Home(props) {
   const { products } = props;

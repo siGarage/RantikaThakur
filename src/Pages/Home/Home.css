@@ -61,7 +61,7 @@
   height: 100%;
 }
 .clothesTypesBox3 {
-  background-image: url("../../Images/h4.jpg");
+  background-image: url("../../Images/mid.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   margin: 0px 10px;
@@ -574,7 +574,7 @@
   }
   .clothesTypesBox3 {
     width: 663px !important;
-    height: 320px !important;
+    height: 350px !important;
   }
   .clothesTypesBox4 {
     height: 320px !important;
