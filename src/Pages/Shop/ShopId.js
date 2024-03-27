@@ -58,6 +58,9 @@ function ShopId(props) {
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
+  const [mmatches, setMmatches] = useState(
+    window.matchMedia("(max-width:395px)").matches
+  );
 
   // Id Of Product
   const { shopId } = useParams();
@@ -297,6 +300,9 @@ function ShopId(props) {
     window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+    window
+      .matchMedia("(max-width:395px)")
+      .addEventListener("change", (e) => setMmatches(e.matches));
     if (shopId) {
       fetch(
         `${process.env.REACT_APP_SERVERNAME}/api/products/${shopId}?populate=category,images,sizes`
@@ -752,18 +758,65 @@ function ShopId(props) {
                   />
                 </svg>
               </div>
-
+              {mmatches ? (
+                wistItemsId.includes(product?.id) ? (
+                  <div className="heart">
+                    <FavoriteIcon
+                      style={{ color: "red" }}
+                      onClick={() => {
+                        DeleteFromWishlist(WishCartID(product?.id), authtoken);
+                      }}
+                    ></FavoriteIcon>
+                  </div>
+                ) : (
+                  <div className="heart">
+                    <FavoriteBorderIcon
+                      onClick={() => {
+                        AddToWishlist(
+                          {
+                            email: useremail,
+                            title: product?.attributes?.title,
+                            price: product?.attributes?.price,
+                            category:
+                              product?.attributes?.category?.data?.attributes
+                                ?.category,
+                            id_product: product.id,
+                            image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                            size: product?.attributes?.sizes?.data.map(
+                              (element) => element?.attributes?.size
+                            ),
+                          },
+                          authtoken
+                        );
+                      }}
+                    ></FavoriteBorderIcon>
+                  </div>
+                )
+              ) : (
+                ""
+              )}
               <p
-                style={{
-                  fontFamily: "poppins",
-                  fontWeight: "300",
-                  fontSize: "15px",
-                  color: "rbg(0,0,0)",
-                  margin: "24px 0px 8px 0px",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginTop: "50px",
-                }}
+                style={
+                  mmatches
+                    ? {
+                        fontFamily: "poppins",
+                        fontWeight: "300",
+                        fontSize: "15px",
+                        color: "rbg(0,0,0)",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }
+                    : {
+                        fontFamily: "poppins",
+                        fontWeight: "300",
+                        fontSize: "15px",
+                        color: "rbg(0,0,0)",
+                        margin: "24px 0px 8px 0px",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        marginTop: "50px",
+                      }
+                }
               >
                 Available Size
               </p>
@@ -805,7 +858,7 @@ function ShopId(props) {
                         size === element?.attributes?.size
                           ? "none"
                           : "1px solid #000000",
-                      color: "black"
+                      color: "black",
                     }}
                   >
                     {element?.attributes?.size}
@@ -868,41 +921,45 @@ function ShopId(props) {
                   >
                     {!product?.attributes?.instock ? "Out Of Stock" : "Buy Now"}
                   </button>
-                  {wistItemsId.includes(product?.id) ? (
-                    <div className="heart">
-                      <FavoriteIcon
-                        style={{ color: "red" }}
-                        onClick={() => {
-                          DeleteFromWishlist(
-                            WishCartID(product?.id),
-                            authtoken
-                          );
-                        }}
-                      ></FavoriteIcon>
-                    </div>
+                  {!mmatches ? (
+                    wistItemsId.includes(product?.id) ? (
+                      <div className="heart">
+                        <FavoriteIcon
+                          style={{ color: "red" }}
+                          onClick={() => {
+                            DeleteFromWishlist(
+                              WishCartID(product?.id),
+                              authtoken
+                            );
+                          }}
+                        ></FavoriteIcon>
+                      </div>
+                    ) : (
+                      <div className="heart">
+                        <FavoriteBorderIcon
+                          onClick={() => {
+                            AddToWishlist(
+                              {
+                                email: useremail,
+                                title: product?.attributes?.title,
+                                price: product?.attributes?.price,
+                                category:
+                                  product?.attributes?.category?.data
+                                    ?.attributes?.category,
+                                id_product: product.id,
+                                image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                                size: product?.attributes?.sizes?.data.map(
+                                  (element) => element?.attributes?.size
+                                ),
+                              },
+                              authtoken
+                            );
+                          }}
+                        ></FavoriteBorderIcon>
+                      </div>
+                    )
                   ) : (
-                    <div className="heart">
-                      <FavoriteBorderIcon
-                        onClick={() => {
-                          AddToWishlist(
-                            {
-                              email: useremail,
-                              title: product?.attributes?.title,
-                              price: product?.attributes?.price,
-                              category:
-                                product?.attributes?.category?.data?.attributes
-                                  ?.category,
-                              id_product: product.id,
-                              image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
-                              size: product?.attributes?.sizes?.data.map(
-                                (element) => element?.attributes?.size
-                              ),
-                            },
-                            authtoken
-                          );
-                        }}
-                      ></FavoriteBorderIcon>
-                    </div>
+                    ""
                   )}
                 </div>
               ) : (
