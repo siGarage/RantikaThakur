@@ -21,7 +21,6 @@ function Cart(props) {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [newAddress, setNewAddress] = useState("");
   const [full_Address, setAddress] = useState("");
-  console.log(full_Address);
   const [selectedOption, setSelectedOption] = useState("");
   const [order_final_address, setOrderFinalAddress] = useState("");
   const [order_final_phone, setOrderFinalPhone] = useState("");
@@ -220,11 +219,10 @@ function Cart(props) {
       });
     }
     if (cart.length > 0) {
-      setPrice(
-        cart
-          .map((element) => Number(element?.attributes.price))
-          .reduce((accumulator, currentValue) => accumulator + currentValue)
-      );
+      let finalPrice = cart
+        .map((element) => Number(element?.attributes.price))
+        .reduce((accumulator, currentValue) => accumulator + currentValue);
+      setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
     }
     if (cart.length > 0) {
       const newValues = cart.map((item) => item.id);
@@ -519,7 +517,7 @@ function Cart(props) {
               }}
             >
               <div>Delivery</div>
-              <div>Free</div>
+              <div>{price < 5000 ? "99" : "Free"}</div>
             </div>
           </div>
 
@@ -533,16 +531,7 @@ function Cart(props) {
               }}
             >
               <div>Total</div>
-              <div>
-                {cart.length !== 0
-                  ? cart
-                      .map((element) => Number(element?.attributes.price))
-                      .reduce(
-                        (accumulator, currentValue) =>
-                          accumulator + currentValue
-                      )
-                  : "0"}
-              </div>
+              <div>{cart.length !== 0 ? price : "0"}</div>
             </div>
           </div>
 

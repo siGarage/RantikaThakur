@@ -141,7 +141,6 @@
   color: black;
   font-size: 28px;
   cursor: pointer;
-
   margin: 0px 20px 0px 0px;
 }
 
@@ -473,5 +472,8 @@
 @media only screen and (width: 852px) {
   .Shop-Button {
     justify-content: end !important;
+  }
+  .Shop-AddToCart {
+    padding: 0px !important ;
   }
 }
