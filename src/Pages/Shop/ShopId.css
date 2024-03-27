@@ -473,7 +473,10 @@
   .Shop-Button {
     justify-content: end !important;
   }
+}
+@media only screen and (height: 852px) {
   .Shop-AddToCart {
     padding: 0px !important ;
+    font-size: 15px !important;
   }
 }
