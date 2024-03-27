@@ -503,6 +503,7 @@
     margin: 0px !important;
   }
   .heart {
-    display: none;
+    width: 35px !important;
+    padding-left: 0px !important;
   }
 }
