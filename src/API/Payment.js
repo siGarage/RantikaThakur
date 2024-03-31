@@ -23,7 +23,7 @@ export default class Auth {
 
   static payment(values,token) {
     let payload = values;
-    let authtoken=token
+    let authtoken=token;
     return new Promise((resolve) => {
       instance
         .post("/api/payments", payload, {

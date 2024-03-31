@@ -42,17 +42,17 @@ function ShopId(props) {
     name: "",
     email: "",
     phone: "",
-    upperbust: "",
-    bust: "",
-    highwaist: "",
-    waist: "",
-    hip: "",
-    shoulder: "",
-    armhole: "",
-    sleevelength: "",
-    bicep: "",
-    fullLength: "",
-    pantskirtLength: "",
+    upperbust: "0",
+    bust: "0",
+    highwaist: "0",
+    waist: "0",
+    hip: "0",
+    shoulder: "0",
+    armhole: "0",
+    sleevelength: "0",
+    bicep: "0",
+    fullLength: "0",
+    pantskirtLength: "0",
   });
   const [size, setSize] = useState("");
   const [matches, setMatches] = useState(
@@ -114,10 +114,24 @@ function ShopId(props) {
       } else {
         CARTDATA.addCartItems(data, authtoken).then((res) => {
           if (res.status === 200) {
+            if (csize) {
+              let customSize = {
+                ...customdata,
+                cart_id: res?.data?.data?.id?.toString(),
+              };
+              CUSTOM.message({ data: customSize }).then((res) => {
+                if (res.status === 200) {
+                  toast.success("Your Message Is Sent SuccessFully ! ");
+                } else {
+                  toast.error(res.data.error.message);
+                }
+              });
+            }
             dispatch({
               type: constants("cart").reducers.cart.AddToCart,
               payload: { cartItems: [...cart, res.data.data] },
             });
+
             toast.success("Item Added To Cart !");
           }
         });
@@ -290,7 +304,7 @@ function ShopId(props) {
       toast.error("Please Enter Phone Number");
       return;
     } else {
-      setCookie("customSize", serializeObject(customdata), 7);
+      setSize("custom");
       setCsize(true);
       setCsShow(false);
     }

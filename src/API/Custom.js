@@ -24,17 +24,30 @@ export default class Auth {
 
   static message(values) {
     let payload = values;
-    console.log(payload)
+    console.log(payload);
     return new Promise((resolve) => {
       instance
-        .post("/api/custom-sizes", {data:payload.data})
+        .post("/api/custom-sizes", { data: payload.data })
         .then((response) => {
           resolve(response);
         })
         .catch((error) => defaultCatch(error, resolve));
     });
   }
-
+  //Create
+  static getCustomSizes(cartid, token) {
+    let authtoken = token;
+    return new Promise((resolve) => {
+      instance
+        .get(`/api/customsize?filters[cart_id]=${cartid}&populate=*`, {
+          headers: {
+            Authorization: "Bearer " + authtoken,
+          },
+        })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
 }
-
-

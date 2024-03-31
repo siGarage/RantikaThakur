@@ -1,9 +1,10 @@
-import { memo, useEffect, useId, useState } from "react";
+import { memo, useEffect, useId, useState, useRef } from "react";
 import "./Cart.css";
 import { connect, useDispatch } from "react-redux";
 import constants from "../../constants";
 import { toast } from "react-toastify";
 import YouMayLike from "../YouMayLike/YouMayLike";
+import emailjs from "@emailjs/browser";
 import PAYMENT from "../../API/Payment";
 import ORDER from "../../API/Order";
 import CARTDATA from "../../API/Cart";
@@ -13,10 +14,18 @@ function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let address = props.user.user.address;
+  const buttonRef = useRef(null);
   const [lgShow, setLgShow] = useState(false);
   const [price, setPrice] = useState(0);
   const [ids, setIds] = useState([]);
+  const form = useRef();
+  // const client = new SMTPClient({
+  //   user: "user",
+  //   password: "password",
+  //   host: "smtp.your-email.com",
+  // });
   let userid = props.user.user.id;
+  let username = props.user.user.name;
   const [addressList, setAddressList] = useState([address || ""]);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [newAddress, setNewAddress] = useState("");
@@ -26,7 +35,23 @@ function Cart(props) {
   const [order_final_phone, setOrderFinalPhone] = useState("");
   const [order_final_pin, setOrderFinalPin] = useState("");
   const [order_final_name, setOrderFinalName] = useState("");
-
+  const [clientMessage, setClientMessage] = useState("");
+  const [customCart, setCustomCart] = useState("");
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm("service_f4cfons", "template_x7kla0g", form.current, {
+        publicKey: "ZCGsvRJF6uxDcjRLo",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+  };
   const { cart, useremail, authtoken } = props;
   // Function to handle changes in the radio selection
   const handleOptionChange = (event) => {
@@ -46,6 +71,7 @@ function Cart(props) {
   };
 
   const handleFinalPayment = (e) => {
+    buttonRef.current.click();
     if (selectedOption?.length > 0) {
       let data = {
         amount: price * 100.0,
@@ -82,7 +108,6 @@ function Cart(props) {
                       }
                     });
                   });
-                  console.log(res.data);
                 }
               );
             },
@@ -147,6 +172,7 @@ function Cart(props) {
   const Increment = (cartId, priceold, quantityold) => {
     const priceofone = priceold / quantityold;
     const price = Number(priceold) + Number(priceofone);
+    setPrice(price < 5000 ? price + 99 : price);
     const quantity = Number(quantityold) + 1;
     const data = { price, quantity };
     const cartData = cart.map((element) => {
@@ -178,6 +204,7 @@ function Cart(props) {
       quantityold > 1
         ? Number(priceold) - Number(priceofone)
         : Number(priceofone);
+    setPrice(price < 5000 ? price + 99 : price);
     const quantity = quantityold > 1 ? Number(quantityold) - 1 : 1;
     const data = { price, quantity };
     const cartData = cart.map((element) => {
@@ -223,6 +250,38 @@ function Cart(props) {
         .map((element) => Number(element?.attributes.price))
         .reduce((accumulator, currentValue) => accumulator + currentValue);
       setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
+      let datacustomId = cart.filter(
+        (item) => item.attributes.size == "custom"
+      );
+      if (datacustomId.length > 0) {
+        fetch(
+          `${process.env.REACT_APP_SERVERNAME}/api/custom-sizes?filters[cart_id]=${datacustomId[0]?.id}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            let mainData = data.data;
+            setClientMessage(`
+            Dear ${username}, thank you for shopping at The Rantika Thakur Clothing! Your order has confirmed.
+            Product Name:${datacustomId[0].attributes.title}
+            Sizes
+            Armhole:${mainData[0]?.attributes?.armhole}
+            High-waist:${mainData[0]?.attributes?.highwaist}
+            Full-length:${mainData[0]?.attributes?.fullLength}
+            Hip:${mainData[0]?.attributes?.hip}
+            Pant-Skir-Length:${mainData[0]?.attributes?.pantskirtLength}
+            Shoulder:${mainData[0]?.attributes?.shoulder}
+            Sleeve-length:${mainData[0]?.attributes?.sleevelength}
+            Upper-bust: ${mainData[0]?.attributes?.upperbust}
+            Waist:${mainData[0]?.attributes?.waist}
+            Bicep:${mainData[0]?.attributes?.bicep}
+            Bust:${mainData[0]?.attributes?.bust}
+            `);
+          });
+      } else {
+        setClientMessage(`Dear ${username}, thank you for shopping at The Rantika Thakur Clothing! Your order has confirmed.
+        Product Name:${cart[0].attributes.title}
+        Price:${finalPrice} `);
+      }
     }
     if (cart.length > 0) {
       const newValues = cart.map((item) => item.id);
@@ -236,6 +295,7 @@ function Cart(props) {
         .then((data) => setAddress(data.data));
     }
   }, [useremail, authtoken, dispatch, cart.length, userid]);
+
   const handlePayment = async (e) => {
     if (cart.length > 0) {
       setLgShow(true);
@@ -246,6 +306,19 @@ function Cart(props) {
 
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
+      <form ref={form} onSubmit={sendEmail} style={{ display: "none" }}>
+        <label>Name</label>
+        <input type="text" name="user_name" value={username ? username : ""} />
+        <label>Email</label>
+        <input
+          type="email"
+          name="user_email"
+          value={useremail ? useremail : ""}
+        />
+        <label>Message</label>
+        <textarea name="message" value={clientMessage ? clientMessage : ""} />
+        <input type="submit" value="Send" ref={buttonRef} />
+      </form>
       <div className="Cart-Main-Box">
         <Modal
           size="lg"
