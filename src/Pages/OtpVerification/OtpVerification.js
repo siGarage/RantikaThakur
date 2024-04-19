@@ -1,62 +1,94 @@
-import "./Login.css";
+import "./OtpVerification.css";
 import SideImage from "../../Images/SDP05271.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import Auth from "../../API/Auth";
 import { useFormik } from "formik";
+import axios from "axios";
 import * as Yup from "yup";
 import constants from "../../constants";
-import { useState, useEffect } from "react";
-function Login() {
+import emailjs from "@emailjs/browser";
+import { useState, useEffect, useRef } from "react";
+import OtpInput from "react-otp-input";
+function OtpVerification() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [matches, setMatches] = useState(
-    window.matchMedia("(max-width:700px)").matches
-  );
+  const [otp, setOtp] = useState("");
+  const buttonRRef = useRef(null);
+  const [users, setUsers] = useState([]);
+
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
   const [ipadAirMatches, setIpadAirMatches] = useState(
     window.matchMedia("(max-width:820px)").matches
   );
-  const SignupSchema = Yup.object().shape({
-    identifier: Yup.string()
-      .email("*Enter a valid mail!")
-      .required("*E-mail field is required!"),
-    password: Yup.string().required("*Password field is required!"),
-  });
 
+  const SignupSchema = Yup.object().shape({
+    otp: Yup.string().required("*OTP field is required!"),
+  });
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
   useEffect(() => {
-    window
-      .matchMedia("(max-width:700px)")
-      .addEventListener("change", (e) => setMatches(e.matches));
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
     window
       .matchMedia("(max-width:820px)")
       .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    let otp = getCookie("otp");
+    setOtp(otp);
   }, []);
   const formik = useFormik({
     initialValues: {
-      identifier: "",
-      password: "",
+      otp: "",
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      Auth.login({ data: values }).then((res) => {
-        if (res.status === 200) {
-          dispatch({
-            type: constants("auth").reducers.login.success,
-            payload: { data: res.data },
-          });
-          toast.success("Login successful!");
-          navigate("/shop?type=All");
-        } else {
-          toast.error("Enter a valid E-mail & Password.");
-        }
-      });
+      if (otp == values.otp) {
+        toast.success("Otp Verification.");
+        navigate("/resetPassword");
+      } else {
+        toast.error("Wrong Otp");
+      }
+      //   values = {
+      //     email: values?.otp,
+      //   };
+      //   if (users?.length > 0) {
+      //     let searchUser = users?.filter((item) => item.email == values?.email);
+      //     if (searchUser?.length > 0) {
+      //       setClientEmail(values?.otp);
+      //     }
+      //   }
     },
   });
   let myFunction = () => {
@@ -67,9 +99,7 @@ function Login() {
       x.type = "password";
     }
   };
-  let forgotPassword = () => {
-    navigate("/forgotPassword");
-  };
+
   return (
     <section
       className="LoginUp"
@@ -120,7 +150,7 @@ function Login() {
                 color: "#bd9334",
               }}
             >
-              Login
+              OTP Verification
             </div>
             <div
               style={{
@@ -150,105 +180,25 @@ function Login() {
                     color: "rbg(0,0,0)",
                   }}
                 >
-                  Email
+                  OTP
                 </div>
                 <input
-                  name="identifier"
-                  type="text"
-                  placeholder="E-mail"
+                  name="otp"
+                  type="Number"
+                  placeholder="OTP"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.identifier}
+                  value={formik.values.otp}
                   style={{ height: "40px", width: "100%" }}
                 />
               </div>
               <div className="w-100">
-                {formik.errors.identifier && formik.touched.identifier ? (
-                  <div className="red_color">{formik.errors.identifier}</div>
+                {formik.errors.otp && formik.touched.otp ? (
+                  <div className="red_color">{formik.errors.otp}</div>
                 ) : null}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
-                  }}
-                >
-                  Password
-                </div>
-                <input
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  style={{ height: "40px", width: "100%" }}
-                  value={formik.values.password}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.password && formik.touched.password ? (
-                  <div className="red_color">{formik.errors.password}</div>
-                ) : null}
-              </div>
-              <div
-                className={
-                  matches
-                    ? "d-flex flex-column w-100 "
-                    : "d-flex justify-content-between w-100"
-                }
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    style={{ margin: "10px 10px" }}
-                    onClick={() => {
-                      myFunction();
-                    }}
-                  />
-                  Show Password
-                </div>
-                <div
-                  className={
-                    matches ? "justify-content-start" : "justify-content-end"
-                  }
-                  onClick={() => forgotPassword()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Forgot Password ?
-                </div>
               </div>
               <button className="Login-Button" onClick={formik.handleSubmit}>
-                Login
+                Submit
               </button>
             </div>
             <div
@@ -260,12 +210,12 @@ function Login() {
                 width: "70%",
               }}
             >
-              <div className="Login-Heading2">Does not have account?</div>
+              <div className="Login-Heading2">Already have an account?</div>
               <Link
-                to="/signup"
+                to="/login"
                 style={{ textDecoration: "none", margin: "0px 10px" }}
               >
-                SignUp
+                Login
               </Link>
             </div>
           </div>
@@ -275,4 +225,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default OtpVerification;

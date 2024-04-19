@@ -20,19 +20,18 @@ function defaultCatch(error, resolve) {
 }
 
 export default class Auth {
-
- // sign up
-    static signup(values) {
-        let payload = values;
-        return new Promise((resolve) => {
-          instance
-            .post("/api/auth/local/register", payload.data)
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => defaultCatch(error, resolve));
-        });
-      }
+  // sign up
+  static signup(values) {
+    let payload = values;
+    return new Promise((resolve) => {
+      instance
+        .post("/api/auth/local/register", payload.data)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
   //log in
   static login(values) {
     let payload = values;
@@ -46,6 +45,28 @@ export default class Auth {
     });
   }
 
+  static resetPassword(values) {
+    let payload=values;
+    console.log(payload.data);
+    return new Promise((resolve) => {
+      instance
+        .post(`/api/auth/reset-password`, payload.data)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
+
+  static forgotPassword(values) {
+    let payload = values;
+    return new Promise((resolve) => {
+      instance
+        .post(`/api/auth/forgot-password`, payload.data)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => defaultCatch(error, resolve));
+    });
+  }
 }
-
-

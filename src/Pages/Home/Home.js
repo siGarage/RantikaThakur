@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 // import Carousel from "react-multi-carousel";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import CarouselSingle from "react-bootstrap/Carousel";
+import quotes from "../../Images/quotes.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
 import h1 from "../../Images/h1.png";
 import h2 from "../../Images/h2.png";
 import h5 from "../../Images/h5.PNG";
@@ -21,6 +24,7 @@ import skirts from "../../Images/skirts.jpeg";
 import h4 from "../../Images/s_mid.PNG";
 
 function Home(props) {
+  const [testimonials, setTestimonials] = useState([]);
   const { products } = props;
   const data = products?.filter(
     (element) => element?.attributes?.bestseller === true
@@ -57,6 +61,13 @@ function Home(props) {
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:810px)").matches
+  );
+  const [ipadMatches, setIpadMatches] = useState(
+    window.matchMedia("(max-width:1024px)").matches
+  );
+
   const shuffled = category?.sort(() => 0.5 - Math.random());
   let array = shuffled.slice(0, 5);
 
@@ -70,7 +81,19 @@ function Home(props) {
     window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+    window
+      .matchMedia("(max-width:810px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    window
+      .matchMedia("(max-width:1024px)")
+      .addEventListener("change", (e) => setIpadMatches(e.matches));
+    if (testimonials.length == 0) {
+      fetch(`${process.env.REACT_APP_SERVERNAME}/api/testiminials`)
+        .then((response) => response.json())
+        .then((data) => setTestimonials(data.data));
+    }
   }, []);
+  console.log(testimonials);
   return (
     <section className="Home">
       <div className="Home-Box1 w-100">
@@ -220,41 +243,41 @@ function Home(props) {
       </div>
 
       <div className="Home-Box3">
-        <div className="Home-Box3-Box1">Shop By Category</div>
-        {matches ? (
+        <div className="Home-Box3-Box1"> SHOP BY CATEGORY</div>
+        {matches || ipadMatches ? (
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
               <img
                 src={dress}
-                className="widthFixForImage"
+                className={matches ? "widthFixForMImage" : "widthFixForPImage"}
                 onClick={() => navigate("/shop?type=Dresses")}
               />
             </div>
             <div className="col-12 d-flex justify-content-center">
               <img
                 src={coOrds}
-                className="widthFixForImage"
+                className={matches ? "widthFixForMImage" : "widthFixForPImage"}
                 onClick={() => navigate("/shop?type=Co-ordinates")}
               />
             </div>
             <div className="col-12 d-flex justify-content-center">
               <img
                 src={h4}
-                className="widthFixForImage"
+                className={matches ? "widthFixForMImage" : "widthFixForPImage"}
                 onClick={() => navigate("/shop?type=All")}
               />
             </div>
             <div className="col-12 d-flex justify-content-center">
               <img
                 src={shirts}
-                className="widthFixForImage"
+                className={matches ? "widthFixForMImage" : "widthFixForPImage"}
                 onClick={() => navigate("/shop?type=Shirts")}
               />
             </div>
             <div className="col-12 d-flex justify-content-center">
               <img
                 src={skirts}
-                className="widthFixForImage"
+                className={matches ? "widthFixForMImage" : "widthFixForPImage"}
                 onClick={() => navigate("/shop?type=Skirts")}
               />
             </div>
@@ -376,6 +399,55 @@ function Home(props) {
             </div>
           </div>
         )}
+      </div>
+      <div
+        className="Home-Box5 w-100"
+        style={matches ? { height: "430px" } : { height: "400px" }}
+      >
+        <div className="Home-Box2-Box5">OUR TESTIMONIALS</div>
+        <CarouselSingle
+          data-bs-theme="dark"
+          indicators={false}
+          controls={false}
+        >
+          {testimonials.length !== 0
+            ? testimonials.map((item) => {
+                return (
+                  <CarouselSingle.Item>
+                    <div className="row testimonial">
+                      <div className="col d-flex justify-content-center flex-column">
+                        <div className="row ">
+                          <div className="col">
+                            <br />
+                            <img src={quotes} width={30} height={30} />
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col text-center">
+                            <p>
+                              <br />
+                            </p>
+                            <p>{item.attributes.Description}</p>
+                            <p>
+                              <br />
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col text-center">
+                            <p>
+                              <strong>- {item.attributes.Name}</strong>
+                            </p>
+                            <br />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CarouselSingle.Item>
+                );
+              })
+            : ""}
+        </CarouselSingle>
       </div>
     </section>
   );

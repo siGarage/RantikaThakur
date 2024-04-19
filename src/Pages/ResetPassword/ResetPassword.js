@@ -1,6 +1,6 @@
-import "./Login.css";
+import "./ResetPassword.css";
 import SideImage from "../../Images/SDP05271.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import Auth from "../../API/Auth";
@@ -8,12 +8,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import constants from "../../constants";
 import { useState, useEffect } from "react";
-function Login() {
+function ResetPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [matches, setMatches] = useState(
-    window.matchMedia("(max-width:700px)").matches
-  );
+  const [users, setUsers] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const code = searchParams.get("code");
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
@@ -21,40 +21,50 @@ function Login() {
     window.matchMedia("(max-width:820px)").matches
   );
   const SignupSchema = Yup.object().shape({
-    identifier: Yup.string()
-      .email("*Enter a valid mail!")
-      .required("*E-mail field is required!"),
     password: Yup.string().required("*Password field is required!"),
+    passwordConfirmation: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("*Confirm Password field is required!"),
   });
 
   useEffect(() => {
-    window
-      .matchMedia("(max-width:700px)")
-      .addEventListener("change", (e) => setMatches(e.matches));
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
     window
       .matchMedia("(max-width:820px)")
       .addEventListener("change", (e) => setIpadAirMatches(e.matches));
+    fetch(`${process.env.REACT_APP_SERVERNAME}/api/users/5`)
+      .then((response) => response.json())
+      .then((data) => setUsers(data));
   }, []);
+  const forgot = () => {
+    navigate("/forgotPassword");
+  };
   const formik = useFormik({
     initialValues: {
-      identifier: "",
       password: "",
+      passwordConfirmation: "",
+      code: "",
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      Auth.login({ data: values }).then((res) => {
+      // let id = 5;
+      // let data = {
+      //   ...users,
+      //   password: values.password,
+      // };
+      let data = {
+        ...values,
+        code: code,
+      };
+      Auth.resetPassword({ data: data }).then((res) => {
         if (res.status === 200) {
-          dispatch({
-            type: constants("auth").reducers.login.success,
-            payload: { data: res.data },
-          });
-          toast.success("Login successful!");
-          navigate("/shop?type=All");
+          console.log(res.data);
+          toast.success("Reset Password successful!");
+          navigate("/login");
         } else {
-          toast.error("Enter a valid E-mail & Password.");
+          toast.error("Error");
         }
       });
     },
@@ -67,9 +77,7 @@ function Login() {
       x.type = "password";
     }
   };
-  let forgotPassword = () => {
-    navigate("/forgotPassword");
-  };
+
   return (
     <section
       className="LoginUp"
@@ -120,7 +128,7 @@ function Login() {
                 color: "#bd9334",
               }}
             >
-              Login
+              Reset Password
             </div>
             <div
               style={{
@@ -150,16 +158,17 @@ function Login() {
                     color: "rbg(0,0,0)",
                   }}
                 >
-                  Email
+                  New Password
                 </div>
                 <input
-                  name="identifier"
-                  type="text"
-                  placeholder="E-mail"
+                  name="password"
+                  type="password"
+                  id="password"
+                  placeholder="Password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
-                  value={formik.values.identifier}
                   style={{ height: "40px", width: "100%" }}
+                  value={formik.values.password}
                 />
               </div>
               <div className="w-100">
@@ -167,6 +176,7 @@ function Login() {
                   <div className="red_color">{formik.errors.identifier}</div>
                 ) : null}
               </div>
+
               <div
                 style={{
                   display: "flex",
@@ -185,88 +195,30 @@ function Login() {
                     color: "rbg(0,0,0)",
                   }}
                 >
-                  Password
+                  Confirm Password
                 </div>
                 <input
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Password"
+                  name="passwordConfirmation"
+                  type="text"
+                  id="passwordConfirmation"
+                  placeholder="Confirm Password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   style={{ height: "40px", width: "100%" }}
-                  value={formik.values.password}
+                  value={formik.values.passwordConfirmation}
                 />
               </div>
               <div className="w-100">
-                {formik.errors.password && formik.touched.password ? (
-                  <div className="red_color">{formik.errors.password}</div>
+                {formik.errors.passwordConfirmation &&
+                formik.touched.passwordConfirmation ? (
+                  <div className="red_color">
+                    {formik.errors.passwordConfirmation}
+                  </div>
                 ) : null}
               </div>
-              <div
-                className={
-                  matches
-                    ? "d-flex flex-column w-100 "
-                    : "d-flex justify-content-between w-100"
-                }
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    style={{ margin: "10px 10px" }}
-                    onClick={() => {
-                      myFunction();
-                    }}
-                  />
-                  Show Password
-                </div>
-                <div
-                  className={
-                    matches ? "justify-content-start" : "justify-content-end"
-                  }
-                  onClick={() => forgotPassword()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Forgot Password ?
-                </div>
-              </div>
               <button className="Login-Button" onClick={formik.handleSubmit}>
-                Login
+                Submit
               </button>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                flexDirection: "row",
-                width: "70%",
-              }}
-            >
-              <div className="Login-Heading2">Does not have account?</div>
-              <Link
-                to="/signup"
-                style={{ textDecoration: "none", margin: "0px 10px" }}
-              >
-                SignUp
-              </Link>
             </div>
           </div>
         </div>
@@ -275,4 +227,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ResetPassword;

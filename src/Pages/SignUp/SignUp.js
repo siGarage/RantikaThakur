@@ -1,16 +1,21 @@
 import "./SignUp.css";
 import SideImage from "../../Images/SDP05271.png";
 import { useNavigate } from "react-router-dom";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useState, useEffect, useRef, Profiler } from "react";
+import emailjs from "@emailjs/browser";
+import axios from "axios";
 import constants from "../../constants";
 function SignUp() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
+  const buttonRRef = useRef(null);
+  const [clientMessage, setClientMessage] = useState("");
   const SignupSchema = Yup.object().shape({
     username: Yup.string().required("*Name is required"),
     email: Yup.string()
@@ -19,6 +24,68 @@ function SignUp() {
     password: Yup.string().required("*Password field is required!"),
   });
 
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm("service_f4cfons", "template_wcv0rxr", form.current, {
+        publicKey: "ZCGsvRJF6uxDcjRLo",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+  };
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+  console.log(profile);
+  useEffect(() => {
+    var firstWord = profile?.name?.replace(/ .*/, "");
+    setClientMessage(firstWord);
+    if (profile && firstWord) {
+      let values = {
+        username: profile?.name,
+        email: profile?.email,
+        password: firstWord,
+        confirmed: true,
+      };
+      Auth.signup({ data: values }).then((res) => {
+        if (res.status === 200) {
+          buttonRRef.current.click();
+          toast.success("Check Your E-mail");
+          navigate("/login");
+        } else {
+          toast.error(res.data.error.message);
+        }
+      });
+    }
+  }, [profile]);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -48,6 +115,20 @@ function SignUp() {
 
   return (
     <section className="SignUp">
+      <form ref={form} onSubmit={sendEmail} style={{ display: "none" }}>
+        <label>Name</label>
+        <input type="text" name="user_name" value="" />
+        <label>Email</label>
+        <input
+          type="email"
+          name="user_email"
+          value={profile?.email ? profile?.email : ""}
+        />
+        <label>Message</label>
+        <textarea name="message" value={clientMessage ? clientMessage : ""} />
+
+        <input type="submit" value="Send" ref={buttonRRef} />
+      </form>
       <div className="SignUp-Box1">
         <div className="SignUp-Box1-innerBox">
           <div className="SignUp-Box1-innerBox-Box1">
@@ -133,9 +214,15 @@ function SignUp() {
                 />
                 Show Password
               </div>
+              {/* <div className="d-flex justify-content-between"> */}
               <button className="SignUp-Button" onClick={formik.handleSubmit}>
                 Sign Up
               </button>
+              <button className="Login-Button margin-top-neg" onClick={login}>
+                {" "}
+                Google Login{" "}
+              </button>
+              {/* </div> */}
             </div>
           </div>
         </div>

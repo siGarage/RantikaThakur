@@ -1,19 +1,12 @@
-import "./Login.css";
+import "./ForgotPassword.css";
 import SideImage from "../../Images/SDP05271.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import constants from "../../constants";
-import { useState, useEffect } from "react";
-function Login() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [matches, setMatches] = useState(
-    window.matchMedia("(max-width:700px)").matches
-  );
+import { useState, useEffect, useRef } from "react";
+function ForgotPassword() {
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
@@ -24,13 +17,8 @@ function Login() {
     identifier: Yup.string()
       .email("*Enter a valid mail!")
       .required("*E-mail field is required!"),
-    password: Yup.string().required("*Password field is required!"),
   });
-
   useEffect(() => {
-    window
-      .matchMedia("(max-width:700px)")
-      .addEventListener("change", (e) => setMatches(e.matches));
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
@@ -41,20 +29,17 @@ function Login() {
   const formik = useFormik({
     initialValues: {
       identifier: "",
-      password: "",
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-      Auth.login({ data: values }).then((res) => {
+      values = {
+        email: values.identifier,
+      };
+      Auth.forgotPassword({ data: values }).then((res) => {
         if (res.status === 200) {
-          dispatch({
-            type: constants("auth").reducers.login.success,
-            payload: { data: res.data },
-          });
-          toast.success("Login successful!");
-          navigate("/shop?type=All");
+          toast.success("Please Check Your E-mail For Reset Password Link.");
         } else {
-          toast.error("Enter a valid E-mail & Password.");
+          toast.error("Enter a valid E-mail ");
         }
       });
     },
@@ -67,9 +52,7 @@ function Login() {
       x.type = "password";
     }
   };
-  let forgotPassword = () => {
-    navigate("/forgotPassword");
-  };
+
   return (
     <section
       className="LoginUp"
@@ -120,7 +103,7 @@ function Login() {
                 color: "#bd9334",
               }}
             >
-              Login
+              Forgot Password
             </div>
             <div
               style={{
@@ -167,88 +150,8 @@ function Login() {
                   <div className="red_color">{formik.errors.identifier}</div>
                 ) : null}
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
-                  }}
-                >
-                  Password
-                </div>
-                <input
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  style={{ height: "40px", width: "100%" }}
-                  value={formik.values.password}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.password && formik.touched.password ? (
-                  <div className="red_color">{formik.errors.password}</div>
-                ) : null}
-              </div>
-              <div
-                className={
-                  matches
-                    ? "d-flex flex-column w-100 "
-                    : "d-flex justify-content-between w-100"
-                }
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    style={{ margin: "10px 10px" }}
-                    onClick={() => {
-                      myFunction();
-                    }}
-                  />
-                  Show Password
-                </div>
-                <div
-                  className={
-                    matches ? "justify-content-start" : "justify-content-end"
-                  }
-                  onClick={() => forgotPassword()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Forgot Password ?
-                </div>
-              </div>
               <button className="Login-Button" onClick={formik.handleSubmit}>
-                Login
+                Submit
               </button>
             </div>
             <div
@@ -260,12 +163,12 @@ function Login() {
                 width: "70%",
               }}
             >
-              <div className="Login-Heading2">Does not have account?</div>
+              <div className="Login-Heading2">Already have an account?</div>
               <Link
-                to="/signup"
+                to="/login"
                 style={{ textDecoration: "none", margin: "0px 10px" }}
               >
-                SignUp
+                Login
               </Link>
             </div>
           </div>
@@ -275,4 +178,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;

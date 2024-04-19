@@ -90,6 +90,9 @@
   font-size: 20px;
   color: rbg(0, 0, 0);
 }
+.margin-top-neg{
+  margin-top: -5px !important;
+}
 
 .signup-input {
   height: 40px;

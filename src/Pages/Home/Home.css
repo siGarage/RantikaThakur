@@ -6,6 +6,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.testimonial{
+  background-color: #f5f5f5;
+}
+
+.carousel-item{
+  padding: 50px !important;
+}
+
+.carousel-indicator {
+  display: none !important;
+}
+
 /* .Home-Box1{
     height:600px;
     width:100%;
@@ -47,6 +60,10 @@
   width: 47.57%;
   height: 100%;
 }
+.react-multiple-carousel__arrow--right,
+.react-multiple-carousel__arrow--left {
+  display: none;
+}
 
 .clothesTypesBox2 {
   background-image: url("../../Images/co-ords.jpeg");
@@ -83,10 +100,17 @@
   width: 47.57%;
   height: 100%;
 }
-.widthFixForImage {
+.widthFixForMImage {
   width: 350px;
   height: 350px;
   padding: 5px;
+  cursor: pointer;
+}
+
+.widthFixForPImage {
+  width: 600px;
+  padding: 5px;
+  height: 600px;
   cursor: pointer;
 }
 
@@ -168,6 +192,7 @@
 .Home-Box1 {
   cursor: pointer;
 }
+
 .Home-Box1-Button {
   text-decoration: none;
   width: 25%;
@@ -207,7 +232,16 @@
   color: #000000;
   margin: 20px 0px;
 }
-
+.Home-Box2-Box5 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Abhaya Libre";
+  font-size: 32px;
+  font-weight: 400;
+  color: #000000;
+}
 .Home-Box3 {
   width: 90%;
   display: flex;
@@ -288,6 +322,11 @@
     cursor: pointer;
   }
 
+  .Home-Box4 {
+    height: 500px;
+    cursor: pointer;
+  }
+
   .Home-Box1-Heading {
     font-size: 40px;
     cursor: pointer;
@@ -345,6 +384,9 @@
 @media only screen and (max-width: 500px) {
   .Home-Box3-Box1-Box-InnerBox1 {
     height: 200px;
+  }
+  .carousel-item{
+    padding: 35px !important;
   }
   .Home-Box1 {
     height: 230px;

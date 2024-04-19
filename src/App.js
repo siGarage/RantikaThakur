@@ -34,6 +34,9 @@ import Terms from "./Pages/TermsCondition/Terms";
 
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
+import OtpVerification from "./Pages/OtpVerification/OtpVerification";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -58,6 +61,9 @@ function App(props) {
 
           <Route exact path="/success" element={<Success />} />
           <Route exact path="/fail" element={<Fail />} />
+          <Route exact path="/forgotPassword" element={<ForgotPassword />} />
+          <Route exact path="/otpverification" element={<OtpVerification />} />
+          <Route exact path="/resetPassword" element={<ResetPassword />} />
 
           {logged_in ? (
             <>
