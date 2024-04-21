@@ -87,13 +87,12 @@ function Home(props) {
     window
       .matchMedia("(max-width:1024px)")
       .addEventListener("change", (e) => setIpadMatches(e.matches));
-    if (testimonials.length == 0) {
+    if (testimonials?.length == 0) {
       fetch(`${process.env.REACT_APP_SERVERNAME}/api/testiminials`)
         .then((response) => response.json())
         .then((data) => setTestimonials(data.data));
     }
   }, []);
-  console.log(testimonials);
   return (
     <section className="Home">
       <div className="Home-Box1 w-100">
@@ -410,8 +409,8 @@ function Home(props) {
           indicators={false}
           controls={false}
         >
-          {testimonials.length !== 0
-            ? testimonials.map((item) => {
+          {testimonials?.length !== 0
+            ? testimonials?.map((item) => {
                 return (
                   <CarouselSingle.Item>
                     <div className="row testimonial">
