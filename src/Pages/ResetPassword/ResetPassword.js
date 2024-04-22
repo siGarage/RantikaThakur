@@ -34,9 +34,9 @@ function ResetPassword() {
     window
       .matchMedia("(max-width:820px)")
       .addEventListener("change", (e) => setIpadAirMatches(e.matches));
-    fetch(`${process.env.REACT_APP_SERVERNAME}/api/users/5`)
-      .then((response) => response.json())
-      .then((data) => setUsers(data));
+    // fetch(`${process.env.REACT_APP_SERVERNAME}/api/users/5`)
+    //   .then((response) => response.json())
+    //   .then((data) => setUsers(data));
   }, []);
   const forgot = () => {
     navigate("/forgotPassword");

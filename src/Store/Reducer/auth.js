@@ -8,6 +8,7 @@ const initial_state = {
 };
 
 export default function auth(state = initial_state, action) {
+  console.log(action?.payload?.data);
   switch (action.type) {
     //all load
     case constants("auth").reducers.login.load:

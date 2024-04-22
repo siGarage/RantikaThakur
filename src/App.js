@@ -33,6 +33,7 @@ import ExchangePolicy from "./Pages/ExchangePolicy/ExchangePolicy";
 import Terms from "./Pages/TermsCondition/Terms";
 
 import Login from "./Pages/Login/Login";
+import LoginGoogle from "./Pages/Login/LoginGoogle";
 import SignUp from "./Pages/SignUp/SignUp";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import OtpVerification from "./Pages/OtpVerification/OtpVerification";
@@ -55,7 +56,7 @@ function App(props) {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/customsize" element={<Custom />} />
           <Route exact path="/about" element={<About />} />
-          <Route path="/auth/callback/google" element={<GoogleAuthCallback/>} />
+          <Route path="/api/connect/google/redirect" element={<LoginGoogle />} />
           <Route exact path="/shop" element={<Shop />} />
           <Route exact path="/shop/:shopId" element={<ShopId />} />
 

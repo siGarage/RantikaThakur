@@ -39,6 +39,34 @@
 .password-input-container {
   position: relative;
 }
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* .login-btn.google {
+  background-color: #DB4437;
+} */
+
+.login-btn:hover {
+  /* background-color: white; */
+  background-color: #bd970c;
+}
+
+.login-btn img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
 
 .password-input-container input[type="password"] {
   padding-right: 30px; /* Adjust as needed */

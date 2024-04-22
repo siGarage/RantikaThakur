@@ -8,14 +8,35 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import constants from "../../constants";
 import eye from "../../Images/eye-svgrepo-com.svg";
-import google from "../../Images/icons8-google.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
-function Login() {
+function LoginGoogle() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [auth, setAuth] = useState();
-
+  const [googleLogin, setLoginGoogle] = useState(false);
+  const location = useLocation();
+  useEffect(() => {
+    if (!location) {
+      return;
+    }
+    const { search } = location;
+    // console.log(googleLogin,"googleLogin")
+    axios({
+      method: "GET",
+      url: `http://localhost:1337/api/auth/google/callback${search}`,
+    })
+      .then((res) => {
+        dispatch({
+          type: constants("auth").reducers.login.success,
+          payload: { data: res.data },
+        });
+        toast.success("Login successful!");
+        // setLoginGoogle(false);
+        navigate("/shop?type=All");
+      })
+      .then(setAuth);
+  }, [location]);
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
@@ -251,7 +272,7 @@ function Login() {
                   (window.location = "http://localhost:1337/api/connect/google")
                 }
               >
-                <img src={google} alt="Google Logo" />
+                <img src="google_logo.png" alt="Google Logo" />
                 <span>Login with Google</span>
               </button>
             </div>
@@ -279,4 +300,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginGoogle;
