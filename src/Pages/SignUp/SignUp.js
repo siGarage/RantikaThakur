@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { GoogleLogin } from '@react-oauth/google';
 import { useState, useEffect, useRef, Profiler } from "react";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
@@ -28,6 +29,7 @@ function SignUp() {
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
+
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
   const form = useRef();
@@ -47,6 +49,7 @@ function SignUp() {
       );
   };
   useEffect(() => {
+    console.log("kartik")
     if (user) {
       axios
         .get(
@@ -64,7 +67,6 @@ function SignUp() {
         .catch((err) => console.log(err));
     }
   }, [user]);
-  console.log(profile);
   useEffect(() => {
     var firstWord = profile?.name?.replace(/ .*/, "");
     setClientMessage(firstWord);
@@ -218,10 +220,21 @@ function SignUp() {
               <button className="SignUp-Button" onClick={formik.handleSubmit}>
                 Sign Up
               </button>
-              <button className="Login-Button margin-top-neg" onClick={login}>
+              {/* <button className="Login-Button margin-top-neg" onClick={login}>
                 {" "}
                 Google Login{" "}
-              </button>
+              </button> */}
+
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse,"credentialResponse")
+                  setUser(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+              {console.log(user,"user")}
               {/* </div> */}
             </div>
           </div>

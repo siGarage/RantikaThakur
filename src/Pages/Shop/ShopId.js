@@ -852,7 +852,7 @@ function ShopId(props) {
                   style={{
                     backgroundColor: csize == true ? "#E2BF44" : "white",
                     border: csize == true ? "none" : "1px solid #0000000",
-                    width: "20%",
+                    // width: "20%",
                     color: "black",
                   }}
                 >
@@ -984,7 +984,9 @@ function ShopId(props) {
                     }}
                     className="Shop-AddToCart"
                   >
-                    Add To Cart
+                    {!product?.attributes?.instock
+                      ? "Out Of Stock"
+                      : "Add To Cart"}
                   </button>
                   <button
                     onClick={() => {
@@ -997,7 +999,7 @@ function ShopId(props) {
                         : "#E2BF44",
                     }}
                   >
-                    Buy Now
+                    {!product?.attributes?.instock ? "Out Of Stock" : "Buy Now"}
                   </button>
                   <div className="heart">
                     <FavoriteBorderIcon

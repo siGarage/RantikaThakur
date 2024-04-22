@@ -36,6 +36,20 @@
   font-weight: 500;
   font-size: 20px;
 }
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input[type="password"] {
+  padding-right: 30px; /* Adjust as needed */
+}
+
+.password-icon {
+  position: absolute;
+  top: 70%;
+  right: 5px; /* Adjust as needed */
+  transform: translateY(-50%);
+}
 @media only screen and (max-width: 800px) {
   .LoginImage {
     display: none;

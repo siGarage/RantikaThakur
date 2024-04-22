@@ -256,7 +256,7 @@ function Home(props) {
               <img
                 src={coOrds}
                 className={matches ? "widthFixForMImage" : "widthFixForPImage"}
-                onClick={() => navigate("/shop?type=Co-ordinates")}
+                onClick={() => navigate("/shop?type=Co-ord sets")}
               />
             </div>
             <div className="col-12 d-flex justify-content-center">
@@ -309,7 +309,7 @@ function Home(props) {
               {/* clothesTypesBox2 */}
               <div
                 className="clothesTypesBox2"
-                onClick={() => navigate("/shop?type=Co-ordinates")}
+                onClick={() => navigate("/shop?type=Co-ord sets")}
               >
                 {/* <div className="clothesTypesBox1-Box1">{array[1]}</div> */}
                 <div></div>

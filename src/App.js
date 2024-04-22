@@ -37,7 +37,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import OtpVerification from "./Pages/OtpVerification/OtpVerification";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
-
+import GoogleAuthCallback from "./GoogleAuthCallback";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App(props) {
@@ -55,7 +55,7 @@ function App(props) {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/customsize" element={<Custom />} />
           <Route exact path="/about" element={<About />} />
-
+          <Route path="/auth/callback/google" element={<GoogleAuthCallback/>} />
           <Route exact path="/shop" element={<Shop />} />
           <Route exact path="/shop/:shopId" element={<ShopId />} />
 

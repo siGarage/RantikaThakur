@@ -7,6 +7,7 @@ import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import constants from "../../constants";
+import eye from "../../Images/eye-svgrepo-com.svg";
 import { useState, useEffect } from "react";
 function Login() {
   const navigate = useNavigate();
@@ -168,12 +169,14 @@ function Login() {
                 ) : null}
               </div>
               <div
+                class="password-input-container"
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   flexDirection: "column",
                   alignItems: "space-between",
                   width: "100%",
+                  // marginTop: "20px",
                 }}
               >
                 <div
@@ -182,20 +185,30 @@ function Login() {
                     fontFamily: "Abhaya Libre",
                     fontWeight: "500",
                     fontSize: "20px",
-                    color: "rbg(0,0,0)",
+                    color: "rbg(0,0,0) !important",
                   }}
                 >
                   Password
                 </div>
                 <input
-                  name="password"
                   type="password"
-                  id="password"
                   placeholder="Password"
+                  name="password"
+                  id="password"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   style={{ height: "40px", width: "100%" }}
                   value={formik.values.password}
+                />
+                <img
+                  class="password-icon"
+                  src={eye}
+                  alt="Lock Icon"
+                  width={20}
+                  height={20}
+                  onClick={() => {
+                    myFunction();
+                  }}
                 />
               </div>
               <div className="w-100">
@@ -211,28 +224,6 @@ function Login() {
                 }
               >
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    style={{ margin: "10px 10px" }}
-                    onClick={() => {
-                      myFunction();
-                    }}
-                  />
-                  Show Password
-                </div>
-                <div
-                  className={
-                    matches ? "justify-content-start" : "justify-content-end"
-                  }
                   onClick={() => forgotPassword()}
                   style={{
                     display: "flex",
@@ -249,6 +240,13 @@ function Login() {
               </div>
               <button className="Login-Button" onClick={formik.handleSubmit}>
                 Login
+              </button>
+              <button
+                onClick={() =>
+                  (window.location = "http://localhost:1337/connect/google")
+                }
+              >
+                Login via Google
               </button>
             </div>
             <div

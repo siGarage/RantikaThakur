@@ -10,6 +10,9 @@ function ForgotPassword() {
   const [iMacMatches, setIMacMatches] = useState(
     window.matchMedia("(min-width:2560px)").matches
   );
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
   const [ipadAirMatches, setIpadAirMatches] = useState(
     window.matchMedia("(max-width:820px)").matches
   );
@@ -19,6 +22,9 @@ function ForgotPassword() {
       .required("*E-mail field is required!"),
   });
   useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
     window
       .matchMedia("(min-width:2560px)")
       .addEventListener("change", (e) => setIMacMatches(e.matches));
@@ -103,8 +109,9 @@ function ForgotPassword() {
                 color: "#bd9334",
               }}
             >
-              Forgot Password
+              Reset Your Password
             </div>
+            <p>We will send you an e-mail to reset your password </p>
             <div
               style={{
                 display: "flex",
@@ -133,7 +140,7 @@ function ForgotPassword() {
                     color: "rbg(0,0,0)",
                   }}
                 >
-                  Email
+                  Enter Your Resgistered E-mail
                 </div>
                 <input
                   name="identifier"
@@ -150,7 +157,11 @@ function ForgotPassword() {
                   <div className="red_color">{formik.errors.identifier}</div>
                 ) : null}
               </div>
-              <button className="Login-Button" onClick={formik.handleSubmit}>
+              <button
+                className="Login-Button"
+                onClick={formik.handleSubmit}
+                style={matches ? {marginTop: "20px"} : { marginTop: "50px" }}
+              >
                 Submit
               </button>
             </div>
