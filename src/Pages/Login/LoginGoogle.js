@@ -24,14 +24,14 @@ function LoginGoogle() {
     // console.log(googleLogin,"googleLogin")
     axios({
       method: "GET",
-      url: `http://localhost:1337/api/auth/google/callback${search}`,
+      url: `https://admin.rantikathakur.com/api/auth/google/callback${search}`,
     })
       .then((res) => {
         dispatch({
           type: constants("auth").reducers.login.success,
           payload: { data: res.data },
         });
-        toast.success("Login successful!");
+        // toast.success("Login successful!");
         // setLoginGoogle(false);
         navigate("/shop?type=All");
       })
@@ -269,7 +269,7 @@ function LoginGoogle() {
               <button
                 class="login-btn google"
                 onClick={() =>
-                  (window.location = "http://localhost:1337/api/connect/google")
+                  (window.location = "https://admin.rantikathakur.com/api/connect/google")
                 }
               >
                 <img src="google_logo.png" alt="Google Logo" />

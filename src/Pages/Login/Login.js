@@ -1,5 +1,5 @@
 import "./Login.css";
-import SideImage from "../../Images/SDP05271.png";
+import SideImage from "../../Images/Tezza-9293.jpg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -112,7 +112,7 @@ function Login() {
               alt="SideImage"
               style={{
                 height: `${ipadAirMatches ? "80%" : "100%"}`,
-                width: `${iMacMatches ? "60%" : "80%"}`,
+                width: `${iMacMatches ? "60%" : "60%"}`,
                 padding: `${iMacMatches ? "0px" : "20px"}`,
               }}
             />
@@ -248,7 +248,7 @@ function Login() {
               <button
                 class="login-btn google"
                 onClick={() =>
-                  (window.location = "http://localhost:1337/api/connect/google")
+                  (window.location = "https://admin.rantikathakur.com/api/connect/google")
                 }
               >
                 <img src={google} alt="Google Logo" />

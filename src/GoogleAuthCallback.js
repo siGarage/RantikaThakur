@@ -13,7 +13,7 @@ function GoogleAuthCallback() {
     // if (user) {
       axios({
         method: 'GET',
-        url: `http://localhost:1337/api/auth/google/callback${search}`,
+        url: `https://admin.rantikathakur.com/api/auth/google/callback${search}`,
       })
         .then((res) => console.log(res.data))
         .then(setAuth)
