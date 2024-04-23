@@ -1,10 +1,6 @@
 import "./Footer.css";
 import image1 from "../Images/image1.svg";
 import image2 from "../Images/image2.svg";
-import mii from "../Images/made-in-india.png";
-import si from "../Images/scissors.png";
-import re from "../Images/png_clipart_semicircle_arrow_clockwise_arrows_circle_arrows_circle.png";
-import rm from "../Images/image-removebg-preview.png";
 import { Link, useNavigate } from "react-router-dom";
 function Footer() {
   const navigate = useNavigate();
@@ -23,7 +19,7 @@ function Footer() {
                 margin: "20px 0px 0px 0px",
               }}
             >
-              <div style={{ width: "32%" }}>
+              <div className="col">
                 <div style={{ margin: "0px 0px 18px 0px", fontSize: "16px" }}>
                   QUICK LINKS
                 </div>
@@ -76,8 +72,7 @@ function Footer() {
                   </div>
                 </Link>
               </div>
-
-              <div style={{ width: "32%" }}>
+              <div className="col">
                 <div
                   style={{
                     margin: "0px 0px 18px 0px",
@@ -143,8 +138,7 @@ function Footer() {
                   </div>
                 </Link>
               </div>
-
-              <div style={{ width: "32%" }}>
+              <div className="col">
                 <div
                   style={{
                     margin: "0px 0px 18px 0px",
@@ -207,131 +201,85 @@ function Footer() {
                   Dresses
                 </div>
               </div>
+              <div className="col">
+                <div
+                  style={{
+                    margin: "0px 0px 18px 0px",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                  }}
+                >
+                  FOLLOW US OUT THERE
+                </div>
 
-              <div style={{ width: "10%" }}>
-                <div className="v1"></div>
-              </div>
-              <div style={{ width: "32%" }} className="mdi">
-                <div>
-                  <div className="pb-2 d-flex">
-                    <img src={mii} width={40} height={40} />
-                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">
-                      Made In India
-                    </div>
-                  </div>
-                  <div className="pb-2 d-flex ">
-                    <img src={si} width={40} height={40} />
-                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">
-                      Customise Now
-                    </div>
-                  </div>
-                  <div className="pb-2 d-flex ">
-                    <img src={re} width={40} height={40} />
-                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">
-                      Easy Return
-                    </div>
-                  </div>
-                  <div className="pb-2 d-flex ">
-                    <img src={rm} width={40} height={40} />
-                    <div className="ps-2 d-flex align-items-center h5 pb-3 pt-2">
-                      Affordable Luxury
-                    </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItem: "center",
+                    justifyContent: "space-between",
+                    width: "50%",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <a
+                      href="https://www.instagram.com/rantikathakurclothing?igsh=bmNjem5pNzQ5bzJw"
+                      target="blank"
+                    >
+                      <div style={{ margin: "0px 10px" }}>
+                        <img
+                          src={image1}
+                          style={{ height: "25px", width: "25px" }}
+                          alt="Twitter"
+                        />
+                      </div>
+                    </a>
+                    <a
+                      href="https://www.facebook.com/Rantikathakurclothing"
+                      target="blank"
+                    >
+                      <div style={{ margin: "0px 10px" }}>
+                        <img
+                          src={image2}
+                          style={{ height: "25px", width: "25px" }}
+                          alt="Facebook"
+                        />
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            className="socialMedia"
-            style={{
-              width: "100%",
-              height: "20%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+        </div>
+        <div className="row w-100">
+          <div className="col">
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
-                alignItem: "center",
-                justifyContent: "space-between",
-                width: "50%",
+                justifyContent: "center",
+                alignItems: "center",
+                fontWeight: "500",
+                fontFamily: "Roboto",
+                color: "white",
+                marginTop: "20px",
+                marginBottom: "10px",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: "10px 0px 20px 0px",
-                }}
-              >
-                <a
-                  href="https://www.instagram.com/rantikathakurclothing?igsh=bmNjem5pNzQ5bzJw"
-                  target="blank"
-                >
-                  <div style={{ margin: "0px 10px" }}>
-                    <img
-                      src={image1}
-                      style={{ height: "25px", width: "25px" }}
-                      alt="Twitter"
-                    />
-                  </div>
-                </a>
-                <a
-                  href="https://www.facebook.com/Rantikathakurclothing"
-                  target="blank"
-                >
-                  <div style={{ margin: "0px 10px" }}>
-                    <img
-                      src={image2}
-                      style={{ height: "25px", width: "25px" }}
-                      alt="Facebook"
-                    />
-                  </div>
-                </a>
-              </div>
+              All rights reserved © 2024 Developed by &nbsp;
+              <a href="http://silicongarage.in/" className="silicon-garage">
+                {" "}
+                Silicon Garage
+              </a>
             </div>
-          </div>
-        </div>
-        <div
-          style={{
-            width: "95%",
-            height: "20%",
-            margin: "10px 0px",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "14px",
-              fontWeight: "500",
-              fontFamily: "Roboto",
-              color: "white",
-            }}
-          >
-            © 2024 Developed by{" "}
-            <a href="http://silicongarage.in/"> Silicon Garage</a>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              width: "40%",
-              fontWeight: "500",
-              fontFamily: "Roboto",
-              color: "white",
-            }}
-          >
-            All rights reserved
           </div>
         </div>
       </section>

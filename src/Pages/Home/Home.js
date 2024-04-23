@@ -13,6 +13,10 @@ import h2 from "../../Images/h2.png";
 import h5 from "../../Images/h5.PNG";
 import h6 from "../../Images/h6.PNG";
 import h7 from "../../Images/h7.PNG";
+import scissor from "../../Images/scissors.png";
+import india from "../../Images/Made_In_India.png";
+import luxury from "../../Images/luxury.png";
+import time from "../../Images/Timeless_Design.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -153,7 +157,7 @@ function Home(props) {
                 gotoShop();
               }}
             >
-              <img src={h5}className="w-100" />
+              <img src={h5} className="w-100" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -180,7 +184,7 @@ function Home(props) {
       </div>
 
       <div className="Home-Box2">
-        <div className="Home-Box2-Box1">BEST SELLERS</div>
+        <div className="Home-Box2-Box1">- BEST SELLERS -</div>
         <Carousel
           responsive={responsive}
           autoPlay={true}
@@ -242,7 +246,7 @@ function Home(props) {
       </div>
 
       <div className="Home-Box3">
-        <div className="Home-Box3-Box1"> SHOP BY CATEGORY</div>
+        <div className="Home-Box3-Box1">- SHOP BY CATEGORY -</div>
         {matches || ipadMatches ? (
           <div className="row">
             <div className="col-12 d-flex justify-content-center">
@@ -399,11 +403,35 @@ function Home(props) {
           </div>
         )}
       </div>
+      <div className="Home-Box6">
+        <div className="row text-center">
+          <div className="col">
+            <img src={scissor} width={60} height={60} />
+            <br />
+            CUSTOMISE NOW
+          </div>
+          <div className="col">
+            <img src={india} width={60} height={60} />
+            <br />
+            MADE IN INDIA
+          </div>
+          <div className="col">
+            <img src={luxury} width={60} height={60} />
+            <br />
+            AFFORDABLE LUXURY
+          </div>
+          <div className="col">
+            <img src={time} width={60} height={60} />
+            <br />
+            TIMELESS DESIGN
+          </div>
+        </div>
+      </div>
       <div
-        className="Home-Box5 w-100"
+        className="Home-Box5 w-100 p-5"
         style={matches ? { height: "430px" } : { height: "400px" }}
       >
-        <div className="Home-Box2-Box5">OUR TESTIMONIALS</div>
+        <div className="Home-Box2-Box5">- OUR TESTIMONIALS -</div>
         <CarouselSingle
           data-bs-theme="dark"
           indicators={false}
