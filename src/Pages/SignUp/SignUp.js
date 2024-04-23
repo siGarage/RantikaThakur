@@ -225,7 +225,7 @@ function SignUp() {
                 Google Login{" "}
               </button> */}
 
-              <GoogleLogin
+              {/* <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse,"credentialResponse")
                   setUser(credentialResponse);
@@ -234,7 +234,7 @@ function SignUp() {
                   console.log("Login Failed");
                 }}
               />
-              {console.log(user,"user")}
+              {console.log(user,"user")} */}
               {/* </div> */}
             </div>
           </div>

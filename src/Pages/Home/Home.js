@@ -153,7 +153,7 @@ function Home(props) {
                 gotoShop();
               }}
             >
-              <img src={h5} className="w-100" />
+              <img src={h5}className="w-100" />
             </div>
           </SwiperSlide>
           <SwiperSlide>
