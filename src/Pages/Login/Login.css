@@ -1,4 +1,4 @@
-.Login-Button {
+.custom-card .Login-Button {
   width: 60%;
   height: 50px;
   border-radius: 72px;
@@ -13,7 +13,7 @@
   margin: 20px 0px;
 }
 
-.red_color {
+.custom-card .red_color {
   color: red;
 }
 
@@ -22,8 +22,8 @@
   height: 100%;
 }
 
-.LoginDetails {
-  width: 50%;
+.custom-card .LoginDetails {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -31,15 +31,15 @@
   height: 100%;
 }
 
-.Login-Heading2 {
+.custom-card .Login-Heading2 {
   font-family: "Poppins";
   font-weight: 500;
   font-size: 20px;
 }
-.password-input-container {
+.custom-card .password-input-container {
   position: relative;
 }
-.login-btn {
+.custom-card .login-btn {
   display: inline-flex;
   align-items: center;
   padding: 10px 20px;
@@ -52,27 +52,31 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
+.custom-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 40% !important;
+}
 
 /* .login-btn.google {
   background-color: #DB4437;
 } */
 
-.login-btn:hover {
+.custom-card .login-btn:hover {
   /* background-color: white; */
   background-color: #e2bf44;
 }
 
-.login-btn img {
+.custom-card .login-btn img {
   width: 24px;
   height: 24px;
   margin-right: 10px;
 }
 
-.password-input-container input[type="password"] {
+.custom-card .password-input-container input[type="password"] {
   padding-right: 30px; /* Adjust as needed */
 }
 
-.password-icon {
+.custom-card .password-icon {
   position: absolute;
   top: 70%;
   right: 5px; /* Adjust as needed */
@@ -85,11 +89,32 @@
   .LoginDetails {
     width: 100%;
   }
+  .custom-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width:90% !important;
+  }
+  .custom-card .Login-Button {
+    width: 100%;
+  }
 
   .Login-Button {
     width: 100%;
   }
   .Login-Heading2 {
     font-size: 16px;
+  }
+}
+
+@media only screen and (height: 1080px) {
+  .custom-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width:85% !important;
+  }
+}
+
+@media only screen and (width: 1080px) {
+  .custom-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width:85% !important;
   }
 }

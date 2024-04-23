@@ -100,7 +100,7 @@ function Login() {
             height: "100%",
           }}
         >
-          <div
+          {/* <div
             className={
               iMacMatches
                 ? "LoginImage   text-center"
@@ -116,161 +116,182 @@ function Login() {
                 padding: `${iMacMatches ? "0px" : "20px"}`,
               }}
             />
-          </div>
-          <div className="LoginDetails">
-            <div
-              style={{
-                fontFamily: "Abhaya Libre",
-                fontSize: "40px",
-                color: "#bd9334",
-              }}
-            >
-              Login
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "column",
-                width: "70%",
-                margin: "50px 0px 10px 0px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
+          </div> */}
+          <div class="card custom-card">
+            <div class="card-body">
+              <div className="LoginDetails">
                 <div
                   style={{
-                    width: "100%",
                     fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
+                    fontSize: "40px",
+                    color: "#bd9334",
                   }}
                 >
-                  Email
+                  Login
                 </div>
-                <input
-                  name="identifier"
-                  type="text"
-                  placeholder="E-mail"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.identifier}
-                  style={{ height: "40px", width: "100%" }}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.identifier && formik.touched.identifier ? (
-                  <div className="red_color">{formik.errors.identifier}</div>
-                ) : null}
-              </div>
-              <div
-                class="password-input-container"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                  // marginTop: "20px",
-                }}
-              >
                 <div
-                  style={{
-                    width: "100%",
-                    fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0) !important",
-                  }}
+                  style={
+                    matches
+                      ? {
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          width: "80%",
+                          margin: "50px 0px 10px 0px",
+                        }
+                      : {
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          flexDirection: "column",
+                          width: "70%",
+                          margin: "50px 0px 10px 0px",
+                        }
+                  }
                 >
-                  Password
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        fontFamily: "Abhaya Libre",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        color: "rbg(0,0,0)",
+                      }}
+                    >
+                      Email
+                    </div>
+                    <input
+                      name="identifier"
+                      type="text"
+                      placeholder="E-mail"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.identifier}
+                      style={{ height: "40px", width: "100%" }}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.identifier && formik.touched.identifier ? (
+                      <div className="red_color">
+                        {formik.errors.identifier}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div
+                    class="password-input-container"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "space-between",
+                      width: "100%",
+                      // marginTop: "20px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        fontFamily: "Abhaya Libre",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        color: "rbg(0,0,0) !important",
+                      }}
+                    >
+                      Password
+                    </div>
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      id="password"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      style={{ height: "40px", width: "100%" }}
+                      value={formik.values.password}
+                    />
+                    <img
+                      class="password-icon"
+                      src={eye}
+                      alt="Lock Icon"
+                      width={20}
+                      height={20}
+                      onClick={() => {
+                        myFunction();
+                      }}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.password && formik.touched.password ? (
+                      <div className="red_color">{formik.errors.password}</div>
+                    ) : null}
+                  </div>
+                  <div
+                    className={
+                      matches
+                        ? "d-flex flex-column w-100 "
+                        : "d-flex justify-content-between w-100"
+                    }
+                  >
+                    <div
+                      onClick={() => forgotPassword()}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "100%",
+                        fontFamily: "Poppins",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Forgot Password ?
+                    </div>
+                  </div>
+                  <button
+                    className="Login-Button"
+                    onClick={formik.handleSubmit}
+                  >
+                    Login
+                  </button>
+                  <button
+                    class="login-btn google"
+                    onClick={() =>
+                      (window.location =
+                        "https://admin.rantikathakur.com/api/connect/google")
+                    }
+                  >
+                    <img src={google} alt="Google Logo" />
+                    <span>Login with Google</span>
+                  </button>
                 </div>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  style={{ height: "40px", width: "100%" }}
-                  value={formik.values.password}
-                />
-                <img
-                  class="password-icon"
-                  src={eye}
-                  alt="Lock Icon"
-                  width={20}
-                  height={20}
-                  onClick={() => {
-                    myFunction();
-                  }}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.password && formik.touched.password ? (
-                  <div className="red_color">{formik.errors.password}</div>
-                ) : null}
-              </div>
-              <div
-                className={
-                  matches
-                    ? "d-flex flex-column w-100 "
-                    : "d-flex justify-content-between w-100"
-                }
-              >
                 <div
-                  onClick={() => forgotPassword()}
                   style={{
                     display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     flexDirection: "row",
-                    width: "100%",
-                    fontFamily: "Poppins",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    cursor: "pointer",
+                    width: "70%",
                   }}
                 >
-                  Forgot Password ?
+                  <div className="Login-Heading2">Does not have account?</div>
+                  <Link
+                    to="/signup"
+                    style={{ textDecoration: "none", margin: "0px 10px" }}
+                  >
+                    SignUp
+                  </Link>
                 </div>
               </div>
-              <button className="Login-Button" onClick={formik.handleSubmit}>
-                Login
-              </button>
-              <button
-                class="login-btn google"
-                onClick={() =>
-                  (window.location = "https://admin.rantikathakur.com/api/connect/google")
-                }
-              >
-                <img src={google} alt="Google Logo" />
-                <span>Login with Google</span>
-              </button>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                flexDirection: "row",
-                width: "70%",
-              }}
-            >
-              <div className="Login-Heading2">Does not have account?</div>
-              <Link
-                to="/signup"
-                style={{ textDecoration: "none", margin: "0px 10px" }}
-              >
-                SignUp
-              </Link>
             </div>
           </div>
         </div>
