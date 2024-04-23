@@ -21,6 +21,9 @@
   width: 50%;
   height: 100%;
 }
+.signUp{
+  color:#0d6efd !important;
+}
 
 .custom-card .LoginDetails {
   width: 100%;
@@ -29,6 +32,7 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+  margin-top: 50px;
 }
 
 .custom-card .Login-Heading2 {
@@ -55,6 +59,7 @@
 .custom-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   width: 40% !important;
+  height: 110%;
 }
 
 /* .login-btn.google {

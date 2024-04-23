@@ -286,7 +286,11 @@ function Login() {
                   <div className="Login-Heading2">Does not have account?</div>
                   <Link
                     to="/signup"
-                    style={{ textDecoration: "none", margin: "0px 10px" }}
+                    className="signUp"
+                    style={{
+                      textDecoration: "none",
+                      margin: "0px 10px",
+                    }}
                   >
                     SignUp
                   </Link>
