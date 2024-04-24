@@ -153,7 +153,7 @@ function Home(props) {
               <img src={h4} className="w-100" />
             </div>
           </SwiperSlide> */}
-          <SwiperSlide>
+          {/* <SwiperSlide>
             {" "}
             <div
               onClick={() => {
@@ -162,7 +162,7 @@ function Home(props) {
             >
               <img src={h5} className="w-100" />
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
           <SwiperSlide>
             {" "}
             <div
@@ -408,43 +408,85 @@ function Home(props) {
       </div>
       <div className="Home-Box6">
         <div className="row text-center">
-          <div className="col">
-            {console.log(ipadAirMatches)}
-            <img
-              src={scissor}
-              width={matches ? 30 : ipadAirMatches ? 40 : 60}
-              height={matches ? 30 : ipadAirMatches ? 40 : 60}
-            />
-            <br />
-            CUSTOMISE NOW
-          </div>
-          <div className="col">
-            <img
-              src={india}
-              width={matches ? 30 : ipadAirMatches ? 40 : 60}
-              height={matches ? 30 : ipadAirMatches ? 40 : 60}
-            />
-            <br />
-            MADE IN INDIA
-          </div>
-          <div className="col">
-            <img
-              src={luxury}
-              width={matches ? 30 : ipadAirMatches ? 40 : 60}
-              height={matches ? 30 : ipadAirMatches ? 40 : 60}
-            />
-            <br />
-            AFFORDABLE LUXURY
-          </div>
-          <div className={matches ? "col pt-2" : "col"}>
-            <img
-              src={time}
-              width={matches ? 30 : ipadAirMatches ? 40 : 60}
-              height={matches ? 30 : ipadAirMatches ? 40 : 60}
-            />
-            <br />
-            TIMELESS DESIGN
-          </div>
+          {matches ? (
+            <>
+              <div className="col-6">
+                <img
+                  src={scissor}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                CUSTOMISE NOW
+              </div>
+              <div className="col-6">
+                <img
+                  src={india}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                MADE IN INDIA
+              </div>
+              <div className="col-6">
+                <img
+                  src={luxury}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                AFFORDABLE LUXURY
+              </div>
+              <div className={matches ? "col-6 pt-2" : "col"}>
+                <img
+                  src={time}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                TIMELESS DESIGN
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="col">
+                <img
+                  src={scissor}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                CUSTOMISE NOW
+              </div>
+              <div className="col">
+                <img
+                  src={india}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                MADE IN INDIA
+              </div>
+              <div className="col">
+                <img
+                  src={luxury}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                AFFORDABLE LUXURY
+              </div>
+              <div className={matches ? "col pt-2" : "col"}>
+                <img
+                  src={time}
+                  width={matches ? 30 : ipadAirMatches ? 40 : 60}
+                  height={matches ? 30 : ipadAirMatches ? 40 : 60}
+                />
+                <br />
+                TIMELESS DESIGN
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div
