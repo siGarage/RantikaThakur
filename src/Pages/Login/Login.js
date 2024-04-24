@@ -148,7 +148,7 @@ function Login() {
                           alignItems: "center",
                           flexDirection: "column",
                           width: "80%",
-                          margin: "30px 0px 10px 0px",
+                          margin: "35px 0px 10px 0px",
                         }
                       : {
                           display: "flex",
@@ -156,7 +156,7 @@ function Login() {
                           alignItems: "center",
                           flexDirection: "column",
                           width: "70%",
-                          margin: "30px 0px 10px 0px",
+                          margin: "35px 0px 10px 0px",
                         }
                   }
                 >
