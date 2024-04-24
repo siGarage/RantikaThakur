@@ -448,7 +448,7 @@ function Home(props) {
         </div>
       </div>
       <div
-        className="Home-Box5 w-100 p-5"
+        className="Home-Box5 w-100 p-2"
         style={matches ? { height: "430px" } : { height: "400px" }}
       >
         <div className="Home-Box2-Box5">
