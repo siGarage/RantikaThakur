@@ -10,7 +10,7 @@ import quotes from "../../Images/quotes.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import h1 from "../../Images/h1.png";
 import h2 from "../../Images/h2.png";
-import h5 from "../../Images/h5.PNG";
+import h5 from "../../Images/h5.jpeg";
 import h6 from "../../Images/h6.PNG";
 import h7 from "../../Images/h7.PNG";
 import scissor from "../../Images/scissors.png";
@@ -153,7 +153,7 @@ function Home(props) {
               <img src={h4} className="w-100" />
             </div>
           </SwiperSlide> */}
-          {/* <SwiperSlide>
+          <SwiperSlide>
             {" "}
             <div
               onClick={() => {
@@ -162,7 +162,7 @@ function Home(props) {
             >
               <img src={h5} className="w-100" />
             </div>
-          </SwiperSlide> */}
+          </SwiperSlide>
           <SwiperSlide>
             {" "}
             <div
@@ -428,7 +428,7 @@ function Home(props) {
                 <br />
                 MADE IN INDIA
               </div>
-              <div className="col-6">
+              <div className="col-6 pt-4">
                 <img
                   src={luxury}
                   width={matches ? 30 : ipadAirMatches ? 40 : 60}
@@ -437,7 +437,7 @@ function Home(props) {
                 <br />
                 AFFORDABLE LUXURY
               </div>
-              <div className={matches ? "col-6 pt-2" : "col"}>
+              <div className={matches ? "col-6 pt-4" : "col"}>
                 <img
                   src={time}
                   width={matches ? 30 : ipadAirMatches ? 40 : 60}
@@ -449,7 +449,7 @@ function Home(props) {
             </>
           ) : (
             <>
-              <div className="col">
+              <div className="col pt-3">
                 <img
                   src={scissor}
                   width={matches ? 30 : ipadAirMatches ? 40 : 60}

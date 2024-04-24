@@ -274,7 +274,8 @@ function Footer() {
                 marginBottom: "10px",
               }}
             >
-              All rights reserved © 2024 Developed by &nbsp;
+              Rantika Thakur Clothing All Rights Reserved © 2024 <br />
+              Developed by &nbsp;
               <a href="http://silicongarage.in/" className="silicon-garage">
                 {" "}
                 Silicon Garage
