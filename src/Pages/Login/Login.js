@@ -129,6 +129,16 @@ function Login() {
                 >
                   Login
                 </div>
+                <button
+                    class="login-btn google"
+                    onClick={() =>
+                      (window.location =
+                        "https://admin.rantikathakur.com/api/connect/google")
+                    }
+                  >
+                    <img src={google} alt="Google Logo" />
+                    <span>Login with Google</span>
+                  </button>
                 <div
                   style={
                     matches
@@ -138,7 +148,7 @@ function Login() {
                           alignItems: "center",
                           flexDirection: "column",
                           width: "80%",
-                          margin: "50px 0px 10px 0px",
+                          margin: "30px 0px 10px 0px",
                         }
                       : {
                           display: "flex",
@@ -146,7 +156,7 @@ function Login() {
                           alignItems: "center",
                           flexDirection: "column",
                           width: "70%",
-                          margin: "50px 0px 10px 0px",
+                          margin: "30px 0px 10px 0px",
                         }
                   }
                 >
@@ -262,16 +272,6 @@ function Login() {
                     onClick={formik.handleSubmit}
                   >
                     Login
-                  </button>
-                  <button
-                    class="login-btn google"
-                    onClick={() =>
-                      (window.location =
-                        "https://admin.rantikathakur.com/api/connect/google")
-                    }
-                  >
-                    <img src={google} alt="Google Logo" />
-                    <span>Login with Google</span>
                   </button>
                 </div>
                 <div
