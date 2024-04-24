@@ -619,6 +619,12 @@
     width: 100%;
     height: 100% !important;
   }
+  .Home-Box6 {
+    width: 80% !important;
+    padding: 15px !important;
+    font-size: 18px !important;
+    font-weight: 600;
+  }
   .clothesTypesBox1 {
     height: 320px !important;
     width: 320px !important;

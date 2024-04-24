@@ -412,8 +412,8 @@ function Home(props) {
             {console.log(ipadAirMatches)}
             <img
               src={scissor}
-              width={matches ? 30 : ipadAirMatches ? 45 : 60}
-              height={matches ? 30 : ipadAirMatches ? 45 : 60}
+              width={matches ? 30 : ipadAirMatches ? 40 : 60}
+              height={matches ? 30 : ipadAirMatches ? 40 : 60}
             />
             <br />
             CUSTOMISE NOW
@@ -421,8 +421,8 @@ function Home(props) {
           <div className="col">
             <img
               src={india}
-              width={matches ? 30 : ipadAirMatches ? 45 : 60}
-              height={matches ? 30 : ipadAirMatches ? 45 : 60}
+              width={matches ? 30 : ipadAirMatches ? 40 : 60}
+              height={matches ? 30 : ipadAirMatches ? 40 : 60}
             />
             <br />
             MADE IN INDIA
@@ -430,8 +430,8 @@ function Home(props) {
           <div className="col">
             <img
               src={luxury}
-              width={matches ? 30 : ipadAirMatches ? 45 : 60}
-              height={matches ? 30 : ipadAirMatches ? 45 : 60}
+              width={matches ? 30 : ipadAirMatches ? 40 : 60}
+              height={matches ? 30 : ipadAirMatches ? 40 : 60}
             />
             <br />
             AFFORDABLE LUXURY
@@ -439,8 +439,8 @@ function Home(props) {
           <div className={matches ? "col pt-2" : "col"}>
             <img
               src={time}
-              width={matches ? 30 : ipadAirMatches ? 45 : 60}
-              height={matches ? 30 : ipadAirMatches ? 45 : 60}
+              width={matches ? 30 : ipadAirMatches ? 40 : 60}
+              height={matches ? 30 : ipadAirMatches ? 40 : 60}
             />
             <br />
             TIMELESS DESIGN
