@@ -1,9 +1,19 @@
 import "./Footer.css";
 import image1 from "../Images/image1.svg";
+import { memo, useEffect, useMemo, useState } from "react";
 import image2 from "../Images/image2.svg";
 import { Link, useNavigate } from "react-router-dom";
+import matchers from "@testing-library/jest-dom/matchers";
 function Footer() {
   const navigate = useNavigate();
+  const [matches, setMatches] = useState(
+    window.matchMedia("(max-width:700px)").matches
+  );
+  useEffect(() => {
+    window
+      .matchMedia("(max-width:700px)")
+      .addEventListener("change", (e) => setMatches(e.matches));
+  }, []);
   return (
     <>
       <section className="Footer">
@@ -262,6 +272,38 @@ function Footer() {
         <div className="row w-100">
           <div className="col">
             <div
+              style={
+                matches
+                  ? {
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "500",
+                    fontFamily: "Roboto",
+                    color: "white",
+                    marginTop: "20px",
+                  fontSize:"15px"}
+                  : {
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontWeight: "500",
+                      fontFamily: "Roboto",
+                      color: "white",
+                      marginTop: "20px",
+                    }
+              }
+            >
+              Rantika Thakur Clothing All Rights Reserved © 2024 <br />
+              {/* Developed by &nbsp; 
+              <a href="http://silicongarage.in/" className="silicon-garage">
+                {" "}
+                Silicon Garage
+              </a> */}
+            </div>
+            <div
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -270,11 +312,9 @@ function Footer() {
                 fontWeight: "500",
                 fontFamily: "Roboto",
                 color: "white",
-                marginTop: "20px",
                 marginBottom: "10px",
               }}
             >
-              Rantika Thakur Clothing All Rights Reserved © 2024 <br />
               Developed by &nbsp;
               <a href="http://silicongarage.in/" className="silicon-garage">
                 {" "}
