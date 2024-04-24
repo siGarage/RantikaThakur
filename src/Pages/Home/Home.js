@@ -65,13 +65,12 @@ function Home(props) {
   const [matches, setMatches] = useState(
     window.matchMedia("(max-width:700px)").matches
   );
-  const [ipadAirMatches, setIpadAirMatches] = useState(
-    window.matchMedia("(max-width:810px)").matches
-  );
   const [ipadMatches, setIpadMatches] = useState(
     window.matchMedia("(max-width:1024px)").matches
   );
-
+  const [ipadAirMatches, setIpadAirMatches] = useState(
+    window.matchMedia("(max-width:820px)").matches
+  );
   const shuffled = category?.sort(() => 0.5 - Math.random());
   let array = shuffled.slice(0, 5);
 
@@ -85,6 +84,10 @@ function Home(props) {
     window
       .matchMedia("(max-width:700px)")
       .addEventListener("change", (e) => setMatches(e.matches));
+
+    window
+      .matchMedia("(max-width:820px)")
+      .addEventListener("change", (e) => setIpadAirMatches(e.matches));
     window
       .matchMedia("(max-width:810px)")
       .addEventListener("change", (e) => setIpadAirMatches(e.matches));
@@ -406,22 +409,39 @@ function Home(props) {
       <div className="Home-Box6">
         <div className="row text-center">
           <div className="col">
-            <img src={scissor} width={60} height={60} />
+            {console.log(ipadAirMatches)}
+            <img
+              src={scissor}
+              width={matches ? 40 : ipadAirMatches ? 50 : 60}
+              height={matches ? 40 : ipadAirMatches ? 50 : 60}
+            />
             <br />
             CUSTOMISE NOW
           </div>
           <div className="col">
-            <img src={india} width={60} height={60} />
+            <img
+              src={india}
+              width={matches ? 40 : ipadAirMatches ? 50 : 60}
+              height={matches ? 40 : ipadAirMatches ? 50 : 60}
+            />
             <br />
             MADE IN INDIA
           </div>
           <div className="col">
-            <img src={luxury} width={60} height={60} />
+            <img
+              src={luxury}
+              width={matches ? 40 : ipadAirMatches ? 50 : 60}
+              height={matches ? 40 : ipadAirMatches ? 50 : 60}
+            />
             <br />
             AFFORDABLE LUXURY
           </div>
           <div className="col">
-            <img src={time} width={60} height={60} />
+            <img
+              src={time}
+              width={matches ? 40 : ipadAirMatches ? 50 : 60}
+              height={matches ? 40 : ipadAirMatches ? 50 : 60}
+            />
             <br />
             TIMELESS DESIGN
           </div>
@@ -431,7 +451,9 @@ function Home(props) {
         className="Home-Box5 w-100 p-5"
         style={matches ? { height: "430px" } : { height: "400px" }}
       >
-        <div className="Home-Box2-Box5">- OUR TESTIMONIALS -</div>
+        <div className="Home-Box2-Box5">
+          {matches ? "OUR TESTIMONIALS" : "- OUR TESTIMONIALS -"}
+        </div>
         <CarouselSingle
           data-bs-theme="dark"
           indicators={false}
