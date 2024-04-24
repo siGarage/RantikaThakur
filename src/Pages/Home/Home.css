@@ -322,7 +322,6 @@
     width: 40%;
     font-size: 28px;
   }
-
   .Home-Box1 {
     height: 500px;
     cursor: pointer;
@@ -355,6 +354,7 @@
   .Home-Box3-Box1-Box-InnerBox1 {
     height: 260px;
   }
+  
   .Home-Box1 {
     height: 250px !important;
     cursor: pointer;
@@ -454,6 +454,13 @@
 @media only screen and (max-width: 464px) {
   .carousel-best-image {
     height: 90%;
+  }
+  
+  .Home-Box6 {
+    width: 80% !important;
+    padding: 15px !important;
+    font-size: 15px !important;
+    font-weight: 400;
   }
   .multi-carousel-container {
     width: 80%;
