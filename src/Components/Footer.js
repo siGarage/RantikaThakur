@@ -269,60 +269,110 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="row w-100">
-          <div className="col">
-            <div
-              style={
-                matches
-                  ? {
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontWeight: "500",
-                    fontFamily: "Roboto",
-                    color: "white",
-                    marginTop: "20px",
-                  fontSize:"15px"}
-                  : {
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontWeight: "500",
-                      fontFamily: "Roboto",
-                      color: "white",
-                      marginTop: "20px",
-                    }
-              }
-            >
-              Rantika Thakur Clothing All Rights Reserved © 2024 <br />
-              {/* Developed by &nbsp; 
+        {matches ? (
+          <div className="row w-100">
+            <div className="col">
+              <div
+                style={
+                  matches
+                    ? {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontWeight: "500",
+                        fontFamily: "Roboto",
+                        color: "white",
+                        marginTop: "20px",
+                        fontSize: "15px",
+                      }
+                    : {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontWeight: "500",
+                        fontFamily: "Roboto",
+                        color: "white",
+                        marginTop: "20px",
+                      }
+                }
+              >
+                Rantika Thakur Clothing All Rights Reserved © 2024 <br />
+                {/* Developed by &nbsp; 
               <a href="http://silicongarage.in/" className="silicon-garage">
                 {" "}
                 Silicon Garage
               </a> */}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                fontWeight: "500",
-                fontFamily: "Roboto",
-                color: "white",
-                marginBottom: "10px",
-              }}
-            >
-              Developed by &nbsp;
-              <a href="http://silicongarage.in/" className="silicon-garage">
-                {" "}
-                Silicon Garage
-              </a>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: "500",
+                  fontFamily: "Roboto",
+                  color: "white",
+                  marginBottom: "10px",
+                }}
+              >
+                Designed & Developed by &nbsp;
+                <a href="http://silicongarage.in/" className="silicon-garage">
+                  {" "}
+                  Silicon Garage
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="row w-100">
+            <div className="col">
+              <div
+                style={
+                  matches
+                    ? {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        fontWeight: "500",
+                        fontFamily: "Roboto",
+                        color: "white",
+                        marginTop: "20px",
+                        fontSize: "15px",
+                      }
+                    : {
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        fontWeight: "500",
+                        fontFamily: "Roboto",
+                        color: "white",
+                        marginTop: "20px",
+                      }
+                }
+              >
+                <div className="row w-100">
+                  <p className="col-5 ps-3">
+                  Designed & Developed by
+                    <a
+                      href="http://silicongarage.in/"
+                      className="silicon-garage"
+                    >
+                      {" "}
+                      Silicon Garage
+                    </a>
+                  </p>
+                  <p className="col-6">
+                    Rantika Thakur Clothing All Rights Reserved © 2024{" "}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </>
   );

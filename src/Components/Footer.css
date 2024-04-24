@@ -16,7 +16,9 @@
   align-items: center;
 }
 .silicon-garage {
-  color: #0d6efd !important;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .v1 {
