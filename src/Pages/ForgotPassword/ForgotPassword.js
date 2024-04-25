@@ -84,7 +84,7 @@ function ForgotPassword() {
             height: "100%",
           }}
         >
-          <div
+          {/* <div
             className={
               iMacMatches
                 ? "LoginImage   text-center"
@@ -100,87 +100,95 @@ function ForgotPassword() {
                 padding: `${iMacMatches ? "0px" : "20px"}`,
               }}
             />
-          </div>
-          <div className="LoginDetails">
-            <div
-              style={{
-                fontFamily: "Abhaya Libre",
-                fontSize: "40px",
-                color: "#bd9334",
-              }}
-            >
-              Reset Your Password
-            </div>
-            <p>We will send you an e-mail to reset your password </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "column",
-                width: "70%",
-                margin: "50px 0px 10px 0px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
+          </div> */}
+          <div class="card custom-card">
+            <div class="card-body">
+              <div className="LoginDetails text-center">
                 <div
                   style={{
-                    width: "100%",
                     fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
+                    fontSize: "40px",
+                    color: "#bd9334",
                   }}
                 >
-                  Enter Your Resgistered E-mail
+                  Reset Your Password
                 </div>
-                <input
-                  name="identifier"
-                  type="text"
-                  placeholder="E-mail"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.identifier}
-                  style={{ height: "40px", width: "100%" }}
-                />
+                <p>We will send you an e-mail to reset your password </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    width: "70%",
+                    margin: "50px 0px 10px 0px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        fontFamily: "Abhaya Libre",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        color: "rbg(0,0,0)",
+                      }}
+                    >
+                      Enter Your Resgistered <br/>E-mail
+                    </div>
+                    <input
+                      name="identifier"
+                      type="text"
+                      placeholder="E-mail"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.identifier}
+                      style={{ height: "40px", width: "100%" }}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.identifier && formik.touched.identifier ? (
+                      <div className="red_color">
+                        {formik.errors.identifier}
+                      </div>
+                    ) : null}
+                  </div>
+                  <button
+                    className="Login-Button"
+                    onClick={formik.handleSubmit}
+                    style={
+                      matches ? { marginTop: "20px" } : { marginTop: "50px" }
+                    }
+                  >
+                    Submit
+                  </button>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    width: "70%",
+                  }}
+                >
+                  <div className="Login-Heading2">Already have an account?</div>
+                  <Link
+                    to="/login"
+                    style={{ textDecoration: "none", margin: "0px 10px" }}
+                  >
+                    Login
+                  </Link>
+                </div>
               </div>
-              <div className="w-100">
-                {formik.errors.identifier && formik.touched.identifier ? (
-                  <div className="red_color">{formik.errors.identifier}</div>
-                ) : null}
-              </div>
-              <button
-                className="Login-Button"
-                onClick={formik.handleSubmit}
-                style={matches ? {marginTop: "20px"} : { marginTop: "50px" }}
-              >
-                Submit
-              </button>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                flexDirection: "row",
-                width: "70%",
-              }}
-            >
-              <div className="Login-Heading2">Already have an account?</div>
-              <Link
-                to="/login"
-                style={{ textDecoration: "none", margin: "0px 10px" }}
-              >
-                Login
-              </Link>
             </div>
           </div>
         </div>

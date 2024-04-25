@@ -45,13 +45,18 @@
   width: 50%;
   height: 100%;
 }
+.custom-card-signup {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 40% !important;
+  height: 108%;
+}
 
 .SignUp-Box1-innerBox-Box1 img {
   height: 100%;
   width: 100%;
 }
 .SignUp-Box1-innerBox-Box2 {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -90,7 +95,7 @@
   font-size: 20px;
   color: rbg(0, 0, 0);
 }
-.margin-top-neg{
+.margin-top-neg {
   margin-top: -5px !important;
 }
 
@@ -103,13 +108,35 @@
   .SignUp-Box1-innerBox-Box1 {
     display: none;
   }
+
   .SignUp-Box1-innerBox-Box2 {
     width: 100%;
+  }
+  .custom-card-signup {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 80% !important;
+    height: 100%;
   }
 
   .SignUp-Button {
     width: 100%;
     font-size: 22px;
+  }
+}
+
+@media screen and (height: 1080px) {
+  .custom-card-signup {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 90% !important;
+    height: 101%;
+  }
+}
+
+@media screen and (width: 1080px) {
+  .custom-card-signup {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 80% !important;
+    height: 112%;
   }
 }
 

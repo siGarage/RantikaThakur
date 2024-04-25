@@ -100,125 +100,117 @@ function ResetPassword() {
             alignItems: "center",
             flexDirection: "row",
             width: "100%",
-            height: "100%",
           }}
         >
-          <div
-            className={
-              iMacMatches
-                ? "LoginImage   text-center"
-                : "LoginImage   text-center"
-            }
-          >
-            <img
-              src={SideImage}
-              alt="SideImage"
-              style={{
-                height: `${ipadAirMatches ? "80%" : "100%"}`,
-                width: `${iMacMatches ? "60%" : "80%"}`,
-                padding: `${iMacMatches ? "0px" : "20px"}`,
-              }}
-            />
-          </div>
-          <div className="LoginDetails">
-            <div
-              style={{
-                fontFamily: "Abhaya Libre",
-                fontSize: "40px",
-                color: "#bd9334",
-              }}
-            >
-              Reset Password
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "column",
-                width: "70%",
-                margin: "50px 0px 10px 0px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
+          <div class="card custom-card">
+            <div class="card-body">
+              <div className="LoginDetails">
                 <div
                   style={{
-                    width: "100%",
                     fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
+                    fontSize: "40px",
+                    color: "#bd9334",
                   }}
                 >
-                  New Password
+                  Reset Password
                 </div>
-                <input
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  style={{ height: "40px", width: "100%" }}
-                  value={formik.values.password}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.identifier && formik.touched.identifier ? (
-                  <div className="red_color">{formik.errors.identifier}</div>
-                ) : null}
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "space-between",
-                  width: "100%",
-                }}
-              >
                 <div
                   style={{
-                    width: "100%",
-                    fontFamily: "Abhaya Libre",
-                    fontWeight: "500",
-                    fontSize: "20px",
-                    color: "rbg(0,0,0)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    width: "70%",
+                    margin: "50px 0px 10px 0px",
                   }}
                 >
-                  Confirm Password
-                </div>
-                <input
-                  name="passwordConfirmation"
-                  type="text"
-                  id="passwordConfirmation"
-                  placeholder="Confirm Password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  style={{ height: "40px", width: "100%" }}
-                  value={formik.values.passwordConfirmation}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.passwordConfirmation &&
-                formik.touched.passwordConfirmation ? (
-                  <div className="red_color">
-                    {formik.errors.passwordConfirmation}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        fontFamily: "Abhaya Libre",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        color: "rbg(0,0,0)",
+                      }}
+                    >
+                      New Password
+                    </div>
+                    <input
+                      name="password"
+                      type="password"
+                      id="password"
+                      placeholder="Password"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      style={{ height: "40px", width: "100%" }}
+                      value={formik.values.password}
+                    />
                   </div>
-                ) : null}
+                  <div className="w-100">
+                    {formik.errors.identifier && formik.touched.identifier ? (
+                      <div className="red_color">
+                        {formik.errors.identifier}
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        fontFamily: "Abhaya Libre",
+                        fontWeight: "500",
+                        fontSize: "20px",
+                        color: "rbg(0,0,0)",
+                        marginTop:"20px"
+                      }}
+                    >
+                      Confirm Password
+                    </div>
+                    <input
+                      name="passwordConfirmation"
+                      type="text"
+                      id="passwordConfirmation"
+                      placeholder="Confirm Password"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      style={{ height: "40px", width: "100%" }}
+                      value={formik.values.passwordConfirmation}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.passwordConfirmation &&
+                    formik.touched.passwordConfirmation ? (
+                      <div className="red_color">
+                        {formik.errors.passwordConfirmation}
+                      </div>
+                    ) : null}
+                  </div>
+                  <button
+                    className="Login-Button"
+                    onClick={formik.handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
-              <button className="Login-Button" onClick={formik.handleSubmit}>
-                Submit
-              </button>
             </div>
           </div>
         </div>

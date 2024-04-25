@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Auth from "../../API/Auth";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import { useState, useEffect, useRef, Profiler } from "react";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
@@ -49,7 +49,7 @@ function SignUp() {
       );
   };
   useEffect(() => {
-    console.log("kartik")
+    console.log("kartik");
     if (user) {
       axios
         .get(
@@ -133,99 +133,106 @@ function SignUp() {
       </form>
       <div className="SignUp-Box1">
         <div className="SignUp-Box1-innerBox">
-          <div className="SignUp-Box1-innerBox-Box1">
+          {/* <div className="SignUp-Box1-innerBox-Box1">
             <img src={SideImage} alt="SideImage" />
-          </div>
-          <div className="SignUp-Box1-innerBox-Box2">
-            <div className="SignUp-Box1-innerBox-Box2-innerBox1">Sign Up</div>
-            <div className="SignUp-Box1-innerBox-Box2-innerBox2">
-              <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
-                <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
-                  Name
+          </div> */}
+          <div class="card custom-card-signup">
+            <div class="card-body">
+              <div className="SignUp-Box1-innerBox-Box2">
+                <div className="SignUp-Box1-innerBox-Box2-innerBox1">
+                  Sign Up
                 </div>
-                <input
-                  className="signup-input"
-                  name="username"
-                  placeholder="Name"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.username}
-                  type="text"
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.username && formik.touched.username ? (
-                  <div className="red_color">{formik.errors.username}</div>
-                ) : null}
-              </div>
-              <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
-                <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
-                  Email Address
-                </div>
-                <input
-                  className="signup-input"
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.email && formik.touched.email ? (
-                  <div className="red_color">{formik.errors.email}</div>
-                ) : null}
-              </div>
-              <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
-                <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
-                  Set Password
-                </div>
-                <input
-                  className="signup-input"
-                  name="password"
-                  type="password"
-                  id="password"
-                  placeholder="Password"
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-              </div>
-              <div className="w-100">
-                {formik.errors.password && formik.touched.password ? (
-                  <div className="red_color">{formik.errors.password}</div>
-                ) : null}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "100%",
-                  fontFamily: "Poppins",
-                  fontWeight: "500",
-                  fontSize: "20px",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  style={{ margin: "10px 10px" }}
-                  onClick={() => {
-                    myFunction();
-                  }}
-                />
-                Show Password
-              </div>
-              {/* <div className="d-flex justify-content-between"> */}
-              <button className="SignUp-Button" onClick={formik.handleSubmit}>
-                Sign Up
-              </button>
-              {/* <button className="Login-Button margin-top-neg" onClick={login}>
+                <div className="SignUp-Box1-innerBox-Box2-innerBox2">
+                  <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
+                    <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
+                      Name
+                    </div>
+                    <input
+                      className="signup-input"
+                      name="username"
+                      placeholder="Name"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.username}
+                      type="text"
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.username && formik.touched.username ? (
+                      <div className="red_color">{formik.errors.username}</div>
+                    ) : null}
+                  </div>
+                  <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
+                    <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
+                      Email Address
+                    </div>
+                    <input
+                      className="signup-input"
+                      name="email"
+                      type="email"
+                      placeholder="Email"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.email && formik.touched.email ? (
+                      <div className="red_color">{formik.errors.email}</div>
+                    ) : null}
+                  </div>
+                  <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox">
+                    <div className="SignUp-Box1-innerBox-Box2-innerBox2-innerBox-box">
+                      Set Password
+                    </div>
+                    <input
+                      className="signup-input"
+                      name="password"
+                      type="password"
+                      id="password"
+                      placeholder="Password"
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                    />
+                  </div>
+                  <div className="w-100">
+                    {formik.errors.password && formik.touched.password ? (
+                      <div className="red_color">{formik.errors.password}</div>
+                    ) : null}
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      width: "100%",
+                      fontFamily: "Poppins",
+                      fontWeight: "500",
+                      fontSize: "20px",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      style={{ margin: "10px 10px" }}
+                      onClick={() => {
+                        myFunction();
+                      }}
+                    />
+                    Show Password
+                  </div>
+                  {/* <div className="d-flex justify-content-between"> */}
+                  <button
+                    className="SignUp-Button"
+                    onClick={formik.handleSubmit}
+                  >
+                    Sign Up
+                  </button>
+                  {/* <button className="Login-Button margin-top-neg" onClick={login}>
                 {" "}
                 Google Login{" "}
               </button> */}
 
-              {/* <GoogleLogin
+                  {/* <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse,"credentialResponse")
                   setUser(credentialResponse);
@@ -235,7 +242,9 @@ function SignUp() {
                 }}
               />
               {console.log(user,"user")} */}
-              {/* </div> */}
+                  {/* </div> */}
+                </div>
+              </div>
             </div>
           </div>
         </div>

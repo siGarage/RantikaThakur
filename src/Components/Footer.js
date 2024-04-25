@@ -298,7 +298,7 @@ function Footer() {
                       }
                 }
               >
-                Rantika Thakur Clothing All Rights Reserved © 2024 <br />
+                2024 © Rantika Thakur Clothing. All Rights Reserved.<br />
                 {/* Developed by &nbsp; 
               <a href="http://silicongarage.in/" className="silicon-garage">
                 {" "}
@@ -356,7 +356,7 @@ function Footer() {
               >
                 <div className="row w-100">
                   <p className="col-5 ps-3">
-                  Designed & Developed by
+                    Designed & Developed by
                     <a
                       href="http://silicongarage.in/"
                       className="silicon-garage"
@@ -366,7 +366,7 @@ function Footer() {
                     </a>
                   </p>
                   <p className="col-6">
-                    Rantika Thakur Clothing All Rights Reserved © 2024{" "}
+                    2024 © Rantika Thakur Clothing. All Rights Reserved.{" "}
                   </p>
                 </div>
               </div>
