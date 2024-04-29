@@ -449,7 +449,7 @@ function Home(props) {
             </>
           ) : (
             <>
-              <div className="col pt-3">
+              <div className="col ">
                 <img
                   src={scissor}
                   width={matches ? 30 : ipadAirMatches ? 40 : 60}

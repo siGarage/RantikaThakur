@@ -17,7 +17,10 @@ function Cart(props) {
   const buttonRef = useRef(null);
   const [lgShow, setLgShow] = useState(false);
   const [price, setPrice] = useState(0);
+  const [dprice, setDprice] = useState(0);
   const [ids, setIds] = useState([]);
+  let [order, setOrder] = useState([]);
+  let [decide, setDecide] = useState(false);
   const form = useRef();
   // const client = new SMTPClient({
   //   user: "user",
@@ -71,7 +74,6 @@ function Cart(props) {
   };
 
   const handleFinalPayment = (e) => {
-    buttonRef.current.click();
     if (selectedOption?.length > 0) {
       let data = {
         amount: price * 100.0,
@@ -172,7 +174,13 @@ function Cart(props) {
   const Increment = (cartId, priceold, quantityold) => {
     const priceofone = priceold / quantityold;
     const price = Number(priceold) + Number(priceofone);
-    setPrice(price < 5000 ? price + 99 : price);
+    if (order.length == 0) {
+      setDprice(Math.round(percentage(10, price)));
+      let damount = price - Math.round(percentage(10, price));
+      setPrice(price < 5000 ? damount + 99 : damount);
+    } else {
+      setPrice(price < 5000 ? price + 99 : price);
+    }
     const quantity = Number(quantityold) + 1;
     const data = { price, quantity };
     const cartData = cart.map((element) => {
@@ -187,7 +195,16 @@ function Cart(props) {
       }
       return element;
     });
-
+    let finalPrice = cartData
+      .map((element) => Number(element?.attributes.price))
+      .reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (order?.length == 0) {
+      setDprice(Math.round(percentage(10, finalPrice)));
+      let damount = finalPrice - Math.round(percentage(10, finalPrice));
+      setPrice(finalPrice < 5000 ? damount + 99 : damount);
+    } else {
+      setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
+    }
     CARTDATA.updateCart(cartId, data, authtoken).then((res) => {
       if (res.status === 200) {
         dispatch({
@@ -198,13 +215,19 @@ function Cart(props) {
     });
   };
 
-  const Decrement = (cartId, priceold, quantityold) => {
+  const Decrement = async (cartId, priceold, quantityold) => {
     const priceofone = priceold / quantityold;
     const price =
       quantityold > 1
         ? Number(priceold) - Number(priceofone)
         : Number(priceofone);
-    setPrice(price < 5000 ? price + 99 : price);
+    if (order.length == 0) {
+      setDprice(Math.round(percentage(10, price)));
+      let damount = price - Math.round(percentage(10, price));
+      setPrice(price < 5000 ? damount + 99 : damount);
+    } else {
+      setPrice(price < 5000 ? price + 99 : price);
+    }
     const quantity = quantityold > 1 ? Number(quantityold) - 1 : 1;
     const data = { price, quantity };
     const cartData = cart.map((element) => {
@@ -219,6 +242,16 @@ function Cart(props) {
       }
       return element;
     });
+    let finalPrice = cartData
+      .map((element) => Number(element?.attributes.price))
+      .reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (order?.length == 0) {
+      setDprice(Math.round(percentage(10, finalPrice)));
+      let damount = finalPrice - Math.round(percentage(10, finalPrice));
+      setPrice(finalPrice < 5000 ? damount + 99 : damount);
+    } else {
+      setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
+    }
     if (quantity >= 1) {
       CARTDATA.updateCart(cartId, data, authtoken).then((res) => {
         if (res.status === 200) {
@@ -231,8 +264,18 @@ function Cart(props) {
     }
   };
   // Get Cart Items
+  function percentage(percent, total) {
+    return ((percent / 100) * total).toFixed(2);
+  }
 
   useEffect(() => {
+    ORDER.getOrder(useremail, authtoken).then((res) => {
+      if (res.status === 200) {
+        setOrder(res.data.data);
+      } else {
+        toast.error("Server Side Error");
+      }
+    });
     if (cart.length === 0) {
       CARTDATA.getCartItems(useremail, authtoken).then((res) => {
         if (res.status === 200) {
@@ -249,7 +292,13 @@ function Cart(props) {
       let finalPrice = cart
         .map((element) => Number(element?.attributes.price))
         .reduce((accumulator, currentValue) => accumulator + currentValue);
-      setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
+      if (order?.length == 0) {
+        setDprice(Math.round(percentage(10, finalPrice)));
+        let damount = finalPrice - Math.round(percentage(10, finalPrice));
+        setPrice(finalPrice < 5000 ? damount + 99 : damount);
+      } else {
+        setPrice(finalPrice < 5000 ? finalPrice + 99 : finalPrice);
+      }
       let datacustomId = cart.filter(
         (item) => item.attributes.size == "custom"
       );
@@ -294,7 +343,7 @@ function Cart(props) {
         .then((response) => response.json())
         .then((data) => setAddress(data.data));
     }
-  }, [useremail, authtoken, dispatch, cart.length, userid]);
+  }, [useremail, authtoken, dispatch, cart.length, userid, order.length]);
 
   const handlePayment = async (e) => {
     if (cart.length > 0) {
@@ -306,19 +355,6 @@ function Cart(props) {
 
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
-      <form ref={form} onSubmit={sendEmail} style={{ display: "none" }}>
-        <label>Name</label>
-        <input type="text" name="user_name" value={username ? username : ""} />
-        <label>Email</label>
-        <input
-          type="email"
-          name="user_email"
-          value={useremail ? useremail : ""}
-        />
-        <label>Message</label>
-        <textarea name="message" value={clientMessage ? clientMessage : ""} />
-        <input type="submit" value="Send" ref={buttonRef} />
-      </form>
       <div className="Cart-Main-Box">
         <Modal
           size="lg"
@@ -592,6 +628,24 @@ function Cart(props) {
               <div>Delivery</div>
               <div>{price < 5000 ? "99" : "Free"}</div>
             </div>
+            {order.length == 0 ? (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>Discount 10%</div>
+                  <div>-{dprice}</div>
+                </div>
+                <p style={{ fontSize: "12px" }}>(First Order)</p>
+              </>
+            ) : (
+              ""
+            )}
           </div>
 
           <div style={{ padding: "20px 0px", width: "100%" }}>
@@ -604,7 +658,7 @@ function Cart(props) {
               }}
             >
               <div>Total</div>
-              <div>{cart.length !== 0 ? price : "0"}</div>
+              <div>{cart.length !== 0 ? price : ""}</div>
             </div>
           </div>
 

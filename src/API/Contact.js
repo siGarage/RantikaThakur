@@ -24,7 +24,6 @@ export default class Auth {
 
   static message(values) {
     let payload = values;
-    console.log(payload)
     return new Promise((resolve) => {
       instance
         .post("/api/contacts", {data:payload.data})

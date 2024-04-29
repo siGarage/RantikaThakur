@@ -13,6 +13,7 @@ import constants from "../../constants";
 import img from "../../Images/userLogo.png";
 import svgimg from "../../Images/fluent_camera-add-48-filled.svg";
 import * as Yup from "yup";
+import "yup-phone";
 import Button from "react-bootstrap/Button";
 function Profile(props) {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ function Profile(props) {
     setEdit(!edit);
   };
   const SignupSchema = Yup.object().shape({
-    phone: Yup.number().required("*Phone is required!"),
+    phone: Yup.string().phone().required("*Phone Number is required!"),
     address: Yup.string().required("*Full Address is required!"),
     pin: Yup.number().required("*Pin is required!"),
   });
@@ -386,7 +387,7 @@ function Profile(props) {
               <div class="form-group">
                 <label for="phone">Phone No.</label>
                 <input
-                  type="number"
+                  type="tel"
                   class="form-control"
                   id="phone"
                   name="phone"
@@ -559,9 +560,20 @@ function Profile(props) {
                   );
                 })
               : ""}
-            <button onClick={() => setAdShow(true)} className="editButton aba">
-              Add Shiping Address
-            </button>
+            <div className="row flex justify-content-between w-100">
+              <button
+                onClick={() => setAdShow(true)}
+                className="editButton aba col-6"
+              >
+                Add Shiping Address
+              </button>
+              <button
+                onClick={() => navigate("/cart")}
+                className="editButton aba col-4"
+              >
+                Go To Cart
+              </button>
+            </div>
           </div>
         </div>
         {/* <div onClick={() => logOut()}>LogOut</div>

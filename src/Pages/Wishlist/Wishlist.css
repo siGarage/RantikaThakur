@@ -63,8 +63,8 @@
     display: none;
 }
 .product-Wishlist-Image{
-    height:299px;
-    width:254px;
+    height:300px;
+    width:200px;
 }
 @media only screen and (max-width: 800px)  {
     .WishlistCard{

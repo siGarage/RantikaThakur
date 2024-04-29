@@ -57,12 +57,6 @@ function Like(props) {
             </div>
             {array?.length > 0 ? (
               <div className="row">
-                {console.log(
-                  ipadMatches,
-                  ipadAirMatches,
-                  airPadRMatches,
-                  iprMatches
-                )}
                 {array.map((element) => {
                   return (
                     <div

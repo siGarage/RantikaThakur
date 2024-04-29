@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { blue } from "@mui/material/colors";
 function Order(props) {
   const { authtoken, useremail } = props;
-
   let [order, setOrder] = useState([]);
   const navigate = useNavigate();
   const fetchSize = (String) => {
