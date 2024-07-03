@@ -436,6 +436,11 @@
     margin: 0px 0px 0px 30px !important;
   }
 }
+@media only screen and (height: 768px) {
+  .Size-Box {
+    margin: 0px 0px 0px 40px !important;
+  }
+}
 @media only screen and (width: 414px) {
   .Size-Box {
     margin: 0px 0px 0px 30px !important;
