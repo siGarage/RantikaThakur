@@ -98,7 +98,6 @@ function Profile(props) {
       } else {
         values = {
           name: values?.name,
-          address: values?.address,
           phone: values?.phone,
         };
         USERAPI.setUserData(values, userid, token).then((res) => {
@@ -464,24 +463,6 @@ function Profile(props) {
                     />
                   ) : (
                     username
-                  )}
-                </div>
-              </div>
-              <div className="d-flex ps-5 pb-3">
-                <div className="titleWeight">Address</div>
-                <div className="textWeight ps-4">
-                  {" "}
-                  {showEdit ? (
-                    <input
-                      name="address"
-                      type="text"
-                      placeholder="Enter your address"
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.address}
-                    />
-                  ) : (
-                    address
                   )}
                 </div>
               </div>

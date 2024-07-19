@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import Auth from "../../API/Auth";
+import CARTDATA from "../../API/Cart";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import constants from "../../constants";
@@ -57,7 +58,43 @@ function Login() {
             payload: { data: res.data },
           });
           toast.success("Login successful!");
-          navigate("/shop?type=All");
+          const storedCart = localStorage.getItem("cart");
+          if (storedCart) {
+            console.log(res.data);
+            let authtoken = res.data.jwt;
+            let email = res.data.user.email;
+            let data = JSON.parse(storedCart);
+            data = {
+              email: email,
+              ...data,
+            };
+            console.log(data);
+            CARTDATA.addCartItems(data, authtoken).then((res) => {
+              if (res.status === 200) {
+                // if (csize) {
+                //   let customSize = {
+                //     ...customdata,
+                //     cart_id: res?.data?.data?.id?.toString(),
+                //   };
+                //   CUSTOM.message({ data: customSize }).then((res) => {
+                //     if (res.status === 200) {
+                //       toast.success("Your Message Is Sent SuccessFully ! ");
+                //     } else {
+                //       toast.error(res.data.error.message);
+                //     }
+                //   });
+                // }
+                // dispatch({
+                //   type: constants("cart").reducers.cart.AddToCart,
+                //   payload: { cartItems: res.data.data },
+                // });
+                toast.success("Item Added To Cart !");
+              }
+            });
+            navigate("/cart");
+          } else {
+            navigate("/shop?type=All");
+          }
         } else {
           toast.error("Enter a valid E-mail & Password.");
         }
@@ -130,15 +167,15 @@ function Login() {
                   Login
                 </div>
                 <button
-                    class="login-btn google"
-                    onClick={() =>
-                      (window.location =
-                        "https://admin.rantikathakur.com/api/connect/google")
-                    }
-                  >
-                    <img src={google} alt="Google Logo" />
-                    <span>Login with Google</span>
-                  </button>
+                  class="login-btn google"
+                  onClick={() =>
+                    (window.location =
+                      "https://admin.rantikathakur.com/api/connect/google")
+                  }
+                >
+                  <img src={google} alt="Google Logo" />
+                  <span>Login with Google</span>
+                </button>
                 <div
                   style={
                     matches

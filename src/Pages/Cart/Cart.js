@@ -4,12 +4,17 @@ import { connect, useDispatch } from "react-redux";
 import constants from "../../constants";
 import { toast } from "react-toastify";
 import YouMayLike from "../YouMayLike/YouMayLike";
+import ADDRESSAPI from "../../API/Address";
 import emailjs from "@emailjs/browser";
+import USERAPI from "../../API/User";
 import PAYMENT from "../../API/Payment";
 import ORDER from "../../API/Order";
 import CARTDATA from "../../API/Cart";
 import Modal from "react-bootstrap/Modal";
+import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import "yup-phone";
 function Cart(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,7 +25,9 @@ function Cart(props) {
   const [dprice, setDprice] = useState(0);
   const [ids, setIds] = useState([]);
   let [order, setOrder] = useState([]);
+  const [showEdit, setShowEdit] = useState(false);
   let [decide, setDecide] = useState(false);
+  let [full_address, setFull_Address] = useState({});
   const form = useRef();
   // const client = new SMTPClient({
   //   user: "user",
@@ -29,6 +36,9 @@ function Cart(props) {
   // });
   let userid = props.user.user.id;
   let username = props.user.user.name;
+  let user = props.user;
+  let phone = props.user.user.phone;
+  let token = user.jwt;
   const [addressList, setAddressList] = useState([address || ""]);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [newAddress, setNewAddress] = useState("");
@@ -39,6 +49,7 @@ function Cart(props) {
   const [order_final_pin, setOrderFinalPin] = useState("");
   const [order_final_name, setOrderFinalName] = useState("");
   const [clientMessage, setClientMessage] = useState("");
+  const [adShow, setAdShow] = useState(false);
   const [customCart, setCustomCart] = useState("");
   const sendEmail = (e) => {
     e.preventDefault();
@@ -70,7 +81,8 @@ function Cart(props) {
   };
 
   const handleNewAddressChange = () => {
-    navigate("/profile");
+    setAdShow(true);
+    setLgShow(false);
   };
 
   const handleFinalPayment = (e) => {
@@ -267,6 +279,18 @@ function Cart(props) {
   function percentage(percent, total) {
     return ((percent / 100) * total).toFixed(2);
   }
+  useEffect(() => {
+    if (userid) {
+      fetch(
+        `${process.env.REACT_APP_SERVERNAME}/api/users-shipping-details?filters[userId]=${userid}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setFull_Address(data.data);
+          setAddress(data.data);
+        });
+    }
+  }, [userid, lgShow]);
 
   useEffect(() => {
     ORDER.getOrder(useremail, authtoken).then((res) => {
@@ -353,6 +377,56 @@ function Cart(props) {
     }
   };
 
+  const SignupSchema = Yup.object().shape({
+    phone: Yup.string().phone().required("*Phone Number is required!"),
+    address: Yup.string().required("*Full Address is required!"),
+    pin: Yup.number().required("*Pin is required!"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      name: username || "",
+      address: address || "",
+      phone: phone || "",
+      pin: "",
+    },
+    validationSchema: SignupSchema,
+    onSubmit: (values) => {
+      if (adShow) {
+        let data = {
+          ...values,
+          userId: userid,
+        };
+        ADDRESSAPI.addAddress({ data }).then((res) => {
+          if (res.status === 200) {
+            toast.success("Shipping Address added succesfully !");
+            setFull_Address([...full_address, res.data.data]);
+            setAdShow(false);
+          } else {
+            toast.error(res.data.error.message);
+          }
+        });
+      } else {
+        values = {
+          name: values?.name,
+          address: values?.address,
+          phone: values?.phone,
+        };
+        USERAPI.setUserData(values, userid, token).then((res) => {
+          if (res.status === 200) {
+            toast.success("Your data is updated successfully!");
+            dispatch({
+              type: constants("auth").reducers.login.success,
+              payload: { data: { ...user, user: { ...user.user, ...values } } },
+            });
+          } else {
+            toast.error(res.data.error.message);
+          }
+        });
+        setShowEdit(false);
+      }
+    },
+  });
+
   return (
     <section className="Cart" style={{ width: "100%", margin: "30px 0px" }}>
       <div className="Cart-Main-Box">
@@ -409,13 +483,23 @@ function Cart(props) {
               ) : (
                 ""
               )}
-              <div className="d-flex justify-content-between">
-                <button
-                  onClick={() => handleFinalPayment()}
-                  className="submit-button"
-                >
-                  Use Selected Address
-                </button>
+              <div
+                className={
+                  full_Address?.length > 0
+                    ? "d-flex justify-content-between"
+                    : "d-flex justify-content-center"
+                }
+              >
+                {full_Address?.length > 0 ? (
+                  <button
+                    onClick={() => handleFinalPayment()}
+                    className="submit-button"
+                  >
+                    Use Selected Address
+                  </button>
+                ) : (
+                  ""
+                )}
                 <button
                   onClick={handleNewAddressChange}
                   className="submit-button"
@@ -423,6 +507,93 @@ function Cart(props) {
                   Add New Address
                 </button>
               </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          show={adShow}
+          onHide={() => setAdShow(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              ADD SHIPING ADDRESS
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div class="container">
+              <form onSubmit={formik.handleSubmit}>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Enter name please"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                  />
+                  {formik.errors.name && formik.touched.name ? (
+                    <div className="red_color">{formik.errors.name}</div>
+                  ) : null}
+                </div>
+                <div class="form-group">
+                  <label for="adderess">
+                    Full Address(House No., City, State)
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    placeholder="Enter full address please"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.address}
+                  />
+                  {formik.errors.address && formik.touched.address ? (
+                    <div className="red_color">{formik.errors.address}</div>
+                  ) : null}
+                </div>
+                <div class="form-group">
+                  <label for="pin">Pin Code</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="pin"
+                    name="pin"
+                    placeholder="Enter pin please."
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.pin}
+                  />
+                  {formik.errors.pin && formik.touched.pin ? (
+                    <div className="red_color">{formik.errors.pin}</div>
+                  ) : null}
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone No.</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter phone please."
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.phone}
+                  />
+                  {formik.errors.phone && formik.touched.phone ? (
+                    <div className="red_color">{formik.errors.phone}</div>
+                  ) : null}
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">
+                  Submit
+                </button>
+              </form>
             </div>
           </Modal.Body>
         </Modal>

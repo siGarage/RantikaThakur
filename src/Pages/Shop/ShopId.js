@@ -131,7 +131,6 @@ function ShopId(props) {
               type: constants("cart").reducers.cart.AddToCart,
               payload: { cartItems: [...cart, res.data.data] },
             });
-
             toast.success("Item Added To Cart !");
           }
         });
@@ -140,6 +139,15 @@ function ShopId(props) {
       toast.error("Please Select Size !");
     }
   };
+  const AddToCartAfterLogin = (data) => {
+    if (data.size !== "") {
+      localStorage.setItem("cart", JSON.stringify(data));
+      navigate("/login");
+    } else {
+      toast.error("Please Select Size !");
+    }
+  };
+
   const BuyAddToCart = (data) => {
     if (data.size !== "") {
       const findData = cart.find(
@@ -980,7 +988,17 @@ function ShopId(props) {
                 <div className="Shop-Button">
                   <button
                     onClick={() => {
-                      navigate(`/login`);
+                      AddToCartAfterLogin({
+                        title: product?.attributes?.title,
+                        price: product?.attributes?.price,
+                        category:
+                          product?.attributes?.category?.data?.attributes
+                            ?.category,
+                        id_product: product?.id,
+                        image: `${product?.attributes?.images?.data[0]?.attributes?.url}`,
+                        quantity: 1,
+                        size: size,
+                      });
                     }}
                     className="Shop-AddToCart"
                   >
