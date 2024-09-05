@@ -81,7 +81,7 @@ function SignUp() {
         if (res.status === 200) {
           buttonRRef.current.click();
           toast.success("Check Your E-mail");
-          navigate("/login");
+          // navigate("/login");
         } else {
           toast.error(res.data.error.message);
         }
@@ -98,8 +98,13 @@ function SignUp() {
     onSubmit: (values) => {
       Auth.signup({ data: values }).then((res) => {
         if (res.status === 200) {
+          dispatch({
+            type: constants("auth").reducers.login.success,
+            payload: { data: res.data },
+          });
           toast.success("Account Created Successfully!");
-          navigate("/login");
+          toast.success("Login successful!");
+          navigate("/shop?type=All");
         } else {
           toast.error(res.data.error.message);
         }
@@ -128,7 +133,6 @@ function SignUp() {
         />
         <label>Message</label>
         <textarea name="message" value={clientMessage ? clientMessage : ""} />
-
         <input type="submit" value="Send" ref={buttonRRef} />
       </form>
       <div className="SignUp-Box1">

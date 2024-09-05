@@ -6,6 +6,7 @@ import ORDER from "../../API/Order";
 import moment from "moment";
 import { toast } from "react-toastify";
 import { blue } from "@mui/material/colors";
+import { Button } from "bootstrap";
 function Order(props) {
   const { authtoken, useremail } = props;
   let [order, setOrder] = useState([]);
@@ -39,7 +40,42 @@ function Order(props) {
         </div>
       </div>
       <div className="row w-100 ps-5 pe-5 ">
-        <table class="borderless">
+        {order?.map((order) => {
+          return (
+            <>
+              <div class="card" style={{ width: "18rem;" }}>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Order Number:&nbsp;&nbsp;
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        navigate(`/order/${order?.id}`);
+                      }}
+                    >
+                      {order?.attributes?.Payment_id}
+                    </button>
+                  </h5>
+                  <p class="card-text">Order ID:&nbsp;{order?.id} </p>
+                  <p class="card-text">
+                    Price:&nbsp;{order?.attributes?.Order_Amount}{" "}
+                  </p>
+                  <p class="card-text">
+                    Order Status:&nbsp;{order?.attributes?.Order_status}{" "}
+                  </p>
+                  <p class="card-text">
+                    Order Date:&nbsp;
+                    {moment(order?.attributes?.createdAt).format(
+                      "DD MMMM, YYYY"
+                    )}{" "}
+                  </p>
+                </div>
+              </div>
+              <hr />
+            </>
+          );
+        })}
+        {/* <table class="borderless">
           <tr className="d-flex justify-content-between pb-4">
             <td>Orders Id</td>
             <td>Price</td>
@@ -47,6 +83,7 @@ function Order(props) {
             <td>Order Date</td>
             <td>Delivery Date</td>
           </tr>
+          {console.log(order)}
           {order?.map((order) => {
             return (
               <tr className="d-flex justify-content-between pb-4">
@@ -88,55 +125,8 @@ function Order(props) {
               // </li>
             );
           })}
-        </table>
-        <hr />
+        </table> */}
       </div>
-      {/* <div className="Order2" style={{ width: "100%", margin: "20px 0px" }}>
-        <div className="Order-Main-Box">
-          <div className="Order-Main-Box1">
-            <div className="row w-50">
-              <div className="col-12 order-list-Container">
-                <div class="order-summary">
-                  <h2> Your Orders</h2>
-                  <ol class="order-list">
-                    {order?.map((order) => {
-                      console.log(order);
-                      return (
-                        <li>
-                          <div class="product-info">
-                            <span
-                              class="product-name"
-                              onClick={() => {
-                                navigate(`/order/${order?.id}`);
-                              }}
-                            >
-                              {order?.attributes?.Payment_id}
-                            </span>
-                            <span class="product-name">
-                              {order?.attributes?.Order_status}
-                            </span>
-                            <span class="product-price">
-                              ₹ {order?.attributes?.Order_Amount}
-                            </span>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="Order5">
-        <Link to="/shop?type=All" className="Order5Button">
-          <button style={{ backgroundColor: "transparent", border: "none" }}>
-            Continue Shopping
-          </button>
-        </Link>
-      </div> */}
     </section>
   );
 }

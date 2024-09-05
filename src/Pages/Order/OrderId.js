@@ -194,12 +194,12 @@ function Order(props) {
                   </div>
                   <div className="col">
                     <p className="delivery-partner-details">
-                      {order?.attributes?.Delivery_Partner.length > 0
+                      {order?.attributes?.Delivery_Partner?.length > 0
                         ? order?.attributes?.Delivery_Partner
                         : ""}
                       <br />
                       <p className="d-flex">
-                        {order?.attributes?.Order_Track_Id.length > 0
+                        {order?.attributes?.Order_Track_Id?.length > 0
                           ? order?.attributes?.Order_Track_Id
                           : ""}
                         <img
@@ -209,7 +209,7 @@ function Order(props) {
                           height={20}
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              order?.attributes?.Order_Track_Id.length > 0
+                              order?.attributes?.Order_Track_Id?.length > 0
                                 ? order?.attributes?.Order_Track_Id
                                 : ""
                             );
