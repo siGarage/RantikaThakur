@@ -289,7 +289,7 @@ function Navbar(props) {
               Category
             </button>
             {category?.length > 0 ? (
-              <div class="dropdown-content">
+              <div class="dropdown-content" id="nav_cat">
                 {category.map((cat) => {
                   return <a href={`/shop?type=${cat}`}>{cat}</a>;
                 })}
